@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { Exercicio, Licao } from "@/lib/schema";
-import { carregarProgresso, salvarProgresso, resolverErro } from "@/lib/progresso";
+import { acertarRevisao, carregarProgresso, errarRevisao, errosVencidos, salvarProgresso } from "@/lib/progresso";
 import EscolhaUnica from "@/components/exercicios/EscolhaUnica";
 import Associacao from "@/components/exercicios/Associacao";
 import Ordenacao from "@/components/exercicios/Ordenacao";
@@ -14,23 +14,29 @@ type Item = { licao: string; exercicio: number };
 
 export default function Repescagem({ licoes }: { licoes: Record<string, Licao> }) {
   const [fila, setFila] = useState<Item[] | null>(null);
+  const [agendados, setAgendados] = useState<Item[]>([]);
   const [pos, setPos] = useState(0);
   const [respondido, setRespondido] = useState<boolean | null>(null);
   const [acertos, setAcertos] = useState(0);
 
   useEffect(() => {
-    carregarProgresso().then((p) =>
-      setFila(p.erros.filter((e) => licoes[e.licao]?.exercicios[e.exercicio]))
-    );
+    carregarProgresso().then((p) => {
+      const valido = (e: Item) => Boolean(licoes[e.licao]?.exercicios[e.exercicio]);
+      setFila(errosVencidos(p).filter(valido));
+      setAgendados(p.erros.filter(valido));
+    });
   }, [licoes]);
 
   async function aoResponder(correto: boolean) {
     setRespondido(correto);
-    if (!correto || !fila) return;
-    setAcertos((a) => a + 1);
+    if (!fila) return;
+    if (correto) setAcertos((a) => a + 1);
     const item = fila[pos];
+    // Recarrega imediatamente antes de salvar para não sobrescrever escritas concorrentes.
     const p = await carregarProgresso();
-    await salvarProgresso(resolverErro(p, item.licao, item.exercicio));
+    await salvarProgresso(
+      correto ? acertarRevisao(p, item.licao, item.exercicio) : errarRevisao(p, item.licao, item.exercicio)
+    );
   }
 
   function renderExercicio(ex: Exercicio) {
@@ -60,6 +66,25 @@ export default function Repescagem({ licoes }: { licoes: Record<string, Licao> }
 
   if (fila === null) return null;
 
+  if (fila.length === 0 && agendados.length > 0) {
+    return (
+      <main className="mx-auto max-w-2xl px-4 py-12 text-center">
+        <h1 className="mb-2 text-2xl font-bold">Nada vencido hoje</h1>
+        <p className="mb-8 text-tinta/70">Sua próxima revisão chega em breve.</p>
+        <button
+          type="button"
+          onClick={() => setFila(agendados)}
+          className="w-full rounded-xl bg-acento py-3 font-semibold text-white"
+        >
+          Adiantar revisão
+        </button>
+        <Link href="/" className="mt-4 inline-block font-semibold text-acento underline">
+          Voltar ao início
+        </Link>
+      </main>
+    );
+  }
+
   if (fila.length === 0 || pos >= fila.length) {
     const fim = fila.length > 0;
     return (
@@ -67,7 +92,7 @@ export default function Repescagem({ licoes }: { licoes: Record<string, Licao> }
         <h1 className="mb-2 text-2xl font-bold">{fim ? "Repescagem concluída" : "Nada para repassar"}</h1>
         <p className="mb-8 text-tinta/70">
           {fim
-            ? `Você acertou ${acertos} de ${fila.length}. O que acertou saiu da fila; o resto volta na próxima.`
+            ? `Você acertou ${acertos} de ${fila.length}. Acertos voltam em intervalos maiores; erros voltam para o começo da fila.`
             : "Você não tem exercícios errados pendentes. Siga com a trilha."}
         </p>
         <Link href="/" className="inline-block w-full rounded-xl bg-acento py-3 font-semibold text-white">
@@ -101,7 +126,9 @@ export default function Repescagem({ licoes }: { licoes: Record<string, Licao> }
         <div className={`fixed inset-x-0 bottom-0 z-20 ${respondido ? "bg-certo-fundo" : "bg-erro-fundo"}`}>
           <div className="mx-auto max-w-2xl px-4 py-4">
             <p className={`mb-3 font-bold ${respondido ? "text-certo" : "text-erro"}`}>
-              {respondido ? "Certo! Esse sai da fila." : "Ainda não. Ele volta na próxima repescagem."}
+              {respondido
+                ? "Certo! Volta em mais tempo da próxima vez."
+                : "Ainda não. Esse volta para o começo da fila."}
             </p>
             <button
               type="button"

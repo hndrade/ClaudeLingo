@@ -4,10 +4,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   carregarProgresso,
+  errosVencidos,
   hojeLocal,
   licoesConcluidas,
   minutosSemana,
+  nivelMaxLiberado,
   salvarProgresso,
+  trilhaLiberada,
   type Progresso,
 } from "@/lib/progresso";
 
@@ -78,6 +81,7 @@ export default function Mapa({ dados }: { dados: DadosMapa }) {
   const metaDia = progresso.compromisso.minutosDia;
   const pctDia = Math.min(100, (minutosHoje / metaDia) * 100);
 
+  const vencidos = errosVencidos(progresso).length;
   const { estaSemana, semanaPassada } = minutosSemana(progresso);
   const maxSemana = Math.max(estaSemana, semanaPassada, 1);
   const naFrente = estaSemana > semanaPassada;
@@ -85,23 +89,24 @@ export default function Mapa({ dados }: { dados: DadosMapa }) {
     ? `Você está ${estaSemana - semanaPassada} min à frente da semana passada`
     : `Faltam ${semanaPassada - estaSemana + 1} min para superar a semana passada`;
 
-  // Nós do caminho, com zigue-zague contínuo entre trilhas.
+  // Nós do caminho, com zigue-zague contínuo entre trilhas. Uma trilha só abre
+  // quando as anteriores foram concluídas; dentro dela, a escada de 80% define
+  // até que nível as lições ficam disponíveis.
+  const idsTrilhas = dados.trilhas.map((t) => ({ id: t.id, licoes: t.licoes.map((l) => l.id) }));
   let idx = 0;
   const trilhas = dados.trilhas.map((t) => {
-    let disponivelDada = false;
+    const liberada = trilhaLiberada(idsTrilhas, progresso, t.id);
+    const niv = nivelMaxLiberado(t.licoes.map(({ id, nivel }) => ({ id, nivel })), progresso);
     const nos: No[] =
       t.licoes.length === 0
         ? [{ tipo: "embreve", off: OFFSETS[idx++ % OFFSETS.length] }]
         : t.licoes.map((l) => {
             let estado: Estado = "bloqueada";
-            if (concluidas.has(l.id)) estado = "concluida";
-            else if (!disponivelDada) {
-              estado = "disponivel";
-              disponivelDada = true;
-            }
+            if (liberada && concluidas.has(l.id)) estado = "concluida";
+            else if (liberada && l.nivel <= niv) estado = "disponivel";
             return { tipo: "licao", estado, off: OFFSETS[idx++ % OFFSETS.length], licao: l };
           });
-    return { ...t, nos };
+    return { ...t, liberada, nos };
   });
 
   return (
@@ -151,17 +156,22 @@ export default function Mapa({ dados }: { dados: DadosMapa }) {
       )}
 
       <main className="mx-auto max-w-md px-4 py-6 pb-16">
-        {progresso.erros.length > 0 && (
+        {vencidos > 0 ? (
           <Link
             href="/repescagem"
             className="mb-4 flex items-center justify-between rounded-xl border border-acento/40 bg-acento-fundo px-4 py-3"
           >
             <span className="font-semibold text-acento">Repescagem: repita o que errou</span>
             <span className="rounded-full bg-acento px-2 py-0.5 text-xs font-bold text-white">
-              {progresso.erros.length}
+              {vencidos}
             </span>
           </Link>
-        )}
+        ) : progresso.erros.length > 0 ? (
+          <div className="mb-4 rounded-xl border border-tinta/10 bg-cartao px-4 py-3 text-sm text-tinta/60">
+            Revisão agendada: {progresso.erros.length}{" "}
+            {progresso.erros.length === 1 ? "exercício volta" : "exercícios voltam"} em breve
+          </div>
+        ) : null}
         <section className="rounded-xl border border-tinta/10 bg-cartao p-4">
           <h2 className="font-bold text-tinta">Você contra você</h2>
           <div className="mt-3 space-y-2">
@@ -223,7 +233,14 @@ export default function Mapa({ dados }: { dados: DadosMapa }) {
                             >
                               {no.licao.titulo}
                             </span>
-                            <span className="mt-1 rounded-full bg-tinta/10 px-2 py-0.5 text-[11px] font-semibold text-tinta/60">
+                            <span
+                              className="mt-1 rounded-full bg-tinta/10 px-2 py-0.5 text-[11px] font-semibold text-tinta/60"
+                              title={
+                                t.liberada && no.estado === "bloqueada"
+                                  ? "Acerte 80% do nível anterior para liberar"
+                                  : undefined
+                              }
+                            >
                               Nível {no.licao.nivel}
                             </span>
                           </>

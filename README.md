@@ -45,6 +45,22 @@ Pedidos do dono do projeto, implementados fora da ordem original das fases:
 
 Verificação: percurso completo via Playwright em 375x667, modos claro e escuro: onboarding, mapa, lição inteira, popup, repescagem, persistência em disco conferida no JSON.
 
+### Fase 2: motor de progresso com testes (concluída)
+
+Feito:
+
+- Regras puras em `lib/progresso.ts`, cobertas por 21 testes Vitest (`npm test`):
+  - XP: soma só na primeira conclusão de cada lição.
+  - Streak: incrementa em dias consecutivos, mantém no mesmo dia, reinicia ao pular.
+  - Revisão espaçada: erro entra no estágio 0 e vence em 1 dia; acertos avançam para 3, 7 e 21 dias; acertar no último estágio remove da fila; errar volta ao estágio 0.
+  - Escada de dificuldade: nível N+1 libera com todas as lições do nível N concluídas e acerto agregado (melhor tentativa por lição) de 80% ou mais.
+  - Trilha destrava trilha: libera quando as anteriores com conteúdo foram concluídas; trilhas vazias não bloqueiam.
+- Vidas na lição: 5 por sessão, erro custa 1; ao zerar, tela "Suas vidas acabaram" sem salvar a conclusão, com opção de tentar de novo.
+- Mapa com cadeados reais: trilha bloqueada trava todos os nós; dentro da trilha, só níveis liberados pela escada ficam disponíveis.
+- Repescagem passou a respeitar os vencimentos (com botão "Adiantar revisão" quando nada venceu ainda).
+
+Verificação da fase: `npm test` verde e percurso Playwright em 375x667 cobrindo onboarding, mapa, lição, vidas zeradas e repescagem agendada.
+
 ### Fase 1: esqueleto + schema + renderizador de 1 lição (concluída)
 
 Feito:

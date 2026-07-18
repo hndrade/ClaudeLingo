@@ -2,7 +2,14 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { Exercicio, Licao } from "@/lib/schema";
-import { carregarProgresso, concluirLicao, licoesConcluidas, registrarErros, salvarProgresso } from "@/lib/progresso";
+import {
+  VIDAS_POR_SESSAO,
+  carregarProgresso,
+  concluirLicao,
+  licoesConcluidas,
+  registrarErros,
+  salvarProgresso,
+} from "@/lib/progresso";
 import { Md } from "@/components/ui";
 import EscolhaUnica from "@/components/exercicios/EscolhaUnica";
 import Associacao from "@/components/exercicios/Associacao";
@@ -17,6 +24,8 @@ export default function LessonPlayer({ licao }: { licao: Licao }) {
   const [resultados, setResultados] = useState<boolean[]>([]);
   const [respondido, setRespondido] = useState<boolean | null>(null);
   const [salvo, setSalvo] = useState<{ primeiraVez: boolean; streak: number } | null>(null);
+  const [vidas, setVidas] = useState(VIDAS_POR_SESSAO);
+  const [fimVidas, setFimVidas] = useState(false);
   const inicioRef = useRef(Date.now());
   const salvouRef = useRef(false);
 
@@ -42,6 +51,7 @@ export default function LessonPlayer({ licao }: { licao: Licao }) {
   function aoResponder(correto: boolean) {
     setRespondido(correto);
     setResultados((r) => [...r, correto]);
+    if (!correto) setVidas((v) => Math.max(0, v - 1));
   }
 
   function continuar() {
@@ -54,6 +64,8 @@ export default function LessonPlayer({ licao }: { licao: Licao }) {
     setResultados([]);
     setRespondido(null);
     setSalvo(null);
+    setVidas(VIDAS_POR_SESSAO);
+    setFimVidas(false);
     inicioRef.current = Date.now();
     salvouRef.current = false;
   }
@@ -81,6 +93,27 @@ export default function LessonPlayer({ licao }: { licao: Licao }) {
       case "consertar_prompt":
         return <ConsertarPromptEx ex={ex} onResponder={aoResponder} />;
     }
+  }
+
+  if (fimVidas) {
+    return (
+      <main className="mx-auto max-w-2xl px-4 py-12 text-center">
+        <h1 className="mb-2 text-2xl font-bold text-tinta">Suas vidas acabaram</h1>
+        <p className="mb-8 text-tinta/70">
+          A sessão terminou por hoje, mas nada se perde: você pode tentar de novo desde o começo.
+        </p>
+        <button
+          type="button"
+          onClick={refazer}
+          className="w-full rounded-xl bg-acento py-3 font-semibold text-white"
+        >
+          Tentar de novo
+        </button>
+        <Link href="/" className="mt-4 inline-block font-semibold text-acento underline">
+          Voltar ao início
+        </Link>
+      </main>
+    );
   }
 
   if (etapa === -1) {
@@ -151,6 +184,7 @@ export default function LessonPlayer({ licao }: { licao: Licao }) {
           <span className="text-sm font-semibold text-tinta/60">
             {etapa + 1} de {total}
           </span>
+          <span className="text-sm font-semibold text-erro">❤️ {vidas}</span>
         </div>
       </header>
 
@@ -166,10 +200,10 @@ export default function LessonPlayer({ licao }: { licao: Licao }) {
             </p>
             <button
               type="button"
-              onClick={continuar}
+              onClick={vidas === 0 ? () => setFimVidas(true) : continuar}
               className={`w-full rounded-xl py-3 font-semibold text-white ${respondido ? "bg-certo" : "bg-erro"}`}
             >
-              Continuar
+              {vidas === 0 ? "Fim das vidas" : "Continuar"}
             </button>
           </div>
         </div>

@@ -48,6 +48,37 @@
       ]
     },
     {
+      "id": "casos",
+      "nome": "Cases por área",
+      "descricao": "Personagens de 8 áreas de trabalho, do nível 2 ao 4. Inclui quando NÃO usar IA.",
+      "licoes": [
+        "caso-financeiro-02",
+        "caso-financeiro-03",
+        "caso-financeiro-04",
+        "caso-comercial-02",
+        "caso-comercial-03",
+        "caso-comercial-04",
+        "caso-rh-02",
+        "caso-rh-03",
+        "caso-rh-04",
+        "caso-juridico-02",
+        "caso-juridico-03",
+        "caso-juridico-04",
+        "caso-marketing-02",
+        "caso-marketing-03",
+        "caso-marketing-04",
+        "caso-operacoes-02",
+        "caso-operacoes-03",
+        "caso-operacoes-04",
+        "caso-dados-02",
+        "caso-dados-03",
+        "caso-dados-04",
+        "caso-atendimento-02",
+        "caso-atendimento-03",
+        "caso-atendimento-04"
+      ]
+    },
+    {
       "id": "rag",
       "nome": "T5. RAG",
       "descricao": "Chunking, busca vetorial e híbrida, reranking e avaliação.",

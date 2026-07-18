@@ -65,4 +65,18 @@ describe("conteúdo das lições", () => {
     const niveis = new Set(licoes.filter(([, l]) => l.trilha === "prompt").map(([, l]) => l.nivel));
     for (const n of [1, 2, 3, 4]) expect(niveis, `nível ${n} ausente`).toContain(n);
   });
+
+  const areasCasos = ["financeiro", "comercial", "rh", "juridico", "marketing", "operacoes", "dados", "atendimento"];
+  const casos = licoes.filter(([, l]) => l.trilha === "casos");
+
+  it.skipIf(casos.length === 0).each(areasCasos)("área %s aparece nos níveis 2, 3 e 4 com o mesmo personagem", (area) => {
+    const daArea = casos.filter(([, l]) => l.area === area);
+    const niveis = new Set(daArea.map(([, l]) => l.nivel));
+    for (const n of [2, 3, 4]) expect(niveis, `nível ${n} ausente em ${area}`).toContain(n);
+  });
+
+  it.skipIf(casos.length === 0).each(areasCasos)("área %s tem ao menos um case cuja resposta é não usar IA", (area) => {
+    const daArea = casos.filter(([, l]) => l.area === area);
+    expect(daArea.some(([, l]) => l.nao_usar_ia === true), `nenhum case "não usar IA" em ${area}`).toBe(true);
+  });
 });

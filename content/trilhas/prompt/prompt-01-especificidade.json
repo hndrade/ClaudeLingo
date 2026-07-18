@@ -1,0 +1,142 @@
+{
+  "id": "prompt-01-especificidade",
+  "trilha": "prompt",
+  "titulo": "Especificidade: diga o que quer",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "conceito": "Prompt vago gera resposta genérica. O modelo não lê sua mente: ele completa as lacunas com o mais provável, não com o que você precisa.\n\nUm pedido específico declara **a tarefa**, **o escopo**, **o formato da saída** e **o critério de aceite**. Diga o que quer, não o que não quer.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Qual destes pedidos tende a gerar a melhor resposta na primeira tentativa?",
+      "alternativas": [
+        {
+          "texto": "Me ajuda com esse relatório de vendas.",
+          "correta": false,
+          "explicacao": "Não diz qual ajuda: resumir, revisar, analisar? O modelo vai escolher por você, e provavelmente errar."
+        },
+        {
+          "texto": "Liste as 3 maiores quedas de venda por região neste relatório, em bullets, cada uma com o percentual de queda.",
+          "correta": true,
+          "explicacao": "Tarefa clara (listar quedas), escopo (3 maiores, por região), formato (bullets) e conteúdo exigido (percentual). Pouco espaço para o modelo inventar."
+        },
+        {
+          "texto": "Faz uma análise bem completa e detalhada do relatório, sem esquecer nada.",
+          "correta": false,
+          "explicacao": "Adjetivos como completa e detalhada não são critérios. O modelo responde com volume, não com relevância."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie cada ingrediente de um prompt específico com o que ele evita.",
+      "pares": [
+        { "conceito": "Verbo de ação claro (liste, compare, resuma)", "definicao": "Evita que o modelo escolha sozinho qual tarefa executar" },
+        { "conceito": "Escopo e quantidade (as 3 maiores, só o trimestre)", "definicao": "Evita resposta que abraça tudo e não aprofunda nada" },
+        { "conceito": "Formato de saída declarado (tabela, bullets, JSON)", "definicao": "Evita texto corrido que você terá que reformatar na mão" }
+      ]
+    },
+    {
+      "tipo": "ordenacao",
+      "enunciado": "Coloque na ordem as etapas para transformar um pedido vago em um prompt específico.",
+      "etapas": [
+        "Nomeie a tarefa com um verbo de ação: listar, comparar, resumir, extrair",
+        "Delimite o escopo: qual recorte, quanto, de onde",
+        "Declare o formato da saída: tabela, bullets, tamanho máximo",
+        "Defina o critério de aceite: o que a resposta precisa conter para servir"
+      ],
+      "explicacao": "Primeiro a tarefa, porque tudo depende dela. Depois o recorte, para o modelo não abraçar o mundo. Formato e critério vêm por último: eles moldam como a resposta chega, não o que ela é."
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete o prompt para que a resposta venha no tamanho certo e ordenada.",
+      "texto": "Liste ___ riscos deste contrato, em bullets, do mais grave ao menos grave.",
+      "opcoes": [
+        {
+          "texto": "os 5 principais",
+          "correta": true,
+          "explicacao": "Quantidade explícita: você sabe o que esperar e força o modelo a priorizar, que é o trabalho difícil."
+        },
+        {
+          "texto": "os principais",
+          "correta": false,
+          "explicacao": "Principais para quem? Sem número, o modelo decide se são 3 ou 15, e a priorização fica frouxa."
+        },
+        {
+          "texto": "alguns",
+          "correta": false,
+          "explicacao": "Pior que nada: sinaliza que qualquer subconjunto serve, e o modelo devolve os mais óbvios."
+        },
+        {
+          "texto": "todos os possíveis",
+          "correta": false,
+          "explicacao": "Convite à enumeração infinita. Você recebe 30 bullets, dos quais 25 são teóricos, e perde os 5 que importam."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Jorge, área financeira.** Precisa apresentar amanhã os desvios do orçamento do trimestre. Tem a planilha de orçado vs realizado por centro de custo e 30 minutos livres. Qual abordagem com IA faz mais sentido?",
+      "alternativas": [
+        {
+          "texto": "Colar a planilha no chat e pedir: analisa esse orçamento pra mim.",
+          "melhor": false,
+          "feedback": "O modelo não sabe que a apresentação é sobre desvios. Vai descrever a planilha inteira e Jorge gasta os 30 minutos filtrando o que presta."
+        },
+        {
+          "texto": "Colar a planilha e pedir: liste os 5 centros de custo com maior desvio percentual entre orçado e realizado, em tabela com orçado, realizado, desvio em percentual e uma hipótese de causa marcada como hipótese.",
+          "melhor": true,
+          "feedback": "Escopo (5 maiores), formato (tabela com colunas nomeadas) e honestidade embutida (hipótese marcada como hipótese, não como fato). Jorge revisa em 10 minutos em vez de reescrever."
+        },
+        {
+          "texto": "Pedir para a IA montar a apresentação inteira de uma vez, com slides e conclusões.",
+          "melhor": false,
+          "feedback": "Pedido grande demais para uma tacada: as conclusões viriam sem que Jorge tenha validado os números base. Melhor decompor: primeiro os desvios, depois a narrativa."
+        }
+      ]
+    },
+    {
+      "tipo": "comparar_prompts",
+      "enunciado": "Mesmo objetivo: transformar a transcrição de uma reunião em algo útil. Qual prompt ganha?",
+      "prompts": [
+        {
+          "rotulo": "Prompt A",
+          "texto": "Resume essa reunião:\n\n[transcrição]",
+          "saida_esperada": "A reunião abordou diversos temas importantes para o projeto. Os participantes discutiram o cronograma e alinharam os próximos passos. Também foram levantadas questões sobre o orçamento que serão tratadas futuramente.",
+          "melhor": false,
+          "explicacao": "Texto corrido, genérico, sem dono nem prazo. Você lê e continua sem saber o que fazer amanhã."
+        },
+        {
+          "rotulo": "Prompt B",
+          "texto": "Resuma a transcrição abaixo em 3 blocos:\n1. Decisões tomadas\n2. Pendências, cada uma com responsável e prazo\n3. Riscos levantados\nMáximo de 10 linhas. Se algum responsável ou prazo não foi dito, escreva \"não definido\".\n\n[transcrição]",
+          "saida_esperada": "Decisões:\n- Aprovada a proposta B do fornecedor\n- Lançamento adiado para 15/09\n\nPendências:\n- Revisar contrato (Ana, até 22/08)\n- Cotar frete extra (Carlos, prazo não definido)\n\nRiscos:\n- Fornecedor único para a peça X",
+          "melhor": true,
+          "explicacao": "Estrutura fixa, limite de tamanho e instrução explícita para o que falta (não definido) em vez de deixar o modelo inventar responsável ou prazo."
+        },
+        {
+          "rotulo": "Prompt C",
+          "texto": "Faça um resumo completo e bem detalhado da reunião, cobrindo tudo o que foi falado, sem omitir nenhum ponto:\n\n[transcrição]",
+          "saida_esperada": "1. Abertura: a reunião iniciou com a apresentação da pauta... 2. Contexto do projeto: foi relembrado o histórico... 3. Discussão do cronograma: houve debate sobre... (segue por 40 linhas reproduzindo a reunião em ordem cronológica)",
+          "melhor": false,
+          "explicacao": "Completo e detalhado sem escopo produz uma segunda transcrição, mais curta. Resumo bom exige critério de corte, e esse prompt proíbe cortar."
+        }
+      ]
+    },
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "O prompt abaixo é real e fraco. Reescreva na caixa de edição aplicando o que você viu nesta lição, depois compare com a referência e se autoavalie.",
+      "prompt_fraco": "Melhora esse e-mail:\n\n[e-mail]",
+      "saida_fraca": "Segue uma versão aprimorada do seu e-mail, com tom mais profissional e maior clareza. (O modelo escolhe sozinho o tom, o tamanho e o que cortar. Às vezes remove exatamente a frase que importava.)",
+      "prompt_referencia": "Reescreva o e-mail abaixo.\nObjetivo: conseguir que o cliente aprove o orçamento ainda esta semana.\nPúblico: diretor financeiro, pouco tempo, direto ao ponto.\nTom: cordial e firme, sem soar cobrança.\nLimite: no máximo 8 linhas.\nPreserve todos os valores e datas do original. Não invente informação nova.\n\n[e-mail]",
+      "saida_referencia": "Assunto: Aprovação do orçamento até sexta\n\nOlá, [nome],\n\nPara garantirmos o cronograma combinado, precisamos da aprovação do orçamento de R$ [valor] até sexta, 22/08.\nO escopo e as condições seguem os que alinhamos na proposta de 10/08.\nPosso ajudar com algum ponto pendente para a decisão?\n\nAbraço,\n[assinatura]",
+      "checklist": [
+        "Declarei o objetivo do e-mail (o que ele precisa conseguir)?",
+        "Disse quem é o destinatário e o que isso muda?",
+        "Defini o tom desejado?",
+        "Dei limite de tamanho?",
+        "Protegi os fatos (valores, datas) contra invenção ou corte?"
+      ]
+    }
+  ]
+}

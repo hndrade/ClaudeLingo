@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-papel: var(--papel);
+  --color-cartao: var(--cartao);
+  --color-tinta: var(--tinta);
+  --color-acento: var(--acento);
+  --color-acento-fundo: var(--acento-fundo);
+  --color-certo: var(--certo);
+  --color-certo-fundo: var(--certo-fundo);
+  --color-erro: var(--erro);
+  --color-erro-fundo: var(--erro-fundo);
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* Modo claro: branco e laranja */
+:root {
+  --papel: #ffffff;
+  --cartao: #faf9f7;
+  --tinta: #1f1a17;
+  --acento: #c65d3b;
+  --acento-fundo: #fbeee8;
+  --certo: #047857;
+  --certo-fundo: #ecfdf5;
+  --erro: #b3411b;
+  --erro-fundo: #fdf0ea;
+}
+
+/* Modo escuro: preto e laranja */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --papel: #141210;
+    --cartao: #1f1b18;
+    --tinta: #f3ede8;
+    --acento: #e8845c;
+    --acento-fundo: #3a2418;
+    --certo: #34d399;
+    --certo-fundo: #0b2e21;
+    --erro: #f0906c;
+    --erro-fundo: #38180c;
+  }
+}
+
+.markdown p {
+  margin-bottom: 0.75rem;
+}
+.markdown p:last-child {
+  margin-bottom: 0;
+}
+.markdown strong {
+  font-weight: 700;
+}
+.markdown code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: color-mix(in srgb, var(--tinta) 10%, transparent);
+  padding: 0.1em 0.35em;
+  border-radius: 0.25rem;
+}
+.markdown ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin-bottom: 0.75rem;
+}

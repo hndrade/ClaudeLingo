@@ -1,0 +1,58 @@
+{
+  "id": "prompt-12-decompor",
+  "trilha": "prompt",
+  "titulo": "Decompor a tarefa grande",
+  "nivel": 3,
+  "prereq": [],
+  "xp": 30,
+  "conceito": "Pedido gigante numa tacada só produz média em tudo: o modelo divide a atenção entre levantar, estruturar, redigir e revisar, e nenhuma etapa sai bem feita.\n\nDecomponha: uma etapa por prompt, na ordem do trabalho, validando o resultado antes de avançar. Erro pego na etapa 1 custa uma frase; pego no final, custa o relatório inteiro.",
+  "exercicios": [
+    {
+      "tipo": "ordenacao",
+      "enunciado": "Você vai usar IA para montar o relatório do trimestre. Coloque as etapas na ordem em que devem virar prompts, uma por vez.",
+      "etapas": [
+        "Levantar: extrair da planilha os indicadores do trimestre e listar o que está faltando na fonte",
+        "Estruturar: propor o sumário do relatório, com as seções e o que entra em cada uma",
+        "Redigir: escrever seção por seção, seguindo o sumário aprovado",
+        "Revisar: conferir os números contra a fonte e apontar afirmações sem sustentação"
+      ],
+      "explicacao": "Cada etapa depende da anterior aprovada: não dá para estruturar sem saber quais dados existem, nem redigir sem sumário validado. Redigir antes de levantar convida o modelo a inventar números; revisar por último pega o que escapou. E entre uma etapa e outra, quem valida é você."
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Renata, operações.** A diretoria pediu o relatório trimestral da área para sexta. Ela tem a planilha de indicadores e um chat com IA aberto. Qual caminho?",
+      "alternativas": [
+        {
+          "texto": "Colar a planilha e pedir: escreve o relatório completo do trimestre, com números, análise e recomendações, pronto para a diretoria.",
+          "melhor": false,
+          "feedback": "Tacada única gera média em tudo: estrutura genérica, análise rasa, recomendações de manual. E como Renata não validou os números no meio do caminho, qualquer erro de base contamina o texto inteiro."
+        },
+        {
+          "texto": "Encadear prompts: primeiro extrair e conferir os indicadores, depois aprovar um sumário, depois redigir seção a seção, por fim revisar contra a planilha.",
+          "melhor": true,
+          "feedback": "Cada prompt faz uma coisa bem. Os erros aparecem cedo, quando corrigir é barato, e o texto final herda etapas que Renata já validou. Custa mais mensagens, mas menos retrabalho."
+        },
+        {
+          "texto": "Pedir o relatório completo de uma vez e depois ir apontando os erros na versão pronta.",
+          "melhor": false,
+          "feedback": "Revisar um texto grande com números não conferidos é mais caro do que validar por etapa: o erro de base já virou análise e recomendação, e a correção vira reescrita. A ordem certa é validar antes, não caçar depois."
+        }
+      ]
+    },
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "Chegou o clássico pedido de fim de trimestre. Reescreva o prompt fraco transformando a tacada única na primeira etapa de uma cadeia, depois compare com a referência.",
+      "prompt_fraco": "Faz o relatório do trimestre da minha área com base nessa planilha: números, análise, conclusões e recomendações, tudo pronto pra eu mandar pra diretoria.\n\n[planilha]",
+      "saida_fraca": "Relatório Trimestral\n\n1. Introdução: o trimestre apresentou resultados mistos, com avanços e desafios...\n2. Números: (reproduz a planilha em texto, com um total que não bate com a fonte)\n3. Análise: o desempenho foi impactado por fatores internos e externos...\n4. Recomendações: otimizar processos, reduzir custos e melhorar a comunicação entre as áreas.\n\n(Tudo em nível médio: estrutura genérica, análise rasa, recomendações que serviriam para qualquer área, e um número errado no meio que ninguém conferiu.)",
+      "prompt_referencia": "Vamos montar o relatório do trimestre em 4 etapas: levantar, estruturar, redigir, revisar. Vou validar cada etapa antes de liberar a próxima.\n\nEtapa 1, apenas ela: da planilha abaixo, extraia os indicadores do trimestre em uma tabela (indicador, valor, variação vs trimestre anterior) e liste em separado o que a planilha NÃO tem e o relatório vai precisar.\nNão escreva o relatório ainda.\n\n[planilha]",
+      "saida_referencia": "Tabela de indicadores extraída (indicador, valor, variação), pronta para você conferir contra a planilha.\n\nFaltando na fonte:\n- Meta do trimestre (para calcular atingimento)\n- Dado de junho do indicador de retrabalho\n- Comparativo com o mesmo trimestre do ano anterior\n\nAguardando sua validação para seguir à etapa 2 (proposta de sumário).",
+      "checklist": [
+        "Quebrou o pedido em etapas nomeadas, na ordem do trabalho?",
+        "Pediu explicitamente UMA etapa e proibiu avançar para as demais?",
+        "Definiu a saída da etapa (tabela, lista) para dar para validar rápido?",
+        "Pediu para o modelo apontar o que falta na fonte, em vez de inventar?",
+        "Reservou para você o papel de validar entre uma etapa e outra?"
+      ]
+    }
+  ]
+}

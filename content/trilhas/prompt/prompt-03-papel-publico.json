@@ -1,0 +1,81 @@
+{
+  "id": "prompt-03-papel-publico",
+  "trilha": "prompt",
+  "titulo": "Papel e público",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "conceito": "Papel diz de onde a resposta sai: \"você é um analista financeiro sênior\" muda o vocabulário, o rigor e o que o modelo considera óbvio.\n\nPúblico diz para onde ela vai: \"para a diretoria, que não é técnica\" muda o que entra, o que fica de fora e como se explica.\n\nPapel sem público resolve metade: você ganha profundidade, mas na língua errada. Declare os dois.",
+  "exercicios": [
+    {
+      "tipo": "comparar_prompts",
+      "enunciado": "Mesma tarefa: explicar por que a margem do trimestre caiu, a partir do demonstrativo. Compare os três prompts e as saídas.",
+      "prompts": [
+        {
+          "rotulo": "Prompt A",
+          "texto": "Explique a queda da margem neste demonstrativo:\n\n[dados]",
+          "saida_esperada": "A margem apresentou redução no período analisado. Entre os fatores que costumam explicar esse movimento estão o aumento dos custos dos insumos, a pressão competitiva sobre os preços e o crescimento das despesas operacionais. Recomenda-se uma análise mais aprofundada de cada linha do demonstrativo.",
+          "melhor": false,
+          "explicacao": "Sem papel nem público, o modelo fica em cima do muro: explicação de livro-texto, sem se comprometer com os números do seu demonstrativo nem com um leitor específico."
+        },
+        {
+          "rotulo": "Prompt B",
+          "texto": "Você é um analista financeiro sênior. Explique a queda da margem neste demonstrativo:\n\n[dados]",
+          "saida_esperada": "A compressão de aproximadamente 3 p.p. na margem EBITDA (valores fictícios) decorre principalmente de desalavancagem operacional: o CPV cresceu acima da receita líquida, com repasse parcial da variação cambial aos insumos. Houve ainda efeito mix desfavorável, com maior participação de SKUs de menor contribuição marginal no faturamento do período.",
+          "melhor": false,
+          "explicacao": "O papel funcionou: a análise ganhou profundidade e compromisso com os números. Mas para quem é isso? Uma diretoria não técnica trava em desalavancagem, CPV e contribuição marginal. Papel sem público resolve metade."
+        },
+        {
+          "rotulo": "Prompt C",
+          "texto": "Você é um analista financeiro sênior. Explique a queda da margem neste demonstrativo para a diretoria, que não é técnica: sem jargão, no máximo 5 linhas, terminando com a ação que você recomenda.\n\n[dados]",
+          "saida_esperada": "A margem caiu porque nossos custos de matéria-prima subiram mais rápido do que os preços que conseguimos repassar aos clientes.\nAlém disso, vendemos proporcionalmente mais produtos baratos, que deixam menos lucro por unidade.\nO efeito combinado tirou cerca de 3 pontos da margem no trimestre (valores fictícios).\nRecomendação: revisar a tabela de preços das linhas mais afetadas antes do próximo ciclo de compras.",
+          "melhor": true,
+          "explicacao": "Papel e público juntos: a profundidade do analista sênior traduzida para a língua da diretoria, com limite de tamanho e fecho em ação. É a mesma análise do Prompt B, mas utilizável na reunião."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete o prompt para que a resposta chegue na língua certa do leitor.",
+      "texto": "Você é um advogado trabalhista experiente. Explique os riscos desta demissão para ___, ajustando a linguagem a esse leitor.",
+      "opcoes": [
+        {
+          "texto": "o dono da empresa, que não conhece os termos jurídicos",
+          "correta": true,
+          "explicacao": "Público concreto e com característica que muda a escrita: sem juridiquês, foco em risco e custo. O modelo sabe exatamente para quem traduzir."
+        },
+        {
+          "texto": "quem se interessar pelo assunto",
+          "correta": false,
+          "explicacao": "Público indefinido é o mesmo que nenhum: o modelo volta ao tom médio de manual, nem técnico nem simples."
+        },
+        {
+          "texto": "todo mundo da empresa",
+          "correta": false,
+          "explicacao": "Todo mundo mistura leitores muito diferentes. Para agradar todos, o modelo não serve bem a ninguém, e riscos de demissão nem deveriam circular para todos."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Marina, do RH.** Precisa comunicar aos operadores da fábrica uma mudança no plano de saúde. Qual prompt tende a gerar o comunicado certo de primeira?",
+      "alternativas": [
+        {
+          "texto": "Escreva um comunicado sobre a mudança no plano de saúde da empresa.",
+          "melhor": false,
+          "feedback": "Sem papel nem público, sai um comunicado corporativo padrão, com tom de intranet de multinacional. Pode soar frio ou confuso para o chão de fábrica."
+        },
+        {
+          "texto": "Você é um especialista em benefícios corporativos. Escreva um comunicado sobre a mudança no plano de saúde.",
+          "melhor": false,
+          "feedback": "O papel traz precisão técnica: coparticipação, rede credenciada, carência. Mas sem público definido, esses termos entram sem explicação, e o operador fica com mais dúvida do que antes."
+        },
+        {
+          "texto": "Você é um analista de RH experiente. Escreva o comunicado da mudança no plano de saúde para os operadores da fábrica: linguagem simples, frases curtas, foco no que muda no dia a dia e onde tirar dúvidas.",
+          "melhor": true,
+          "feedback": "Papel garante que a informação esteja certa; público garante que ela chegue. Linguagem simples, o que muda na prática e canal de dúvidas: comunicado pronto para o mural."
+        }
+      ]
+    }
+  ]
+}

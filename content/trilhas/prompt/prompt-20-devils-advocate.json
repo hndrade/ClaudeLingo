@@ -1,0 +1,82 @@
+{
+  "id": "prompt-20-devils-advocate",
+  "trilha": "prompt",
+  "titulo": "Devil's advocate",
+  "nivel": 4,
+  "prereq": ["prompt-19-reescreva-mantendo"],
+  "xp": 40,
+  "conceito": "**Devil's advocate**: depois de chegar a uma recomendação, peça ao modelo para atacá-la: \"agora ataque essa recomendação: onde ela falha, que premissa é frágil, que dado a derrubaria\".\n\nO modelo tende a concordar com o rumo da conversa. Sem ordem explícita para discordar, ele reforça a conclusão que você já prefere.\n\n**Quando usar**: decisão importante em que você já tem opinião formada e o viés de confirmação está à espreita (fornecedor, contratação, corte de projeto). **Quando não usar**: questão factual simples; pedir contra-argumento para \"qual o prazo legal de resposta\" só gera ruído.\n\nSaída esperada: pontos de falha concretos, a premissa por trás de cada um e o dado que mudaria a conclusão.",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**Marina, gerente de operações.** Na sexta a diretoria decide se internaliza a frota de entregas ou mantém a terceirizada. A análise da equipe recomenda internalizar, e Marina concorda com força: foi ideia dela. O material vai para a diretoria amanhã. O que fazer com IA nas próximas horas?",
+      "alternativas": [
+        {
+          "texto": "Colar a análise e pedir ao modelo para revisar os argumentos e deixá-los mais convincentes, reforçando os números que sustentam a internalização.",
+          "melhor": false,
+          "feedback": "Parece diligência, mas é o viés de confirmação com motor: o modelo vai polir exatamente a conclusão que ninguém testou. Se a premissa central estiver frágil, ela chega à diretoria mais bonita e igualmente frágil."
+        },
+        {
+          "texto": "Colar a análise e pedir: \"atue como o diretor mais cético da mesa. Ataque esta recomendação: liste os 3 pontos mais prováveis de falha, a premissa por trás de cada um e que dado concreto a derrubaria. Não repita os pontos fortes.\"",
+          "melhor": true,
+          "feedback": "É o padrão aplicado onde ele rende: decisão cara, autora envolvida, véspera da apresentação. Marina descobre os furos antes da diretoria, e chega na sexta com resposta pronta para as objeções ou com a recomendação corrigida."
+        },
+        {
+          "texto": "Abrir um chat novo, sem mostrar a análise, e pedir ao modelo uma avaliação independente sobre internalizar ou terceirizar frotas, para comparar com a conclusão da equipe.",
+          "melhor": false,
+          "feedback": "Segunda opinião cega soa rigorosa, mas sem os dados e o contexto da empresa o modelo devolve prós e contras genéricos de manual. A comparação não diz quais premissas da análise de Marina são frágeis, que é o que a sexta-feira exige."
+        }
+      ]
+    },
+    {
+      "tipo": "comparar_prompts",
+      "enunciado": "A recomendação está pronta: trocar o sistema de gestão de estoque pelo fornecedor NovaStack (caso fictício). Antes de enviar ao comitê, você quer que o modelo a ataque. Qual prompt cumpre o papel de advogado do diabo de verdade?",
+      "prompts": [
+        {
+          "rotulo": "Prompt A",
+          "texto": "O que você acha desta recomendação? Ela tem algum problema?\n\n[recomendação de trocar para a NovaStack]",
+          "saida_esperada": "A recomendação está bem estruturada e considera os principais fatores.\nA escolha da NovaStack parece sólida dado o comparativo de custos.\nAlguns pontos que poderiam ser opcionalmente detalhados:\n1. Cronograma de migração um pouco otimista.\n2. Poderia citar mais referências de clientes.\nNo geral, é uma recomendação consistente.",
+          "melhor": false,
+          "explicacao": "Pergunta aberta e educada convida validação: o modelo elogia, aponta detalhes cosméticos e confirma. É o comportamento padrão que o devil's advocate existe para quebrar."
+        },
+        {
+          "rotulo": "Prompt B",
+          "texto": "Liste todos os prós e contras desta recomendação, de forma equilibrada e imparcial.\n\n[recomendação de trocar para a NovaStack]",
+          "saida_esperada": "Prós:\n1. Custo de licença menor. 2. Interface moderna. 3. Suporte em português.\nContras:\n1. Migração exige esforço. 2. Fornecedor menos conhecido. 3. Curva de aprendizado.\nAmbos os lados apresentam pontos relevantes a considerar na decisão.",
+          "melhor": false,
+          "explicacao": "Parece rigor, e é a pegadinha: o pedido de equilíbrio força simetria artificial. Os contras saem genéricos (valem para qualquer troca de sistema) e a lista de prós reconfirma a tese. Ninguém testou premissa nenhuma."
+        },
+        {
+          "rotulo": "Prompt C",
+          "texto": "Agora ataque esta recomendação. Assuma que ela está errada e que a troca vai fracassar.\nListe os 3 pontos mais prováveis de falha. Para cada um: a premissa da recomendação que ele expõe, e que dado concreto, se eu o levantasse, derrubaria a recomendação.\nFeche com o sinal mais precoce de que erramos, observável nos 3 primeiros meses.\nNão repita pontos fortes.\n\n[recomendação de trocar para a NovaStack]",
+          "saida_esperada": "1. Migração do histórico: a recomendação assume exportação limpa dos dados atuais. Dado que a derrubaria: teste de exportação com mais de 5% de registros corrompidos.\n2. Custo real: assume que o preço de tabela vale para o nosso volume. Dado: proposta formal com o nosso número de usuários acima do orçado.\n3. Dependência do fornecedor: assume que a NovaStack sobrevive 5 anos. Dado: balanço ou rodada de captação indicando caixa curto.\nSinal precoce: na virada piloto, equipe voltando à planilha paralela já no primeiro mês.",
+          "melhor": true,
+          "explicacao": "Inverte o vetor: o modelo é obrigado a assumir o fracasso, nomear premissas e apontar o dado que decidiria. Limite de 3 força priorização, o sinal precoce cria um alarme verificável, e proibir pontos fortes impede a recaída em elogio."
+        },
+        {
+          "rotulo": "Prompt D",
+          "texto": "Você é um consultor extremamente crítico e implacável. Critique duramente esta recomendação em todos os aspectos possíveis, sem piedade.\n\n[recomendação de trocar para a NovaStack]",
+          "saida_esperada": "Esta recomendação apresenta falhas graves em praticamente todas as dimensões.\nA redação é vaga, a formatação dificulta a leitura, faltam citações de mercado.\nO cronograma é irrealista, o orçamento é questionável, a governança é fraca.\nA análise de riscos é superficial e o sumário executivo não convence.\nEm resumo, o documento precisa ser refeito antes de qualquer decisão.",
+          "melhor": false,
+          "explicacao": "Tom agressivo sem estrutura gera crítica performática: ataca tudo, inclusive formatação, sem separar premissa fatal de detalhe cosmético e sem dizer que dado resolveria. Volume de crítica não é teste de decisão."
+        }
+      ]
+    },
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "Exercício de construção. O pedido abaixo é o que alguém realmente digita antes de mandar uma decisão cara para cima. Monte você o prompt completo do zero na caixa de edição, aplicando o padrão devil's advocate. Depois compare com a referência e se avalie pela checklist.",
+      "prompt_fraco": "Revisa minha recomendação de fornecedor antes de eu mandar pra diretoria, vê se tá boa.",
+      "saida_fraca": "Sua recomendação está clara e bem fundamentada. A estrutura facilita a leitura e o comparativo de preços é convincente. Pequenas sugestões: padronizar a grafia do nome do fornecedor e reforçar a conclusão no final. No mais, está pronta para envio. (O modelo revisou forma, validou o mérito sem testar nada e devolveu exatamente a segurança que a autora queria sentir.)",
+      "prompt_referencia": "Recomendei abaixo o fornecedor B para o contrato de logística (valores fictícios). A diretoria decide na quinta e eu escrevi a recomendação, então estou propensa a defendê-la.\n\nAtue como o diretor mais cético da mesa e ataque a recomendação:\n1. Os 3 pontos mais prováveis de falha, em ordem de gravidade.\n2. Para cada ponto: a premissa que estou assumindo e que dado concreto a derrubaria.\n3. A pergunta mais difícil que a diretoria pode me fazer na quinta e que a recomendação não responde.\n\nNão liste pontos fortes e não reescreva o texto ainda. Se um ataque depender de informação que você não tem, formule a pergunta que eu deveria responder antes de enviar.\n\n[recomendação]",
+      "saida_referencia": "1. Dependência de preço promocional: você assume que o desconto do fornecedor B vale após o primeiro ano. Dado que derruba: minuta do contrato com reajuste livre na renovação.\n2. Capacidade de pico: assume que B atende o volume de dezembro. Dado que derruba: histórico de atrasos de B em alta temporada com clientes do nosso porte.\n3. Custo de troca omitido: a comparação ignora o custo de sair do fornecedor atual. Pergunta que preciso responder antes: existe multa rescisória e qual o valor?\nPergunta provável da diretoria: por que o fornecedor A, atual, não teve chance de cobrir a proposta?",
+      "checklist": [
+        "Ordenou explicitamente atacar a recomendação, em vez de revisar ou opinar?",
+        "Declarou o conflito (você é a autora e tende a defendê-la) para calibrar o ceticismo?",
+        "Pediu, para cada ataque, a premissa exposta e o dado concreto que derrubaria a recomendação?",
+        "Limitou e priorizou os ataques (os mais prováveis ou graves primeiro), em vez de pedir crítica geral?",
+        "Proibiu o modelo de listar pontos fortes ou reescrever antes do ataque?",
+        "Mandou transformar ataque sem dado em pergunta a responder, em vez de deixar o modelo especular?"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "id": "prompt-13-pergunte-antes",
+  "trilha": "prompt",
+  "titulo": "Pergunte antes de assumir",
+  "nivel": 3,
+  "prereq": [],
+  "xp": 30,
+  "conceito": "Quando o pedido tem lacunas, o modelo não para: preenche com premissas silenciosas e entrega errado com toda a confiança do mundo.\n\nO antídoto cabe numa instrução: \"antes de responder, faça as perguntas necessárias; não assuma o que não foi dito\". Use quando errar a premissa custa caro (proposta, comunicado, contrato). Para pedidos triviais, dispense: a rodada extra não paga o atraso.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Você pede: \"escreve a proposta comercial para o cliente novo\". O modelo entrega um texto impecável na forma. Qual é o risco mais provável?",
+      "alternativas": [
+        {
+          "texto": "O texto vir com erros de português que passam despercebidos.",
+          "correta": false,
+          "explicacao": "Forma é justamente onde o modelo menos erra. O perigo desse pedido não está na gramática, está no conteúdo que ninguém informou."
+        },
+        {
+          "texto": "O modelo assumir em silêncio escopo, prazo e condições que ninguém disse, e a proposta parecer pronta sem estar.",
+          "correta": true,
+          "explicacao": "Sem os dados, o modelo completa as lacunas com o mais provável. A fluência do texto esconde as premissas inventadas: é o erro entregue com confiança."
+        },
+        {
+          "texto": "O modelo se recusar a responder por falta de informação.",
+          "correta": false,
+          "explicacao": "Modelos raramente recusam por lacuna: o comportamento padrão é preencher e seguir em frente. É exatamente isso que torna a premissa silenciosa perigosa."
+        }
+      ]
+    },
+    {
+      "tipo": "comparar_prompts",
+      "enunciado": "O RH precisa comunicar uma mudança na política de home office, mas o pedido chegou sem os detalhes da nova regra. Qual prompt lida melhor com as lacunas?",
+      "prompts": [
+        {
+          "rotulo": "Prompt A",
+          "texto": "Escreve o comunicado da mudança na política de home office para os funcionários.",
+          "saida_esperada": "Prezados colaboradores,\n\nA partir do próximo mês, o trabalho remoto passará a ser permitido em 2 dias por semana, mediante acordo com a liderança...\n\n(O modelo escolheu sozinho a regra, a data e o tom. Nada disso foi informado.)",
+          "melhor": false,
+          "explicacao": "Premissas silenciosas com cara de decisão oficial. É perigoso justamente porque o texto parece pronto para envio."
+        },
+        {
+          "rotulo": "Prompt B",
+          "texto": "Preciso comunicar uma mudança na política de home office. Antes de escrever, faça as perguntas necessárias para redigir sem inventar: não assuma o que não foi dito. Depois que eu responder, redija o comunicado em até 15 linhas.",
+          "saida_esperada": "Antes de redigir, preciso saber:\n1. Qual é a nova regra (dias permitidos, quem é elegível)?\n2. A partir de quando vale?\n3. Quem assina o comunicado?\n4. Há exceções por área ou função?\n5. Tom: institucional ou mais próximo?",
+          "melhor": true,
+          "explicacao": "As perguntas certas antes do texto: custa uma rodada a mais e elimina as premissas inventadas. O comunicado sai com os fatos reais."
+        },
+        {
+          "rotulo": "Prompt C",
+          "texto": "Escreve o comunicado da mudança na política de home office. Não invente nenhuma informação.",
+          "saida_esperada": "Prezados colaboradores,\n\nComunicamos que a política de home office passará por mudanças. Detalhes sobre a nova regra, datas e elegibilidade serão informados oportunamente.\n[inserir regra] [inserir data de vigência]",
+          "melhor": false,
+          "explicacao": "Proibir inventar sem permitir perguntar gera texto oco, cheio de lacunas que voltam para você preencher. A instrução completa tem as duas partes: não assuma E pergunte."
+        }
+      ]
+    },
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "O pedido abaixo tem mais lacunas que informação. Conserte fazendo o modelo perguntar antes de produzir, depois compare com a referência.",
+      "prompt_fraco": "Monta a proposta comercial pra esse cliente novo que a gente vai visitar quinta.",
+      "saida_fraca": "Proposta Comercial\n\nPrezado cliente, é com satisfação que apresentamos nossa proposta.\nEscopo: implementação completa da solução em até 90 dias.\nInvestimento: condições especiais de lançamento, com 10% de desconto.\nValidade: 30 dias.\n\n(Escopo, prazo, desconto e validade: tudo assumido em silêncio pelo modelo. Parece pronta, e cada linha é um chute.)",
+      "prompt_referencia": "Vou montar uma proposta comercial para um cliente novo; a visita é quinta.\nAntes de escrever qualquer linha, faça as perguntas necessárias para redigir sem inventar: não assuma o que não foi dito.\nPergunte apenas o que muda o texto: escopo, preço, prazo, condições, quem decide.\nDepois que eu responder, redija a proposta em 1 página.",
+      "saida_referencia": "Para redigir sem chutar, preciso de:\n1. Qual produto ou serviço entra no escopo desta proposta?\n2. Preço e condições: tabela cheia, desconto já aprovado ou faixa a negociar?\n3. Qual prazo de entrega ou implantação podemos prometer?\n4. Quem decide do lado do cliente e o que essa pessoa valoriza?\n5. Validade da proposta e próximo passo após a visita?\n\nCom essas respostas, entrego a proposta em 1 página.",
+      "checklist": [
+        "Instruiu o modelo a perguntar ANTES de produzir qualquer texto?",
+        "Proibiu explicitamente assumir o que não foi dito?",
+        "Limitou as perguntas ao que muda o texto, para não virar interrogatório?",
+        "Definiu o que acontece depois das respostas (redigir, formato, tamanho)?",
+        "Aproveitou para dar o contexto que você já tem (cliente novo, visita quinta)?"
+      ]
+    }
+  ]
+}

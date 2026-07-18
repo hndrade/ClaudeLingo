@@ -45,6 +45,17 @@ Pedidos do dono do projeto, implementados fora da ordem original das fases:
 
 Verificação: percurso completo via Playwright em 375x667, modos claro e escuro: onboarding, mapa, lição inteira, popup, repescagem, persistência em disco conferida no JSON.
 
+### Fase 4: Trilha 4 completa + login por perfis (concluída)
+
+Feito:
+
+- 22 lições na T4: as 12 boas práticas (4A), os 9 prompts de efeito (4B) e um capstone de construção, distribuídas na escada: 4 lições nível 1, 7 nível 2, 8 nível 3, 3 nível 4. Toda lição de prompt traz saídas esperadas (4C) nos comparar_prompts e consertar_prompt.
+- Teste de validação de conteúdo (tests/conteudo.test.ts): schema, id, conceito até 6 linhas, sem travessão, contagens de alternativas. Suíte total: 111 testes verdes.
+- Login por perfis: /login com "Continuar como visitante", contas locais nomeadas (um arquivo de progresso por perfil em data/) e troca de conta pelo topo do mapa. Botão "Entrar com Google" visível e desabilitado: OAuth real exige credenciais e servidor; num app local as contas nomeadas cumprem o papel de salvar progresso por pessoa.
+- NOTAS.md: caderno de trabalho curto com decisões e pendências.
+
+Verificação da fase: escada conferida por script no mapa (nível 1 com 4 disponíveis; concluir nível N destrava exatamente as lições do nível N+1: 7, depois 8, depois 3) e percurso completo login → onboarding → lição → repescagem sem falhas.
+
 ### Fase 2: motor de progresso com testes (concluída)
 
 Feito:

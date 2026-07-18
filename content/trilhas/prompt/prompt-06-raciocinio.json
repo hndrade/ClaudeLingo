@@ -1,0 +1,79 @@
+{
+  "id": "prompt-06-raciocinio",
+  "trilha": "prompt",
+  "titulo": "Raciocínio passo a passo (e quando atrapalha)",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "conceito": "Em problema com **lógica encadeada** (regras que dependem umas das outras, cálculo em etapas), peça o raciocínio antes da resposta: \"liste as regras aplicáveis, verifique uma a uma, depois dê o veredito\". Erro em etapa visível você corrige; erro em silêncio, não.\n\nMas raciocínio explícito tem preço: em tarefa simples ele só deixa a resposta prolixa, lenta e mais cara. Extração direta e reformatação não precisam de ensaio.\n\nRegra de bolso: se você conferiria a conta no papel, peça as etapas. Se é localizar e copiar com critério, peça direto.",
+  "exercicios": [
+    {
+      "tipo": "comparar_prompts",
+      "enunciado": "A política de reembolso tem regras encadeadas: teto por categoria, prazo de envio, exigência de nota fiscal. Você quer saber se um pedido específico é reembolsável. Qual prompt escolher?",
+      "prompts": [
+        {
+          "rotulo": "Prompt A",
+          "texto": "Com base na política abaixo, o pedido de reembolso a seguir é válido? Responda apenas sim ou não.\n\n[política e pedido]",
+          "saida_esperada": "Não.\nO pedido não atende integralmente aos requisitos da política.\nRecomendo revisar as condições antes de reenviar.\nPosso detalhar os pontos se desejar.",
+          "melhor": false,
+          "explicacao": "Veredito seco sobre regras encadeadas é inauditável: se o modelo escorregou numa etapa intermediária, você não tem como perceber. Barato, mas você paga depois, conferindo tudo na mão."
+        },
+        {
+          "rotulo": "Prompt B",
+          "texto": "Com base na política abaixo, avalie o pedido em 3 passos:\n1. Liste cada regra da política que se aplica a este pedido.\n2. Verifique o pedido contra cada regra, uma por linha, citando o dado usado.\n3. Termine com VEREDITO: válido ou inválido, em uma linha.\n\n[política e pedido]",
+          "saida_esperada": "1. Regras aplicáveis: teto da categoria alimentação, prazo de 30 dias, nota fiscal obrigatória.\n2. Teto: R$ [valor], abaixo do limite da categoria, ok.\nPrazo: despesa de [data], enviada em [data], dentro dos 30 dias, ok.\nNota fiscal: o pedido anexa apenas comprovante de cartão, falha.\n3. VEREDITO: inválido, falta a nota fiscal.",
+          "melhor": true,
+          "explicacao": "Raciocínio dirigido (regra a regra, citando o dado usado) mais veredito em formato fixo: cada etapa fica auditável e a conclusão é achável sem reler o texto. É o desenho certo para lógica encadeada."
+        },
+        {
+          "rotulo": "Prompt C",
+          "texto": "Analise com muito cuidado e detalhadamente se o pedido de reembolso abaixo é válido segundo a política. Explique tudo.\n\n[política e pedido]",
+          "saida_esperada": "A política de reembolsos estabelece diretrizes importantes para o controle de despesas corporativas.\nEm linhas gerais, políticas desse tipo buscam equilibrar agilidade e conformidade.\nSobre o pedido em análise, há vários aspectos a considerar: a natureza da despesa, o contexto do envio, a documentação apresentada.\nA despesa parece razoável para a categoria, embora o comprovante mereça atenção.\n(segue por mais de 30 linhas, com o veredito diluído num parágrafo do meio)",
+          "melhor": false,
+          "explicacao": "\"Explique tudo\" gera dissertação, não verificação: o modelo fala sobre a política em vez de testar o pedido contra ela. Raciocínio útil é estruturado por você, não é volume livre."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Paulo, operações.** Precisa extrair de 200 e-mails de fornecedores três campos para uma planilha: CNPJ, número do pedido e valor. Como pedir?",
+      "alternativas": [
+        {
+          "texto": "Pedir raciocínio passo a passo antes de cada extração, para garantir a qualidade em cada e-mail.",
+          "melhor": false,
+          "feedback": "Extração é localizar e copiar: o ensaio não melhora o acerto, só multiplica texto, tempo e custo por 200. Raciocínio explícito é ferramenta para lógica encadeada, não ritual de qualidade."
+        },
+        {
+          "texto": "Pedir extração direta em tabela, com a regra: se um campo não estiver no e-mail, escrever \"não encontrado\", nunca deduzir.",
+          "melhor": true,
+          "feedback": "Tarefa simples pede resposta direta, e a regra para campo ausente cobre o único risco real, que é o modelo inventar um CNPJ ou valor plausível. Rápido, barato e conferível por amostragem."
+        },
+        {
+          "texto": "Pedir a extração e, ao final de cada linha, uma nota de confiança de 0 a 100 sobre o dado extraído.",
+          "melhor": false,
+          "feedback": "A nota de confiança parece rigor, mas o modelo a gera sem base verificável: você ganha uma coluna decorativa e continua sem saber quais linhas conferir. A regra do \"não encontrado\" resolve melhor e mais barato."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie cada desenho de prompt com a situação em que ele compensa.",
+      "pares": [
+        { "conceito": "Raciocínio antes da resposta", "definicao": "Regras encadeadas e cálculo em etapas" },
+        { "conceito": "Resposta direta, sem ensaio", "definicao": "Extrair e reformatar o que já está no texto" },
+        { "conceito": "Veredito em formato fixo no final", "definicao": "Achar a conclusão sem reler o raciocínio" }
+      ]
+    },
+    {
+      "tipo": "ordenacao",
+      "enunciado": "Ordene as partes de um prompt que pede verificação com raciocínio explícito.",
+      "etapas": [
+        "Forneça a política e os dados do caso",
+        "Peça a lista das regras que se aplicam ao caso",
+        "Peça a checagem do caso contra cada regra, citando o dado usado",
+        "Peça o veredito final em uma linha, com formato fixo"
+      ],
+      "explicacao": "O material vem primeiro, senão não há o que verificar. Listar as regras antes de checar impede que o modelo esqueça uma no meio do caminho. O veredito fecha em formato fixo para a conclusão não se perder dentro do raciocínio."
+    }
+  ]
+}

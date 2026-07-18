@@ -1,0 +1,58 @@
+{
+  "id": "prompt-17-cascata",
+  "trilha": "prompt",
+  "titulo": "Cascata: rascunho, crítica, versão final",
+  "nivel": 3,
+  "prereq": [],
+  "xp": 30,
+  "conceito": "**Padrão: Cascata.** Em um único pedido, exija três blocos rotulados: 1) rascunho, 2) crítica do próprio rascunho contra critérios que você declarou, 3) versão final incorporando a crítica.\n\n**Quando usar:** texto importante, como proposta ou comunicado, em que a primeira versão nunca é boa o suficiente.\n**Quando não usar:** resposta rápida de baixo risco: a cascata triplica o custo e o tempo.\n**Saída esperada:** os três blocos visíveis, com a versão final diferente do rascunho exatamente nos pontos que a crítica apontou.",
+  "exercicios": [
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "O RH precisa comunicar a troca da operadora do plano de saúde (datas fictícias). Conserte o prompt aplicando o padrão Cascata, depois compare com a referência e se autoavalie.",
+      "prompt_fraco": "Escreve um comunicado pros funcionários avisando que o plano de saúde vai mudar de operadora em outubro.",
+      "saida_fraca": "Prezados colaboradores,\n\nInformamos que, a partir de outubro, nosso plano de saúde passará a ser operado por uma nova empresa. A mudança visa trazer melhorias para todos. Em breve divulgaremos mais informações.\n\nAtenciosamente, RH\n\n(Primeira versão típica: tom burocrático, não diz o que muda na prática nem o que o funcionário precisa fazer, e foi entregue como se fosse a final.)",
+      "prompt_referencia": "Escreva um comunicado aos funcionários sobre a troca da operadora do plano de saúde em outubro, em três blocos rotulados:\n1) RASCUNHO do comunicado.\n2) CRÍTICA do rascunho contra estes critérios: diz o que muda na prática para o funcionário? Diz o que ele precisa fazer e até quando? Tom empático, sem juridiquês? Máximo de 15 linhas?\n3) VERSÃO FINAL incorporando cada ponto da crítica.\nContexto: carteirinhas novas chegam em setembro, a rede credenciada muda, quem tem tratamento em andamento deve se recadastrar até 15/09.",
+      "saida_referencia": "RASCUNHO: Prezados, informamos que a operadora do plano de saúde mudará em outubro...\n\nCRÍTICA: o rascunho não cita a mudança da rede credenciada nem o prazo de 15/09 para quem tem tratamento em andamento; tom distante; passou de 15 linhas.\n\nVERSÃO FINAL: A partir de outubro, nosso plano de saúde passa a ser operado pela nova empresa. O que muda para você: carteirinha nova em setembro e nova rede credenciada. Se você tem tratamento em andamento, recadastre-se até 15/09 para não haver interrupção. Dúvidas: canal do RH.",
+      "checklist": [
+        "Pediu os três blocos rotulados (rascunho, crítica, versão final) em um único prompt?",
+        "Declarou os critérios contra os quais a crítica deve ser feita?",
+        "Os critérios são verificáveis (ação clara? prazo citado? limite de linhas?) em vez de adjetivos?",
+        "Exigiu que a versão final incorpore cada ponto da crítica?",
+        "Forneceu os fatos (datas, mudanças concretas) para o comunicado não sair vazio?"
+      ]
+    },
+    {
+      "tipo": "ordenacao",
+      "enunciado": "Coloque na ordem os blocos de um prompt em Cascata.",
+      "etapas": [
+        "Declare os critérios de qualidade que a crítica vai usar",
+        "Peça o rascunho completo do texto",
+        "Peça a crítica do próprio rascunho, ponto a ponto, contra os critérios",
+        "Peça a versão final incorporando cada ponto da crítica"
+      ],
+      "explicacao": "Os critérios vêm antes de tudo: sem eles, a crítica vira elogio genérico. O rascunho materializa uma primeira tentativa, a crítica confronta essa tentativa com os critérios declarados, e a versão final só faz sentido por último, alimentada pelo que a crítica encontrou."
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Cláudia, comercial.** Na mesma tarde ela precisa: responder um e-mail confirmando o recebimento de um documento e escrever a proposta de renovação para o maior cliente da carteira. Como usar a Cascata?",
+      "alternativas": [
+        {
+          "texto": "Aplicar a Cascata nos dois textos, para garantir qualidade máxima em tudo.",
+          "melhor": false,
+          "feedback": "Na confirmação de recebimento, a cascata triplica o custo para melhorar um texto de duas linhas que ninguém relê. Padrão certo em lugar errado vira desperdício."
+        },
+        {
+          "texto": "Aplicar a Cascata só na proposta de renovação, com critérios declarados, e pedir o e-mail de confirmação direto, em uma tacada.",
+          "melhor": true,
+          "feedback": "Reserva o padrão para o texto caro de errar (proposta para o maior cliente) e resolve o trivial pelo caminho barato. O critério de uso aplicado dos dois lados."
+        },
+        {
+          "texto": "Dispensar a Cascata na proposta e iterar na conversa: pedir uma versão e ir corrigindo em mensagens seguintes.",
+          "melhor": false,
+          "feedback": "Funciona, mas espalha os critérios por dez mensagens e depende de você lembrar de todos. A cascata força o confronto com os critérios em uma única passada, com registro explícito."
+        }
+      ]
+    }
+  ]
+}

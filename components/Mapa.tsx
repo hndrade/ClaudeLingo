@@ -52,9 +52,17 @@ export default function Mapa({ dados }: { dados: DadosMapa }) {
   const router = useRouter();
   const [progresso, setProgresso] = useState<Progresso | null>(null);
   const [popupReforco, setPopupReforco] = useState(false);
+  const [perfil, setPerfil] = useState<string | null>(null);
 
   useEffect(() => {
-    carregarProgresso().then((p) => {
+    (async () => {
+      const { atual } = await (await fetch("/api/perfil")).json();
+      if (!atual) {
+        router.replace("/login");
+        return;
+      }
+      setPerfil(atual);
+      const p = await carregarProgresso();
       if (p.compromisso === null) {
         router.replace("/onboarding");
         return;
@@ -66,7 +74,7 @@ export default function Mapa({ dados }: { dados: DadosMapa }) {
         setPopupReforco(true);
         salvarProgresso({ ...p, ultimoPopupReforco: hojeLocal() });
       }
-    });
+    })();
   }, [router]);
 
   if (!progresso || !progresso.compromisso) return null;
@@ -115,6 +123,9 @@ export default function Mapa({ dados }: { dados: DadosMapa }) {
         <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-between">
             <span className="text-sm font-bold text-tinta">⚡ {progresso.xp} XP</span>
+            <Link href="/login" className="text-xs font-semibold text-tinta/60">
+              👤 {perfil}
+            </Link>
             <span className="text-sm font-bold text-tinta">
               🔥 {progresso.streak.atual} {progresso.streak.atual === 1 ? "dia" : "dias"}
             </span>

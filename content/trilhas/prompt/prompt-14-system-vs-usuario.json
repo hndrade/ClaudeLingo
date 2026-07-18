@@ -1,0 +1,62 @@
+{
+  "id": "prompt-14-system-vs-usuario",
+  "trilha": "prompt",
+  "titulo": "System prompt vs mensagem",
+  "nivel": 3,
+  "prereq": [],
+  "xp": 30,
+  "conceito": "Regra dita no meio da conversa vale para aquela conversa: amanhã, em um chat novo, o modelo volta ao padrão de fábrica.\n\nSepare os dois planos. Instrução permanente (system prompt): papel, regras fixas, formato padrão de saída, o que nunca fazer. Mensagem do caso: os dados e o pedido de hoje.\n\nRegra de bolso: se você repete a mesma instrução toda conversa, ela pertence ao system prompt.",
+  "exercicios": [
+    {
+      "tipo": "associacao",
+      "enunciado": "Onde vive cada coisa? Pareie.",
+      "pares": [
+        { "conceito": "Instrução permanente (system)", "definicao": "Papel, regras fixas, formato padrão, proibições" },
+        { "conceito": "Mensagem do caso", "definicao": "Dados e pedido específicos de hoje" },
+        { "conceito": "Regra dita só na conversa", "definicao": "Funciona hoje e evapora no chat seguinte" }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a regra de bolso para decidir onde colocar cada instrução.",
+      "texto": "Se a instrução vale para toda conversa (papel, formato, o que nunca fazer), ela pertence ___; se só vale para o caso de hoje, vai na mensagem.",
+      "opcoes": [
+        {
+          "texto": "ao system prompt (instrução permanente)",
+          "correta": true,
+          "explicacao": "Regra estável mora no lugar estável: você para de redigitar, ninguém esquece, e o comportamento fica consistente entre conversas e entre pessoas da equipe."
+        },
+        {
+          "texto": "à primeira mensagem de cada nova conversa",
+          "correta": false,
+          "explicacao": "Funciona na marra, mas depende de alguém lembrar de colar toda vez. No dia em que esquecer, o padrão quebra em silêncio."
+        },
+        {
+          "texto": "ao final de cada pedido, como lembrete",
+          "correta": false,
+          "explicacao": "A regra passa a competir com o pedido do dia dentro da mesma mensagem, e continua evaporando quando a conversa acaba. Repetição manual não é padrão, é esforço."
+        },
+        {
+          "texto": "a um documento que você anexa quando dá tempo",
+          "correta": false,
+          "explicacao": "Instrução que depende de anexo ocasional não é regra, é loteria: nas conversas sem o anexo, o modelo nem sabe que ela existe."
+        }
+      ]
+    },
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "A equipe jurídica tem regras fixas de revisão, mas elas são redigitadas (ou esquecidas) a cada conversa. Separe o que é permanente do que é do caso, depois compare com a referência.",
+      "prompt_fraco": "Revisa esse contrato de prestação de serviços. Ah, e como sempre: você é nosso revisor jurídico, aponta só riscos relevantes, em tabela, cita a cláusula, nunca sugere redação nova sem marcar como sugestão, e responde em português formal. O contrato é com a fornecedora Alfa, prazo de 12 meses.\n\n[contrato]",
+      "saida_fraca": "Segue a análise do contrato:\n\nO documento está bem estruturado de forma geral. Alguns pontos de atenção: a multa parece elevada, sugiro alterar a redação para \"a multa limita-se ao valor mensal do contrato\". Também há observações menores sobre formatação e numeração...\n\n(Metade das regras se perdeu no meio da mensagem: sem tabela, sem citar cláusula, redação nova sem o rótulo de sugestão, risco grave misturado com detalhe. E amanhã, em outra conversa, nem esse meio-padrão sobrevive: a regra durou um chat.)",
+      "prompt_referencia": "INSTRUÇÃO PERMANENTE (salvar como system prompt do assistente jurídico):\nVocê é o revisor jurídico da equipe. Em toda revisão de contrato:\n1. Aponte apenas riscos relevantes, em tabela: cláusula, risco, gravidade.\n2. Cite sempre o número da cláusula.\n3. Nunca proponha redação nova sem o rótulo SUGESTÃO.\n4. Responda em português formal.\n\nMENSAGEM DO CASO:\nRevise o contrato de prestação de serviços abaixo. Contexto: fornecedora Alfa, prazo de 12 meses, primeira contratação.\n\n[contrato]",
+      "saida_referencia": "| Cláusula | Risco | Gravidade |\n| 7.2 | Multa sem teto para o contratante | Alta |\n| 10.1 | Renovação automática sem aviso prévio | Média |\n\nSUGESTÃO (cláusula 7.2): limitar a multa a um percentual do valor mensal do contrato.\n\n(Mesmo formato em qualquer conversa futura: a regra mora no system prompt, não na memória de quem digita.)",
+      "checklist": [
+        "Separou o que vale sempre (papel, regras, formato) do que é só deste caso?",
+        "As proibições (o que nunca fazer) ficaram na instrução permanente?",
+        "O formato padrão de saída está no system prompt, não na mensagem?",
+        "A mensagem do caso ficou só com os dados e o pedido de hoje?",
+        "Alguma instrução que você repete toda conversa ficou de fora do system prompt?"
+      ]
+    }
+  ]
+}

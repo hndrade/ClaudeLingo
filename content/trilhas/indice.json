@@ -1,0 +1,10 @@
+{
+  "trilhas": [
+    {
+      "id": "prompt",
+      "nome": "Prompt engineering",
+      "descricao": "Do pedido vago ao prompt de alto impacto, por desafio.",
+      "licoes": ["prompt-01-especificidade"]
+    }
+  ]
+}

@@ -50,14 +50,14 @@ export function PreencherLacuna({
         {partes[1] ?? ""}
       </div>
 
-      <div className="mt-3 flex flex-wrap gap-2">
+      <div className="mt-2 flex flex-wrap gap-2">
         {ex.opcoes.map((op, i) => (
           <button
             key={i}
             type="button"
             disabled={verificado}
             onClick={() => setSel(i)}
-            className={`rounded-full border px-3 py-2 text-[14px] ${chipClasses(i)}`}
+            className={`rounded-full border px-3 py-1.5 text-sm leading-snug ${chipClasses(i)}`}
           >
             {op.texto}
           </button>
@@ -67,14 +67,14 @@ export function PreencherLacuna({
       {verificado && sel !== null && (
         <div className="mt-3 flex flex-col gap-2">
           <div
-            className={`rounded-xl border p-3 text-[14px] leading-relaxed ${
+            className={`rounded-xl border px-3 py-2.5 text-sm leading-snug ${
               acertou ? "border-certo bg-certo-fundo text-certo" : "border-erro bg-erro-fundo text-erro"
             }`}
           >
             {ex.opcoes[sel].explicacao}
           </div>
           {!acertou && idxCerta !== -1 && (
-            <div className="rounded-xl border border-certo bg-certo-fundo p-3 text-[14px] leading-relaxed text-certo">
+            <div className="rounded-xl border border-certo bg-certo-fundo px-3 py-2.5 text-sm leading-snug text-certo">
               <span className="font-semibold">Correta: {ex.opcoes[idxCerta].texto}. </span>
               {ex.opcoes[idxCerta].explicacao}
             </div>

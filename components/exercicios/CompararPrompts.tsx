@@ -21,8 +21,8 @@ export default function CompararPromptsEx({
 
   return (
     <div>
-      <Md texto={ex.enunciado} className="mb-4" />
-      <div className="grid gap-3 md:grid-cols-2">
+      <Md texto={ex.enunciado} className="mb-3" />
+      <div className="grid gap-2 md:grid-cols-2">
         {ex.prompts.map((p, i) => {
           const selecionado = escolhido === i;
           let borda = "border-tinta/10";
@@ -49,9 +49,9 @@ export default function CompararPromptsEx({
               type="button"
               disabled={verificado}
               onClick={() => setEscolhido(i)}
-              className={`rounded-xl border-2 bg-white p-3 text-left ${borda}`}
+              className={`rounded-xl border-2 bg-cartao p-3 text-left ${borda}`}
             >
-              <div className="mb-2 flex items-center gap-2">
+              <div className="mb-1.5 flex items-center gap-2">
                 <span className="text-sm font-bold text-tinta">{p.rotulo}</span>
                 {badge}
               </div>

@@ -23,10 +23,17 @@ export type Progresso = {
   licoes: LicaoConcluida[]; // histórico; a mesma lição pode aparecer mais de uma vez
   minutosPorDia: Record<string, number>;
   ultimaNotificacao: string | null; // data da última notificação de ausência
-  // Exercícios errados aguardando repescagem (removidos quando acertados lá).
-  erros: { licao: string; exercicio: number; data: string }[];
+  // Exercícios errados na fila de revisão espaçada. "data" é a data da última
+  // resposta; o item vence em data + INTERVALOS_REVISAO[estagio] dias.
+  erros: ErroRevisao[];
   ultimoPopupReforco: string | null; // data do último popup de fim de semana
 };
+
+export type ErroRevisao = { licao: string; exercicio: number; data: string; estagio: number };
+
+export const VIDAS_POR_SESSAO = 5;
+export const INTERVALOS_REVISAO = [1, 3, 7, 21]; // dias até a próxima revisão, por estágio
+export const TAXA_LIBERACAO = 0.8; // acerto agregado mínimo para liberar o nível seguinte
 
 export const progressoVazio: Progresso = {
   xp: 0,
@@ -69,21 +76,89 @@ export function concluirLicao(
   };
 }
 
-// Registra os exercícios errados de uma lição para a repescagem (sem duplicar).
+// Registra os exercícios errados de uma lição na fila de revisão (sem duplicar;
+// errar de novo um item que já está na fila reinicia a contagem do estágio dele).
 export function registrarErros(p: Progresso, licao: string, indices: number[], hoje = hojeLocal()): Progresso {
+  const erros = p.erros.map((e) =>
+    e.licao === licao && indices.includes(e.exercicio) ? { ...e, data: hoje } : e
+  );
   const novos = indices
     .filter((i) => !p.erros.some((e) => e.licao === licao && e.exercicio === i))
-    .map((i) => ({ licao, exercicio: i, data: hoje }));
-  return { ...p, erros: [...p.erros, ...novos] };
+    .map((i) => ({ licao, exercicio: i, data: hoje, estagio: 0 }));
+  return { ...p, erros: [...erros, ...novos] };
 }
 
-// Remove um erro da fila quando o usuário acerta na repescagem.
-export function resolverErro(p: Progresso, licao: string, exercicio: number): Progresso {
-  return { ...p, erros: p.erros.filter((e) => !(e.licao === licao && e.exercicio === exercicio)) };
+// Itens da fila já vencidos (prontos para revisar) na data de hoje.
+export function errosVencidos(p: Progresso, hoje = hojeLocal()): ErroRevisao[] {
+  return p.erros.filter((e) => diasEntre(e.data, hoje) >= INTERVALOS_REVISAO[e.estagio ?? 0]);
+}
+
+// Acertou na repescagem: avança o estágio; após o último intervalo (21 dias), sai da fila.
+export function acertarRevisao(p: Progresso, licao: string, exercicio: number, hoje = hojeLocal()): Progresso {
+  return {
+    ...p,
+    erros: p.erros.flatMap((e) => {
+      if (e.licao !== licao || e.exercicio !== exercicio) return [e];
+      const estagio = (e.estagio ?? 0) + 1;
+      return estagio >= INTERVALOS_REVISAO.length ? [] : [{ ...e, estagio, data: hoje }];
+    }),
+  };
+}
+
+// Errou na repescagem: volta ao estágio inicial e reinicia a contagem.
+export function errarRevisao(p: Progresso, licao: string, exercicio: number, hoje = hojeLocal()): Progresso {
+  return {
+    ...p,
+    erros: p.erros.map((e) =>
+      e.licao === licao && e.exercicio === exercicio ? { ...e, estagio: 0, data: hoje } : e
+    ),
+  };
 }
 
 export function licoesConcluidas(p: Progresso): Set<string> {
   return new Set(p.licoes.map((l) => l.id));
+}
+
+export type LicaoMeta = { id: string; nivel: number };
+
+// Melhor tentativa (maior taxa de acerto) de cada lição concluída.
+function melhorTentativa(p: Progresso, id: string): LicaoConcluida | undefined {
+  return p.licoes
+    .filter((l) => l.id === id)
+    .sort((a, b) => b.acertos / b.total - a.acertos / a.total)[0];
+}
+
+// Escada de dificuldade: o nível 1 está sempre liberado; o nível N+1 libera quando
+// todas as lições de nível N da trilha foram concluídas e o acerto agregado
+// (melhor tentativa por lição) é de pelo menos 80%.
+export function nivelMaxLiberado(metas: LicaoMeta[], p: Progresso): number {
+  let liberado = 1;
+  for (let nivel = 1; nivel < 5; nivel++) {
+    const doNivel = metas.filter((m) => m.nivel === nivel);
+    if (doNivel.length === 0) break;
+    const tentativas = doNivel.map((m) => melhorTentativa(p, m.id));
+    if (tentativas.some((t) => !t)) break;
+    const acertos = tentativas.reduce((s, t) => s + (t as LicaoConcluida).acertos, 0);
+    const total = tentativas.reduce((s, t) => s + (t as LicaoConcluida).total, 0);
+    if (acertos / total < TAXA_LIBERACAO) break;
+    liberado = nivel + 1;
+  }
+  return liberado;
+}
+
+// Trilha destrava trilha: uma trilha está liberada quando todas as trilhas
+// anteriores COM conteúdo tiveram todas as suas lições concluídas.
+export function trilhaLiberada(
+  trilhas: { id: string; licoes: string[] }[],
+  p: Progresso,
+  trilhaId: string
+): boolean {
+  const feitas = licoesConcluidas(p);
+  for (const t of trilhas) {
+    if (t.id === trilhaId) return true;
+    if (t.licoes.length > 0 && !t.licoes.every((id) => feitas.has(id))) return false;
+  }
+  return false;
 }
 
 // Minutos estudados nos últimos 7 dias e nos 7 anteriores (competição consigo mesmo).

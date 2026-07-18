@@ -1,10 +1,58 @@
 {
   "trilhas": [
     {
+      "id": "fundamentos",
+      "nome": "T1. Fundamentos de IA",
+      "descricao": "Machine learning, transformer, tokens e embeddings em linguagem humana.",
+      "licoes": []
+    },
+    {
+      "id": "llm",
+      "nome": "T2. LLM 101",
+      "descricao": "Janela de contexto, temperatura, alucinação, custo e latência.",
+      "licoes": []
+    },
+    {
+      "id": "claude",
+      "nome": "T3. Claude 101",
+      "descricao": "Família de modelos, Projects, Artifacts, Skills e quando NÃO usar Claude.",
+      "licoes": []
+    },
+    {
       "id": "prompt",
-      "nome": "Prompt engineering",
+      "nome": "T4. Prompt engineering",
       "descricao": "Do pedido vago ao prompt de alto impacto, por desafio.",
       "licoes": ["prompt-01-especificidade"]
+    },
+    {
+      "id": "rag",
+      "nome": "T5. RAG",
+      "descricao": "Chunking, busca vetorial e híbrida, reranking e avaliação.",
+      "licoes": []
+    },
+    {
+      "id": "mcp",
+      "nome": "T6. MCP",
+      "descricao": "Arquitetura host, client e server, tools vs resources, transports e riscos.",
+      "licoes": []
+    },
+    {
+      "id": "agentes",
+      "nome": "T7. Agentes e tool use",
+      "descricao": "Loop de agente, sub-agentes, human in the loop e custo real.",
+      "licoes": []
+    },
+    {
+      "id": "comparativo",
+      "nome": "T8. Comparativo de IAs",
+      "descricao": "Escolher a ferramenta certa por eixo de decisão, com fontes verificadas.",
+      "licoes": []
+    },
+    {
+      "id": "avaliacao",
+      "nome": "T9. Avaliação, custo e risco",
+      "descricao": "Evals, red teaming, prompt injection, LGPD e custo por caso de uso.",
+      "licoes": []
     }
   ]
 }

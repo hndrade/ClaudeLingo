@@ -23,15 +23,15 @@ export function EscolhaUnica({
   }
 
   function classes(i: number) {
-    if (!verificado) return i === sel ? "border-acento bg-acento-fundo" : "border-tinta/10 bg-white";
+    if (!verificado) return i === sel ? "border-acento bg-acento-fundo" : "border-tinta/10 bg-cartao";
     if (opcoes[i].correta) return "border-certo bg-certo-fundo";
     if (i === sel) return "border-erro bg-erro-fundo";
-    return "border-tinta/10 bg-white opacity-70";
+    return "border-tinta/10 bg-cartao opacity-70";
   }
 
   return (
     <div>
-      <Md texto={enunciado} className="mb-3 font-medium" />
+      <Md texto={enunciado} className="mb-2 font-medium" />
       <div className="flex flex-col gap-2">
         {opcoes.map((op, i) => (
           <button
@@ -39,12 +39,12 @@ export function EscolhaUnica({
             type="button"
             disabled={verificado}
             onClick={() => setSel(i)}
-            className={`rounded-xl border p-3 text-left text-[15px] leading-relaxed ${classes(i)}`}
+            className={`rounded-xl border px-3 py-2.5 text-left text-sm leading-snug ${classes(i)}`}
           >
             {op.texto}
             {verificado && (
               <span
-                className={`mt-2 block text-[13px] ${
+                className={`mt-1.5 block text-[13px] leading-snug ${
                   op.correta ? "text-certo" : i === sel ? "text-erro" : "text-tinta/70"
                 }`}
               >

@@ -13,7 +13,7 @@ export function PromptBloco({ texto, rotulo }: { texto: string; rotulo?: string 
   return (
     <div>
       {rotulo && <div className="mb-1 text-xs font-semibold uppercase tracking-wide text-tinta/60">{rotulo}</div>}
-      <pre className="whitespace-pre-wrap break-words rounded-lg bg-tinta p-3 font-mono text-[13px] leading-relaxed text-papel">
+      <pre className="whitespace-pre-wrap break-words rounded-lg bg-[#26221e] p-3 font-mono text-[13px] leading-relaxed text-[#f3ede8]">
         {texto}
       </pre>
     </div>
@@ -22,7 +22,7 @@ export function PromptBloco({ texto, rotulo }: { texto: string; rotulo?: string 
 
 export function PainelSaida({ texto, titulo = "Saída esperada" }: { texto: string; titulo?: string }) {
   return (
-    <div className="rounded-lg border border-tinta/15 bg-white p-3">
+    <div className="rounded-lg border border-tinta/15 bg-cartao p-3">
       <div className="mb-1 text-xs font-semibold uppercase tracking-wide text-acento">{titulo}</div>
       <div className="whitespace-pre-wrap break-words text-[13px] leading-relaxed text-tinta/90">{texto}</div>
     </div>
@@ -43,7 +43,7 @@ export function BotaoVerificar({
       type="button"
       disabled={disabled}
       onClick={onClick}
-      className="mt-4 w-full rounded-xl bg-acento py-3 font-semibold text-white disabled:opacity-40"
+      className="mt-3 w-full rounded-xl bg-acento py-2.5 font-semibold text-white disabled:opacity-40"
     >
       {children}
     </button>

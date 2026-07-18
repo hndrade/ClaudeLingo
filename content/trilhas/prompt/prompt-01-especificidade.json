@@ -17,11 +17,6 @@
           "explicacao": "Não diz qual ajuda: resumir, revisar, analisar? O modelo vai escolher por você, e provavelmente errar."
         },
         {
-          "texto": "Analisa isso aqui e me fala o que achar importante.",
-          "correta": false,
-          "explicacao": "O que é importante para você não é o que é estatisticamente provável para o modelo. Resultado: análise genérica."
-        },
-        {
           "texto": "Liste as 3 maiores quedas de venda por região neste relatório, em bullets, cada uma com o percentual de queda.",
           "correta": true,
           "explicacao": "Tarefa clara (listar quedas), escopo (3 maiores, por região), formato (bullets) e conteúdo exigido (percentual). Pouco espaço para o modelo inventar."

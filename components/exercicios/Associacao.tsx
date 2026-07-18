@@ -52,10 +52,10 @@ export function Associacao({
 
   return (
     <div>
-      <Md texto={ex.enunciado} className="mb-3 font-medium" />
+      <Md texto={ex.enunciado} className="mb-2 font-medium" />
 
       <div className="mb-1 text-xs font-semibold uppercase tracking-wide text-tinta/60">Conceitos</div>
-      <div className="mb-4 flex flex-col gap-2">
+      <div className="mb-3 flex flex-col gap-2">
         {ex.pares.map((p, i) => {
           const classes = verificado
             ? acertou(i)
@@ -63,20 +63,20 @@ export function Associacao({
               : "border-erro bg-erro-fundo"
             : i === sel
               ? "border-acento bg-acento-fundo"
-              : "border-tinta/10 bg-white";
+              : "border-tinta/10 bg-cartao";
           return (
             <button
               key={i}
               type="button"
               disabled={verificado}
               onClick={() => setSel(i)}
-              className={`flex items-start gap-2 rounded-xl border p-3 text-left text-[14px] leading-relaxed ${classes}`}
+              className={`flex items-start gap-2 rounded-xl border px-3 py-2.5 text-left text-sm leading-snug ${classes}`}
             >
               <Badge n={i + 1} cor={verificado ? (acertou(i) ? "bg-certo" : "bg-erro") : par[i] !== null ? "bg-acento" : "bg-tinta/25"} />
               <span className="min-w-0">
                 {p.conceito}
                 {verificado && !acertou(i) && (
-                  <span className="mt-1 block text-[13px] text-erro">Correto: {p.definicao}</span>
+                  <span className="mt-1 block text-[13px] leading-snug text-erro">Correto: {p.definicao}</span>
                 )}
               </span>
             </button>
@@ -93,17 +93,17 @@ export function Associacao({
               ? "border-certo bg-certo-fundo"
               : dono !== -1
                 ? "border-erro bg-erro-fundo"
-                : "border-tinta/10 bg-white opacity-70"
+                : "border-tinta/10 bg-cartao opacity-70"
             : dono !== -1
               ? "border-acento bg-acento-fundo"
-              : "border-tinta/10 bg-white";
+              : "border-tinta/10 bg-cartao";
           return (
             <button
               key={di}
               type="button"
               disabled={verificado}
               onClick={() => tocarDef(di)}
-              className={`flex items-start gap-2 rounded-xl border p-3 text-left text-[14px] leading-relaxed ${classes}`}
+              className={`flex items-start gap-2 rounded-xl border px-3 py-2.5 text-left text-sm leading-snug ${classes}`}
             >
               {dono !== -1 && (
                 <Badge n={dono + 1} cor={verificado ? (acertou(dono) ? "bg-certo" : "bg-erro") : "bg-acento"} />

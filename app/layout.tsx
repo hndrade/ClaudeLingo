@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Notificacoes from "@/components/Notificacoes";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -9,7 +10,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR">
-      <body className="bg-papel text-tinta antialiased">{children}</body>
+      <body className="bg-papel text-tinta antialiased">
+        <Notificacoes />
+        {children}
+      </body>
     </html>
   );
 }

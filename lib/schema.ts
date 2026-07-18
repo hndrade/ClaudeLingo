@@ -9,7 +9,7 @@ const alternativa = z.object({
 const multiplaEscolha = z.object({
   tipo: z.literal("multipla_escolha"),
   enunciado: z.string(),
-  alternativas: z.array(alternativa).length(4),
+  alternativas: z.array(alternativa).length(3),
 });
 
 const associacao = z.object({

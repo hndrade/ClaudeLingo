@@ -29,20 +29,20 @@ export function PreencherLacuna({
       : "border-erro bg-erro-fundo text-erro"
     : sel !== null
       ? "border-acento bg-acento-fundo text-tinta"
-      : "border-dashed border-papel/40 text-papel/50";
+      : "border-dashed border-[#f3ede8]/40 text-[#f3ede8]/50";
 
   function chipClasses(i: number) {
-    if (!verificado) return i === sel ? "border-acento bg-acento-fundo" : "border-tinta/10 bg-white";
+    if (!verificado) return i === sel ? "border-acento bg-acento-fundo" : "border-tinta/10 bg-cartao";
     if (ex.opcoes[i].correta) return "border-certo bg-certo-fundo text-certo";
     if (i === sel) return "border-erro bg-erro-fundo text-erro";
-    return "border-tinta/10 bg-white opacity-60";
+    return "border-tinta/10 bg-cartao opacity-60";
   }
 
   return (
     <div>
-      <Md texto={ex.enunciado} className="mb-3 font-medium" />
+      <Md texto={ex.enunciado} className="mb-2 font-medium" />
 
-      <div className="whitespace-pre-wrap break-words rounded-lg bg-tinta p-3 font-mono text-[13px] leading-relaxed text-papel">
+      <div className="whitespace-pre-wrap break-words rounded-lg bg-[#26221e] px-3 py-2.5 font-mono text-[13px] leading-snug text-[#f3ede8]">
         {partes[0]}
         <span className={`mx-0.5 inline-block rounded border-2 px-2 py-0.5 font-semibold ${slotClasses}`}>
           {sel !== null ? ex.opcoes[sel].texto : "escolha abaixo"}

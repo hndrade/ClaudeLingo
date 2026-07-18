@@ -35,17 +35,17 @@ export function Ordenacao({
 
   return (
     <div>
-      <Md texto={ex.enunciado} className="mb-3 font-medium" />
+      <Md texto={ex.enunciado} className="mb-2 font-medium" />
       <div className="flex flex-col gap-2">
         {ordem.map((etapa, i) => {
           const classes = verificado
             ? etapa === ex.etapas[i]
               ? "border-certo bg-certo-fundo"
               : "border-erro bg-erro-fundo"
-            : "border-tinta/10 bg-white";
+            : "border-tinta/10 bg-cartao";
           return (
-            <div key={etapa} className={`flex items-center gap-2 rounded-xl border p-3 ${classes}`}>
-              <span className="min-w-0 flex-1 break-words text-[14px] leading-relaxed">{etapa}</span>
+            <div key={etapa} className={`flex items-center gap-2 rounded-xl border px-3 py-2 ${classes}`}>
+              <span className="min-w-0 flex-1 break-words text-sm leading-snug">{etapa}</span>
               {!verificado && (
                 <span className="flex shrink-0 flex-col gap-1">
                   <button
@@ -53,7 +53,7 @@ export function Ordenacao({
                     disabled={i === 0}
                     onClick={() => mover(i, -1)}
                     aria-label="Mover para cima"
-                    className="h-8 w-8 rounded-lg border border-tinta/15 bg-white text-tinta disabled:opacity-30"
+                    className="h-7 w-7 rounded-lg border border-tinta/15 bg-cartao text-tinta disabled:opacity-30"
                   >
                     ↑
                   </button>
@@ -62,7 +62,7 @@ export function Ordenacao({
                     disabled={i === ordem.length - 1}
                     onClick={() => mover(i, 1)}
                     aria-label="Mover para baixo"
-                    className="h-8 w-8 rounded-lg border border-tinta/15 bg-white text-tinta disabled:opacity-30"
+                    className="h-7 w-7 rounded-lg border border-tinta/15 bg-cartao text-tinta disabled:opacity-30"
                   >
                     ↓
                   </button>
@@ -74,9 +74,9 @@ export function Ordenacao({
       </div>
 
       {verificado && (
-        <div className="mt-3 rounded-xl border border-tinta/10 bg-white p-3">
+        <div className="mt-3 rounded-xl border border-tinta/10 bg-cartao p-3">
           <div className="mb-1 text-xs font-semibold uppercase tracking-wide text-tinta/60">Ordem correta</div>
-          <ol className="list-decimal pl-5 text-[14px] leading-relaxed">
+          <ol className="list-decimal pl-5 text-sm leading-snug">
             {ex.etapas.map((e) => (
               <li key={e}>{e}</li>
             ))}

@@ -22,7 +22,30 @@
       "id": "prompt",
       "nome": "T4. Prompt engineering",
       "descricao": "Do pedido vago ao prompt de alto impacto, por desafio.",
-      "licoes": ["prompt-01-especificidade"]
+      "licoes": [
+        "prompt-01-especificidade",
+        "prompt-02-contexto",
+        "prompt-03-papel-publico",
+        "prompt-04-formato-saida",
+        "prompt-05-exemplos",
+        "prompt-06-raciocinio",
+        "prompt-07-tags-xml",
+        "prompt-08-criterio-sucesso",
+        "prompt-09-rubrica-antes",
+        "prompt-10-explique-como-se",
+        "prompt-11-comparacao-forcada",
+        "prompt-12-decompor",
+        "prompt-13-pergunte-antes",
+        "prompt-14-system-vs-usuario",
+        "prompt-15-iteracao",
+        "prompt-16-pergunte-me-primeiro",
+        "prompt-17-cascata",
+        "prompt-18-extracao-estruturada",
+        "prompt-19-reescreva-mantendo",
+        "prompt-20-devils-advocate",
+        "prompt-21-checklist-reverso",
+        "prompt-22-construir-do-zero"
+      ]
     },
     {
       "id": "rag",

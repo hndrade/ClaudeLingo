@@ -28,6 +28,23 @@ Trilha nova = criar os JSONs da lição e registrar em `content/trilhas/indice.j
 
 ## Log de fases
 
+### Rodada de ajustes pós Fase 1 (concluída)
+
+Pedidos do dono do projeto, implementados fora da ordem original das fases:
+
+- Tema novo: laranja estilo Claude, modo claro (branco e laranja) e modo escuro (preto e laranja) automáticos pelo sistema. Tipografia com a pilha do iOS (SF Pro no Apple, fallbacks no resto).
+- Layout também confortável em desktop (conteúdo centrado; o mapa segue vertical).
+- Progresso salvo em `data/progresso.json` via `/api/progresso` (XP, streak, lições, minutos por dia, erros, compromisso).
+- Onboarding de compromisso: dedicação diária (5, 10 ou 15 min) e melhor horário (manhã, meio do dia, noite).
+- Metas e competição consigo mesmo: meta diária de minutos no topo e cartão "Você contra você" (esta semana vs semana passada).
+- Notificações do navegador no horário escolhido quando a meta do dia não foi cumprida, mais banner de ausência (2+ dias sem estudar). Limitação honesta: app local sem servidor não notifica com o navegador fechado.
+- Linha do tempo estilo Duolingo: caminho vertical com nós por lição (concluída, disponível, bloqueada) e as 9 trilhas do currículo visíveis, com as futuras marcadas como "Em breve".
+- Múltipla escolha agora tem sempre 3 alternativas, e as telas de resposta cabem em 375x667 sem scroll antes de responder.
+- Repescagem: exercícios errados entram numa fila; acertar na repescagem remove da fila. Atalho no mapa quando há pendências.
+- Popup de fim de semana (sábado/domingo, uma vez por dia): aula de reforço ou seguir com a trilha.
+
+Verificação: percurso completo via Playwright em 375x667, modos claro e escuro: onboarding, mapa, lição inteira, popup, repescagem, persistência em disco conferida no JSON.
+
 ### Fase 1: esqueleto + schema + renderizador de 1 lição (concluída)
 
 Feito:

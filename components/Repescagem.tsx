@@ -91,7 +91,7 @@ export default function Repescagem({ licoes }: { licoes: Record<string, Licao> }
           </span>
         </div>
       </header>
-      <main className="mx-auto max-w-2xl px-4 py-6 pb-40">
+      <main className={`mx-auto max-w-2xl px-4 py-6 ${respondido !== null ? "pb-40" : ""}`}>
         <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-tinta/50">
           Da lição: {licoes[item.licao].titulo}
         </p>

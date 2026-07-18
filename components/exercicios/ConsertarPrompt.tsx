@@ -39,7 +39,7 @@ export default function ConsertarPromptEx({
             value={versao}
             onChange={(e) => setVersao(e.target.value)}
             rows={8}
-            className="w-full rounded-lg border border-tinta/15 bg-white p-3 font-mono text-[13px] leading-relaxed text-tinta"
+            className="w-full rounded-lg border border-tinta/15 bg-cartao p-3 font-mono text-[13px] leading-relaxed text-tinta"
           />
         </div>
         <BotaoVerificar onClick={() => setFase("avaliar")}>Comparar com a referência</BotaoVerificar>
@@ -52,8 +52,8 @@ export default function ConsertarPromptEx({
       <PromptBloco texto={versao} rotulo="Sua versão" />
       <PromptBloco texto={ex.prompt_referencia} rotulo="Prompt de referência" />
       <PainelSaida texto={ex.saida_referencia} />
-      <div className="rounded-xl border border-tinta/10 bg-white p-3">
-        <p className="mb-3 text-[13px] leading-relaxed text-tinta/80">
+      <div className="rounded-xl border border-tinta/10 bg-cartao p-3">
+        <p className="mb-2 text-[13px] leading-snug text-tinta/80">
           Autoavaliação honesta: compare as duas versões acima e marque o que a SUA versão cobre.
         </p>
         <div className="space-y-2">

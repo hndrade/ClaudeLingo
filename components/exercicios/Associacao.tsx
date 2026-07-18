@@ -55,7 +55,7 @@ export function Associacao({
       <Md texto={ex.enunciado} className="mb-2 font-medium" />
 
       <div className="mb-1 text-xs font-semibold uppercase tracking-wide text-tinta/60">Conceitos</div>
-      <div className="mb-3 flex flex-col gap-2">
+      <div className="mb-2 flex flex-col gap-1.5">
         {ex.pares.map((p, i) => {
           const classes = verificado
             ? acertou(i)
@@ -70,7 +70,7 @@ export function Associacao({
               type="button"
               disabled={verificado}
               onClick={() => setSel(i)}
-              className={`flex items-start gap-2 rounded-xl border px-3 py-2.5 text-left text-sm leading-snug ${classes}`}
+              className={`flex items-start gap-2 rounded-xl border px-3 py-2 text-left text-[13px] leading-snug ${classes}`}
             >
               <Badge n={i + 1} cor={verificado ? (acertou(i) ? "bg-certo" : "bg-erro") : par[i] !== null ? "bg-acento" : "bg-tinta/25"} />
               <span className="min-w-0">
@@ -85,7 +85,7 @@ export function Associacao({
       </div>
 
       <div className="mb-1 text-xs font-semibold uppercase tracking-wide text-tinta/60">Definições</div>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-1.5">
         {defs.map((d, di) => {
           const dono = par.indexOf(di); // conceito ao qual esta definição foi atribuída
           const classes = verificado
@@ -103,7 +103,7 @@ export function Associacao({
               type="button"
               disabled={verificado}
               onClick={() => tocarDef(di)}
-              className={`flex items-start gap-2 rounded-xl border px-3 py-2.5 text-left text-sm leading-snug ${classes}`}
+              className={`flex items-start gap-2 rounded-xl border px-3 py-2 text-left text-[13px] leading-snug ${classes}`}
             >
               {dono !== -1 && (
                 <Badge n={dono + 1} cor={verificado ? (acertou(dono) ? "bg-certo" : "bg-erro") : "bg-acento"} />

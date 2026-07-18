@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { Exercicio, Licao } from "@/lib/schema";
+import { carregarProgresso, concluirLicao, licoesConcluidas, registrarErros, salvarProgresso } from "@/lib/progresso";
 import { Md } from "@/components/ui";
 import EscolhaUnica from "@/components/exercicios/EscolhaUnica";
 import Associacao from "@/components/exercicios/Associacao";
@@ -15,6 +16,28 @@ export default function LessonPlayer({ licao }: { licao: Licao }) {
   const [etapa, setEtapa] = useState(-1);
   const [resultados, setResultados] = useState<boolean[]>([]);
   const [respondido, setRespondido] = useState<boolean | null>(null);
+  const [salvo, setSalvo] = useState<{ primeiraVez: boolean; streak: number } | null>(null);
+  const inicioRef = useRef(Date.now());
+  const salvouRef = useRef(false);
+
+  // Registra a conclusão no progresso uma única vez por tela final.
+  useEffect(() => {
+    if (etapa < total || salvouRef.current) return;
+    salvouRef.current = true;
+    const minutos = Math.max(1, Math.round((Date.now() - inicioRef.current) / 60000));
+    const acertos = resultados.filter(Boolean).length;
+    carregarProgresso().then(async (p) => {
+      const primeiraVez = !licoesConcluidas(p).has(licao.id);
+      const errados = resultados.flatMap((ok, i) => (ok ? [] : [i]));
+      const novo = registrarErros(
+        concluirLicao(p, { id: licao.id, acertos, total, xp: licao.xp }, minutos),
+        licao.id,
+        errados
+      );
+      await salvarProgresso(novo);
+      setSalvo({ primeiraVez, streak: novo.streak.atual });
+    });
+  }, [etapa, total, resultados, licao]);
 
   function aoResponder(correto: boolean) {
     setRespondido(correto);
@@ -30,6 +53,9 @@ export default function LessonPlayer({ licao }: { licao: Licao }) {
     setEtapa(-1);
     setResultados([]);
     setRespondido(null);
+    setSalvo(null);
+    inicioRef.current = Date.now();
+    salvouRef.current = false;
   }
 
   function renderExercicio(ex: Exercicio) {
@@ -64,7 +90,7 @@ export default function LessonPlayer({ licao }: { licao: Licao }) {
           Nível {licao.nivel}
         </span>
         <h1 className="mb-4 text-2xl font-bold text-tinta">{licao.titulo}</h1>
-        <div className="rounded-xl border border-tinta/10 bg-white p-4">
+        <div className="rounded-xl border border-tinta/10 bg-cartao p-4">
           <Md texto={licao.conceito} />
         </div>
         <button
@@ -86,7 +112,15 @@ export default function LessonPlayer({ licao }: { licao: Licao }) {
         <p className="mb-4 text-tinta/80">
           Você acertou {acertos} de {total} exercícios.
         </p>
-        <p className="mb-8 text-3xl font-bold text-acento">+{licao.xp} XP</p>
+        {salvo?.primeiraVez && <p className="mb-8 text-3xl font-bold text-acento">+{licao.xp} XP</p>}
+        {salvo && !salvo.primeiraVez && (
+          <div className="mb-8">
+            <p className="text-sm text-tinta/70">Lição já concluída antes: XP não se repete</p>
+            <p className="mt-2 text-xl font-bold text-acento">
+              🔥 {salvo.streak} {salvo.streak === 1 ? "dia" : "dias"}
+            </p>
+          </div>
+        )}
         <button
           type="button"
           onClick={refazer}
@@ -120,7 +154,7 @@ export default function LessonPlayer({ licao }: { licao: Licao }) {
         </div>
       </header>
 
-      <main className="mx-auto max-w-2xl px-4 py-6 pb-40">
+      <main className={`mx-auto max-w-2xl px-4 py-6 ${respondido !== null ? "pb-40" : ""}`}>
         <div key={etapa}>{renderExercicio(licao.exercicios[etapa])}</div>
       </main>
 

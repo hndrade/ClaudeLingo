@@ -36,7 +36,7 @@ export function Ordenacao({
   return (
     <div>
       <Md texto={ex.enunciado} className="mb-2 font-medium" />
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-1.5">
         {ordem.map((etapa, i) => {
           const classes = verificado
             ? etapa === ex.etapas[i]
@@ -47,7 +47,7 @@ export function Ordenacao({
             <div key={etapa} className={`flex items-center gap-2 rounded-xl border px-3 py-2 ${classes}`}>
               <span className="min-w-0 flex-1 break-words text-sm leading-snug">{etapa}</span>
               {!verificado && (
-                <span className="flex shrink-0 flex-col gap-1">
+                <span className="flex shrink-0 gap-1">
                   <button
                     type="button"
                     disabled={i === 0}

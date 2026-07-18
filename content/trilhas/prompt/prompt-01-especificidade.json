@@ -34,8 +34,7 @@
       "pares": [
         { "conceito": "Verbo de ação claro (liste, compare, resuma)", "definicao": "Evita que o modelo escolha sozinho qual tarefa executar" },
         { "conceito": "Escopo e quantidade (as 3 maiores, só o trimestre)", "definicao": "Evita resposta que abraça tudo e não aprofunda nada" },
-        { "conceito": "Formato de saída declarado (tabela, bullets, JSON)", "definicao": "Evita texto corrido que você terá que reformatar na mão" },
-        { "conceito": "Critério de aceite (com percentual, citando a fonte)", "definicao": "Evita afirmação vaga impossível de conferir" }
+        { "conceito": "Formato de saída declarado (tabela, bullets, JSON)", "definicao": "Evita texto corrido que você terá que reformatar na mão" }
       ]
     },
     {

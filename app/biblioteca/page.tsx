@@ -18,7 +18,7 @@ export default function Biblioteca() {
         {arquivos.map((a) => (
           <li key={a.arquivo}>
             <a
-              href={`/api/biblioteca-md/${a.arquivo}`}
+              href={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/biblioteca-md/${a.arquivo}`}
               download
               className="flex items-center justify-between rounded-xl border border-tinta/10 bg-cartao px-4 py-3"
             >

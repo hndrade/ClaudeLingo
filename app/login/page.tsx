@@ -1,24 +1,50 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { completarLoginComLinkSeAplicavel, entrarComGoogle, enviarLinkMagico, observarUsuario } from "@/lib/auth";
 
 export default function Login() {
   const router = useRouter();
-  const [contas, setContas] = useState<string[]>([]);
-  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [linkEnviado, setLinkEnviado] = useState(false);
   const [entrando, setEntrando] = useState(false);
+  const [erro, setErro] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("/api/perfil")
-      .then((r) => r.json())
-      .then((d) => setContas(d.contas.filter((c: string) => c !== "visitante")));
-  }, []);
+    // Se a URL atual é o link mágico que o usuário recebeu por e-mail, conclui
+    // o login aqui mesmo antes de checar se já existe uma sessão.
+    completarLoginComLinkSeAplicavel().catch(() => setErro("Não deu para confirmar o link. Peça um novo."));
+    const cancelar = observarUsuario((usuario) => {
+      if (usuario) router.replace("/");
+    });
+    return cancelar;
+  }, [router]);
 
-  async function entrar(quem: string) {
+  async function comGoogle() {
     if (entrando) return;
     setEntrando(true);
-    await fetch("/api/perfil", { method: "POST", body: JSON.stringify({ nome: quem }) });
-    router.push("/");
+    setErro(null);
+    try {
+      await entrarComGoogle();
+    } catch {
+      setErro("Não deu para entrar com Google agora. Tente de novo.");
+    } finally {
+      setEntrando(false);
+    }
+  }
+
+  async function comLinkMagico() {
+    if (entrando || !email.includes("@")) return;
+    setEntrando(true);
+    setErro(null);
+    try {
+      await enviarLinkMagico(email);
+      setLinkEnviado(true);
+    } catch {
+      setErro("Não deu para enviar o link agora. Tente de novo.");
+    } finally {
+      setEntrando(false);
+    }
   }
 
   return (
@@ -28,61 +54,50 @@ export default function Login() {
 
       <button
         type="button"
-        onClick={() => entrar("visitante")}
-        className="mt-8 w-full rounded-xl bg-acento py-3 font-semibold text-white"
+        disabled={entrando}
+        onClick={comGoogle}
+        className="mt-8 w-full rounded-xl bg-acento py-3 font-semibold text-white disabled:opacity-40"
       >
-        Continuar como visitante
+        Entrar com Google
       </button>
 
-      {contas.length > 0 && (
-        <div className="mt-6">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-tinta/60">Suas contas</p>
-          {contas.map((c) => (
-            <button
-              key={c}
-              type="button"
-              onClick={() => entrar(c)}
-              className="mb-2 w-full rounded-xl border border-tinta/15 bg-cartao px-4 py-3 text-left font-semibold text-tinta"
-            >
-              👤 {c}
-            </button>
-          ))}
-        </div>
-      )}
-
       <div className="mt-6">
-        <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-tinta/60">Criar conta</p>
-        <div className="flex gap-2">
-          <input
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-            placeholder="Seu nome"
-            className="min-w-0 flex-1 rounded-xl border border-tinta/15 bg-cartao px-4 py-3 text-tinta placeholder:text-tinta/40"
-          />
-          <button
-            type="button"
-            disabled={nome.trim() === ""}
-            onClick={() => entrar(nome)}
-            className="rounded-xl bg-acento px-5 py-3 font-semibold text-white disabled:opacity-40"
-          >
-            Criar
-          </button>
-        </div>
-        <p className="mt-1 text-xs text-tinta/60">Cada conta guarda o próprio progresso neste computador.</p>
+        {linkEnviado ? (
+          <p className="rounded-xl border border-tinta/15 bg-cartao px-4 py-3 text-sm text-tinta">
+            Link enviado para <strong>{email}</strong>. Abra seu e-mail e toque no link para entrar; a sessão
+            sincroniza seu progresso em qualquer aparelho.
+          </p>
+        ) : (
+          <>
+            <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-tinta/60">
+              Ou entre por link mágico, sem senha
+            </p>
+            <div className="flex gap-2">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="seu@email.com"
+                className="min-w-0 flex-1 rounded-xl border border-tinta/15 bg-cartao px-4 py-3 text-tinta placeholder:text-tinta/40"
+              />
+              <button
+                type="button"
+                disabled={entrando || !email.includes("@")}
+                onClick={comLinkMagico}
+                className="rounded-xl bg-acento px-5 py-3 font-semibold text-white disabled:opacity-40"
+              >
+                Enviar
+              </button>
+            </div>
+          </>
+        )}
       </div>
 
-      <div className="mt-6">
-        <button
-          type="button"
-          disabled
-          className="w-full rounded-xl border border-tinta/15 bg-cartao py-3 font-semibold text-tinta/40"
-        >
-          Entrar com Google (em breve)
-        </button>
-        <p className="mt-1 text-xs text-tinta/50">
-          Login Google exige credenciais OAuth e um servidor. Neste app local, o progresso das contas acima já fica salvo no seu computador.
-        </p>
-      </div>
+      {erro && <p className="mt-4 text-sm text-erro">{erro}</p>}
+
+      <p className="mt-6 text-xs text-tinta/50">
+        Seu progresso fica salvo na sua conta e sincroniza entre computador e celular.
+      </p>
     </main>
   );
 }

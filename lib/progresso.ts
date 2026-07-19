@@ -1,5 +1,5 @@
-// Modelo de progresso do usuário (single-player, salvo em data/progresso.json
-// via /api/progresso). Funções puras para facilitar os testes da Fase 2.
+// Modelo de progresso do usuário, salvo no Firestore (um documento por uid).
+// A maior parte das funções abaixo é pura, sem I/O, para os testes da Fase 2.
 
 export type Periodo = "manha" | "meiodia" | "noite";
 
@@ -205,11 +205,29 @@ export function calcularBadges(p: Progresso, trilhas: TrilhaMeta[]): string[] {
   return conquistados;
 }
 
+// Progresso vive no Firestore, num documento por usuário (coleção "progresso",
+// id = uid do Firebase Auth). Sem usuário logado, não há onde salvar: as
+// páginas que chamam essas funções assumem que o login já foi checado antes
+// (ver lib/auth.ts e a página de login).
 export async function carregarProgresso(): Promise<Progresso> {
-  const r = await fetch("/api/progresso");
-  return r.json();
+  const [{ doc, getDoc }, { db }, { usuarioAtual }] = await Promise.all([
+    import("firebase/firestore"),
+    import("./firebase"),
+    import("./auth"),
+  ]);
+  const usuario = await usuarioAtual();
+  if (!usuario) return progressoVazio;
+  const instantaneo = await getDoc(doc(db, "progresso", usuario.uid));
+  return instantaneo.exists() ? (instantaneo.data() as Progresso) : progressoVazio;
 }
 
 export async function salvarProgresso(p: Progresso): Promise<void> {
-  await fetch("/api/progresso", { method: "PUT", body: JSON.stringify(p) });
+  const [{ doc, setDoc }, { db }, { usuarioAtual }] = await Promise.all([
+    import("firebase/firestore"),
+    import("./firebase"),
+    import("./auth"),
+  ]);
+  const usuario = await usuarioAtual();
+  if (!usuario) return;
+  await setDoc(doc(db, "progresso", usuario.uid), p);
 }

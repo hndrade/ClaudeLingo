@@ -14,6 +14,7 @@ import {
   trilhaLiberada,
   type Progresso,
 } from "@/lib/progresso";
+import { sair, usuarioAtual } from "@/lib/auth";
 import badgesData from "@/content/badges.json";
 
 export type DadosMapa = {
@@ -58,12 +59,12 @@ export default function Mapa({ dados }: { dados: DadosMapa }) {
 
   useEffect(() => {
     (async () => {
-      const { atual } = await (await fetch("/api/perfil")).json();
-      if (!atual) {
+      const usuario = await usuarioAtual();
+      if (!usuario) {
         router.replace("/login");
         return;
       }
-      setPerfil(atual);
+      setPerfil(usuario.displayName ?? usuario.email ?? "conta");
       const p = await carregarProgresso();
       if (p.compromisso === null) {
         router.replace("/onboarding");
@@ -126,9 +127,14 @@ export default function Mapa({ dados }: { dados: DadosMapa }) {
         <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-between">
             <span className="text-sm font-bold text-tinta">⚡ {progresso.xp} XP</span>
-            <Link href="/login" className="text-xs font-semibold text-tinta/60">
+            <button
+              type="button"
+              onClick={() => sair().then(() => router.replace("/login"))}
+              title="Sair"
+              className="text-xs font-semibold text-tinta/60"
+            >
               👤 {perfil}
-            </Link>
+            </button>
             <span className="text-sm font-bold text-tinta">
               🔥 {progresso.streak.atual} {progresso.streak.atual === 1 ? "dia" : "dias"}
             </span>

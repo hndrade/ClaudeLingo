@@ -67,3 +67,15 @@ Pensamentos de execução. Curto, bruto, cronológico. Não é documentação.
 - Achado no proprio script de verificacao: popup de fim de semana cobria a secao de badges na tela, contagem via CSS pegou elemento errado (chips de nivel tambem usam bg-acento-fundo). Corrigido escopando o seletor pela section certa e fechando o popup antes de contar.
 - Plano original de 10 fases: CONCLUIDO. ~110 licoes, 9 trilhas + cases, 487 testes.
 - Pendencias reais que ficam registradas no README pro dono do projeto decidir: login Google de verdade (hoje so perfil local), testar os .md num Claude real (nao tenho API aqui), revalidar T8 periodicamente com check-stale.
+
+## 2026-07-19 (pos-PR: deploy)
+- PR #1 (fases 1-4) ja tinha sido mesclado enquanto eu seguia na branch antiga. Rebase dos 8 commits nao mesclados sobre origin/main, forca-with-lease, PR #2 novo aberto. Sem conflito no rebase.
+- Pedido: GitHub Pages + Vercel. Github Pages e so estatico (sem servidor); Vercel roda API mas disco de funcao serverless nao persiste. Perguntei antes de mexer (AskUserQuestion), porque decisao de arquitetura + custo de conta e do usuario, nao minha.
+- Usuario escolheu: GitHub Pages + progresso sincronizado entre aparelhos. Isso exige Firestore (banco na nuvem lido direto do navegador) e login de verdade (nao da pra sincronizar sem saber quem e quem). Perguntei backend (Firebase) e metodo de login (Google + link magico).
+- Migracao grande: output:"export" no next.config, matei as 3 rotas de API (progresso/perfil/biblioteca-md), troquei carregarProgresso/salvarProgresso pra Firestore MANTENDO A MESMA ASSINATURA (import dinamico so dentro dessas 2 funcoes, pra nao quebrar os testes das funcoes puras que rodam em Node sem browser). Boa decisao: zero mudanca nos componentes que so chamam essas funcoes (LessonPlayer, Repescagem, Notificacoes, onboarding).
+- app/login reescrito do zero: Google popup + link magico por email (sendSignInLinkToEmail/isSignInWithEmailLink).
+- app/licao/[id] precisou de generateStaticParams (obrigatorio em export estatico com rota dinamica).
+- biblioteca-md: rota de API morreu, arquivos viraram estaticos em public/ (copiados de content/ via script, content/ continua fonte unica).
+- firestore.rules: 1 regra, uid so mexe no proprio doc.
+- Testei de verdade: build local sem GITHUB_ACTIONS (basePath vazio) E com GITHUB_ACTIONS=true (basePath /ClaudeLingo aplicado em tudo, confirmado via grep no HTML exportado, inclusive nos links de download que sao <a href> manual, nao <Link>, entao nao ganham basePath de graca). 487 testes continuaram verdes, nada quebrou.
+- Limitacao honesta que registrei: nao tenho como criar projeto Firebase real nem testar login/sync de ponta a ponta aqui. Deixei checklist manual no README (criar projeto, ativar provedores, pegar config, secrets no GitHub, dominio autorizado, ativar Pages).

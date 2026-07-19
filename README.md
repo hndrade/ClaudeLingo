@@ -1,21 +1,37 @@
 # ClaudeLingo
 
-App pessoal de aprendizado gamificado (estilo Duolingo) sobre IA aplicada, com foco em Claude e no ecossistema Anthropic. Single-player, local, sem auth e sem deploy.
+App de aprendizado gamificado (estilo Duolingo) sobre IA aplicada, com foco em Claude e no ecossistema Anthropic. Publicado como site estático no GitHub Pages, com login (Google ou link mágico por e-mail) e progresso sincronizado entre aparelhos via Firebase.
 
-## Rodar
+## Rodar localmente
 
 ```bash
 npm install
+cp .env.local.example .env.local   # preencha com as chaves do seu projeto Firebase
 npm run dev
 ```
+
+## Publicar no GitHub Pages (checklist)
+
+O código já está pronto (export estático, workflow de deploy, regras do Firestore). Faltam só passos que só você pode fazer, porque exigem sua conta:
+
+1. **Criar o projeto no Firebase**: [console.firebase.google.com](https://console.firebase.google.com) → Adicionar projeto. Dentro dele, em "Compilação" → Authentication → Sign-in method, ative os provedores **Google** e **Link de e-mail (sem senha)**.
+2. **Criar o banco**: em "Compilação" → Firestore Database → Criar banco de dados (modo produção). Depois, na aba Regras, cole o conteúdo de `firestore.rules` deste repositório e publique.
+3. **Pegar a config do app**: Configurações do projeto (ícone de engrenagem) → Geral → role até "Seus apps" → adicione um app da Web → copie os valores (`apiKey`, `authDomain`, etc.).
+4. **Guardar a config no GitHub**: no repositório, Settings → Secrets and variables → Actions → New repository secret, um para cada variável listada em `.env.local.example` (`NEXT_PUBLIC_FIREBASE_API_KEY` etc.), com os valores do passo 3.
+5. **Autorizar o domínio do GitHub Pages**: no Firebase, Authentication → Settings → Authorized domains → adicione `<seu-usuario>.github.io` (necessário para o login com Google e o link mágico funcionarem no site publicado).
+6. **Ativar o GitHub Pages**: no repositório, Settings → Pages → Source: escolha "GitHub Actions" (não "Deploy from a branch").
+7. **Disparar o deploy**: dê push na branch `main` (ou rode o workflow "Deploy to GitHub Pages" manualmente em Actions). O site sobe em `https://<seu-usuario>.github.io/ClaudeLingo/`.
+
+Sem os passos 1 a 5, o build até passa (as chaves do Firebase não são validadas em build time), mas o login falha em produção. Isso não foi testado ponta a ponta com um projeto Firebase real nesta sessão, porque criar contas e projetos em serviços externos exige acesso que esta sessão não tem: o export estático, o fluxo de auth e as regras de segurança foram verificados no código e num build local, não contra um Firebase de verdade.
 
 ## Estrutura
 
 ```
-app/                    rotas Next.js (App Router)
+app/                    rotas Next.js (App Router), export estático (sem rotas de API)
 components/             LessonPlayer e renderizadores de exercício
-lib/                    schema Zod das lições e loader de conteúdo
+lib/                    schema Zod, loader de conteúdo, Firebase (auth.ts, firebase.ts) e progresso.ts (Firestore)
 content/trilhas/        lições em JSON, uma pasta por trilha + indice.json
+public/biblioteca-md/   cópia gerada (npm run prebuild) de content/biblioteca-md/, servida como arquivo estático
 ```
 
 Trilha nova = criar os JSONs da lição e registrar em `content/trilhas/indice.json`. Nenhum componente precisa mudar.
@@ -26,7 +42,7 @@ Todas as 10 fases do plano foram concluídas: esqueleto e schema (1), motor de p
 
 Pendências e cortes de escopo conhecidos, para não fingir que o app está 100% sem ressalva:
 
-- **Login Google real**: não implementado. O app usa perfis locais (visitante + contas nomeadas); o botão "Entrar com Google" fica visível e desabilitado, com explicação de que exigiria credenciais OAuth e um servidor público.
+- **Login Google real**: implementado (ver "Publicar no GitHub Pages" acima). Substituiu os perfis locais da Fase 4.
 - **Biblioteca de .md**: verificada estruturalmente (as 5 seções da anatomia, regras concretas), mas nunca testada colando de fato num Claude real, porque este ambiente não tem acesso à API. Recomendo ao dono do projeto testar pelo menos um arquivo antes de considerar esse requisito da spec totalmente fechado.
 - **T1-T3, T5-T7, T9**: usam majoritariamente nível 1-2 da escada (Reconhecer/Escolher), não a escada completa de 5 níveis desenhada para prompt engineering. São conteúdos conceituais onde "consertar" e "construir do zero" não se aplicam bem; a T4 (prompt engineering) é a única trilha com os 5 níveis completos, como a spec pede para o "carro-chefe".
 - **T8 comparativo**: dados de preço e capacidade mudam rápido. `npm run check-stale` sinaliza quando revalidar; `content/comparativo/README.md` explica como.
@@ -39,6 +55,23 @@ Pendências e cortes de escopo conhecidos, para não fingir que o app está 100%
 - Regra dos 80%: nível N+1 destrava com todas as lições do nível N concluídas e acerto agregado dos exercícios do nível N maior ou igual a 80%.
 
 ## Log de fases
+
+### Migração para GitHub Pages + Firebase (concluída)
+
+Pedido pós-plano original: publicar o app e sincronizar progresso entre aparelhos, algo que o app local com arquivo em disco não fazia. Mudança de arquitetura:
+
+- `next.config.ts`: `output: "export"` (site 100% estático) com `basePath` automático para `/ClaudeLingo` só quando builda no GitHub Actions (`GITHUB_ACTIONS=true`); localmente continua sem prefixo.
+- Removidas as 3 rotas de API (`/api/progresso`, `/api/perfil`, `/api/biblioteca-md/[arquivo]`): export estático não roda servidor, então nada de rota dinâmica no request.
+- `lib/firebase.ts` e `lib/auth.ts`: cliente Firebase e funções de login (Google via popup, link mágico por e-mail). `carregarProgresso`/`salvarProgresso` em `lib/progresso.ts` passaram a ler/escrever no Firestore (`progresso/{uid}`) por trás da mesma assinatura de função, então `LessonPlayer`, `Repescagem`, `Notificacoes` e `onboarding` não precisaram mudar uma linha. O import do Firebase é dinâmico dentro dessas duas funções, de propósito: mantém os testes das funções puras rodando em Node sem tocar no SDK, que espera navegador.
+- `app/login/page.tsx`: reescrita para Google + link mágico, sem cookie nem "perfil por nome".
+- `app/licao/[id]/page.tsx`: ganhou `generateStaticParams`, obrigatório para rota dinâmica em export estático.
+- `content/biblioteca-md/*.md` continuam a fonte única; `scripts/copy-biblioteca-md.mjs` (rodado no `prebuild`) copia para `public/biblioteca-md/`, de onde o navegador baixa direto, sem rota de API.
+- `firestore.rules`: cada uid só lê/escreve o próprio documento.
+- `.github/workflows/deploy.yml`: build + teste + export + deploy automático no push para `main`.
+
+Verificação: 487 testes continuam verdes (nenhum dependia das rotas removidas), typecheck limpo, `npm run build` gera `out/` com as ~100 páginas de lição pré-renderizadas (via `generateStaticParams`), confirmado com `GITHUB_ACTIONS=true` que o `basePath` é aplicado em todo asset e nos links de download da biblioteca.
+
+Limitação honesta: não testei o fluxo de login e sincronização contra um projeto Firebase real, porque criar contas e projetos em serviços externos exige acesso que esta sessão não tem. O checklist de passos manuais (README, seção "Publicar no GitHub Pages") cobre exatamente isso; recomendo testar o login de ponta a ponta assim que o Firebase estiver configurado, antes de considerar a sincronização entre aparelhos validada.
 
 ### Rodada de ajustes pós Fase 1 (concluída)
 

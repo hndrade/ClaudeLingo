@@ -47,3 +47,13 @@ Pensamentos de execução. Curto, bruto, cronológico. Não é documentação.
 - Verificado o encadeamento completo entre 5 trilhas seguidas (prompt -> casos -> rag -> mcp -> agentes), cada uma destravando a seguinte só depois da anterior 100% concluida. Motor aguentou sem ajuste.
 - 416 testes verdes.
 - Pendencia grande que fica pra Fase 9: pesquisa web de verdade pra T8 comparativo (OpenAI, Google, Meta/Llama, Ollama), com cuidado de nao inventar preco nem numero de benchmark. Ja adiantei ao usuario o que vou pesquisar antes de comecar.
+
+## 2026-07-19 (Fase 9)
+- Pesquisa real antes de escrever, como prometido. WebFetch direto bateu 403 em quase TODAS as paginas oficiais (openai, google, meta, ollama) - só platform.claude.com e um github.com/meta-llama funcionaram direto.
+- Contornei com WebSearch escopado por dominio (allowed_domains) quando o fetch direto falhava. Funciona bem: cita fonte, sintetiza do dominio certo.
+- Achado importante: busca solta (sem escopo) trouxe uma penca de agregadores terceiros (finout, benchlm, pricepertoken, etc) com precos CONFLITANTES entre si pro mesmo modelo. Isso e exatamente o risco que a spec queria evitar. Documentei isso no content/comparativo/README.md como aviso pra quem for revalidar depois.
+- Gemini 3.1 Pro: contexto veio contraditorio entre fontes (2M num lugar, 200K+ noutro). Fiz busca de desempate escopada em ai.google.dev/cloud.google.com, resolvido: 1M input / 64k output confirmado.
+- 7 licoes T8, todas com verificado_em + fontes reais. Neutralidade: nenhuma resposta certa de cenario cita marca, virou teste automatico (nao so promessa em texto).
+- check-stale testado de verdade: forcei data de 2025-01-01 numa licao, rodei o script, confirmou deteccao (564 dias), restaurei o arquivo original, rodei de novo pra confirmar que limpou.
+- 452 testes verdes.
+- Proximo: Fase 10, T9 (avaliacao/custo/risco) + badges (max 6) + polimento. Ultima fase do plano original.

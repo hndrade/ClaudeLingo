@@ -1,0 +1,81 @@
+{
+  "id": "comparativo-04-contexto-e-custo",
+  "trilha": "comparativo",
+  "titulo": "Eixo janela de contexto e custo por milhão de tokens",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "verificado_em": "2026-07-19",
+  "fontes": [
+    "https://platform.claude.com/docs/en/about-claude/models/overview",
+    "https://developers.openai.com/api/docs/pricing",
+    "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+    "https://www.llama.com/models/llama-4/"
+  ],
+  "conceito": "Preço por milhão de tokens varia bastante entre modelos, de frações de dólar a dezenas de dólares, e costuma ter preço diferente para entrada e saída. Alguns fornecedores cobram mais caro quando a conversa passa de um certo tamanho (preço em faixas).\n\nJanela de contexto também varia: a família Llama 4 tem o modelo Scout, com contexto bem maior que o normal entre os modelos abertos no lançamento; outros fornecedores giram na casa de 1 milhão de tokens nos modelos mais recentes. O número certo depende do que você precisa caber numa única conversa, não de qual é o maior número absoluto.",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**Sônia, área de operações.** Processa relatórios curtos, várias vezes ao dia, em altíssimo volume, com orçamento apertado. Qual eixo pesa mais na escolha do modelo?",
+      "alternativas": [
+        {
+          "texto": "Custo por milhão de tokens, já que o volume é altíssimo e cada execução, mesmo pequena, soma ao longo do dia.",
+          "melhor": true,
+          "feedback": "Em alto volume, uma diferença pequena de preço por token se multiplica rapidamente; o custo tende a pesar mais que a capacidade máxima do modelo aqui."
+        },
+        {
+          "texto": "Janela de contexto máxima disponível no mercado, mesmo que os relatórios sejam curtos.",
+          "melhor": false,
+          "feedback": "Para relatórios curtos, uma janela de contexto enorme não traz benefício real e normalmente vem com um modelo mais caro do que o necessário."
+        },
+        {
+          "texto": "O fornecedor mais famoso, independentemente do preço ou do tamanho da tarefa.",
+          "melhor": false,
+          "feedback": "Fama de marca não é um eixo de decisão técnica; para esse caso específico, custo por volume é o que mais importa."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "O que significa um fornecedor cobrar 'em faixas' pelo uso, com preço mais alto acima de um certo tamanho de entrada?",
+      "alternativas": [
+        {
+          "texto": "Uma vez que a conversa ou o documento processado passa de um tamanho definido pelo fornecedor, tanto entrada quanto saída passam a ser cobradas a uma taxa mais alta.",
+          "correta": true,
+          "explicacao": "É um padrão comum: preço menor até um certo tamanho, preço maior acima dele, o que afeta diretamente o custo de processar documentos grandes."
+        },
+        {
+          "texto": "Significa que o preço cai automaticamente conforme o uso aumenta.",
+          "correta": false,
+          "explicacao": "É o oposto do padrão descrito: cobrança em faixas geralmente sobe o preço acima de um certo tamanho, não desce."
+        },
+        {
+          "texto": "Significa que só existe um preço fixo, independentemente do tamanho da entrada.",
+          "correta": false,
+          "explicacao": "Cobrança em faixas é justamente o oposto de preço fixo único: o valor muda conforme o tamanho da entrada cruza um limite."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Lucas, área de dados.** Precisa processar um único documento gigante, bem maior que o normal entre os modelos comerciais, e não quer fatiar em pedaços. Qual característica ele deveria buscar primeiro?",
+      "alternativas": [
+        {
+          "texto": "Um modelo com janela de contexto especificamente grande o suficiente para caber o documento inteiro de uma vez, verificando o número atual na documentação oficial do fornecedor.",
+          "melhor": true,
+          "feedback": "Para não fatiar o documento, o fator decisivo é a janela de contexto suportar o tamanho real do documento, e esse número deve ser conferido na fonte oficial, já que muda com frequência."
+        },
+        {
+          "texto": "O modelo mais barato disponível, sem considerar o tamanho do documento.",
+          "melhor": false,
+          "feedback": "Se o modelo mais barato não tiver contexto suficiente, o documento simplesmente não vai caber inteiro, exigindo fatiar de qualquer forma."
+        },
+        {
+          "texto": "Qualquer modelo serve, já que todos têm o mesmo limite de contexto.",
+          "melhor": false,
+          "feedback": "Os limites de contexto variam consideravelmente entre modelos e fornecedores; não são todos iguais."
+        }
+      ]
+    }
+  ]
+}

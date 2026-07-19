@@ -1,0 +1,66 @@
+{
+  "id": "comparativo-07-cascata-caso-central",
+  "trilha": "comparativo",
+  "titulo": "Cascata: quando a resposta não é um único modelo",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 30,
+  "verificado_em": "2026-07-19",
+  "fontes": ["https://developers.openai.com/api/docs/pricing", "https://platform.claude.com/docs/en/about-claude/models/overview"],
+  "conceito": "Em alto volume, a resposta muitas vezes não é escolher um único modelo, é combinar: um modelo barato faz a triagem de tudo, e só os casos duvidosos ou de maior risco passam por um modelo mais caro e capaz para validação. Isso é uma cascata.\n\nCascata custa menos que usar o modelo caro em tudo, e erra menos que usar o modelo barato sozinho em tudo. O tradeoff é a complexidade extra de montar e manter esse pipeline com dois estágios.",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**Lucas, área de dados.** Processa 40 mil contratos por mês, extraindo 6 campos de cada um. Precisão importa, mas o custo é o gargalo do projeto. Qual caminho tende a equilibrar melhor os dois?",
+      "alternativas": [
+        {
+          "texto": "Usar sempre o modelo mais caro e capaz disponível em todos os 40 mil contratos, para garantir o máximo de precisão.",
+          "melhor": false,
+          "feedback": "Em alto volume, usar sempre o modelo mais caro multiplica o custo por 40 mil execuções, o que pode inviabilizar o orçamento, mesmo garantindo alta precisão individual."
+        },
+        {
+          "texto": "Usar sempre o modelo mais barato disponível, aceitando a taxa de erro que vier.",
+          "melhor": false,
+          "feedback": "Em alto volume com precisão importando, aceitar o erro do modelo mais barato sem nenhuma validação pode custar caro em retrabalho ou decisão errada."
+        },
+        {
+          "texto": "Montar uma cascata: o modelo barato tria os 40 mil, e só os casos duvidosos ou de maior risco passam pelo modelo caro para validação.",
+          "melhor": true,
+          "feedback": "Cascata é o padrão clássico para esse tipo de caso: reduz o custo total (a maioria passa só pelo barato) sem abrir mão de precisão nos casos que mais precisam dela."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Qual é o principal tradeoff de montar uma cascata em vez de usar um único modelo?",
+      "alternativas": [
+        {
+          "texto": "Ganha-se equilíbrio entre custo e precisão, mas paga-se com a complexidade extra de construir e manter um pipeline com mais de um estágio.",
+          "correta": true,
+          "explicacao": "Cascata não é grátis: o ganho de custo e precisão vem com o preço de mais peças móveis para montar e manter."
+        },
+        {
+          "texto": "Cascata sempre custa mais caro que usar um único modelo caro em tudo.",
+          "correta": false,
+          "explicacao": "Normalmente é o oposto: cascata tende a custar menos que usar o modelo caro em tudo, já que a maioria dos casos passa só pelo estágio barato."
+        },
+        {
+          "texto": "Cascata elimina qualquer necessidade de revisão humana depois.",
+          "correta": false,
+          "explicacao": "Cascata reduz custo e melhora precisão média, mas não elimina a necessidade de revisão humana em casos de alto risco, dependendo do domínio."
+        }
+      ]
+    },
+    {
+      "tipo": "ordenacao",
+      "enunciado": "Ordene o funcionamento de uma cascata de triagem barata seguida de validação cara.",
+      "etapas": [
+        "O modelo barato processa todos os casos, em alto volume",
+        "Casos com resposta clara e de baixo risco são aceitos direto do modelo barato",
+        "Casos duvidosos ou de maior risco são encaminhados ao modelo caro",
+        "O modelo caro valida ou corrige só esses casos encaminhados"
+      ],
+      "explicacao": "A triagem em volume acontece primeiro, barata; só o subconjunto que precisa de mais cuidado passa pelo estágio caro, o que mantém o custo total sob controle."
+    }
+  ]
+}

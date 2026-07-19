@@ -79,4 +79,24 @@ describe("conteúdo das lições", () => {
     const daArea = casos.filter(([, l]) => l.area === area);
     expect(daArea.some(([, l]) => l.nao_usar_ia === true), `nenhum case "não usar IA" em ${area}`).toBe(true);
   });
+
+  const comparativo = licoes.filter(([, l]) => l.trilha === "comparativo");
+  it.skipIf(comparativo.length === 0)("trilha comparativo é neutra: nenhuma resposta certa de cenario nomeia uma marca específica como vencedora", () => {
+    const marcas = ["Claude", "Anthropic", "GPT", "OpenAI", "Gemini", "Google", "Llama", "Meta"];
+    for (const [id, l] of comparativo) {
+      for (const ex of l.exercicios) {
+        if (ex.tipo !== "cenario") continue;
+        const melhor = ex.alternativas.find((a) => a.melhor);
+        if (!melhor) continue;
+        for (const marca of marcas) {
+          expect(melhor.texto, `${id}: resposta certa nomeia "${marca}"`).not.toContain(marca);
+        }
+      }
+    }
+  });
+
+  it.skipIf(comparativo.length === 0).each(comparativo)("%s: fatos datáveis da trilha comparativo exigem verificado_em e fontes", (_id, l) => {
+    expect(l.verificado_em, `${l.id} sem verificado_em`).toBeTruthy();
+    expect(l.fontes?.length, `${l.id} sem fontes`).toBeGreaterThan(0);
+  });
 });

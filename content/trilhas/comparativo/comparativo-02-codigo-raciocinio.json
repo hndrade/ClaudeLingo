@@ -1,0 +1,79 @@
+{
+  "id": "comparativo-02-codigo-raciocinio",
+  "trilha": "comparativo",
+  "titulo": "Eixo código e raciocínio",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "verificado_em": "2026-07-19",
+  "fontes": [
+    "https://platform.claude.com/docs/en/about-claude/models/overview",
+    "https://developers.openai.com/api/docs/pricing"
+  ],
+  "conceito": "Para código e raciocínio complexo, os fornecedores costumam ter um modelo de topo posicionado especificamente para isso: a Anthropic recomenda Opus 4.8 para codificação agente complexa e trabalho corporativo; a OpenAI oferece a família GPT-5.6 (Sol, Terra, Luna) com raciocínio adaptável em vários níveis de custo.\n\nO ponto de decisão não é só 'qual pontua mais em benchmark', é o tradeoff entre esse modelo de topo (mais caro) e um modelo intermediário, que pode bastar para a maior parte das tarefas do dia a dia.",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**Lucas, área de dados.** Precisa de um agente que refatore um módulo grande e complexo do sistema, com várias dependências, e é aceitável pagar mais por isso, já que é uma tarefa pontual e crítica. O que pesa mais nessa escolha?",
+      "alternativas": [
+        {
+          "texto": "Priorizar um modelo de topo posicionado para codificação agente complexa, aceitando o custo mais alto, já que a tarefa é pontual, crítica e exige lidar bem com dependências.",
+          "melhor": true,
+          "feedback": "Para uma tarefa pontual, crítica e complexa, o custo mais alto de um modelo de topo tende a compensar, evitando erro caro numa refatoração grande."
+        },
+        {
+          "texto": "Escolher sempre o modelo mais barato disponível, independentemente da complexidade da tarefa.",
+          "melhor": false,
+          "feedback": "Para uma tarefa pontual e crítica como essa, economizar no modelo pode custar mais caro depois, em retrabalho ou erro na refatoração."
+        },
+        {
+          "texto": "A escolha do modelo não importa nada para tarefas de código.",
+          "melhor": false,
+          "feedback": "A escolha do modelo importa bastante para tarefas de código complexo, especialmente em capacidade de raciocínio sobre dependências."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que 'qual modelo pontua mais em um benchmark' não é sempre a pergunta certa para decidir qual usar em código?",
+      "alternativas": [
+        {
+          "texto": "Porque o benchmark pode não refletir a tarefa real, e o custo do modelo de topo pode não valer a pena para tarefas simples e repetitivas do dia a dia.",
+          "correta": true,
+          "explicacao": "Benchmark é um proxy, não a tarefa real; e o tradeoff de custo importa tanto quanto a pontuação bruta."
+        },
+        {
+          "texto": "Porque benchmark de código não existe para nenhum modelo.",
+          "correta": false,
+          "explicacao": "Benchmarks de código existem e são publicados; o ponto é usá-los com cautela, não ignorar sua existência."
+        },
+        {
+          "texto": "Porque todo modelo tem exatamente a mesma pontuação em qualquer benchmark.",
+          "correta": false,
+          "explicacao": "As pontuações variam entre modelos; o problema não é que sejam iguais, é confiar cegamente no número sem considerar custo e adequação à tarefa."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Paula, área de atendimento.** Precisa de um assistente que classifique centenas de tickets simples por dia, uma tarefa repetitiva e de baixa complexidade de raciocínio. Faz sentido usar o modelo de topo mais caro para isso?",
+      "alternativas": [
+        {
+          "texto": "Provavelmente não: para uma tarefa repetitiva e simples, um modelo intermediário ou mais barato tende a bastar, reservando o modelo de topo para o que realmente exige raciocínio complexo.",
+          "melhor": true,
+          "feedback": "Escalonar o modelo pela complexidade real da tarefa evita pagar o preço do modelo de topo por um trabalho que não precisa dele."
+        },
+        {
+          "texto": "Sim, sempre vale usar o modelo mais caro e capaz disponível, custe o que custar.",
+          "melhor": false,
+          "feedback": "Isso ignora o tradeoff de custo por volume; numa tarefa repetitiva de baixa complexidade, o gasto extra raramente se traduz em ganho perceptível."
+        },
+        {
+          "texto": "Não, e o certo é nunca usar nenhum modelo de IA para classificação de ticket.",
+          "melhor": false,
+          "feedback": "A questão não é evitar IA, é escalonar o modelo pela complexidade real da tarefa, não descartar a tarefa inteira."
+        }
+      ]
+    }
+  ]
+}

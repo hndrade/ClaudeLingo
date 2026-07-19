@@ -146,7 +146,15 @@
       "id": "comparativo",
       "nome": "T8. Comparativo de IAs",
       "descricao": "Escolher a ferramenta certa por eixo de decisão, com fontes verificadas.",
-      "licoes": []
+      "licoes": [
+        "comparativo-01-panorama-cinco-caminhos",
+        "comparativo-02-codigo-raciocinio",
+        "comparativo-03-escrita-longa-multimodal",
+        "comparativo-04-contexto-e-custo",
+        "comparativo-05-latencia-privacidade-onpremise",
+        "comparativo-06-ecossistema",
+        "comparativo-07-cascata-caso-central"
+      ]
     },
     {
       "id": "avaliacao",

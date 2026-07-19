@@ -45,6 +45,19 @@ Pedidos do dono do projeto, implementados fora da ordem original das fases:
 
 Verificação: percurso completo via Playwright em 375x667, modos claro e escuro: onboarding, mapa, lição inteira, popup, repescagem, persistência em disco conferida no JSON.
 
+### Fase 9: T8 Comparativo de IAs (concluída)
+
+Feito:
+
+- 7 lições cobrindo os eixos de decisão da spec (código, raciocínio, escrita longa, multimodal, janela de contexto, custo por milhão de tokens, latência, privacidade/on-premise, ecossistema), condensados de forma proporcional às trilhas anteriores, sempre estruturados por eixo, não por marca.
+- Pesquisa feita de verdade nas fontes primárias antes de escrever, não de memória: platform.claude.com/docs, developers.openai.com/api/docs, cloud.google.com/vertex-ai, ai.google.dev, llama.com, github.com/meta-llama e github.com/ollama. Descobri no processo que buscas simples devolvem agregadores de preço terceiros com números conflitantes entre si (documentado em content/comparativo/README.md); só usei o que vinha direto do fornecedor.
+- Todas as 7 lições têm verificado_em: 2026-07-19 e fontes reais. Uma delas (comparativo-04) precisou de uma segunda busca escopada para resolver uma contradição real entre fontes sobre o contexto do Gemini 3.1 Pro.
+- Neutralidade obrigatória: nenhuma resposta correta de cenario nomeia uma marca como vencedora; todas giram em torno do critério (custo, privacidade, volume). Uma delas favorece explicitamente a rota aberta e local sobre qualquer API fechada, incluindo Claude. Virou teste automático (tests/conteudo.test.ts), não só promessa.
+- A lição 7 (cascata) implementa o exemplo padrão pedido pela spec: 40 mil contratos por mês, custo como gargalo, resposta pela combinação barato+caro, não por um único modelo.
+- Anti-obsolescência: content/comparativo/README.md explica onde revalidar cada fornecedor; npm run check-stale lista lições com verificado_em há mais de 90 dias. Testei o script de verdade (forcei uma data antiga, confirmei que ele detecta, restaurei).
+
+Verificação da fase: 452 testes verdes (incluindo o teste de neutralidade e o de verificado_em/fontes obrigatórios), build ok, npm run check-stale funcionando de verdade (não só "sem erro"), e percurso Playwright confirmando que T8 só abre depois de T7 concluída, sem scroll horizontal em 375px.
+
 ### Fase 8: T5 RAG, T6 MCP, T7 Agentes (concluída)
 
 Feito:

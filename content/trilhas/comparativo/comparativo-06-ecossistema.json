@@ -1,0 +1,68 @@
+{
+  "id": "comparativo-06-ecossistema",
+  "trilha": "comparativo",
+  "titulo": "Eixo ecossistema",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "verificado_em": "2026-07-19",
+  "fontes": [
+    "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview",
+    "https://www.llama.com/models/llama-4/",
+    "https://github.com/ollama/ollama"
+  ],
+  "conceito": "Ecossistema é o conjunto de ferramentas ao redor do modelo: integração com editores e agentes de código, formas de empacotar conhecimento reutilizável (como Skills), suporte a protocolos abertos de ferramenta (como MCP), e comunidade de modelos derivados no caso de modelos abertos.\n\nUm modelo tecnicamente forte, mas com pouco ecossistema ao redor, pode custar mais trabalho de integração do que um modelo um pouco menos capaz, mas com tooling maduro para o seu caso de uso.",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**Beatriz, área comercial.** Está escolhendo entre dois modelos: um com capacidade ligeiramente superior em benchmark, mas sem integração pronta com as ferramentas que o time já usa, e outro um pouco menos capaz, mas com integração e documentação maduras para esse mesmo fluxo. O que deveria pesar mais na decisão?",
+      "alternativas": [
+        {
+          "texto": "O ecossistema maduro, porque reduz o trabalho de integração e o risco de atraso, mesmo com uma capacidade ligeiramente menor no benchmark.",
+          "melhor": true,
+          "feedback": "Diferença pequena de benchmark raramente compensa o custo real de construir integração do zero; ecossistema maduro costuma vencer na prática do dia a dia."
+        },
+        {
+          "texto": "Sempre a maior pontuação em benchmark, ignorando o esforço de integração necessário.",
+          "melhor": false,
+          "feedback": "Ignorar o custo de integração pode atrasar o projeto bem mais do que a diferença de capacidade justificaria."
+        },
+        {
+          "texto": "Ecossistema nunca deveria pesar numa decisão técnica.",
+          "melhor": false,
+          "feedback": "Ecossistema tem impacto real e prático no tempo e custo de implementação, então é um fator legítimo a considerar, não algo a ignorar."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "O que caracteriza um bom ecossistema ao redor de um modelo, além da capacidade bruta dele?",
+      "alternativas": [
+        {
+          "texto": "Ferramentas de integração maduras, formas de empacotar conhecimento reutilizável e suporte a protocolos abertos, que reduzem o trabalho de colocar o modelo para funcionar num caso real.",
+          "correta": true,
+          "explicacao": "Ecossistema é sobre o que existe ao redor do modelo para facilitar seu uso prático, não sobre a capacidade do modelo isoladamente."
+        },
+        {
+          "texto": "Apenas o preço mais baixo por token.",
+          "correta": false,
+          "explicacao": "Preço é um eixo separado (custo); ecossistema é sobre ferramentas e integração, não sobre o valor cobrado por token."
+        },
+        {
+          "texto": "A quantidade de anúncios de marketing feitos pelo fornecedor.",
+          "correta": false,
+          "explicacao": "Marketing não é ecossistema técnico; o que conta é ferramenta, documentação e integração disponíveis de verdade."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie o elemento de ecossistema com o que ele facilita.",
+      "pares": [
+        { "conceito": "Empacotamento de conhecimento reutilizável (como Skills)", "definicao": "Evita repetir a mesma instrução em cada conversa" },
+        { "conceito": "Suporte a protocolo aberto de ferramenta (como MCP)", "definicao": "Facilita conectar o modelo a sistemas externos de forma padronizada" },
+        { "conceito": "Comunidade de modelos derivados (comum em modelos abertos)", "definicao": "Oferece variações já ajustadas para casos específicos, prontas para usar" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "id": "rag-06-quando-rag-e-a-resposta-errada",
+  "trilha": "rag",
+  "titulo": "Quando RAG é a resposta errada",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "conceito": "RAG não é sempre a solução certa. Se a base cabe inteira, com folga, na janela de contexto do modelo, colar tudo direto pode ser mais simples e até mais preciso que montar um pipeline de busca.\n\nE se o problema real é dado bagunçado, duplicado ou sem dono definido, RAG não conserta isso: ele só busca dentro da bagunça mais rápido. Às vezes o trabalho certo é arrumar a base antes de buscar dentro dela.",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**Beatriz, área comercial.** Tem 20 páginas de material de vendas que cabem com folga na janela de contexto do modelo que ela usa. Um colega sugere montar um sistema de RAG para isso. Faz sentido?",
+      "alternativas": [
+        {
+          "texto": "Provavelmente não: se o material cabe inteiro e com folga no contexto, colar tudo direto é mais simples e evita a complexidade extra de um pipeline de busca.",
+          "melhor": true,
+          "feedback": "RAG resolve o problema de base grande demais para caber no contexto; quando esse problema não existe, montar RAG é complexidade desnecessária."
+        },
+        {
+          "texto": "Sim, sempre vale montar RAG, independentemente do tamanho da base.",
+          "melhor": false,
+          "feedback": "Isso ignora o motivo de existir do RAG. Para uma base pequena que cabe no contexto, colar direto tende a ser mais simples e igualmente eficaz."
+        },
+        {
+          "texto": "Sim, porque RAG deixa qualquer resposta automaticamente mais precisa.",
+          "melhor": false,
+          "feedback": "RAG não é uma garantia automática de precisão; ele é uma técnica para lidar com base grande demais, com seus próprios pontos de falha (chunking, busca, reranking)."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Uma empresa tem documentos duplicados, desatualizados e sem dono claro, e monta um sistema de RAG sobre essa base esperando respostas melhores. O que provavelmente vai acontecer?",
+      "alternativas": [
+        {
+          "texto": "O RAG vai buscar rápido dentro da bagunça, mas continuará trazendo documentos duplicados ou desatualizados, porque busca não resolve problema de qualidade de dado.",
+          "correta": true,
+          "explicacao": "RAG acelera a busca, não arruma a base. Se a base tem problema de qualidade, o sintoma vai aparecer na resposta final, só que mais rápido."
+        },
+        {
+          "texto": "O RAG automaticamente identifica e remove os documentos duplicados e desatualizados.",
+          "correta": false,
+          "explicacao": "RAG não faz curadoria de dado por conta própria; isso é um trabalho de organização da base que precisa ser feito à parte."
+        },
+        {
+          "texto": "O problema desaparece assim que RAG é implementado, independentemente da qualidade da base.",
+          "correta": false,
+          "explicacao": "A qualidade da base é a raiz do problema; um pipeline de busca sobre uma base ruim ainda vai buscar dentro do que é ruim."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a frase sobre quando não vale a pena montar RAG.",
+      "texto": "Se a base de conhecimento é pequena o suficiente para caber inteira no contexto, ou se o problema real é ___ da base, montar RAG pode não ser a prioridade certa.",
+      "opcoes": [
+        {
+          "texto": "qualidade e organização",
+          "correta": true,
+          "explicacao": "Dado bagunçado, duplicado ou sem dono é um problema de qualidade da base, que RAG não resolve: ele só busca mais rápido dentro da bagunça."
+        },
+        {
+          "texto": "cor da interface",
+          "correta": false,
+          "explicacao": "A aparência visual da interface não tem relação com a decisão de usar ou não RAG."
+        },
+        {
+          "texto": "velocidade da internet",
+          "correta": false,
+          "explicacao": "Velocidade de rede não é o fator que determina se RAG é ou não a abordagem certa para o problema."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "id": "rag-04-reranking-montagem-contexto",
+  "trilha": "rag",
+  "titulo": "Reranking e montagem de contexto",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "conceito": "A primeira busca traz uma lista de candidatos aproximada, rápida, mas nem sempre na melhor ordem. Reranking é uma segunda passada, mais cara e mais precisa, que reordena esses candidatos por relevância real antes de decidir o que vai para o prompt.\n\nMontagem de contexto é a etapa seguinte: decidir quantos chunks entram, em que ordem, e se a fonte de cada um é citada, para o modelo poder apontar de onde tirou a resposta.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que fazer uma busca rápida seguida de reranking, em vez de já buscar com o método mais preciso desde o início?",
+      "alternativas": [
+        {
+          "texto": "Porque o método mais preciso é caro demais para rodar sobre toda a base; a busca rápida reduz para um número pequeno de candidatos, e só esses passam pelo método caro.",
+          "correta": true,
+          "explicacao": "Esse é o motivo prático: aplicar o método caro só nos poucos candidatos da primeira busca, em vez de sobre a base inteira, equilibra custo e precisão."
+        },
+        {
+          "texto": "Porque a busca rápida é sempre mais precisa que o reranking.",
+          "correta": false,
+          "explicacao": "É o contrário: o reranking existe justamente porque é mais preciso, só que caro demais para aplicar em tudo de uma vez."
+        },
+        {
+          "texto": "Porque reranking é uma etapa opcional que nunca muda o resultado final.",
+          "correta": false,
+          "explicacao": "Reranking pode mudar bastante a ordem final dos candidatos, é uma etapa que afeta o resultado, não decorativa."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Carla, área de RH.** Monta um sistema de busca sobre políticas internas. Ao montar o contexto final para o modelo, ela decide não incluir de onde cada trecho veio. Qual problema isso cria?",
+      "alternativas": [
+        {
+          "texto": "Nenhum problema, a fonte é só um detalhe decorativo.",
+          "melhor": false,
+          "feedback": "Não incluir a fonte torna impossível verificar de onde a resposta veio, o que é justamente um dos objetivos de usar RAG em vez de deixar o modelo responder de memória."
+        },
+        {
+          "texto": "Fica difícil verificar e auditar a resposta, porque ninguém sabe de qual política ou versão o trecho usado realmente veio.",
+          "melhor": true,
+          "feedback": "Citar a fonte na montagem de contexto é o que permite auditar a resposta depois, algo essencial quando o assunto é política interna."
+        },
+        {
+          "texto": "O modelo passa a inventar mais, porque perdeu acesso ao conteúdo.",
+          "melhor": false,
+          "feedback": "O conteúdo ainda está lá; o que falta é a citação de origem, não o conteúdo em si. O risco aqui é de auditabilidade, não de alucinação por falta de dado."
+        }
+      ]
+    },
+    {
+      "tipo": "ordenacao",
+      "enunciado": "Ordene as etapas de um sistema de RAG, da busca inicial até a resposta final.",
+      "etapas": [
+        "Busca inicial traz uma lista ampla de candidatos, rápida e aproximada",
+        "Reranking reordena os candidatos por relevância mais precisa",
+        "Montagem de contexto decide quantos chunks entram e com qual citação de fonte",
+        "O modelo gera a resposta com base no contexto montado"
+      ],
+      "explicacao": "Cada etapa refina a anterior: busca ampla, depois reordenação mais precisa, depois seleção final para o prompt, e só então a geração da resposta."
+    }
+  ]
+}

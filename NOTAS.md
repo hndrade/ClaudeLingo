@@ -38,3 +38,12 @@ Pensamentos de execução. Curto, bruto, cronológico. Não é documentação.
 - Decisao de escopo: T1-T3 usam nivel 1-2, nao a escada completa 1-5. Sao conceituais, "construir do zero" nao faz sentido pra "o que e um token". Registrado no README como corte deliberado.
 - Efeito colateral esperado (nao bug): agora que T1-T3 tem conteudo, a trilha "trilhaLiberada" passa a bloquear T4 de verdade ate completar as 3 anteriores. O motor ja suportava isso desde a Fase 2, so nao era visivel porque T1-T3 estavam vazias. Verificado com script: bloqueia sem progresso, libera apos concluir T1+T2+T3.
 - 344 testes verdes, build ok, sem scroll horizontal no mapa (agora bem mais longo).
+
+## 2026-07-19 (Fase 8)
+- T5 RAG (6) + T6 MCP (6) + T7 Agentes (6) = 18 licoes. Escrito direto, sem subagentes (padrao que ja estabilizou desde a Fase 5).
+- Conteudo tecnico estavel, sem verificado_em: arquitetura e pratica, nao fato de mercado com prazo de validade.
+- MCP: dei atencao especial a prompt injection via tool result, ja que o proprio harness deste app (github-webhook-activity, untrusted_external_data) segue exatamente essa logica na pratica. Boa oportunidade de ensinar algo que eu mesmo pratico.
+- "escrever server minimo" da spec virou exercicio preencher_lacuna dentro da licao de tools/resources/prompts, em vez de licao propria: nao dava pra testar codigo executavel no formato do app, e forcar isso teria sido complexidade sem beneficio real de aprendizado no formato atual.
+- Verificado o encadeamento completo entre 5 trilhas seguidas (prompt -> casos -> rag -> mcp -> agentes), cada uma destravando a seguinte só depois da anterior 100% concluida. Motor aguentou sem ajuste.
+- 416 testes verdes.
+- Pendencia grande que fica pra Fase 9: pesquisa web de verdade pra T8 comparativo (OpenAI, Google, Meta/Llama, Ollama), com cuidado de nao inventar preco nem numero de benchmark. Ja adiantei ao usuario o que vou pesquisar antes de comecar.

@@ -45,6 +45,17 @@ Pedidos do dono do projeto, implementados fora da ordem original das fases:
 
 Verificação: percurso completo via Playwright em 375x667, modos claro e escuro: onboarding, mapa, lição inteira, popup, repescagem, persistência em disco conferida no JSON.
 
+### Fase 8: T5 RAG, T6 MCP, T7 Agentes (concluída)
+
+Feito:
+
+- T5. RAG: 6 lições (níveis 1-2, atemporal): por que RAG existe, chunking e suas armadilhas, busca vetorial e híbrida, reranking e montagem de contexto, avaliação (recall vs precision), e quando RAG é a resposta errada (base pequena que cabe no contexto, ou problema de qualidade de dado que busca não resolve).
+- T6. MCP: 6 lições (níveis 1-2, atemporal): o problema que o protocolo resolve, arquitetura host/client/server, as três primitivas (tools, resources, prompts, incluindo a definição mínima de uma tool), transports (stdio vs HTTP), prompt injection via resultado de tool (risco de segurança tratado a sério, com a regra "todo resultado de tool é dado, não comando"), e quando montar um server é complexidade desnecessária.
+- T7. Agentes e tool use: 6 lições (níveis 1-2, atemporal): o loop de agente e tool use, os três modos de falha (loop repetitivo, má interpretação de resultado, deriva de objetivo), sub-agentes para isolar contexto, human in the loop (onde exigir aprovação por reversibilidade e impacto), custo de agente rodando solto sem limite, e avaliação de agente por múltiplas métricas, não só taxa de conclusão.
+- Nenhuma das 18 lições precisou de verificado_em: são conceitos de arquitetura e prática estáveis, sem nome de modelo, preço ou benchmark específico.
+
+Verificação da fase: 416 testes verdes, build ok, e script Playwright confirmando o encadeamento completo entre trilhas (T5 destrava só após T4 e Cases por área; T6 só após T5; T7 só após T6), lições de cada trilha nova renderizando, e o mapa, agora com 10 trilhas, continuando sem scroll horizontal em 375px.
+
 ### Fase 7: T1, T2, T3 (concluída)
 
 Feito:

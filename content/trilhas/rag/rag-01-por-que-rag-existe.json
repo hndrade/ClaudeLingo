@@ -1,0 +1,75 @@
+{
+  "id": "rag-01-por-que-rag-existe",
+  "trilha": "rag",
+  "titulo": "Por que RAG existe",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "conceito": "RAG (retrieval augmented generation) resolve um problema prático: sua base de conhecimento é grande demais para colar inteira em todo prompt, e muda com frequência demais para treinar um modelo novo cada vez.\n\nEm vez de colar tudo, o sistema busca só os trechos relevantes para a pergunta e monta o prompt com eles. O modelo responde com base no que foi buscado, não no que decorou no treino.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Qual problema RAG resolve diretamente?",
+      "alternativas": [
+        {
+          "texto": "Ter uma base de conhecimento grande e mutável, sem precisar colar tudo em cada prompt nem retreinar o modelo a cada mudança.",
+          "correta": true,
+          "explicacao": "Esse é o problema central: buscar só o relevante em vez de carregar tudo ou depender do que o modelo aprendeu no treino."
+        },
+        {
+          "texto": "Fazer o modelo responder mais rápido em qualquer situação.",
+          "correta": false,
+          "explicacao": "RAG adiciona uma etapa de busca antes de gerar a resposta; não é uma técnica focada em velocidade."
+        },
+        {
+          "texto": "Reduzir a temperatura do modelo automaticamente.",
+          "correta": false,
+          "explicacao": "Temperatura e RAG são conceitos independentes; RAG não mexe no parâmetro de temperatura."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Lucas, área de dados.** A empresa tem 5 mil documentos internos que mudam toda semana. Colar tudo em cada pergunta é inviável, e retreinar um modelo toda semana também. O que RAG oferece nesse caso?",
+      "alternativas": [
+        {
+          "texto": "Buscar, a cada pergunta, só os documentos relevantes ao que foi perguntado, e montar o prompt só com eles.",
+          "melhor": true,
+          "feedback": "Isso evita colar tudo e evita retreinar: a base muda, a busca se adapta automaticamente na hora da pergunta."
+        },
+        {
+          "texto": "Colar os 5 mil documentos inteiros em toda pergunta, para garantir que nada fique de fora.",
+          "melhor": false,
+          "feedback": "Isso provavelmente estoura a janela de contexto e custa caro em tokens, além de ser desnecessário: a maioria dos documentos não é relevante para uma pergunta específica."
+        },
+        {
+          "texto": "Retreinar o modelo toda semana com os documentos atualizados.",
+          "melhor": false,
+          "feedback": "Retreinar é caro, demorado e não é a solução para uma base que muda com frequência; RAG resolve isso sem precisar retreinar nada."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a frase sobre o papel do modelo num sistema com RAG.",
+      "texto": "Com RAG, o modelo responde com base no que foi ___ para aquela pergunta, não só no que aprendeu durante o treino.",
+      "opcoes": [
+        {
+          "texto": "buscado e trazido ao prompt",
+          "correta": true,
+          "explicacao": "É essa a mudança de papel: o modelo passa a responder com base em material trazido na hora, não só na memória do treino."
+        },
+        {
+          "texto": "inventado pelo modelo",
+          "correta": false,
+          "explicacao": "O objetivo de RAG é justamente reduzir invenção, ancorando a resposta em material real buscado."
+        },
+        {
+          "texto": "apagado da conversa",
+          "correta": false,
+          "explicacao": "O material buscado é adicionado ao prompt, não apagado; é isso que fundamenta a resposta."
+        }
+      ]
+    }
+  ]
+}

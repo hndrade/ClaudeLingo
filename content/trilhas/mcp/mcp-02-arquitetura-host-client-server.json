@@ -1,0 +1,62 @@
+{
+  "id": "mcp-02-arquitetura-host-client-server",
+  "trilha": "mcp",
+  "titulo": "Arquitetura: host, client e server",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "conceito": "No MCP, o host é a aplicação que você usa (um app de chat, um editor de código). Dentro do host, um client mantém a conexão com um server específico.\n\nO server é quem expõe as capacidades: tools, resources ou prompts de um sistema externo (um banco, uma API, um sistema de arquivos). Um host pode ter vários clients conectados a vários servers ao mesmo tempo.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Qual é o papel do server na arquitetura MCP?",
+      "alternativas": [
+        {
+          "texto": "Expor as capacidades de um sistema externo (tools, resources, prompts) para serem usadas pelo host através do client.",
+          "correta": true,
+          "explicacao": "O server é o lado que oferece a capacidade concreta, seja acesso a dado ou execução de ação, conectado ao sistema externo."
+        },
+        {
+          "texto": "Mostrar a interface visual que o usuário vê na tela.",
+          "correta": false,
+          "explicacao": "A interface visual é papel do host, a aplicação que o usuário usa diretamente. O server fica por trás, expondo capacidades."
+        },
+        {
+          "texto": "Substituir completamente o modelo de linguagem.",
+          "correta": false,
+          "explicacao": "O server não substitui o modelo; ele fornece acesso a ferramentas e dados que o modelo pode usar durante a conversa."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie o componente com seu papel na arquitetura MCP.",
+      "pares": [
+        { "conceito": "Host", "definicao": "A aplicação que o usuário usa, como um app de chat ou editor" },
+        { "conceito": "Client", "definicao": "Mantém a conexão entre o host e um server específico" },
+        { "conceito": "Server", "definicao": "Expõe as capacidades (tools, resources, prompts) de um sistema externo" }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Sônia, área de operações.** Usa um app de chat que está conectado, ao mesmo tempo, a um sistema de estoque e a um sistema de tickets, cada um via MCP. Como isso é organizado por trás?",
+      "alternativas": [
+        {
+          "texto": "O host mantém um client separado para cada server (estoque e tickets), permitindo usar as capacidades dos dois ao mesmo tempo dentro da mesma conversa.",
+          "melhor": true,
+          "feedback": "Um host pode manter múltiplos clients, cada um conectado a um server diferente, e usar as capacidades de vários sistemas na mesma sessão."
+        },
+        {
+          "texto": "É preciso escolher só um dos dois sistemas por vez, nunca os dois juntos.",
+          "melhor": false,
+          "feedback": "A arquitetura MCP permite múltiplas conexões simultâneas: um host pode ter vários clients conectados a vários servers ao mesmo tempo."
+        },
+        {
+          "texto": "Os dois sistemas precisam ser fundidos em um único server para funcionar.",
+          "melhor": false,
+          "feedback": "Não é necessário fundir nada; cada sistema pode continuar como um server independente, conectado por seu próprio client."
+        }
+      ]
+    }
+  ]
+}

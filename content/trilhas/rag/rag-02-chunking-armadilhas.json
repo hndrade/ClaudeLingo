@@ -1,0 +1,62 @@
+{
+  "id": "rag-02-chunking-armadilhas",
+  "trilha": "rag",
+  "titulo": "Chunking e suas armadilhas",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "conceito": "Chunking é dividir um documento grande em pedaços (chunks) menores, porque a busca e o armazenamento funcionam melhor em pedaços do que no documento inteiro.\n\nA armadilha: chunk grande demais mistura assuntos diferentes e perde precisão na busca; chunk pequeno demais corta uma ideia no meio e perde contexto. Cortar exatamente na fronteira errada (no meio de uma frase, de uma tabela) piora os dois problemas ao mesmo tempo.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "O que acontece quando um chunk é grande demais, misturando vários assuntos num único pedaço?",
+      "alternativas": [
+        {
+          "texto": "A busca perde precisão: o chunk pode ser recuperado por conter um trecho relevante, mas trazer junto muito conteúdo irrelevante.",
+          "correta": true,
+          "explicacao": "Chunk grande demais dilui o sinal: a relevância de uma frase específica fica escondida no meio de assunto que não tem nada a ver com a pergunta."
+        },
+        {
+          "texto": "A busca fica mais rápida, porque há menos chunks no total.",
+          "correta": false,
+          "explicacao": "Velocidade não é o problema principal aqui; o problema é a precisão do que é recuperado."
+        },
+        {
+          "texto": "Nada muda, o tamanho do chunk é só um detalhe técnico sem efeito prático.",
+          "correta": false,
+          "explicacao": "O tamanho do chunk tem efeito direto na qualidade da busca e da resposta final; não é um detalhe irrelevante."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Sônia, área de operações.** Um manual de procedimento foi dividido em chunks de tamanho fixo, sem respeitar os títulos de seção. Um chunk terminou cortando uma tabela de passos no meio. Qual é a consequência mais provável?",
+      "alternativas": [
+        {
+          "texto": "A busca pode trazer só metade da tabela, e a resposta gerada fica incompleta ou enganosa sobre o procedimento.",
+          "melhor": true,
+          "feedback": "Cortar no meio de uma unidade de sentido (como uma tabela de passos) é uma armadilha clássica de chunking: o pedaço recuperado perde informação essencial."
+        },
+        {
+          "texto": "Nenhuma consequência, o modelo sempre reconstrói a tabela inteira sozinho.",
+          "melhor": false,
+          "feedback": "O modelo só vê o que foi recuperado; se metade da tabela não foi trazida, ele não tem como reconstruir a parte que falta."
+        },
+        {
+          "texto": "A busca vetorial corrige automaticamente cortes de tabela.",
+          "melhor": false,
+          "feedback": "Busca vetorial não corrige o corte; ela só busca entre os chunks que existem. O corte ruim precisa ser evitado na etapa de chunking, não corrigido depois."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie o problema de chunking com sua consequência.",
+      "pares": [
+        { "conceito": "Chunk grande demais", "definicao": "Mistura assuntos, a busca perde precisão" },
+        { "conceito": "Chunk pequeno demais", "definicao": "Corta a ideia no meio, perde contexto" },
+        { "conceito": "Corte no meio de uma tabela ou lista", "definicao": "Perde informação estrutural essencial, mesmo com tamanho razoável" }
+      ]
+    }
+  ]
+}

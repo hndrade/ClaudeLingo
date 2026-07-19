@@ -107,19 +107,40 @@
       "id": "rag",
       "nome": "T5. RAG",
       "descricao": "Chunking, busca vetorial e híbrida, reranking e avaliação.",
-      "licoes": []
+      "licoes": [
+        "rag-01-por-que-rag-existe",
+        "rag-02-chunking-armadilhas",
+        "rag-03-busca-vetorial-hibrida",
+        "rag-04-reranking-montagem-contexto",
+        "rag-05-avaliacao-recall-precision",
+        "rag-06-quando-rag-e-a-resposta-errada"
+      ]
     },
     {
       "id": "mcp",
       "nome": "T6. MCP",
       "descricao": "Arquitetura host, client e server, tools vs resources, transports e riscos.",
-      "licoes": []
+      "licoes": [
+        "mcp-01-problema-que-resolve",
+        "mcp-02-arquitetura-host-client-server",
+        "mcp-03-tools-resources-prompts",
+        "mcp-04-transports",
+        "mcp-05-prompt-injection-via-tool-result",
+        "mcp-06-quando-mcp-e-overkill"
+      ]
     },
     {
       "id": "agentes",
       "nome": "T7. Agentes e tool use",
       "descricao": "Loop de agente, sub-agentes, human in the loop e custo real.",
-      "licoes": []
+      "licoes": [
+        "agentes-01-loop-e-tool-use",
+        "agentes-02-quando-o-agente-falha",
+        "agentes-03-sub-agentes",
+        "agentes-04-human-in-the-loop",
+        "agentes-05-custo-agente-rodando-solto",
+        "agentes-06-avaliacao-de-agente"
+      ]
     },
     {
       "id": "comparativo",

@@ -1,0 +1,75 @@
+{
+  "id": "mcp-06-quando-mcp-e-overkill",
+  "trilha": "mcp",
+  "titulo": "Quando MCP é overkill",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "conceito": "MCP compensa quando várias aplicações vão reusar a mesma integração, ou quando a ferramenta precisa ser mantida e atualizada de forma independente do app que a usa.\n\nPara uma integração única, usada por uma única aplicação, que provavelmente nunca vai ser reaproveitada, montar um server MCP completo pode ser complexidade desnecessária; uma chamada direta e simples resolve com menos peça móvel.",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**Rafael, área de marketing.** Precisa que um único script, usado só por ele, busque um dado de uma planilha uma vez por semana. Vale montar um server MCP completo para isso?",
+      "alternativas": [
+        {
+          "texto": "Provavelmente não: é uma integração única, sem reuso previsto por outras aplicações, então uma chamada direta e simples resolve com menos complexidade.",
+          "melhor": true,
+          "feedback": "MCP compensa quando há reuso entre aplicações ou necessidade de manutenção independente; para um uso único e simples, é complexidade desnecessária."
+        },
+        {
+          "texto": "Sim, sempre vale montar um server MCP, mesmo para uso único.",
+          "melhor": false,
+          "feedback": "Isso adiciona peças móveis (server, transport, protocolo) sem ganho real quando não há reuso nem necessidade de padronização entre aplicações."
+        },
+        {
+          "texto": "Não, e o certo é nunca usar nenhuma automação nesse caso.",
+          "melhor": false,
+          "feedback": "O ponto não é evitar automação, é escolher a ferramenta proporcional ao problema; um script direto simples também é uma solução válida, só que mais simples que MCP."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Qual cenário mais justifica o investimento de montar um server MCP?",
+      "alternativas": [
+        {
+          "texto": "Uma ferramenta que várias aplicações diferentes vão usar, mantida de forma independente e atualizada sem depender de nenhuma delas.",
+          "correta": true,
+          "explicacao": "É esse cenário de reuso e independência entre ferramenta e aplicação que justifica o investimento na padronização que o MCP oferece."
+        },
+        {
+          "texto": "Uma chamada única, feita uma vez, dentro de um script pessoal que ninguém mais vai usar.",
+          "correta": false,
+          "explicacao": "Para um uso isolado e sem reuso, o custo de montar e manter um server MCP tende a superar o benefício."
+        },
+        {
+          "texto": "Qualquer situação, sempre vale montar um server MCP, sem exceção.",
+          "correta": false,
+          "explicacao": "Não existe essa regra absoluta; a decisão depende de reuso e necessidade de padronização, como em qualquer escolha de ferramenta."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete o critério para decidir se vale montar um server MCP.",
+      "texto": "MCP compensa quando há ___ entre aplicações diferentes; para um uso único, uma solução mais simples costuma bastar.",
+      "opcoes": [
+        {
+          "texto": "reuso da mesma integração",
+          "correta": true,
+          "explicacao": "O ganho do protocolo aparece quando a mesma integração serve a mais de uma aplicação; sem esse reuso, o benefício cai."
+        },
+        {
+          "texto": "menor custo de token",
+          "correta": false,
+          "explicacao": "Custo de token não é o critério central para decidir entre montar um server MCP ou uma chamada direta."
+        },
+        {
+          "texto": "cor da interface do usuário",
+          "correta": false,
+          "explicacao": "Aparência visual não tem relação com a decisão técnica de usar ou não um protocolo de integração."
+        }
+      ]
+    }
+  ]
+}

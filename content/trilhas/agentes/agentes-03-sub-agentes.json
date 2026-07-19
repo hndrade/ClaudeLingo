@@ -1,0 +1,75 @@
+{
+  "id": "agentes-03-sub-agentes",
+  "trilha": "agentes",
+  "titulo": "Sub-agentes: dividir para isolar contexto",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "conceito": "Um sub-agente é um agente disparado por outro agente para cuidar de uma parte específica da tarefa, com seu próprio contexto separado. Isso evita que o histórico de uma investigação longa e detalhada polua o contexto principal com informação que só importa para aquela etapa.\n\nO agente principal recebe de volta só o resultado do sub-agente, não todo o processo que ele percorreu para chegar lá.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Qual é a principal vantagem de delegar uma parte da tarefa a um sub-agente, em vez de fazer tudo no mesmo contexto?",
+      "alternativas": [
+        {
+          "texto": "O contexto detalhado da subtarefa fica isolado no sub-agente, e o agente principal recebe só o resultado, sem poluir seu próprio contexto com todos os detalhes intermediários.",
+          "correta": true,
+          "explicacao": "Isolamento de contexto é o ganho central: detalhes de uma investigação específica não precisam ocupar espaço no contexto principal."
+        },
+        {
+          "texto": "Sub-agentes tornam a tarefa automaticamente mais rápida em qualquer situação.",
+          "correta": false,
+          "explicacao": "Velocidade não é garantida; o ganho principal é organizacional, isolar contexto, não necessariamente tempo de execução."
+        },
+        {
+          "texto": "Sub-agentes eliminam qualquer chance de erro na subtarefa.",
+          "correta": false,
+          "explicacao": "Um sub-agente ainda pode errar; ele não é uma garantia de acerto, é uma forma de organizar e isolar parte do trabalho."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Lucas, área de dados.** Pede a um agente principal para investigar um problema de qualidade de dado em 10 tabelas diferentes. Cada investigação gera muitos detalhes técnicos. Por que delegar cada investigação a um sub-agente pode ajudar?",
+      "alternativas": [
+        {
+          "texto": "Cada sub-agente investiga uma tabela com seu próprio contexto, e o agente principal recebe só o resumo de cada investigação, sem acumular todos os detalhes técnicos das 10 tabelas no seu próprio contexto.",
+          "melhor": true,
+          "feedback": "Isso evita que o contexto principal fique sobrecarregado com detalhes técnicos de investigações que já foram concluídas e resumidas."
+        },
+        {
+          "texto": "Delegar não muda nada, o contexto acumulado seria o mesmo de qualquer jeito.",
+          "melhor": false,
+          "feedback": "Isolar cada investigação num sub-agente é justamente o que evita acumular todos os detalhes no contexto principal."
+        },
+        {
+          "texto": "Sub-agentes só servem para tarefas de programação, não para investigação de dado.",
+          "melhor": false,
+          "feedback": "A técnica de isolar contexto com sub-agentes se aplica a qualquer tarefa que se beneficie de dividir e delegar partes específicas, não só programação."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a frase sobre o que o agente principal recebe de um sub-agente.",
+      "texto": "O agente principal recebe do sub-agente só o ___, não todo o processo detalhado que ele percorreu.",
+      "opcoes": [
+        {
+          "texto": "resultado final",
+          "correta": true,
+          "explicacao": "Isso é o que preserva o isolamento de contexto: o principal fica com o resumo útil, não com todo o histórico de passos do sub-agente."
+        },
+        {
+          "texto": "histórico completo de cada passo",
+          "correta": false,
+          "explicacao": "Receber o histórico completo anularia o benefício de isolar contexto, que é justamente evitar essa poluição."
+        },
+        {
+          "texto": "acesso total às ferramentas do sub-agente",
+          "correta": false,
+          "explicacao": "O que volta ao agente principal é o resultado da subtarefa, não um acesso direto às ferramentas que o sub-agente usou."
+        }
+      ]
+    }
+  ]
+}

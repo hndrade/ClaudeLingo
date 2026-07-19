@@ -23,3 +23,10 @@ Pensamentos de execução. Curto, bruto, cronológico. Não é documentação.
 - nao_usar_ia: 1 por área, verificado por teste. Regra de honestidade da spec cumprida.
 - Achado: teste de travessão pegou comentário SQL "--"; troquei por /* */ (SQL valido, nao viola a regra de texto). 223 testes verdes.
 - Git: hook reclama de assinatura GPG (nao tenho chave aqui); email do committer ja e noreply@anthropic.com. Nao da pra assinar neste ambiente.
+
+## 2026-07-19 (Fase 6)
+- Escrevi tudo eu mesmo, sem subagentes (aprendizado da Fase 5: quota compartilhada). 5 licoes nivel 5 + 8 .md + rota de download + pagina /biblioteca + link na tela final.
+- Bug achado no MEU script de verificacao, nao no app: getByRole "Continuar" sem exact:true colidiu com a palavra "continuar" dentro do texto de uma explicacao ("chat continuar existindo"). Corrigido com exact:true.
+- "0 arquivos listados" no script foi corrida de timing pos-navegacao; checagem direta confirmou os 8 links corretos na pagina.
+- Nao consigo testar os .md contra uma Claude de verdade aqui (sem acesso a API). Verificacao ficou estrutural. Registrado como limitacao no README.
+- 276 testes verdes.

@@ -1,0 +1,62 @@
+{
+  "id": "prompt-25-instrucao-vs-system-vs-skill",
+  "trilha": "prompt",
+  "titulo": "Instrução de projeto, system prompt e Skill: qual é qual",
+  "nivel": 5,
+  "prereq": [],
+  "xp": 45,
+  "conceito": "Instrução de projeto (um .md) é algo que você cola ou anexa quando o caso pede: controle manual, uso ocasional.\n\nSystem prompt é configurado uma vez e se aplica automaticamente a toda mensagem daquela conversa ou assistente: você não cola nada, ele já está lá.\n\nUma Skill é empacotada com um gatilho: dispara sozinha quando reconhece o contexto certo, e pode incluir passos ou ferramentas, não só texto.",
+  "exercicios": [
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie o mecanismo com a forma como ele entra em ação.",
+      "pares": [
+        { "conceito": "Instrução de projeto (.md)", "definicao": "Você cola ou anexa manualmente quando o caso pede" },
+        { "conceito": "System prompt", "definicao": "Configurado uma vez, aplica a toda mensagem sem precisar colar" },
+        { "conceito": "Skill", "definicao": "Empacotada com gatilho, dispara sozinha ao reconhecer o contexto" }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Carla, área de RH.** Toda vez que alguém do time pede 'escreve uma descrição de vaga', ela quer que sempre saia no mesmo formato, automaticamente, sem precisar lembrar de colar instrução nenhuma. Qual mecanismo resolve isso melhor?",
+      "alternativas": [
+        {
+          "texto": "Um arquivo .md que ela manda cada pessoa colar toda vez que for pedir uma descrição.",
+          "melhor": false,
+          "feedback": "Funciona, mas depende de alguém lembrar de colar. Se o objetivo é 'sempre, automaticamente', isso não escala: alguém vai esquecer."
+        },
+        {
+          "texto": "Uma Skill com gatilho para 'descrição de vaga' que aplica o formato sozinha quando reconhece o pedido.",
+          "melhor": true,
+          "feedback": "É exatamente o caso de uso de uma Skill: reconhece o contexto e age sem que ninguém precise lembrar de colar nada."
+        },
+        {
+          "texto": "Pedir para cada pessoa decorar o formato e escrever de memória.",
+          "melhor": false,
+          "feedback": "Memória deriva, como visto na lição anterior. Isso reproduz exatamente o problema que o .md e a Skill existem para resolver."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Qual a diferença central entre um system prompt e uma instrução de projeto em .md?",
+      "alternativas": [
+        {
+          "texto": "O system prompt é sempre mais longo que o .md.",
+          "correta": false,
+          "explicacao": "Tamanho não define a diferença. Os dois podem ter qualquer tamanho."
+        },
+        {
+          "texto": "O system prompt se aplica automaticamente a toda mensagem daquele contexto; a instrução de projeto precisa ser trazida manualmente para cada uso.",
+          "correta": true,
+          "explicacao": "Essa é a diferença que importa na prática: automático e persistente versus manual e sob demanda."
+        },
+        {
+          "texto": "Só o system prompt pode conter regras duras.",
+          "correta": false,
+          "explicacao": "Regras duras podem estar em qualquer um dos três. A diferença é como e quando cada mecanismo entra em ação."
+        }
+      ]
+    }
+  ]
+}

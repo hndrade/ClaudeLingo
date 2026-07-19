@@ -154,6 +154,14 @@ export default function LessonPlayer({ licao }: { licao: Licao }) {
             </p>
           </div>
         )}
+        {licao.trilha === "prompt" && licao.nivel === 5 && (
+          <Link
+            href="/biblioteca"
+            className="mb-4 block rounded-xl border border-acento/40 bg-acento-fundo px-4 py-3 font-semibold text-acento"
+          >
+            Baixar a biblioteca de instruções .md
+          </Link>
+        )}
         <button
           type="button"
           onClick={refazer}

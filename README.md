@@ -45,6 +45,19 @@ Pedidos do dono do projeto, implementados fora da ordem original das fases:
 
 Verificação: percurso completo via Playwright em 375x667, modos claro e escuro: onboarding, mapa, lição inteira, popup, repescagem, persistência em disco conferida no JSON.
 
+### Fase 6: bloco 4D + biblioteca de .md baixável (concluída)
+
+Feito:
+
+- 5 lições novas na trilha "prompt", nível 5 (Sistematizar): por que um .md vale mais que repetir prompt, anatomia de um bom .md (contexto, regras duras, exemplos, formato de saída, o que não fazer), instrução de projeto vs system prompt vs Skill, como testar um .md (rodar 3 vezes e checar estabilidade), e como versionar quando a saída degrada.
+- content/biblioteca-md/ com 8 arquivos .md reais, um por área de trabalho (financeiro, comercial, RH, jurídico, marketing, operações, dados, atendimento), cada um seguindo as 5 seções da anatomia ensinada na Fase 6, com regras duras concretas (ex: jurídico nunca conclui parecer, dados nunca afirma valor sem ter rodado, atendimento nunca responde caso sensível sozinho).
+- Download pela interface: rota /api/biblioteca-md/[arquivo] serve o .md como anexo (com validação de nome de arquivo contra path traversal), e a página /biblioteca lista os 8 com botão de baixar. A tela de conclusão de qualquer lição de nível 5 da trilha prompt mostra um link direto para a biblioteca.
+- Teste de estrutura (tests/biblioteca-md.test.ts): garante 6 a 8 arquivos, as 5 seções obrigatórias em cada um, tamanho mínimo (não decorativo) e ausência de travessão. Suíte total: 276 testes verdes.
+
+Verificação da fase: build ok, rota de download testada (headers corretos, path traversal bloqueado, 404 para arquivo inexistente), percurso Playwright login → lição de nível 5 → link de biblioteca → 8 downloads listados, sem scroll horizontal em 375px.
+
+Limitação honesta: não tenho acesso a chamar a API da Claude neste ambiente para validar de fato colando os .md num Claude real. A verificação foi estrutural (as 5 seções, regras duras concretas e verificáveis, exemplos bom/ruim). Recomendo ao dono do projeto colar pelo menos um arquivo num Claude real antes de considerar o requisito "funcionam de verdade" fechado.
+
 ### Fase 5: Cases por área (concluída)
 
 Feito:

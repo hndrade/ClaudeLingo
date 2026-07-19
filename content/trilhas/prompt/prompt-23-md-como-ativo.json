@@ -1,0 +1,64 @@
+{
+  "id": "prompt-23-md-como-ativo",
+  "trilha": "prompt",
+  "titulo": "Por que um arquivo .md vale mais que repetir o prompt",
+  "nivel": 5,
+  "prereq": [],
+  "xp": 45,
+  "conceito": "Reescrever o mesmo pedido toda vez custa tempo e deriva: cada versão fica um pouco diferente da anterior, e ninguém sabe qual é a boa.\n\nUm arquivo .md guardado numa pasta é um ativo: escrito uma vez, revisado quando falha, e colado (ou referenciado) sempre igual. Ele vira parte do processo, não uma lembrança de cada pessoa.",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**Jorge, área financeira.** Toda semana ele reescreve de cabeça o parágrafo de instrução da conciliação, e cada semana sai um pouco diferente do anterior, às vezes esquecendo uma regra que tinha aprendido. Qual mudança resolve isso?",
+      "alternativas": [
+        {
+          "texto": "Jorge decorar melhor o parágrafo para reescrever sempre igual.",
+          "melhor": false,
+          "feedback": "Depender de memória é a causa do problema, não a solução. Memória humana deriva; um arquivo não."
+        },
+        {
+          "texto": "Jorge salvar o parágrafo testado num arquivo .md e colar o mesmo texto toda vez, editando o arquivo quando encontrar um caso que ele não cobre.",
+          "melhor": true,
+          "feedback": "O arquivo vira a fonte única da verdade. Toda melhoria fica registrada nele, e Jorge para de reinventar a instrução a cada rodada."
+        },
+        {
+          "texto": "Jorge pedir para a IA lembrar da conversa da semana passada.",
+          "melhor": false,
+          "feedback": "Conversas não persistem entre sessões novas nem são auditáveis. Um arquivo é visível, editável e não depende do histórico de chat continuar existindo."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Qual é o principal ganho de externalizar uma instrução repetida para um arquivo .md?",
+      "alternativas": [
+        {
+          "texto": "O texto fica mais bonito visualmente.",
+          "correta": false,
+          "explicacao": "Formatação não é o ponto. O ganho real é outro: consistência entre usos."
+        },
+        {
+          "texto": "A instrução fica estável e versionável: todo mundo usa a mesma versão, e melhorias ficam registradas em vez de se perderem.",
+          "correta": true,
+          "explicacao": "Isso é o que separa um processo de uma lembrança. O arquivo é a fonte única, editável e rastreável ao longo do tempo."
+        },
+        {
+          "texto": "O modelo responde mais rápido quando a instrução vem de um arquivo.",
+          "correta": false,
+          "explicacao": "Velocidade não muda pela origem do texto. O que muda é a consistência entre uma execução e outra."
+        }
+      ]
+    },
+    {
+      "tipo": "ordenacao",
+      "enunciado": "Ordene o caminho do prompt avulso repetido de memória até o ativo maduro.",
+      "etapas": [
+        "Reescrever o pedido do zero a cada vez, de memória",
+        "Copiar e colar a última versão que lembrar de ter funcionado",
+        "Salvar a versão testada num arquivo .md numa pasta",
+        "Revisar o .md quando um caso novo expõe uma lacuna"
+      ],
+      "explicacao": "Cada etapa reduz a dependência da memória: primeiro não há registro nenhum, depois um registro informal, depois um arquivo fonte única, e por fim um processo de revisão contínua."
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "id": "prompt-27-versionar-md",
+  "trilha": "prompt",
+  "titulo": "Versionar e revisar o .md quando a saída degrada",
+  "nivel": 5,
+  "prereq": [],
+  "xp": 45,
+  "conceito": "Um .md não é escrito uma vez e esquecido. Quando a saída começa a falhar num tipo novo de caso, isso é sinal de revisar, não de voltar a escrever prompt avulso.\n\nGuarde a data e o motivo de cada mudança. Se o .md é usado por várias pessoas, avise antes de editar: uma mudança silenciosa quebra o processo de quem não sabe que ele mudou.",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**Henrique, área jurídica.** O .md de checagem de risco que ele mantém começou a deixar passar um tipo de cláusula que antes pegava. O que ele faz?",
+      "alternativas": [
+        {
+          "texto": "Ignora, porque o .md já funcionou bem antes e provavelmente foi só um caso isolado.",
+          "melhor": false,
+          "feedback": "Um erro recorrente num tipo novo de caso é sinal de lacuna na instrução, não acaso. Ignorar deixa o mesmo erro se repetir."
+        },
+        {
+          "texto": "Revisa o .md acrescentando esse tipo de cláusula ao 'o que não fazer' ou aos exemplos, registra a data e o motivo da mudança, e avisa o time que usa o arquivo.",
+          "melhor": true,
+          "feedback": "Isso trata o .md como processo vivo: a falha vira aprendizado registrado, e o time inteiro se beneficia da correção em vez de cada um descobrir o mesmo problema sozinho."
+        },
+        {
+          "texto": "Apaga o .md e volta a escrever o prompt na mão a cada contrato.",
+          "melhor": false,
+          "feedback": "Isso joga fora o ganho de ter um ativo versionável e reintroduz a deriva que o .md existia para evitar. O problema pede revisão, não abandono."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que registrar data e motivo de cada mudança no .md importa?",
+      "alternativas": [
+        {
+          "texto": "Porque deixa o arquivo mais longo e completo.",
+          "correta": false,
+          "explicacao": "Tamanho não é o objetivo. O registro serve para entender por que o comportamento mudou quando alguém perguntar."
+        },
+        {
+          "texto": "Porque permite entender depois por que a saída de hoje é diferente da de meses atrás, e reverter se uma mudança piorou algo.",
+          "correta": true,
+          "explicacao": "Sem histórico, uma mudança que piora o resultado fica invisível até alguém notar o efeito, sem saber a causa nem como reverter."
+        },
+        {
+          "texto": "Porque a IA exige um changelog para funcionar.",
+          "correta": false,
+          "explicacao": "A IA não exige nada disso; ela lê o .md do jeito que está. O changelog é para as pessoas que mantêm o arquivo, não para o modelo."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a prática de manutenção de um .md compartilhado pelo time.",
+      "texto": "Antes de editar um .md que outras pessoas usam, ___.",
+      "opcoes": [
+        {
+          "texto": "avise o time e registre o motivo da mudança",
+          "correta": true,
+          "explicacao": "Uma mudança silenciosa num arquivo compartilhado quebra o processo de quem não sabe que ele mudou. Avisar e registrar mantém o ativo confiável para todos."
+        },
+        {
+          "texto": "edite direto, sem avisar, para não perder tempo",
+          "correta": false,
+          "explicacao": "Rapidez aqui custa caro: alguém vai notar uma saída diferente sem saber por quê, e vai perder tempo investigando o que já era conhecido."
+        },
+        {
+          "texto": "crie uma cópia pessoal e pare de usar o arquivo compartilhado",
+          "correta": false,
+          "explicacao": "Isso fragmenta o ativo: agora existem duas versões divergentes e o time perde a fonte única de verdade."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "id": "prompt-26-testar-md",
+  "trilha": "prompt",
+  "titulo": "Como testar um .md antes de confiar nele",
+  "nivel": 5,
+  "prereq": [],
+  "xp": 45,
+  "conceito": "Um .md que funcionou uma vez pode ter dado sorte. Testar de verdade é rodar o mesmo caso 3 vezes e comparar as saídas: se elas variam na estrutura, a instrução ainda tem folga para o modelo interpretar.\n\nDepois, teste com um caso que tem dado faltando e um caso levemente diferente do exemplo, para ver se a instrução aguenta o mundo real.",
+  "exercicios": [
+    {
+      "tipo": "ordenacao",
+      "enunciado": "Ordene o processo de testar um .md antes de confiar nele para o time inteiro usar.",
+      "etapas": [
+        "Rodar o mesmo caso 3 vezes com o .md",
+        "Comparar as 3 saídas: a estrutura se manteve igual?",
+        "Rodar um caso com um dado importante faltando",
+        "Rodar um caso levemente diferente do exemplo dado no .md"
+      ],
+      "explicacao": "Primeiro confere estabilidade no caso mais fácil; depois testa os dois jeitos mais comuns de o mundo real fugir do exemplo: dado faltando e caso levemente diferente."
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Lucas, área de dados.** Escreveu um .md para documentar métricas, testou uma vez com sucesso, e já quer distribuir para o time todo. O que falta antes disso?",
+      "alternativas": [
+        {
+          "texto": "Nada, uma vez que funcionou já é prova suficiente.",
+          "melhor": false,
+          "feedback": "Um sucesso pode ser sorte de redação do caso de teste. Sem rodar de novo e sem testar caso diferente, Lucas não sabe se o .md é estável ou só acertou uma vez."
+        },
+        {
+          "texto": "Rodar o mesmo caso mais 2 vezes para ver se a saída se mantém estável, e testar com uma métrica que tem regra de negócio mais confusa.",
+          "melhor": true,
+          "feedback": "Isso é o teste de verdade: estabilidade (repetir o mesmo caso) e robustez (um caso mais difícil que o exemplo). Só depois disso o .md está pronto para o time."
+        },
+        {
+          "texto": "Pedir para a própria IA confirmar se o .md está bom.",
+          "melhor": false,
+          "feedback": "A IA vai dizer que está bom com confiança, mesmo que não esteja: ela não sabe como vai se comportar no próximo caso real. Só rodar de fato revela isso."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a frase sobre o que significa um .md 'estável'.",
+      "texto": "Um .md é estável quando, rodado 3 vezes com o mesmo caso, ___.",
+      "opcoes": [
+        {
+          "texto": "a estrutura e o conteúdo essencial da saída se repetem, com pequenas variações de redação",
+          "correta": true,
+          "explicacao": "Estabilidade não é a saída idêntica letra por letra, é a estrutura e o essencial se manterem. Variação de redação é normal; variação de estrutura ou de regra aplicada não."
+        },
+        {
+          "texto": "a saída é idêntica, palavra por palavra, nas 3 vezes",
+          "correta": false,
+          "explicacao": "Isso é rigor demais e nem sempre acontece mesmo com uma boa instrução. O que importa é a estrutura e o essencial, não o texto exato."
+        },
+        {
+          "texto": "a saída fica cada vez mais detalhada a cada rodada",
+          "correta": false,
+          "explicacao": "Detalhe crescente não indica estabilidade, indica deriva. Um .md estável produz o mesmo tipo de resposta toda vez, não uma cada vez maior."
+        }
+      ]
+    }
+  ]
+}

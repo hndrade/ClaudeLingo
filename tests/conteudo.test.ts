@@ -61,9 +61,9 @@ describe("conteúdo das lições", () => {
     }
   });
 
-  it("trilha prompt cobre os níveis 1 a 4 da escada", () => {
+  it("trilha prompt cobre os níveis 1 a 5 da escada (5 é o bloco 4D, arquivo .md como ativo)", () => {
     const niveis = new Set(licoes.filter(([, l]) => l.trilha === "prompt").map(([, l]) => l.nivel));
-    for (const n of [1, 2, 3, 4]) expect(niveis, `nível ${n} ausente`).toContain(n);
+    for (const n of [1, 2, 3, 4, 5]) expect(niveis, `nível ${n} ausente`).toContain(n);
   });
 
   const areasCasos = ["financeiro", "comercial", "rh", "juridico", "marketing", "operacoes", "dados", "atendimento"];

@@ -57,3 +57,13 @@ Pensamentos de execução. Curto, bruto, cronológico. Não é documentação.
 - check-stale testado de verdade: forcei data de 2025-01-01 numa licao, rodei o script, confirmou deteccao (564 dias), restaurei o arquivo original, rodei de novo pra confirmar que limpou.
 - 452 testes verdes.
 - Proximo: Fase 10, T9 (avaliacao/custo/risco) + badges (max 6) + polimento. Ultima fase do plano original.
+
+## 2026-07-19 (Fase 10, fechamento)
+- T9: 6 licoes (eval, benchmark enganoso, red teaming+injection, dado sensivel, LGPD com ressalva de nao ser conselho juridico, custo real). Sem verificado_em, conteudo de pratica/principio, nao fato de mercado.
+- Badges: 6 no JSON, motor puro calcularBadges() em lib/progresso.ts, 11 testes. UI no Mapa, secao "Suas conquistas", 3 colunas, colorido quando conquistado.
+- Bug pego nos meus proprios testes: usei resolverErro (funcao removida faz tempo, substituida por acertarRevisao/errarRevisao) sem checar antes. Corrigido com um helper de teste que chama acertarRevisao 4x (INTERVALOS_REVISAO.length) pra tirar o item da fila de vez, igual o motor real faz.
+- Favicon adicionado (app/icon.svg), pendencia que tava aberta desde a Fase 1.
+- Verificacao final: 487 testes, tsc ok, build ok, favicon 200, e Playwright confirmando T9 destravando depois de T8, badges corretos (5 de 6, o "sem pendencia" corretamente ausente pois a jornada sintetica nao teve erro).
+- Achado no proprio script de verificacao: popup de fim de semana cobria a secao de badges na tela, contagem via CSS pegou elemento errado (chips de nivel tambem usam bg-acento-fundo). Corrigido escopando o seletor pela section certa e fechando o popup antes de contar.
+- Plano original de 10 fases: CONCLUIDO. ~110 licoes, 9 trilhas + cases, 487 testes.
+- Pendencias reais que ficam registradas no README pro dono do projeto decidir: login Google de verdade (hoje so perfil local), testar os .md num Claude real (nao tenho API aqui), revalidar T8 periodicamente com check-stale.

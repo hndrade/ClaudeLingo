@@ -1,0 +1,62 @@
+{
+  "id": "avaliacao-04-dados-sensiveis-o-que-nao-colar",
+  "trilha": "avaliacao",
+  "titulo": "Dados sensíveis: o que não colar no chat",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "conceito": "Dado sensível inclui informação pessoal identificável (CPF, endereço, dado de saúde), segredo comercial, senha ou chave de acesso, e informação de cliente coberta por contrato de confidencialidade.\n\nAntes de colar qualquer coisa num chat, vale perguntar: esse dado pode sair do ambiente controlado da empresa? Se a resposta é não, ou se você não tem certeza, ele não deveria ir para uma ferramenta externa sem antes checar a política da empresa.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Qual pergunta ajuda a decidir se um dado pode ser colado num chat externo?",
+      "alternativas": [
+        {
+          "texto": "Esse dado pode sair do ambiente controlado da empresa, segundo a política vigente?",
+          "correta": true,
+          "explicacao": "Essa é a pergunta central: se a resposta é não ou incerta, o dado não deveria sair sem checagem prévia."
+        },
+        {
+          "texto": "O texto é longo ou curto?",
+          "correta": false,
+          "explicacao": "Tamanho do texto não tem relação com sensibilidade do dado; um texto curto pode conter um CPF, por exemplo."
+        },
+        {
+          "texto": "O chat responde rápido ou devagar?",
+          "correta": false,
+          "explicacao": "Velocidade de resposta não é um critério de sensibilidade de dado."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Paula, área de atendimento.** Quer colar a lista completa de clientes, com nome, CPF e telefone, num chat para pedir uma análise de padrão de compra. O que ela deveria fazer antes?",
+      "alternativas": [
+        {
+          "texto": "Verificar a política da empresa sobre dado pessoal em ferramenta externa, e considerar anonimizar ou remover CPF e telefone antes de colar, mantendo só o necessário para a análise.",
+          "melhor": true,
+          "feedback": "CPF e telefone não costumam ser necessários para analisar padrão de compra; remover o que não é essencial reduz o risco sem perder o valor da análise."
+        },
+        {
+          "texto": "Colar tudo direto, já que a análise é só interna.",
+          "melhor": false,
+          "feedback": "'Interna' não significa que o dado ficou dentro do ambiente controlado; se a ferramenta é externa, o dado sensível saiu, mesmo que o uso pretendido seja interno."
+        },
+        {
+          "texto": "Trocar todos os nomes por emojis, mas manter CPF e telefone reais.",
+          "melhor": false,
+          "feedback": "Isso protege a informação errada: nome sozinho é menos sensível que CPF e telefone, que são os dados que realmente identificam e expõem risco."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie o tipo de dado com a razão de ele ser sensível.",
+      "pares": [
+        { "conceito": "CPF, endereço, dado de saúde", "definicao": "Informação pessoal identificável, sujeita a proteção legal" },
+        { "conceito": "Senha ou chave de acesso", "definicao": "Permite acesso indevido a sistemas se exposta" },
+        { "conceito": "Dado de cliente sob confidencialidade", "definicao": "Exposição pode violar contrato e gerar responsabilidade legal" }
+      ]
+    }
+  ]
+}

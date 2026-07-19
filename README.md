@@ -20,6 +20,18 @@ content/trilhas/        lições em JSON, uma pasta por trilha + indice.json
 
 Trilha nova = criar os JSONs da lição e registrar em `content/trilhas/indice.json`. Nenhum componente precisa mudar.
 
+## Estado do plano original (10 fases)
+
+Todas as 10 fases do plano foram concluídas: esqueleto e schema (1), motor de progresso (2), mapa e persistência (3), Trilha 4 completa (4), cases por área (5), biblioteca de .md (6), T1-T3 (7), T5-T7 (8), T8 comparativo (9), T9 + badges + polimento (10). O currículo tem 9 trilhas de conteúdo mais a trilha de cases, cerca de 110 lições no total, 487 testes automatizados.
+
+Pendências e cortes de escopo conhecidos, para não fingir que o app está 100% sem ressalva:
+
+- **Login Google real**: não implementado. O app usa perfis locais (visitante + contas nomeadas); o botão "Entrar com Google" fica visível e desabilitado, com explicação de que exigiria credenciais OAuth e um servidor público.
+- **Biblioteca de .md**: verificada estruturalmente (as 5 seções da anatomia, regras concretas), mas nunca testada colando de fato num Claude real, porque este ambiente não tem acesso à API. Recomendo ao dono do projeto testar pelo menos um arquivo antes de considerar esse requisito da spec totalmente fechado.
+- **T1-T3, T5-T7, T9**: usam majoritariamente nível 1-2 da escada (Reconhecer/Escolher), não a escada completa de 5 níveis desenhada para prompt engineering. São conteúdos conceituais onde "consertar" e "construir do zero" não se aplicam bem; a T4 (prompt engineering) é a única trilha com os 5 níveis completos, como a spec pede para o "carro-chefe".
+- **T8 comparativo**: dados de preço e capacidade mudam rápido. `npm run check-stale` sinaliza quando revalidar; `content/comparativo/README.md` explica como.
+- **Notificações**: funcionam com o navegador aberto (mesmo em segundo plano), não com o navegador fechado, por ser um app local sem servidor.
+
 ## Decisões registradas
 
 - Níveis 4 e 5 (texto livre): opção A da spec, rubrica + prompt de referência + autoavaliação por checklist (acerto = cobrir 80% da rubrica). Sem dependência de API.
@@ -44,6 +56,16 @@ Pedidos do dono do projeto, implementados fora da ordem original das fases:
 - Popup de fim de semana (sábado/domingo, uma vez por dia): aula de reforço ou seguir com a trilha.
 
 Verificação: percurso completo via Playwright em 375x667, modos claro e escuro: onboarding, mapa, lição inteira, popup, repescagem, persistência em disco conferida no JSON.
+
+### Fase 10: T9, badges e polimento (concluída, fecha o plano original)
+
+Feito:
+
+- T9. Avaliação, custo e risco: 6 lições (níveis 1-2, atemporal): como montar um eval e por que exemplo fácil demais engana, por que benchmark público engana (incluindo o risco de contaminação de treino), red teaming básico e prompt injection (complementando o que já foi visto em MCP, agora de forma mais geral), dados sensíveis e o que não colar no chat, LGPD em uso corporativo (com ressalva explícita de que não é aconselhamento jurídico), e como calcular o custo real de um caso de uso (além do preço por token: retentativa, revisão humana, manutenção).
+- Badges: 6 no total, definidos em content/badges.json (id, nome, descrição, ícone), calculados por uma função pura em lib/progresso.ts (calcularBadges), testada com 11 casos em tests/badges.test.ts, incluindo um teste que garante que o motor nunca retorna um id de badge que não existe no JSON. São eles: Primeiro passo, Semana de fogo, Trilha dominada, Mestre do prompt, Sem pendência (zerou a fila de revisão depois de já ter errado algo) e Maratonista (100 exercícios respondidos). Aparecem no mapa, numa seção "Suas conquistas", coloridos quando conquistados e apagados quando não.
+- Favicon: adicionado app/icon.svg (pendência aberta desde a Fase 1).
+
+Verificação da fase: 487 testes verdes, build ok, e percurso Playwright confirmando: T9 só abre depois de T8 concluída; nenhum badge aparece sem progresso; 5 dos 6 badges aparecem corretamente após concluir tudo até T8 com streak de 8 dias (o sexto, "Sem pendência", corretamente não aparece porque a jornada de teste não teve nenhum erro); favicon responde 200; sem scroll horizontal em 375px com a seção de badges.
 
 ### Fase 9: T8 Comparativo de IAs (concluída)
 

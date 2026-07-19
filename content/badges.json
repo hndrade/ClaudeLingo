@@ -1,0 +1,8 @@
+[
+  { "id": "primeiro-passo", "nome": "Primeiro passo", "descricao": "Concluiu a primeira lição", "icone": "🌱" },
+  { "id": "semana-de-fogo", "nome": "Semana de fogo", "descricao": "7 dias seguidos de estudo", "icone": "🔥" },
+  { "id": "trilha-dominada", "nome": "Trilha dominada", "descricao": "Concluiu todas as lições de uma trilha", "icone": "🗺️" },
+  { "id": "mestre-do-prompt", "nome": "Mestre do prompt", "descricao": "Concluiu toda a trilha de prompt engineering", "icone": "🎯" },
+  { "id": "sem-pendencia", "nome": "Sem pendência", "descricao": "Zerou a fila de revisão depois de já ter errado algo", "icone": "✅" },
+  { "id": "maratonista", "nome": "Maratonista", "descricao": "Respondeu 100 exercícios", "icone": "🏃" }
+]

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
+  calcularBadges,
   carregarProgresso,
   errosVencidos,
   hojeLocal,
@@ -13,6 +14,7 @@ import {
   trilhaLiberada,
   type Progresso,
 } from "@/lib/progresso";
+import badgesData from "@/content/badges.json";
 
 export type DadosMapa = {
   trilhas: {
@@ -101,6 +103,7 @@ export default function Mapa({ dados }: { dados: DadosMapa }) {
   // quando as anteriores foram concluídas; dentro dela, a escada de 80% define
   // até que nível as lições ficam disponíveis.
   const idsTrilhas = dados.trilhas.map((t) => ({ id: t.id, licoes: t.licoes.map((l) => l.id) }));
+  const badgesConquistados = new Set(calcularBadges(progresso, idsTrilhas));
   let idx = 0;
   const trilhas = dados.trilhas.map((t) => {
     const liberada = trilhaLiberada(idsTrilhas, progresso, t.id);
@@ -202,6 +205,29 @@ export default function Mapa({ dados }: { dados: DadosMapa }) {
             ))}
           </div>
           <p className="mt-3 text-sm font-medium text-acento">{frase}</p>
+        </section>
+
+        <section className="mt-4 rounded-xl border border-tinta/10 bg-cartao p-4">
+          <h2 className="font-bold text-tinta">Suas conquistas</h2>
+          <div className="mt-3 grid grid-cols-3 gap-3">
+            {badgesData.map((b) => {
+              const conquistado = badgesConquistados.has(b.id);
+              return (
+                <div
+                  key={b.id}
+                  title={b.descricao}
+                  className={`flex flex-col items-center rounded-xl border px-2 py-3 text-center ${
+                    conquistado ? "border-acento/40 bg-acento-fundo" : "border-tinta/10 opacity-40"
+                  }`}
+                >
+                  <span className="text-2xl">{b.icone}</span>
+                  <span className={`mt-1 text-[11px] font-semibold ${conquistado ? "text-acento" : "text-tinta/60"}`}>
+                    {b.nome}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
         </section>
 
         {trilhas.map((t) => (

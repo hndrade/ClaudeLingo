@@ -173,6 +173,38 @@ export function minutosSemana(p: Progresso, hoje = hojeLocal()): { estaSemana: n
   return { estaSemana, semanaPassada };
 }
 
+export type Badge = { id: string; nome: string; descricao: string; icone: string };
+
+export type TrilhaMeta = { id: string; licoes: string[] };
+
+// Total de exercícios já respondidos (soma do total de cada conclusão de lição no histórico).
+function exerciciosRespondidos(p: Progresso): number {
+  return p.licoes.reduce((s, l) => s + l.total, 0);
+}
+
+// Calcula os ids dos badges conquistados a partir do progresso e da lista de trilhas
+// (id + lições) vinda do índice de conteúdo. Função pura, sem acesso a disco ou rede.
+export function calcularBadges(p: Progresso, trilhas: TrilhaMeta[]): string[] {
+  const feitas = licoesConcluidas(p);
+  const conquistados: string[] = [];
+
+  if (feitas.size >= 1) conquistados.push("primeiro-passo");
+  if (p.streak.atual >= 7) conquistados.push("semana-de-fogo");
+  if (trilhas.some((t) => t.licoes.length > 0 && t.licoes.every((id) => feitas.has(id)))) {
+    conquistados.push("trilha-dominada");
+  }
+  const prompt = trilhas.find((t) => t.id === "prompt");
+  if (prompt && prompt.licoes.length > 0 && prompt.licoes.every((id) => feitas.has(id))) {
+    conquistados.push("mestre-do-prompt");
+  }
+  if (p.erros.length === 0 && p.licoes.some((l) => l.acertos < l.total)) {
+    conquistados.push("sem-pendencia");
+  }
+  if (exerciciosRespondidos(p) >= 100) conquistados.push("maratonista");
+
+  return conquistados;
+}
+
 export async function carregarProgresso(): Promise<Progresso> {
   const r = await fetch("/api/progresso");
   return r.json();

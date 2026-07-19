@@ -160,7 +160,14 @@
       "id": "avaliacao",
       "nome": "T9. Avaliação, custo e risco",
       "descricao": "Evals, red teaming, prompt injection, LGPD e custo por caso de uso.",
-      "licoes": []
+      "licoes": [
+        "avaliacao-01-como-montar-um-eval",
+        "avaliacao-02-por-que-benchmark-publico-engana",
+        "avaliacao-03-red-teaming-e-prompt-injection",
+        "avaliacao-04-dados-sensiveis-o-que-nao-colar",
+        "avaliacao-05-lgpd-uso-corporativo",
+        "avaliacao-06-custo-real-de-um-caso-de-uso"
+      ]
     }
   ]
 }

@@ -1,0 +1,75 @@
+{
+  "id": "fund-04-tokens",
+  "trilha": "fundamentos",
+  "titulo": "Tokens: a unidade que o modelo realmente lê",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "conceito": "O modelo não lê letra por letra nem palavra por palavra: ele lê tokens, pedaços de texto que podem ser uma palavra inteira, um pedaço dela, ou até um espaço.\n\nIsso importa porque o limite de contexto e o custo são medidos em tokens, não em palavras. Uma palavra rara ou uma palavra em português pode virar mais de um token.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que é impreciso pensar 'esse limite é de tantas mil palavras'?",
+      "alternativas": [
+        {
+          "texto": "Porque o limite é medido em tokens, e uma palavra pode virar um ou mais tokens, dependendo do idioma e da raridade da palavra.",
+          "correta": true,
+          "explicacao": "A unidade real é o token, não a palavra. A contagem de palavras é só uma aproximação, às vezes bem imprecisa."
+        },
+        {
+          "texto": "Porque o limite é medido em letras, não em palavras.",
+          "correta": false,
+          "explicacao": "A unidade também não é a letra. É o token, que geralmente agrupa mais de uma letra."
+        },
+        {
+          "texto": "Porque não existe limite algum, é só uma lenda.",
+          "correta": false,
+          "explicacao": "O limite existe e é real, medido em tokens. Ignorá-lo causa erro de janela de contexto estourada."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a frase sobre a unidade real de leitura do modelo.",
+      "texto": "O custo e o limite de contexto de um modelo são medidos em ___, não em palavras.",
+      "opcoes": [
+        {
+          "texto": "tokens",
+          "correta": true,
+          "explicacao": "Token é a unidade real. Palavra é só uma aproximação prática que às vezes engana, principalmente em português."
+        },
+        {
+          "texto": "frases",
+          "correta": false,
+          "explicacao": "Frase é uma unidade grande demais e variável; não é a unidade que o modelo processa."
+        },
+        {
+          "texto": "letras",
+          "correta": false,
+          "explicacao": "Letra é uma unidade menor demais; o token geralmente agrupa várias letras."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Lucas, área de dados.** Monta um prompt contando 'palavras' para caber no limite do modelo, e mesmo assim recebe um erro de limite excedido. Por quê?",
+      "alternativas": [
+        {
+          "texto": "Porque o limite real é em tokens, e o texto dele (com termos técnicos e talvez em português) provavelmente gerou mais tokens do que palavras.",
+          "melhor": true,
+          "feedback": "Exatamente essa é a armadilha: contar palavras não é o mesmo que contar tokens, e a diferença pode ser grande o suficiente para estourar o limite."
+        },
+        {
+          "texto": "Porque o sistema está com bug e ele deveria reclamar com o suporte.",
+          "melhor": false,
+          "feedback": "Não é bug, é a diferença normal entre contagem de palavras e contagem de tokens. Entender isso evita o erro."
+        },
+        {
+          "texto": "Porque tokens e palavras são exatamente a mesma coisa e o erro deve ser de outra causa.",
+          "melhor": false,
+          "feedback": "Tokens e palavras não são a mesma coisa; essa é justamente a causa mais provável do erro."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "id": "llm-02-temperatura-determinismo",
+  "trilha": "llm",
+  "titulo": "Temperatura e por que a mesma pergunta pode gerar respostas diferentes",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "conceito": "Temperatura controla o quanto o modelo varia entre respostas possíveis: temperatura baixa favorece a opção mais provável (mais previsível), temperatura alta permite mais variação (mais criativo, mas menos consistente).\n\nMesmo com a mesma pergunta e mesma temperatura, o resultado pode não ser idêntico de uma vez para outra: o modelo não é totalmente determinístico por padrão.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Para extrair um dado estruturado de uma nota fiscal, com pouca margem para variação, qual configuração de temperatura faz mais sentido?",
+      "alternativas": [
+        {
+          "texto": "Temperatura baixa, para favorecer a resposta mais previsível e consistente.",
+          "correta": true,
+          "explicacao": "Extração de dado estruturado quer consistência, não criatividade. Temperatura baixa reduz a variação entre execuções."
+        },
+        {
+          "texto": "Temperatura alta, para o modelo ser mais criativo com os números.",
+          "correta": false,
+          "explicacao": "Criatividade é indesejável aqui: você quer o mesmo número extraído de forma confiável, não variações inventivas."
+        },
+        {
+          "texto": "Temperatura não faz diferença nenhuma para esse tipo de tarefa.",
+          "correta": false,
+          "explicacao": "Faz diferença sim: temperatura mais baixa reduz a variação da resposta, o que ajuda tarefas que exigem consistência."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie o conceito com sua característica.",
+      "pares": [
+        { "conceito": "Temperatura baixa", "definicao": "Favorece a opção mais provável, resposta mais previsível" },
+        { "conceito": "Temperatura alta", "definicao": "Permite mais variação, resposta mais criativa e menos consistente" },
+        { "conceito": "Determinismo", "definicao": "Mesma entrada sempre gerar exatamente a mesma saída, o que não é garantido por padrão" }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Rafael, área de marketing.** Quer gerar variações criativas de slogan para testar ideias diferentes. Qual configuração de temperatura ajuda mais nesse objetivo?",
+      "alternativas": [
+        {
+          "texto": "Temperatura mais alta, já que o objetivo é variedade e ideias diferentes entre si.",
+          "melhor": true,
+          "feedback": "Quando o objetivo é variedade criativa, temperatura mais alta ajuda a explorar opções diferentes em vez de convergir sempre para a mais óbvia."
+        },
+        {
+          "texto": "Temperatura zero, para garantir que todas as variações sejam idênticas.",
+          "melhor": false,
+          "feedback": "Temperatura muito baixa tende a produzir respostas parecidas entre si, o oposto do que Rafael quer ao testar variações."
+        },
+        {
+          "texto": "A temperatura não influencia a criatividade das respostas.",
+          "melhor": false,
+          "feedback": "Influencia sim: é justamente o parâmetro que controla o quanto o modelo se afasta da opção mais óbvia."
+        }
+      ]
+    }
+  ]
+}

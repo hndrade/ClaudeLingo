@@ -30,3 +30,11 @@ Pensamentos de execução. Curto, bruto, cronológico. Não é documentação.
 - "0 arquivos listados" no script foi corrida de timing pos-navegacao; checagem direta confirmou os 8 links corretos na pagina.
 - Nao consigo testar os .md contra uma Claude de verdade aqui (sem acesso a API). Verificacao ficou estrutural. Registrado como limitacao no README.
 - 276 testes verdes.
+
+## 2026-07-19 (Fase 7)
+- T1 (6) + T2 (6) + T3 (5) = 17 licoes. Escrevi tudo eu mesmo de novo, sem subagentes.
+- Usei WebSearch + WebFetch de verdade para T3: platform.claude.com/docs (modelos + skills), code.claude.com/docs (Claude Code), anthropic.com/news e support.claude.com (Projects/Artifacts/Cowork). anthropic.com/product e anthropic.com/pricing deram 403 direto via WebFetch, mas o WebSearch sintetizou com boa citação; prioritizei os fetches que funcionaram (platform.claude.com, code.claude.com) como fonte principal.
+- Peguei a tabela oficial de precos/contexto/data de corte de Fable 5, Opus 4.8, Sonnet 5, Haiku 4.5 direto da doc. verificado_em: 2026-07-19 (data de hoje).
+- Decisao de escopo: T1-T3 usam nivel 1-2, nao a escada completa 1-5. Sao conceituais, "construir do zero" nao faz sentido pra "o que e um token". Registrado no README como corte deliberado.
+- Efeito colateral esperado (nao bug): agora que T1-T3 tem conteudo, a trilha "trilhaLiberada" passa a bloquear T4 de verdade ate completar as 3 anteriores. O motor ja suportava isso desde a Fase 2, so nao era visivel porque T1-T3 estavam vazias. Verificado com script: bloqueia sem progresso, libera apos concluir T1+T2+T3.
+- 344 testes verdes, build ok, sem scroll horizontal no mapa (agora bem mais longo).

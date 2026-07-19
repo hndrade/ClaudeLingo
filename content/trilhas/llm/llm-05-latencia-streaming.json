@@ -1,0 +1,62 @@
+{
+  "id": "llm-05-latencia-streaming",
+  "trilha": "llm",
+  "titulo": "Latência e streaming: por que a resposta aparece aos poucos",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "conceito": "Latência é o tempo entre o pedido e a resposta começar a aparecer; modelos maiores e respostas mais longas costumam demorar mais. Streaming é a técnica de mostrar a resposta token a token, à medida que é gerada, em vez de esperar tudo pronto.\n\nStreaming não deixa o modelo mais rápido de verdade, mas reduz a sensação de espera de quem está lendo.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "O que o streaming realmente muda no tempo total de geração da resposta?",
+      "alternativas": [
+        {
+          "texto": "Nada no tempo total; ele muda a experiência de espera, mostrando o texto aos poucos em vez de tudo de uma vez no final.",
+          "correta": true,
+          "explicacao": "O tempo total de geração continua o mesmo; o que melhora é a percepção, porque você já começa a ler antes de tudo terminar."
+        },
+        {
+          "texto": "Streaming faz o modelo gerar o texto duas vezes mais rápido.",
+          "correta": false,
+          "explicacao": "Streaming não acelera a geração em si, só muda a forma como o resultado é entregue e exibido."
+        },
+        {
+          "texto": "Streaming elimina completamente a latência.",
+          "correta": false,
+          "explicacao": "Ainda existe o tempo até o primeiro token aparecer; streaming reduz a sensação de espera, não a elimina."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie o termo com sua definição.",
+      "pares": [
+        { "conceito": "Latência", "definicao": "Tempo entre o pedido e a resposta começar a aparecer" },
+        { "conceito": "Streaming", "definicao": "Mostrar a resposta token a token, à medida que é gerada" },
+        { "conceito": "Tempo total de geração", "definicao": "Não muda com o streaming, só a forma de exibição muda" }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Carla, área de RH.** Está construindo um assistente interno e precisa decidir se ativa streaming na resposta. Para um assistente de chat interativo, isso costuma valer a pena?",
+      "alternativas": [
+        {
+          "texto": "Sim: para conversas interativas, ver o texto aparecendo aos poucos melhora a sensação de resposta rápida, mesmo sem mudar o tempo total.",
+          "melhor": true,
+          "feedback": "Streaming é especialmente útil em chat interativo, onde a percepção de velocidade importa tanto quanto o tempo real."
+        },
+        {
+          "texto": "Não, streaming sempre atrapalha porque deixa o texto mais lento de gerar.",
+          "melhor": false,
+          "feedback": "Streaming não deixa a geração mais lenta; ele só muda como o resultado é exibido enquanto é gerado."
+        },
+        {
+          "texto": "Streaming só serve para vídeo, não tem aplicação em texto.",
+          "melhor": false,
+          "feedback": "Streaming de texto é uma técnica comum e amplamente usada em assistentes de chat, não é exclusiva de vídeo."
+        }
+      ]
+    }
+  ]
+}

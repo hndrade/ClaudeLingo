@@ -1,0 +1,62 @@
+{
+  "id": "fund-03-transformer",
+  "trilha": "fundamentos",
+  "titulo": "O que o transformer resolve",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "conceito": "Antes do transformer, modelos liam texto em sequência, palavra por palavra, e tendiam a esquecer o começo quando o texto era longo. O transformer usa 'atenção': cada palavra pode olhar diretamente para qualquer outra palavra do texto ao mesmo tempo, não só para a vizinha.\n\nIsso permite processar textos longos em paralelo e captar relação entre palavras distantes no texto.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Qual é o principal problema que o mecanismo de atenção do transformer ajuda a resolver?",
+      "alternativas": [
+        {
+          "texto": "A dificuldade de conectar palavras distantes num texto longo, que modelos sequenciais anteriores perdiam.",
+          "correta": true,
+          "explicacao": "É essa a vantagem central: cada palavra pode se relacionar diretamente com qualquer outra, mesmo em textos longos."
+        },
+        {
+          "texto": "A necessidade de traduzir texto para outro idioma antes de processar.",
+          "correta": false,
+          "explicacao": "Tradução não é o problema que a atenção resolve; é uma tarefa que se beneficia dela, entre várias outras."
+        },
+        {
+          "texto": "O tamanho do teclado usado para digitar o texto.",
+          "correta": false,
+          "explicacao": "Isso não tem relação com como o modelo processa o texto internamente."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Henrique, área jurídica.** Precisa que a IA relacione uma cláusula do início de um contrato de 40 páginas com uma exceção mencionada só no final. Por que isso é viável com um modelo baseado em transformer?",
+      "alternativas": [
+        {
+          "texto": "Porque o transformer consegue relacionar diretamente partes distantes do texto através da atenção, sem depender só da proximidade.",
+          "melhor": true,
+          "feedback": "Exatamente o ponto forte da arquitetura: atenção conecta início e fim do documento diretamente, dentro do limite de contexto do modelo."
+        },
+        {
+          "texto": "Porque o modelo lê o contrato de trás para frente primeiro.",
+          "melhor": false,
+          "feedback": "A ordem de leitura literal não é o mecanismo; é a atenção simultânea entre todas as partes do texto que permite a conexão."
+        },
+        {
+          "texto": "Porque contratos jurídicos têm um formato especial que facilita a leitura.",
+          "melhor": false,
+          "feedback": "O formato do documento não é o que resolve a conexão entre partes distantes; é a arquitetura do modelo."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie o conceito com sua característica.",
+      "pares": [
+        { "conceito": "Atenção", "definicao": "Permite relacionar qualquer palavra com qualquer outra do texto" },
+        { "conceito": "Processamento em paralelo", "definicao": "Deixa o texto ser processado todo de uma vez, não palavra por palavra" },
+        { "conceito": "Modelo sequencial antigo", "definicao": "Tendia a perder informação de início do texto em textos longos" }
+      ]
+    }
+  ]
+}

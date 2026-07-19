@@ -1,0 +1,66 @@
+{
+  "id": "claude-03-skills",
+  "trilha": "claude",
+  "titulo": "Skills: capacidade empacotada que dispara sozinha",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "verificado_em": "2026-07-19",
+  "fontes": ["https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview"],
+  "conceito": "Uma Skill é uma pasta com um arquivo SKILL.md e, opcionalmente, scripts e materiais de referência. No início da sessão, só o nome e a descrição de cada Skill entram em contexto.\n\nQuando o pedido combina com a descrição, o restante da Skill é lido automaticamente. Isso permite ter muitas Skills instaladas sem custo de contexto até que uma delas seja realmente usada.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que é possível ter dezenas de Skills instaladas sem que isso pese no contexto de toda conversa?",
+      "alternativas": [
+        {
+          "texto": "Porque só o nome e a descrição de cada Skill carregam sempre; o conteúdo completo só entra em contexto quando a Skill é de fato acionada.",
+          "correta": true,
+          "explicacao": "Esse carregamento em camadas é o que permite escalar o número de Skills instaladas sem custo de contexto proporcional."
+        },
+        {
+          "texto": "Porque as Skills são armazenadas fora do modelo e nunca entram em contexto.",
+          "correta": false,
+          "explicacao": "Elas entram em contexto sim, quando acionadas; a metadados (nome e descrição) é o que fica sempre carregado, em baixo custo."
+        },
+        {
+          "texto": "Porque o modelo só pode ter uma Skill instalada por vez.",
+          "correta": false,
+          "explicacao": "É possível ter várias Skills instaladas ao mesmo tempo; o carregamento em camadas é o que torna isso viável sem custo alto."
+        }
+      ]
+    },
+    {
+      "tipo": "ordenacao",
+      "enunciado": "Ordene o que entra em contexto, do que sempre carrega para o que só carrega por último se necessário.",
+      "etapas": [
+        "O nome e a descrição da Skill, carregados desde o início da sessão",
+        "O corpo do arquivo SKILL.md, lido quando o pedido combina com a descrição",
+        "Arquivos de referência adicionais, lidos só se as instruções mencionarem eles",
+        "Scripts executáveis, cujo código não entra em contexto, só a saída da execução"
+      ],
+      "explicacao": "O carregamento é em camadas: primeiro só o essencial para identificar se a Skill se aplica, depois a instrução principal, e por último os materiais mais específicos, só quando referenciados."
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Sônia, área de operações.** Quer que, toda vez que alguém pedir 'documenta esse procedimento', o formato saia sempre igual, sem precisar colar instrução nenhuma. Qual mecanismo é o mais adequado?",
+      "alternativas": [
+        {
+          "texto": "Colar o formato completo manualmente toda vez que alguém do time pedir.",
+          "melhor": false,
+          "feedback": "Funciona, mas depende de alguém lembrar de colar a instrução toda vez, o que não escala nem é automático."
+        },
+        {
+          "texto": "Criar uma Skill com descrição que reconhece o pedido de documentar procedimento e aplica o formato automaticamente.",
+          "melhor": true,
+          "feedback": "Esse é o caso de uso de uma Skill: reconhece o contexto pela descrição e aplica a instrução sozinha, sem depender de alguém colar nada."
+        },
+        {
+          "texto": "Pedir para cada pessoa do time decorar o formato de memória.",
+          "melhor": false,
+          "feedback": "Memória humana deriva com o tempo. É exatamente o tipo de problema que uma Skill, sendo um ativo automático, resolve melhor."
+        }
+      ]
+    }
+  ]
+}

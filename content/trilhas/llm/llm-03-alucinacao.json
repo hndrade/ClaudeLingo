@@ -1,0 +1,75 @@
+{
+  "id": "llm-03-alucinacao",
+  "trilha": "llm",
+  "titulo": "Alucinação: por que o modelo inventa com confiança",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "conceito": "O modelo gera a palavra estatisticamente mais provável a seguir; ele não consulta um banco de fatos para confirmar antes de responder. Quando o assunto foge do que ele viu no treino, ou falta contexto, ele preenche a lacuna com algo plausível.\n\nE apresenta isso com a mesma confiança de um fato correto. Isso não é uma falha ocasional, é consequência de como o modelo gera texto.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que uma alucinação do modelo pode soar tão convincente quanto um fato correto?",
+      "alternativas": [
+        {
+          "texto": "Porque o modelo gera texto plausível pela estrutura da linguagem, sem sinalizar internamente se está certo do fato ou preenchendo uma lacuna.",
+          "correta": true,
+          "explicacao": "O tom de confiança vem do estilo da resposta, não de uma verificação de veracidade que o modelo tenha feito."
+        },
+        {
+          "texto": "Porque o modelo sabe que está mentindo e escolhe fazer isso de propósito.",
+          "correta": false,
+          "explicacao": "Não é intenção deliberada; é consequência de como o texto é gerado, sem checagem de fato embutida."
+        },
+        {
+          "texto": "Porque alucinação só acontece quando o usuário pede explicitamente uma mentira.",
+          "correta": false,
+          "explicacao": "Alucinação pode acontecer mesmo em pedidos honestos e diretos, sempre que falta base sólida no que foi treinado ou fornecido."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Henrique, área jurídica.** Recebe do modelo a citação de uma lei específica, com número de artigo, e a usa direto num documento sem checar. Qual é o risco?",
+      "alternativas": [
+        {
+          "texto": "O número do artigo pode ser uma alucinação plausível, e usar sem checar pode levar um dado falso para um documento oficial.",
+          "melhor": true,
+          "feedback": "Exatamente o risco: uma citação com número específico soa precisa, mas pode ser inventada. Checar contra a fonte real é obrigatório."
+        },
+        {
+          "texto": "Nenhum risco, porque modelos de linguagem sempre citam leis corretamente.",
+          "melhor": false,
+          "feedback": "Não existe essa garantia. Números e citações específicas são justamente onde a alucinação costuma aparecer com mais confiança."
+        },
+        {
+          "texto": "O risco só existiria se a pergunta tivesse sido feita de forma rude.",
+          "melhor": false,
+          "feedback": "Tom da pergunta não influencia a chance de alucinação. O risco vem da natureza do dado (fato específico e verificável), não da educação do pedido."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a prática que reduz o risco de levar uma alucinação para um documento importante.",
+      "texto": "Todo fato específico e verificável (número, citação, dado) que o modelo fornecer deve ser ___ antes de virar parte de um documento oficial.",
+      "opcoes": [
+        {
+          "texto": "conferido na fonte original",
+          "correta": true,
+          "explicacao": "A única forma confiável de neutralizar o risco de alucinação em fato específico é checar contra a fonte real, não confiar na confiança do tom da resposta."
+        },
+        {
+          "texto": "reformulado com outras palavras",
+          "correta": false,
+          "explicacao": "Reformular não corrige um fato inventado, só muda a redação de algo que pode continuar errado."
+        },
+        {
+          "texto": "perguntado de novo ao mesmo modelo",
+          "correta": false,
+          "explicacao": "Perguntar de novo ao mesmo modelo pode repetir a mesma alucinação com a mesma confiança. Conferir na fonte é o que resolve."
+        }
+      ]
+    }
+  ]
+}

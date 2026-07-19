@@ -4,19 +4,39 @@
       "id": "fundamentos",
       "nome": "T1. Fundamentos de IA",
       "descricao": "Machine learning, transformer, tokens e embeddings em linguagem humana.",
-      "licoes": []
+      "licoes": [
+        "fund-01-machine-learning",
+        "fund-02-redes-neurais",
+        "fund-03-transformer",
+        "fund-04-tokens",
+        "fund-05-embeddings",
+        "fund-06-treino-inferencia-data-corte"
+      ]
     },
     {
       "id": "llm",
       "nome": "T2. LLM 101",
       "descricao": "Janela de contexto, temperatura, alucinação, custo e latência.",
-      "licoes": []
+      "licoes": [
+        "llm-01-janela-contexto",
+        "llm-02-temperatura-determinismo",
+        "llm-03-alucinacao",
+        "llm-04-custo-por-token",
+        "llm-05-latencia-streaming",
+        "llm-06-o-que-nao-sabe-de-si"
+      ]
     },
     {
       "id": "claude",
       "nome": "T3. Claude 101",
       "descricao": "Família de modelos, Projects, Artifacts, Skills e quando NÃO usar Claude.",
-      "licoes": []
+      "licoes": [
+        "claude-01-familia-modelos",
+        "claude-02-projects-artifacts",
+        "claude-03-skills",
+        "claude-04-code-cowork",
+        "claude-05-quando-nao-usar"
+      ]
     },
     {
       "id": "prompt",

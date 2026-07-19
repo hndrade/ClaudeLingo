@@ -45,6 +45,19 @@ Pedidos do dono do projeto, implementados fora da ordem original das fases:
 
 Verificação: percurso completo via Playwright em 375x667, modos claro e escuro: onboarding, mapa, lição inteira, popup, repescagem, persistência em disco conferida no JSON.
 
+### Fase 7: T1, T2, T3 (concluída)
+
+Feito:
+
+- T1. Fundamentos de IA: 6 lições (nível 1, conteúdo atemporal, sem verificado_em): machine learning, redes neurais, transformer, tokens, embeddings, treino/inferência/data de corte.
+- T2. LLM 101: 6 lições (nível 1, atemporal): janela de contexto, temperatura e determinismo, alucinação, custo por token, latência e streaming, o que o modelo não sabe sobre si mesmo. Onde um preço aparece, está marcado como fictício, sem citar valor real de mercado.
+- T3. Claude 101: 5 lições (níveis 1-2), com verificado_em: 2026-07-19 e fontes reais pesquisadas nas fontes primárias da Anthropic: família de modelos (platform.claude.com/docs, tabela oficial de modelos e preços), Projects e Artifacts (anthropic.com/news/projects, support.claude.com), Skills (platform.claude.com/docs, arquitetura de carregamento em camadas), Claude Code e Cowork (code.claude.com/docs, anthropic.com/product/claude-cowork), e quando NÃO usar Claude (sem fonte: é julgamento pedagógico, não fato datável).
+- Escada de trilhas passou a valer de verdade: como T1, T2 e T3 agora têm conteúdo, a trilha T4 (prompt engineering) fica bloqueada até as três anteriores serem concluídas, seguindo a regra "trilha destrava trilha" da spec. Isso muda o comportamento em runtime (verificado em teste), sem exigir nenhuma mudança de código no motor de progresso, que já suportava a regra desde a Fase 2.
+
+Verificação da fase: 344 testes verdes, build ok, e um script Playwright que confirma o novo bloqueio (T4 inacessível sem T1-T3, abre depois de concluídas) e que o mapa, agora bem mais longo, continua sem scroll horizontal e sem erro de página em 375px.
+
+Decisão de escopo registrada: para T1-T3 usei majoritariamente nível 1 (Reconhecer) com um pouco de nível 2 em T3, em vez de forçar a escada completa de 5 níveis (Reconhecer a Sistematizar) elaborada para prompt engineering. Esses conteúdos são conceituais, não de construção de prompt, então "consertar" e "construir do zero" não se aplicam bem; achei que forçar a escada completa aqui seria abstração superdimensionada para o tipo de conteúdo. Detalhado em NOTAS.md.
+
 ### Fase 6: bloco 4D + biblioteca de .md baixável (concluída)
 
 Feito:

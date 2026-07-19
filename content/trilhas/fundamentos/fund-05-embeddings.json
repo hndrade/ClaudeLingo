@@ -1,0 +1,62 @@
+{
+  "id": "fund-05-embeddings",
+  "trilha": "fundamentos",
+  "titulo": "Embeddings: transformar significado em número",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "conceito": "Um embedding é uma lista de números que representa o significado de um texto num espaço matemático. Textos com sentido parecido ficam com números parecidos, então dá para medir 'distância de significado' com matemática, sem reler o texto.\n\nÉ a base da busca semântica: achar o texto mais parecido em significado, não só em palavra igual.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "O que torna a busca semântica diferente de uma busca por palavra exata?",
+      "alternativas": [
+        {
+          "texto": "A busca semântica encontra textos com significado parecido, mesmo que não compartilhem as mesmas palavras.",
+          "correta": true,
+          "explicacao": "É essa a vantagem: 'atraso na entrega' pode encontrar 'chegou depois do prazo', porque o significado é próximo, mesmo com palavras diferentes."
+        },
+        {
+          "texto": "A busca semântica é mais rápida porque ignora acentuação.",
+          "correta": false,
+          "explicacao": "Ignorar acentuação é um truque de busca por texto, não tem relação com a ideia de embedding e significado."
+        },
+        {
+          "texto": "A busca semântica só funciona em inglês.",
+          "correta": false,
+          "explicacao": "Embeddings existem para vários idiomas; a técnica não é limitada ao inglês."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie o termo com sua definição.",
+      "pares": [
+        { "conceito": "Embedding", "definicao": "Lista de números que representa o significado de um texto" },
+        { "conceito": "Busca semântica", "definicao": "Encontrar o texto mais parecido em significado, não em palavra exata" },
+        { "conceito": "Distância entre embeddings", "definicao": "Medida matemática de quão parecido é o significado de dois textos" }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Ana, área de atendimento.** Busca por 'atraso na entrega' num sistema com busca semântica e o resultado inclui um ticket que diz 'o pedido chegou bem depois do combinado', sem usar a palavra atraso. Por que isso acontece?",
+      "alternativas": [
+        {
+          "texto": "O sistema comparou o significado dos textos via embeddings, e os dois têm significado próximo mesmo com palavras diferentes.",
+          "melhor": true,
+          "feedback": "Exatamente isso: a busca semântica encontra proximidade de significado, não coincidência literal de palavra."
+        },
+        {
+          "texto": "O sistema teve um erro e trouxe um resultado aleatório.",
+          "melhor": false,
+          "feedback": "Não é erro, é o comportamento esperado de uma busca baseada em embeddings, que olha significado e não só a palavra exata."
+        },
+        {
+          "texto": "Alguém cadastrou manualmente esse ticket como sinônimo de atraso.",
+          "melhor": false,
+          "feedback": "Não é necessário cadastro manual de sinônimo; o embedding já captura a proximidade de significado automaticamente."
+        }
+      ]
+    }
+  ]
+}

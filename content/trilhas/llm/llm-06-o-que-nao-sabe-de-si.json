@@ -1,0 +1,75 @@
+{
+  "id": "llm-06-o-que-nao-sabe-de-si",
+  "trilha": "llm",
+  "titulo": "O que o modelo não sabe sobre si mesmo",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "conceito": "O modelo não tem acesso direto aos próprios pesos, nem certeza sobre a própria arquitetura ou data de corte exata, a menos que essa informação esteja documentada no texto que ele viu no treino. Perguntado sobre si mesmo, ele pode responder com a mesma confiança de sempre e ainda assim errar.\n\nPara fatos sobre a ferramenta que você usa, confie na documentação oficial, não na autodescrição do modelo.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que a resposta de um modelo sobre 'qual é o seu limite de contexto' pode estar errada?",
+      "alternativas": [
+        {
+          "texto": "Porque o modelo não tem acesso direto e confiável aos próprios parâmetros técnicos; ele responde com base em padrões de texto, podendo errar como em qualquer outro assunto.",
+          "correta": true,
+          "explicacao": "Autodescrição não é diferente de qualquer outra pergunta para o modelo: sujeita ao mesmo risco de erro e alucinação."
+        },
+        {
+          "texto": "Porque o modelo é proibido de falar sobre si mesmo.",
+          "correta": false,
+          "explicacao": "Não há uma proibição geral; o problema é a confiabilidade da resposta, não uma restrição de falar sobre o tema."
+        },
+        {
+          "texto": "Porque essa pergunta trava o sistema.",
+          "correta": false,
+          "explicacao": "A pergunta não trava nada; ela só pode gerar uma resposta imprecisa, como qualquer outro tópico sujeito a erro."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Paula, área de atendimento.** Pergunta ao chat 'qual é o seu limite de contexto' e recebe um número. Ela usa esse número para planejar quanto texto pode colar. O que ela deveria ter feito?",
+      "alternativas": [
+        {
+          "texto": "Checar o número na documentação oficial do modelo, em vez de confiar na resposta que o próprio modelo deu sobre si mesmo.",
+          "melhor": true,
+          "feedback": "Fatos técnicos sobre a ferramenta (limite de contexto, preço, data de corte) devem vir da documentação oficial, que é atualizada e verificável, não da autodescrição do modelo."
+        },
+        {
+          "texto": "Confiar no número, já que o modelo com certeza sabe tudo sobre si mesmo.",
+          "melhor": false,
+          "feedback": "Essa confiança é o próprio risco descrito na lição: o modelo pode errar sobre si mesmo como sobre qualquer outro assunto."
+        },
+        {
+          "texto": "Perguntar de novo em maiúsculas para garantir uma resposta mais precisa.",
+          "melhor": false,
+          "feedback": "Formatação da pergunta não aumenta a confiabilidade da resposta sobre um fato técnico específico. A fonte confiável é a documentação."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a prática correta para obter um fato técnico confiável sobre um modelo.",
+      "texto": "Para saber o limite de contexto real de um modelo, consulte a ___ oficial, não a resposta do próprio modelo sobre si mesmo.",
+      "opcoes": [
+        {
+          "texto": "documentação",
+          "correta": true,
+          "explicacao": "Documentação oficial é a fonte confiável e atualizável para fatos técnicos, diferente da autodescrição do modelo, sujeita a erro."
+        },
+        {
+          "texto": "intuição",
+          "correta": false,
+          "explicacao": "Intuição não é uma fonte verificável de fato técnico específico."
+        },
+        {
+          "texto": "opinião de colegas",
+          "correta": false,
+          "explicacao": "Opinião de colegas pode estar desatualizada; a fonte confiável para um fato técnico específico é a documentação oficial."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "id": "rag-05-avaliacao-recall-precision",
+  "trilha": "rag",
+  "titulo": "Avaliação: recall vs precision",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "conceito": "Recall mede se o sistema achou tudo que era relevante: um recall baixo significa que informação importante ficou de fora da busca. Precision mede se o que foi trazido é realmente relevante: uma precision baixa significa muito lixo misturado no que foi recuperado.\n\nOs dois têm tensão entre si: buscar mais candidatos tende a subir o recall e derrubar a precision, e vice-versa. Um bom sistema de RAG precisa medir os dois, não só um.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Um sistema de RAG tem recall alto mas precision baixa. O que isso significa na prática?",
+      "alternativas": [
+        {
+          "texto": "Ele geralmente encontra a informação relevante, mas traz junto muito conteúdo que não é relevante, misturado no meio.",
+          "correta": true,
+          "explicacao": "Recall alto: a informação certa costuma estar lá dentro. Precision baixa: vem acompanhada de bastante ruído irrelevante."
+        },
+        {
+          "texto": "Ele nunca encontra a informação relevante.",
+          "correta": false,
+          "explicacao": "Isso descreveria recall baixo, não alto. Recall alto significa que a informação relevante costuma ser encontrada."
+        },
+        {
+          "texto": "Ele é perfeito e não precisa de ajuste.",
+          "correta": false,
+          "explicacao": "Precision baixa é um problema real: o modelo recebe ruído junto com o sinal, o que pode prejudicar a qualidade da resposta final."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Lucas, área de dados.** Precisa decidir quantos chunks buscar para cada pergunta num sistema jurídico, onde perder uma cláusula relevante é mais grave que trazer um pouco de ruído extra. Qual prioridade faz mais sentido?",
+      "alternativas": [
+        {
+          "texto": "Priorizar recall alto, mesmo que isso reduza um pouco a precision, já que o custo de perder informação relevante é maior aqui.",
+          "melhor": true,
+          "feedback": "Quando o custo de perder algo importante é alto (como uma cláusula jurídica relevante), vale a pena aceitar mais ruído em troca de não deixar nada de fora."
+        },
+        {
+          "texto": "Priorizar precision ao máximo, mesmo que isso signifique deixar cláusulas relevantes de fora.",
+          "melhor": false,
+          "feedback": "Nesse contexto específico, perder uma cláusula relevante é mais grave que ter um pouco de ruído; priorizar só precision pode causar exatamente esse dano."
+        },
+        {
+          "texto": "Recall e precision não importam, o que importa é a velocidade da busca.",
+          "melhor": false,
+          "feedback": "Velocidade é relevante, mas não substitui a avaliação de qualidade: um sistema rápido que perde informação relevante ainda tem um problema sério."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a definição de precision.",
+      "texto": "Precision mede se o que foi ___ pela busca é realmente relevante para a pergunta.",
+      "opcoes": [
+        {
+          "texto": "recuperado",
+          "correta": true,
+          "explicacao": "Precision avalia a qualidade do que foi trazido: entre tudo que a busca recuperou, quanto realmente era relevante."
+        },
+        {
+          "texto": "apagado",
+          "correta": false,
+          "explicacao": "Precision não mede o que foi apagado; mede a relevância do que foi efetivamente recuperado."
+        },
+        {
+          "texto": "treinado",
+          "correta": false,
+          "explicacao": "Precision é uma métrica de avaliação da busca, não do treino do modelo."
+        }
+      ]
+    }
+  ]
+}

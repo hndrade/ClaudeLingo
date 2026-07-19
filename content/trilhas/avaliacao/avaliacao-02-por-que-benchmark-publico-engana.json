@@ -1,0 +1,75 @@
+{
+  "id": "avaliacao-02-por-que-benchmark-publico-engana",
+  "trilha": "avaliacao",
+  "titulo": "Por que benchmark público engana",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "conceito": "Um benchmark público mede desempenho num conjunto fixo de tarefas, que não é a sua tarefa. Um modelo pode pontuar bem no benchmark e ainda assim performar mal no seu caso específico, com seus dados e seu formato.\n\nHá também o risco de contaminação: se o benchmark é público, é possível que material parecido com ele tenha entrado no treino do modelo, inflando a pontuação sem refletir capacidade real de generalizar para casos novos.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que um modelo com pontuação alta num benchmark público pode ainda assim performar mal na sua tarefa específica?",
+      "alternativas": [
+        {
+          "texto": "Porque o benchmark mede um conjunto fixo de tarefas gerais, que pode não se parecer com a sua tarefa real, seus dados e seu formato específico.",
+          "correta": true,
+          "explicacao": "Benchmark público é um proxy geral, não uma medida direta do seu caso de uso; a distância entre os dois pode ser grande."
+        },
+        {
+          "texto": "Porque benchmarks públicos são sempre fraudados por todos os fornecedores.",
+          "correta": false,
+          "explicacao": "Não é necessariamente fraude; o problema mais comum é apenas a diferença entre a tarefa do benchmark e a tarefa real do usuário."
+        },
+        {
+          "texto": "Porque pontuação de benchmark nunca tem relação nenhuma com capacidade real.",
+          "correta": false,
+          "explicacao": "Benchmark ainda dá algum sinal de capacidade geral; o ponto é que ele não substitui testar a tarefa específica que você tem."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Henrique, área jurídica.** Escolhe um modelo só porque ele tem a maior pontuação num benchmark público de raciocínio geral, sem testar em nenhum contrato real da empresa. O que ele deveria ter feito também?",
+      "alternativas": [
+        {
+          "texto": "Rodar um eval próprio, com contratos reais da empresa e critérios de acerto específicos para a tarefa jurídica, além de olhar o benchmark público.",
+          "melhor": true,
+          "feedback": "Benchmark público pode informar a decisão inicial, mas testar contra a tarefa real é o que confirma se o modelo funciona para o caso específico."
+        },
+        {
+          "texto": "Nada mais, a pontuação de benchmark já é suficiente para qualquer decisão.",
+          "melhor": false,
+          "feedback": "Benchmark sozinho não garante desempenho na tarefa real; testar com dado próprio é necessário antes de confiar no modelo para produção."
+        },
+        {
+          "texto": "Escolher o modelo mais barato, ignorando qualquer benchmark ou teste próprio.",
+          "melhor": false,
+          "feedback": "Ignorar toda avaliação, seja benchmark ou teste próprio, é pior do que usar o benchmark como sinal inicial, desde que complementado por teste real."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a explicação sobre o risco de contaminação em benchmark público.",
+      "texto": "Se o benchmark é público, material parecido com ele pode ter entrado no ___ do modelo, inflando a pontuação sem refletir capacidade real em casos novos.",
+      "opcoes": [
+        {
+          "texto": "treino",
+          "correta": true,
+          "explicacao": "Contaminação de treino é justamente isso: o modelo pode ter visto algo parecido com o teste durante o treino, o que infla artificialmente a pontuação."
+        },
+        {
+          "texto": "orçamento",
+          "correta": false,
+          "explicacao": "Orçamento não tem relação com o risco de contaminação; o problema é sobre o que entrou nos dados de treino do modelo."
+        },
+        {
+          "texto": "prompt do usuário",
+          "correta": false,
+          "explicacao": "O risco de contaminação é sobre o treino do modelo, não sobre o prompt específico que um usuário escreve depois."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "id": "claude-04-code-cowork",
+  "trilha": "claude",
+  "titulo": "Claude Code e Cowork: dois jeitos de delegar trabalho",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "verificado_em": "2026-07-19",
+  "fontes": ["https://code.claude.com/docs/en/overview", "https://www.anthropic.com/product/claude-cowork"],
+  "conceito": "Claude Code é uma ferramenta agente voltada a codificação: lê o repositório, edita arquivo, roda comando e integra com git e outras ferramentas de desenvolvimento.\n\nCowork usa uma arquitetura agente semelhante para trabalho fora de código: ler e escrever arquivos e pastas que você autoriza, executando tarefas de várias etapas do início ao fim, inclusive em agenda. A escolha certa depende se a tarefa vive em código ou em arquivos do dia a dia.",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**Beatriz, área comercial.** Quer que, toda sexta, uma planilha de pipeline seja lida e um resumo em documento seja gerado automaticamente, sem ninguém precisar abrir um editor de código. Qual ferramenta se encaixa melhor?",
+      "alternativas": [
+        {
+          "texto": "Claude Code, porque é a ferramenta mais avançada da Anthropic.",
+          "melhor": false,
+          "feedback": "Claude Code é voltado a trabalho em repositório de código; a tarefa de Beatriz é sobre planilha e documento, não sobre codificação."
+        },
+        {
+          "texto": "Cowork, porque a tarefa é sobre ler e escrever arquivos do dia a dia (planilha, documento), com repetição em agenda.",
+          "melhor": true,
+          "feedback": "Esse é justamente o perfil de tarefa para o qual o Cowork foi pensado: arquivos do cotidiano, execução de várias etapas, inclusive agendada."
+        },
+        {
+          "texto": "Nenhuma das duas serve para tarefas repetidas em agenda.",
+          "melhor": false,
+          "feedback": "Tarefas agendadas e recorrentes são justamente um dos usos citados para esse tipo de ferramenta agente."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "O que Claude Code e Cowork têm em comum, segundo a documentação oficial?",
+      "alternativas": [
+        {
+          "texto": "Os dois usam uma arquitetura agente que executa tarefas de múltiplas etapas, não só responde uma pergunta por vez.",
+          "correta": true,
+          "explicacao": "Ambos compartilham a mesma base de agente capaz de planejar e executar várias etapas, mudando o que muda é o domínio de aplicação (código vs arquivos gerais)."
+        },
+        {
+          "texto": "Os dois só funcionam dentro de um editor de código.",
+          "correta": false,
+          "explicacao": "Cowork é pensado justamente para trabalho fora de código, em arquivos e pastas do dia a dia."
+        },
+        {
+          "texto": "Os dois são a mesma ferramenta com nomes diferentes em idiomas diferentes.",
+          "correta": false,
+          "explicacao": "São produtos distintos, com focos diferentes (codificação vs trabalho geral com arquivos), ainda que compartilhem arquitetura agente."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie a necessidade com a ferramenta mais indicada.",
+      "pares": [
+        { "conceito": "Ler o repositório, editar código e abrir um pull request", "definicao": "Claude Code" },
+        { "conceito": "Ler uma pasta de planilhas e gerar um relatório em documento", "definicao": "Cowork" },
+        { "conceito": "Rodar a mesma tarefa toda semana sem ninguém acionar manualmente", "definicao": "Agendamento, disponível nos dois tipos de ferramenta agente" }
+      ]
+    }
+  ]
+}

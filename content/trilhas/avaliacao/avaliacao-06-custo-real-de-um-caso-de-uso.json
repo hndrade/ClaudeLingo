@@ -1,0 +1,64 @@
+{
+  "id": "avaliacao-06-custo-real-de-um-caso-de-uso",
+  "trilha": "avaliacao",
+  "titulo": "Calcular o custo real de um caso de uso",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "conceito": "O custo real de um caso de uso não é só volume vezes preço por token. Ele inclui retentativas quando a resposta sai errada, tempo de revisão humana quando o resultado precisa ser conferido, e o custo de manter o prompt ou o pipeline funcionando ao longo do tempo.\n\nUm caso de uso que parece barato no cálculo de tokens pode ficar caro de verdade se a taxa de erro for alta e cada erro exigir retrabalho humano.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que 'volume vezes preço por token' costuma subestimar o custo real de um caso de uso?",
+      "alternativas": [
+        {
+          "texto": "Porque não conta retentativas de casos que saem errados, nem o tempo de revisão humana necessário para conferir o resultado, que também têm custo.",
+          "correta": true,
+          "explicacao": "O custo de token é só uma parte; retrabalho e revisão humana são custos reais que o cálculo simples costuma deixar de fora."
+        },
+        {
+          "texto": "Porque o preço por token nunca está disponível publicamente.",
+          "correta": false,
+          "explicacao": "Preço por token costuma estar disponível na documentação do fornecedor; o problema é que ele sozinho não captura o custo total do processo."
+        },
+        {
+          "texto": "Porque volume nunca influencia custo total.",
+          "correta": false,
+          "explicacao": "Volume influencia sim o custo total; o ponto é que ele não é o único fator a considerar no cálculo completo."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Sônia, área de operações.** Calcula que processar 10 mil relatórios por mês custaria um valor baixo, só olhando o preço por token. Mas 15% dos relatórios saem com erro e precisam de 10 minutos de revisão humana cada. O que essa conta esqueceu?",
+      "alternativas": [
+        {
+          "texto": "O custo do tempo humano gasto revisando os 15% de relatórios com erro, que precisa ser somado ao custo de token para chegar ao custo real do processo.",
+          "melhor": true,
+          "feedback": "1500 relatórios com erro, a 10 minutos cada, é um custo de tempo humano real que precisa entrar na conta, não só o preço por token."
+        },
+        {
+          "texto": "Nada, o cálculo de token já é suficiente e completo.",
+          "melhor": false,
+          "feedback": "Ignorar 15% de retrabalho humano é justamente o tipo de custo escondido que faz o cálculo simples subestimar o custo real."
+        },
+        {
+          "texto": "O custo da eletricidade do computador de Sônia.",
+          "melhor": false,
+          "feedback": "Esse custo é irrelevante comparado ao tempo humano de revisão, que é o fator relevante esquecido no cenário."
+        }
+      ]
+    },
+    {
+      "tipo": "ordenacao",
+      "enunciado": "Ordene os componentes a somar para chegar no custo real de um caso de uso.",
+      "etapas": [
+        "Custo de token: volume de execuções vezes preço por token do modelo escolhido",
+        "Custo de retentativa: quantas execuções precisam ser refeitas por erro",
+        "Custo de revisão humana: tempo gasto conferindo ou corrigindo resultados",
+        "Custo de manutenção: tempo gasto ajustando o prompt ou pipeline ao longo do tempo"
+      ],
+      "explicacao": "O cálculo completo soma o custo direto de token com os custos indiretos de erro, revisão e manutenção contínua, que juntos formam o custo real do caso de uso."
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "id": "mcp-04-transports",
+  "trilha": "mcp",
+  "titulo": "Transports: stdio e HTTP",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "conceito": "Transport é o meio pelo qual host e server trocam mensagens. Stdio (entrada e saída padrão) é simples e rápido, indicado quando o server roda localmente, na mesma máquina do host, como um processo filho.\n\nHTTP é indicado quando o server roda remotamente, numa outra máquina ou num serviço na nuvem, acessível pela rede. A escolha do transport depende de onde o server vive, não de qual capacidade ele oferece.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Quando faz mais sentido usar stdio como transport entre host e server MCP?",
+      "alternativas": [
+        {
+          "texto": "Quando o server roda localmente, como um processo na mesma máquina do host.",
+          "correta": true,
+          "explicacao": "Stdio é indicado para comunicação local, entre processos na mesma máquina, sem precisar de rede."
+        },
+        {
+          "texto": "Quando o server está hospedado num serviço de nuvem, acessível pela internet.",
+          "correta": false,
+          "explicacao": "Para um server remoto, acessível pela rede, HTTP é o transport indicado, não stdio."
+        },
+        {
+          "texto": "Stdio nunca deve ser usado, é uma opção obsoleta.",
+          "correta": false,
+          "explicacao": "Stdio continua sendo uma opção válida e comum para servers locais; não é uma opção obsoleta."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Lucas, área de dados.** Está decidindo como expor um server MCP que vai rodar num serviço de nuvem da empresa, acessado por vários usuários em máquinas diferentes. Qual transport faz mais sentido?",
+      "alternativas": [
+        {
+          "texto": "HTTP, já que o server roda remotamente e precisa ser acessível pela rede por vários usuários.",
+          "melhor": true,
+          "feedback": "Para um server remoto e compartilhado, acessível pela rede, HTTP é o transport adequado, ao contrário do stdio, pensado para processos locais."
+        },
+        {
+          "texto": "Stdio, porque é sempre a opção mais simples independentemente de onde o server roda.",
+          "melhor": false,
+          "feedback": "Stdio pressupõe processos na mesma máquina; um server remoto acessado por múltiplos usuários pela rede pede HTTP."
+        },
+        {
+          "texto": "Não importa, qualquer transport funciona igual em qualquer cenário.",
+          "melhor": false,
+          "feedback": "A escolha do transport depende de onde o server roda; usar stdio para um server remoto simplesmente não funciona como pretendido."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie o transport com o cenário mais indicado.",
+      "pares": [
+        { "conceito": "Stdio", "definicao": "Server local, rodando como processo na mesma máquina do host" },
+        { "conceito": "HTTP", "definicao": "Server remoto, acessível pela rede" },
+        { "conceito": "Escolha do transport", "definicao": "Depende de onde o server roda, não da capacidade que ele oferece" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "id": "agentes-05-custo-agente-rodando-solto",
+  "trilha": "agentes",
+  "titulo": "O custo de um agente rodando solto",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "conceito": "Cada passo do loop de um agente consome tokens: decidir, chamar tool, ler o resultado, decidir de novo. Uma tarefa que exige muitas iterações pode custar bem mais do que uma resposta única de chat, especialmente se o agente entra num loop sem perceber que não está progredindo.\n\nPor isso, limites explícitos importam: um número máximo de iterações, um orçamento de tempo ou de custo, e uma condição clara de parada quando a tarefa não está avançando.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que um agente sem limite de iterações é um risco de custo?",
+      "alternativas": [
+        {
+          "texto": "Porque cada iteração do loop consome tokens, e sem um limite, um agente preso num loop sem progresso pode continuar gastando indefinidamente.",
+          "correta": true,
+          "explicacao": "Sem um teto de iterações ou de custo, um agente que não está progredindo continua consumindo recurso sem que ninguém perceba a tempo."
+        },
+        {
+          "texto": "Porque agentes sempre custam menos que uma resposta única de chat.",
+          "correta": false,
+          "explicacao": "É o contrário: várias iterações podem custar bem mais que uma resposta única, especialmente em tarefas longas ou com loop sem progresso."
+        },
+        {
+          "texto": "Porque limite de iteração é um recurso que não existe em agentes.",
+          "correta": false,
+          "explicacao": "Definir um limite de iterações é justamente uma prática recomendada para controlar o risco de custo, não um recurso inexistente."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Sônia, área de operações.** Configurou um agente para rodar tarefas de operações durante a madrugada, sem ninguém acompanhando. O que ela deveria ter definido antes de deixá-lo rodando sozinho?",
+      "alternativas": [
+        {
+          "texto": "Um limite de iterações ou de custo, e uma condição clara de parada para quando a tarefa não estiver progredindo.",
+          "melhor": true,
+          "feedback": "Rodar sem supervisão direta é exatamente quando limites explícitos importam mais: evitam que um agente preso em loop gaste recurso a noite toda sem ninguém perceber."
+        },
+        {
+          "texto": "Nada, agentes sempre param sozinhos quando terminam a tarefa, sem exceção.",
+          "melhor": false,
+          "feedback": "Um agente pode entrar num loop sem perceber que não está progredindo, continuando a rodar sem nunca 'terminar' naturalmente; por isso limites explícitos são necessários."
+        },
+        {
+          "texto": "Apenas garantir que a internet estivesse funcionando bem.",
+          "melhor": false,
+          "feedback": "Conectividade é relevante para o agente funcionar, mas não resolve o risco específico de custo por loop sem progresso, que exige limite explícito."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a prática recomendada para agente rodando sem supervisão direta.",
+      "texto": "Antes de deixar um agente rodar sem supervisão direta, defina um limite de iterações ou custo e uma condição clara de ___.",
+      "opcoes": [
+        {
+          "texto": "parada quando não há progresso",
+          "correta": true,
+          "explicacao": "Sem essa condição de parada, um agente preso num loop sem sucesso pode continuar consumindo recurso indefinidamente."
+        },
+        {
+          "texto": "cor da interface",
+          "correta": false,
+          "explicacao": "Aparência visual não tem relação com o controle de custo e risco de um agente rodando sem supervisão."
+        },
+        {
+          "texto": "quantidade de emojis na resposta",
+          "correta": false,
+          "explicacao": "Estilo de resposta não é o que protege contra o risco de custo de um agente preso num loop sem progresso."
+        }
+      ]
+    }
+  ]
+}

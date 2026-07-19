@@ -1,0 +1,71 @@
+{
+  "id": "caso-comercial-04",
+  "trilha": "casos",
+  "titulo": "Beatriz: montar a argumentação de uma proposta do zero",
+  "nivel": 4,
+  "area": "comercial",
+  "prereq": [],
+  "xp": 40,
+  "conceito": "Argumentar uma proposta é conectar o que o cliente disse que dói com o que você vende, na ordem em que ele decide.\n\nO caso chega cru: você tem as notas da reunião e o preço, e alguém pede 'faz um texto convincente'. Convincente para quem, contra qual objeção, com qual prova? Sem isso o modelo produz folheto genérico.",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**Beatriz, área comercial.** Precisa montar a argumentação da proposta para a LogBR. Tem as notas da reunião (a dor citada foi atraso na entrega e falta de rastreio) e a tabela de preços. Qual estratégia de prompt monta o melhor argumento?",
+      "alternativas": [
+        {
+          "texto": "Pedir: escreve um texto de vendas convincente sobre nosso produto.",
+          "melhor": false,
+          "feedback": "Sem a dor do cliente e sem o interlocutor, sai um folheto sobre você, não um argumento para a LogBR. Convencer é falar do problema dele, não das suas qualidades."
+        },
+        {
+          "texto": "Dar as notas da reunião, dizer quem decide e pedir o argumento ligando cada dor citada a um ganho concreto, com a objeção provável de preço já respondida.",
+          "melhor": true,
+          "feedback": "O argumento nasce da dor real (atraso, rastreio), fala com quem decide e já enfrenta a objeção que vai aparecer. É o que move a negociação, não um texto bonito."
+        },
+        {
+          "texto": "Pedir para a IA inventar três cases de clientes parecidos para dar credibilidade.",
+          "melhor": false,
+          "feedback": "Case inventado é mentira que explode na primeira pergunta. Credibilidade se constrói com prova real, não com ficção que o cliente pode checar."
+        }
+      ]
+    },
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "Este é o pedido de uma linha que Beatriz faria com pressa. Monte na caixa o prompt completo para a proposta da LogBR, compare com a referência e se autoavalie.",
+      "prompt_fraco": "Faz um texto convincente pra proposta da LogBR.",
+      "saida_fraca": "A LogBR encontrará em nossa solução um parceiro de excelência, com tecnologia de ponta e atendimento diferenciado que agrega valor ao seu negócio e impulsiona resultados. (Genérico, sem a dor da LogBR, sem interlocutor, sem preço, sem resposta a objeção.)",
+      "prompt_referencia": "Escreva a argumentação da proposta para a LogBR.\nQuem decide: diretor de operações, foco em prazo e custo, pouco tempo.\nDores que ele citou na reunião: atrasos recorrentes na entrega e falta de rastreio em tempo real.\nLigue cada dor a um ganho concreto do nosso serviço, com número quando houver (marque estimativas como estimativa).\nAntecipe a objeção de preço: nosso valor é 15% acima do concorrente atual dele; responda com o custo do atraso que evitamos.\nFormato: 4 blocos curtos (dor, ganho, prova, próximo passo). Máximo 15 linhas.\nNão invente cases nem números que eu não te dei.\n\n[notas da reunião] [tabela de preços]",
+      "saida_referencia": "Dor: entregas atrasando e sem rastreio, gerando multa contratual com os clientes da LogBR.\nGanho: rastreio em tempo real e alerta de desvio antes do atraso virar multa.\nProva: no piloto que combinamos, medimos a taxa de atraso por 30 dias antes de falar em contrato.\nObjeção de preço: somos 15% acima, mas uma multa evitada por mês já cobre a diferença (estimativa a validar no piloto).\nPróximo passo: agendar o piloto de 30 dias.",
+      "checklist": [
+        "Defini quem decide e o que importa para ele?",
+        "Usei as dores reais citadas na reunião?",
+        "Liguei cada dor a um ganho concreto?",
+        "Antecipei a objeção de preço com um contra-argumento?",
+        "Proibi inventar cases e números?",
+        "Defini formato e tamanho?"
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete o prompt no ponto que protege a proposta contra o erro mais caro.",
+      "texto": "Monte o argumento usando só as dores e números que eu te passei e ___.",
+      "opcoes": [
+        {
+          "texto": "não invente cases nem estatísticas de mercado",
+          "correta": true,
+          "explicacao": "Um número ou case inventado numa proposta é risco de credibilidade e às vezes de contrato. Fechar a porta para invenção é o que protege Beatriz na hora da pergunta difícil."
+        },
+        {
+          "texto": "deixe o texto o mais longo e completo possível",
+          "correta": false,
+          "explicacao": "Diretor de operações com pouco tempo não lê texto longo. Comprimento não convence, relevância sim."
+        },
+        {
+          "texto": "use um tom bem entusiasmado e cheio de adjetivos",
+          "correta": false,
+          "explicacao": "Adjetivo empilhado soa a folheto e afasta um decisor técnico. O que convence é o custo do problema dele, não seu entusiasmo."
+        }
+      ]
+    }
+  ]
+}

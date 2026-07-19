@@ -1,0 +1,109 @@
+{
+  "id": "caso-comercial-02",
+  "trilha": "casos",
+  "titulo": "Beatriz: qualificar lead sem terceirizar a decisão",
+  "nivel": 2,
+  "area": "comercial",
+  "prereq": [],
+  "xp": 25,
+  "nao_usar_ia": true,
+  "conceito": "Qualificar lead é decidir a ordem em que você gasta seu tempo, e essa decisão é sua, não do modelo.\n\nA IA é ótima para **organizar** os sinais (cargo, porte, ação no site) em tabela e **marcar o que falta**. É ruim para **decidir sozinha** quem é quente: os critérios ficam invisíveis, a nota parece objetiva mas foi chutada, e você não consegue auditar nem defender a escolha.\n\n**Padrão:** a IA estrutura os sinais, você aplica o critério e pontua.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "**Beatriz, área comercial. Consultora de vendas B2B na Nortex.** Toda segunda recebe uma lista de leads crus (nome, empresa, cargo, o que baixaram no site) e precisa decidir quem ligar primeiro. Hoje ela cola a lista no chat e pede 'me diz quais são os quentes'. Qual é o maior problema dessa abordagem?",
+      "alternativas": [
+        {
+          "texto": "A IA demora para responder uma lista grande de leads.",
+          "correta": false,
+          "explicacao": "Velocidade não é o ponto. O problema é o que vem depois: uma decisão sobre onde investir o tempo dela, tomada com critérios que ela não vê."
+        },
+        {
+          "texto": "A IA decide quem é quente com critérios invisíveis, que Beatriz não pode auditar nem defender para o gerente.",
+          "correta": true,
+          "explicacao": "Exato. A priorização vira caixa-preta: ela não sabe por que a máquina escolheu, não consegue reproduzir e pode estar seguindo um chute do modelo em vez do ICP ou do histórico do CRM."
+        },
+        {
+          "texto": "A IA nunca acerta qual lead vai fechar, então qualificar é inútil.",
+          "correta": false,
+          "explicacao": "Qualificar não é adivinhar o futuro, é priorizar com base em sinais. O erro não é qualificar, é deixar a máquina qualificar sozinha e às cegas."
+        }
+      ]
+    },
+    {
+      "tipo": "comparar_prompts",
+      "enunciado": "Beatriz tem a lista de leads da semana. Qual prompt a ajuda a priorizar sem entregar a decisão para a máquina?",
+      "prompts": [
+        {
+          "rotulo": "Prompt A",
+          "texto": "Analise esses leads e me diga quais são quentes, mornos e frios:\n\n[lista de leads]",
+          "saida_esperada": "Quentes: Marina Costa (TechCorp), Paulo Dias (LogBR)\nMornos: Ana Reis (VarejoX)\nFrios: os demais\n\nSugiro priorizar os quentes para contato hoje.",
+          "melhor": false,
+          "explicacao": "A IA decide sozinha e o critério fica invisível. Beatriz não sabe por que Marina é quente, não consegue reproduzir, e a etiqueta pode refletir um chute do modelo, não o ICP dela nem o CRM. A decisão sobre onde ligar virou caixa-preta."
+        },
+        {
+          "rotulo": "Prompt B",
+          "texto": "Organize os leads abaixo em uma tabela para eu priorizar. Colunas: nome, empresa, cargo, é decisor (sim/não/não informado), porte da empresa, ação que fez no site, aderência ao nosso ICP (transportadora com mais de 50 veículos). Não classifique como quente ou frio: só preencha os sinais observáveis e escreva 'não informado' onde faltar dado. No fim, liste quais leads estão sem telefone ou e-mail no CRM.\n\n[lista de leads]",
+          "saida_esperada": "Nome | Empresa | Cargo | Decisor | Porte | Ação no site | Aderência ICP\nMarina Costa | TechCorp | Analista | não | médio | baixou e-book | parcial\nPaulo Dias | LogBR | Diretor | sim | grande | pediu demonstração | alta\nAna Reis | VarejoX | Compras | não informado | pequeno | abriu newsletter | baixa\n\nSem contato no CRM: Ana Reis, João Melo.",
+          "melhor": true,
+          "explicacao": "A IA faz o que sabe (extrair e estruturar) e Beatriz mantém a decisão. Os critérios de pontuação continuam dela e auditáveis, o dado que falta é sinalizado em vez de chutado, e ela consegue defender para o gerente por que ligou para o Paulo primeiro."
+        },
+        {
+          "rotulo": "Prompt C",
+          "texto": "Pontue cada lead de 0 a 100 pela chance de fechar e explique a nota de cada um:\n\n[lista de leads]",
+          "saida_esperada": "Paulo Dias: 87. Diretor, pediu demonstração, empresa grande.\nMarina Costa: 64. Analista, baixou material, sem sinal de orçamento.\nAna Reis: 40. Cargo e intenção pouco claros.\n(As notas parecem objetivas, mas o peso de cada critério foi escolhido pelo modelo.)",
+          "melhor": false,
+          "explicacao": "Melhor que o A porque mostra o raciocínio, mas a nota ainda sai de pesos que o modelo inventou, não dos critérios de Beatriz nem do CRM. Um número preciso esconde um chute: ela defenderia o '87' sem saber o que ele significa."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "O gerente pergunta a Beatriz por que ela não ligou para um lead que acabou fechando com o concorrente. Qual forma de trabalhar deixa ela pronta para responder isso?",
+      "alternativas": [
+        {
+          "texto": "A IA pontua os leads sozinha e Beatriz segue a lista de quentes que ela recebeu.",
+          "melhor": false,
+          "feedback": "Quando cobrada, ela só pode dizer 'a IA classificou como frio'. Sem critério explícito e sem dado do CRM por trás, a resposta não se sustenta e a decisão não tem dono."
+        },
+        {
+          "texto": "A IA organiza os sinais em tabela, Beatriz aplica um critério escrito (ICP, decisor, ação de intenção) e registra a nota que deu a cada lead.",
+          "melhor": true,
+          "feedback": "A prioridade tem dono e rastro. Ela mostra o critério, os sinais que tinha na hora e por que aquele lead ficou abaixo. Erro de priorização vira aprendizado auditável, não caixa-preta."
+        },
+        {
+          "texto": "Beatriz pede à IA para prever com números a probabilidade exata de cada lead fechar e confia nela.",
+          "melhor": false,
+          "feedback": "Uma probabilidade exata vinda do chat, sem dados calibrados, é falsa precisão. Ela troca um chute humano por um chute com casas decimais, e continua sem critério auditável."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete o pedido para a IA no ponto em que ela ajuda de verdade sem tomar a decisão por Beatriz.",
+      "texto": "Monte a tabela de sinais dos leads e ___, que eu pontuo e priorizo depois com meu critério.",
+      "opcoes": [
+        {
+          "texto": "marque com 'não informado' o dado que faltar",
+          "correta": true,
+          "explicacao": "Mantém a IA no papel de organizar e ser honesta sobre lacunas. Beatriz pontua sabendo exatamente o que tinha e o que faltava, e a decisão continua auditável."
+        },
+        {
+          "texto": "já me diga quem é o lead mais quente",
+          "correta": false,
+          "explicacao": "Devolve a decisão para a máquina, que é justamente o que se quer evitar. O critério some e a priorização volta a ser caixa-preta."
+        },
+        {
+          "texto": "invente os dados que faltarem para completar a tabela",
+          "correta": false,
+          "explicacao": "Dado inventado sobre um lead é pior que dado ausente: Beatriz pontuaria em cima de ficção e ligaria confiando em algo que não existe."
+        },
+        {
+          "texto": "dê uma nota de 0 a 100 para cada um",
+          "correta": false,
+          "explicacao": "A nota parece objetiva, mas nasce de pesos que o modelo escolheu. Some a auditabilidade e ela não consegue defender a ordem depois."
+        }
+      ]
+    }
+  ]
+}

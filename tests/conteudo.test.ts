@@ -61,8 +61,42 @@ describe("conteúdo das lições", () => {
     }
   });
 
-  it("trilha prompt cobre os níveis 1 a 4 da escada", () => {
+  it("trilha prompt cobre os níveis 1 a 5 da escada (5 é o bloco 4D, arquivo .md como ativo)", () => {
     const niveis = new Set(licoes.filter(([, l]) => l.trilha === "prompt").map(([, l]) => l.nivel));
-    for (const n of [1, 2, 3, 4]) expect(niveis, `nível ${n} ausente`).toContain(n);
+    for (const n of [1, 2, 3, 4, 5]) expect(niveis, `nível ${n} ausente`).toContain(n);
+  });
+
+  const areasCasos = ["financeiro", "comercial", "rh", "juridico", "marketing", "operacoes", "dados", "atendimento"];
+  const casos = licoes.filter(([, l]) => l.trilha === "casos");
+
+  it.skipIf(casos.length === 0).each(areasCasos)("área %s aparece nos níveis 2, 3 e 4 com o mesmo personagem", (area) => {
+    const daArea = casos.filter(([, l]) => l.area === area);
+    const niveis = new Set(daArea.map(([, l]) => l.nivel));
+    for (const n of [2, 3, 4]) expect(niveis, `nível ${n} ausente em ${area}`).toContain(n);
+  });
+
+  it.skipIf(casos.length === 0).each(areasCasos)("área %s tem ao menos um case cuja resposta é não usar IA", (area) => {
+    const daArea = casos.filter(([, l]) => l.area === area);
+    expect(daArea.some(([, l]) => l.nao_usar_ia === true), `nenhum case "não usar IA" em ${area}`).toBe(true);
+  });
+
+  const comparativo = licoes.filter(([, l]) => l.trilha === "comparativo");
+  it.skipIf(comparativo.length === 0)("trilha comparativo é neutra: nenhuma resposta certa de cenario nomeia uma marca específica como vencedora", () => {
+    const marcas = ["Claude", "Anthropic", "GPT", "OpenAI", "Gemini", "Google", "Llama", "Meta"];
+    for (const [id, l] of comparativo) {
+      for (const ex of l.exercicios) {
+        if (ex.tipo !== "cenario") continue;
+        const melhor = ex.alternativas.find((a) => a.melhor);
+        if (!melhor) continue;
+        for (const marca of marcas) {
+          expect(melhor.texto, `${id}: resposta certa nomeia "${marca}"`).not.toContain(marca);
+        }
+      }
+    }
+  });
+
+  it.skipIf(comparativo.length === 0).each(comparativo)("%s: fatos datáveis da trilha comparativo exigem verificado_em e fontes", (_id, l) => {
+    expect(l.verificado_em, `${l.id} sem verificado_em`).toBeTruthy();
+    expect(l.fontes?.length, `${l.id} sem fontes`).toBeGreaterThan(0);
   });
 });

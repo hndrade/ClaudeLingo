@@ -1,0 +1,70 @@
+{
+  "id": "prompt-04-formato-saida",
+  "trilha": "prompt",
+  "titulo": "Formato de saída explícito",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "conceito": "Sem formato declarado, o modelo escolhe por você: quase sempre texto corrido, que você terá que reformatar na mão.\n\nDeclare a estrutura (tabela, bullets, JSON), os campos ou colunas que precisam existir e o tamanho máximo.\n\nRegra prática: pense onde a resposta vai ser colada (planilha, e-mail, sistema, slide) e peça já nesse formato. A saída nasce utilizável.",
+  "exercicios": [
+    {
+      "tipo": "comparar_prompts",
+      "enunciado": "Mesma tarefa: levantar os pedidos em atraso a partir dos e-mails de cobrança dos clientes. Compare o que cada prompt devolve.",
+      "prompts": [
+        {
+          "rotulo": "Prompt A",
+          "texto": "Veja quais pedidos estão em atraso nesses e-mails:\n\n[e-mails]",
+          "saida_esperada": "Analisando os e-mails, é possível identificar alguns atrasos. A empresa Alfa relata que seu pedido feito no início do mês ainda não foi entregue, e demonstra insatisfação com a falta de retorno. Já a empresa Beta cobra uma entrega que estava prometida para a semana passada. Por fim, a Gama menciona dois pedidos pendentes, sem detalhar as datas.",
+          "melhor": false,
+          "explicacao": "Sem formato pedido, o modelo escolhe texto corrido. A informação está lá, mas você vai reler os parágrafos e montar a planilha na mão, ou seja, fazer o trabalho de novo."
+        },
+        {
+          "rotulo": "Prompt B",
+          "texto": "Organize direitinho os pedidos em atraso desses e-mails:\n\n[e-mails]",
+          "saida_esperada": "**Pedidos em atraso identificados:**\n\n**Empresa Alfa**: pedido do início do mês, ainda não entregue, cliente insatisfeito com a falta de retorno.\n\n**Empresa Beta**: entrega prometida para a semana passada, não realizada.\n\n**Empresa Gama**: dois pedidos pendentes, datas não informadas nos e-mails.",
+          "melhor": false,
+          "explicacao": "Direitinho não é formato. O modelo caprichou nos negritos, mas continua prosa: sem colunas fixas, sem um registro por linha, nada que cole numa planilha. Adjetivo não substitui estrutura."
+        },
+        {
+          "rotulo": "Prompt C",
+          "texto": "Extraia dos e-mails abaixo os pedidos em atraso, em tabela com as colunas: cliente, número do pedido, data prometida, dias de atraso. Uma linha por pedido. Se algum dado não aparecer no e-mail, escreva \"não informado\". Sem texto antes ou depois da tabela.\n\n[e-mails]",
+          "saida_esperada": "cliente | número do pedido | data prometida | dias de atraso\nAlfa | 4821 | 05/07 | 13\nBeta | 4915 | 10/07 | 8\nGama | 4930 | não informado | não informado\nGama | 4951 | não informado | não informado\n(valores fictícios)",
+          "melhor": true,
+          "explicacao": "Estrutura (tabela), colunas nomeadas, uma linha por registro e regra para dado ausente. A saída cola direto na planilha de acompanhamento, sem retrabalho e sem o modelo inventar datas que não existem."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Você vai colar a resposta do modelo direto numa planilha de RH. Qual instrução garante que ela chegue pronta para isso?",
+      "alternativas": [
+        {
+          "texto": "Responda em CSV com as colunas nome, cargo e data de admissão, uma linha por pessoa, sem nenhum texto fora do CSV.",
+          "correta": true,
+          "explicacao": "Formato nomeado (CSV), colunas definidas e proibição de texto extra: é copiar e colar. O destino da resposta ditou o formato do pedido."
+        },
+        {
+          "texto": "Responda de forma organizada e clara.",
+          "correta": false,
+          "explicacao": "Organizada é opinião, não formato. O modelo pode devolver parágrafos com subtítulos e considerar que cumpriu o pedido."
+        },
+        {
+          "texto": "Responda de um jeito que dê para usar na planilha.",
+          "correta": false,
+          "explicacao": "Menciona o destino, mas não define a estrutura: pode vir tabela, lista ou prosa com nomes no meio. Diga o formato, as colunas e o que fica de fora."
+        }
+      ]
+    },
+    {
+      "tipo": "ordenacao",
+      "enunciado": "Coloque na ordem as etapas para definir o formato de saída de um prompt.",
+      "etapas": [
+        "Identifique onde a resposta vai ser usada: planilha, e-mail, sistema, slide",
+        "Escolha a estrutura que esse destino aceita: tabela, bullets, JSON",
+        "Nomeie os campos ou colunas que precisam existir",
+        "Limite o tamanho: número de linhas, itens ou caracteres"
+      ],
+      "explicacao": "O destino decide a estrutura: planilha pede tabela ou CSV, sistema pede JSON, e-mail aceita bullets. Escolhida a estrutura, você nomeia os campos para o modelo não inventar os seus. O limite de tamanho vem por último, cortando o excesso que sobrar."
+    }
+  ]
+}

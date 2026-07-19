@@ -4,19 +4,39 @@
       "id": "fundamentos",
       "nome": "T1. Fundamentos de IA",
       "descricao": "Machine learning, transformer, tokens e embeddings em linguagem humana.",
-      "licoes": []
+      "licoes": [
+        "fund-01-machine-learning",
+        "fund-02-redes-neurais",
+        "fund-03-transformer",
+        "fund-04-tokens",
+        "fund-05-embeddings",
+        "fund-06-treino-inferencia-data-corte"
+      ]
     },
     {
       "id": "llm",
       "nome": "T2. LLM 101",
       "descricao": "Janela de contexto, temperatura, alucinação, custo e latência.",
-      "licoes": []
+      "licoes": [
+        "llm-01-janela-contexto",
+        "llm-02-temperatura-determinismo",
+        "llm-03-alucinacao",
+        "llm-04-custo-por-token",
+        "llm-05-latencia-streaming",
+        "llm-06-o-que-nao-sabe-de-si"
+      ]
     },
     {
       "id": "claude",
       "nome": "T3. Claude 101",
       "descricao": "Família de modelos, Projects, Artifacts, Skills e quando NÃO usar Claude.",
-      "licoes": []
+      "licoes": [
+        "claude-01-familia-modelos",
+        "claude-02-projects-artifacts",
+        "claude-03-skills",
+        "claude-04-code-cowork",
+        "claude-05-quando-nao-usar"
+      ]
     },
     {
       "id": "prompt",
@@ -44,38 +64,110 @@
         "prompt-19-reescreva-mantendo",
         "prompt-20-devils-advocate",
         "prompt-21-checklist-reverso",
-        "prompt-22-construir-do-zero"
+        "prompt-22-construir-do-zero",
+        "prompt-23-md-como-ativo",
+        "prompt-24-anatomia-md",
+        "prompt-25-instrucao-vs-system-vs-skill",
+        "prompt-26-testar-md",
+        "prompt-27-versionar-md"
+      ]
+    },
+    {
+      "id": "casos",
+      "nome": "Cases por área",
+      "descricao": "Personagens de 8 áreas de trabalho, do nível 2 ao 4. Inclui quando NÃO usar IA.",
+      "licoes": [
+        "caso-financeiro-02",
+        "caso-financeiro-03",
+        "caso-financeiro-04",
+        "caso-comercial-02",
+        "caso-comercial-03",
+        "caso-comercial-04",
+        "caso-rh-02",
+        "caso-rh-03",
+        "caso-rh-04",
+        "caso-juridico-02",
+        "caso-juridico-03",
+        "caso-juridico-04",
+        "caso-marketing-02",
+        "caso-marketing-03",
+        "caso-marketing-04",
+        "caso-operacoes-02",
+        "caso-operacoes-03",
+        "caso-operacoes-04",
+        "caso-dados-02",
+        "caso-dados-03",
+        "caso-dados-04",
+        "caso-atendimento-02",
+        "caso-atendimento-03",
+        "caso-atendimento-04"
       ]
     },
     {
       "id": "rag",
       "nome": "T5. RAG",
       "descricao": "Chunking, busca vetorial e híbrida, reranking e avaliação.",
-      "licoes": []
+      "licoes": [
+        "rag-01-por-que-rag-existe",
+        "rag-02-chunking-armadilhas",
+        "rag-03-busca-vetorial-hibrida",
+        "rag-04-reranking-montagem-contexto",
+        "rag-05-avaliacao-recall-precision",
+        "rag-06-quando-rag-e-a-resposta-errada"
+      ]
     },
     {
       "id": "mcp",
       "nome": "T6. MCP",
       "descricao": "Arquitetura host, client e server, tools vs resources, transports e riscos.",
-      "licoes": []
+      "licoes": [
+        "mcp-01-problema-que-resolve",
+        "mcp-02-arquitetura-host-client-server",
+        "mcp-03-tools-resources-prompts",
+        "mcp-04-transports",
+        "mcp-05-prompt-injection-via-tool-result",
+        "mcp-06-quando-mcp-e-overkill"
+      ]
     },
     {
       "id": "agentes",
       "nome": "T7. Agentes e tool use",
       "descricao": "Loop de agente, sub-agentes, human in the loop e custo real.",
-      "licoes": []
+      "licoes": [
+        "agentes-01-loop-e-tool-use",
+        "agentes-02-quando-o-agente-falha",
+        "agentes-03-sub-agentes",
+        "agentes-04-human-in-the-loop",
+        "agentes-05-custo-agente-rodando-solto",
+        "agentes-06-avaliacao-de-agente"
+      ]
     },
     {
       "id": "comparativo",
       "nome": "T8. Comparativo de IAs",
       "descricao": "Escolher a ferramenta certa por eixo de decisão, com fontes verificadas.",
-      "licoes": []
+      "licoes": [
+        "comparativo-01-panorama-cinco-caminhos",
+        "comparativo-02-codigo-raciocinio",
+        "comparativo-03-escrita-longa-multimodal",
+        "comparativo-04-contexto-e-custo",
+        "comparativo-05-latencia-privacidade-onpremise",
+        "comparativo-06-ecossistema",
+        "comparativo-07-cascata-caso-central"
+      ]
     },
     {
       "id": "avaliacao",
       "nome": "T9. Avaliação, custo e risco",
       "descricao": "Evals, red teaming, prompt injection, LGPD e custo por caso de uso.",
-      "licoes": []
+      "licoes": [
+        "avaliacao-01-como-montar-um-eval",
+        "avaliacao-02-por-que-benchmark-publico-engana",
+        "avaliacao-03-red-teaming-e-prompt-injection",
+        "avaliacao-04-dados-sensiveis-o-que-nao-colar",
+        "avaliacao-05-lgpd-uso-corporativo",
+        "avaliacao-06-custo-real-de-um-caso-de-uso"
+      ]
     }
   ]
 }

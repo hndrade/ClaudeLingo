@@ -1,0 +1,74 @@
+{
+  "id": "prompt-19-reescreva-mantendo",
+  "trilha": "prompt",
+  "titulo": "Reescreva mantendo",
+  "nivel": 3,
+  "prereq": [],
+  "xp": 30,
+  "conceito": "**Padrão: Reescreva mantendo.** Transformação com restrições declaradas: \"reescreva para leigo, mantendo todos os valores, datas e a ordem dos argumentos; não acrescente informação\".\n\n**Quando usar:** mudar tom ou formato de material já aprovado (laudo, relatório, comunicado) sem reabrir o conteúdo.\n**Quando não usar:** quando o conteúdo em si precisa mudar; aí as amarras travam justamente o que deveria ser alterado.\n**Saída esperada:** o mesmo conteúdo em outra roupa: nada a mais, nada a menos, fatos e ordem intactos.",
+  "exercicios": [
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "Um analista precisa enviar ao cliente um trecho de laudo técnico em linguagem acessível (valores fictícios). Conserte o prompt aplicando o padrão Reescreva mantendo, depois compare com a referência e se autoavalie.",
+      "prompt_fraco": "Deixa esse trecho do laudo mais fácil de entender pro cliente:\n\n[trecho do laudo]",
+      "saida_fraca": "Boas notícias! A análise mostrou alguns pontos de atenção na estrutura, mas nada muito grave. Alguns reparos serão necessários nos próximos meses, com custo estimado em torno de 30 mil reais. Fique tranquilo, é tudo resolvível.\n\n(O modelo arredondou o valor de R$ 28.400,00, sumiu com o prazo de 60 dias e acrescentou um fique tranquilo que o laudo não autoriza.)",
+      "prompt_referencia": "Reescreva o trecho de laudo abaixo para um cliente leigo.\nMantenha: todos os valores, todas as datas e prazos, e a ordem dos pontos apresentados.\nNão acrescente informação, opinião nem tom tranquilizador que não esteja no original.\nTroque apenas os termos técnicos por linguagem comum, explicando entre parênteses quando precisar.\nMáximo de 10 linhas.\n\n[trecho do laudo]",
+      "saida_referencia": "A vistoria encontrou fissuras (pequenas rachaduras) na estrutura da laje. Elas não indicam risco imediato, mas exigem reparo em até 60 dias para não evoluírem. O custo estimado do reparo é de R$ 28.400,00. Recomenda-se também nova vistoria 6 meses após a conclusão do serviço.",
+      "checklist": [
+        "Listou explicitamente o que deve ser mantido (valores, datas, ordem)?",
+        "Proibiu acrescentar informação e opinião que não estão no original?",
+        "Definiu o público e o tipo de transformação (técnico para leigo)?",
+        "Definiu como tratar os termos técnicos na reescrita?",
+        "Deu limite de tamanho para a versão nova?"
+      ]
+    },
+    {
+      "tipo": "comparar_prompts",
+      "enunciado": "Trecho de relatório de crédito (valores fictícios): a inadimplência subiu de 2,1% para 3,4% entre março e junho, o principal fator foi o segmento de pequenas empresas, e a projeção para dezembro é de 3,8% sem renegociação. Qual prompt transforma esse trecho para leigos sem estragá-lo?",
+      "prompts": [
+        {
+          "rotulo": "Prompt A",
+          "texto": "Reescreve esse trecho de um jeito mais simples:\n\n[trecho]",
+          "saida_esperada": "A inadimplência vem crescendo nos últimos meses, puxada principalmente pelas pequenas empresas.\nA tendência é continuar subindo até o fim do ano se nada for feito.\nÉ um ponto que merece atenção da gestão.",
+          "melhor": false,
+          "explicacao": "Ficou simples apagando os fatos: sumiram os percentuais e os meses, e entrou um comentário de gestão que não existia. Para quem decide, o trecho novo é inútil."
+        },
+        {
+          "rotulo": "Prompt B",
+          "texto": "Reescreva o trecho abaixo para um leitor leigo, mantendo todos os percentuais, os meses citados e a ordem dos argumentos. Não acrescente informação nem opinião.\n\n[trecho]",
+          "saida_esperada": "A parcela de clientes que deixou de pagar subiu de 2,1% para 3,4% entre março e junho.\nO principal motivo foi o grupo de pequenas empresas.\nSe nada for renegociado, a previsão é chegar a 3,8% em dezembro.",
+          "melhor": true,
+          "explicacao": "Transformação com amarras: a linguagem mudou, os fatos e a ordem ficaram intactos e nada foi acrescentado. É o padrão Reescreva mantendo aplicado inteiro."
+        },
+        {
+          "rotulo": "Prompt C",
+          "texto": "Explica esse trecho pro cliente de um jeito que não assuste ele:\n\n[trecho]",
+          "saida_esperada": "Houve uma pequena variação na taxa de inadimplência nos últimos meses, algo comum no cenário atual.\nNossa equipe está acompanhando de perto os indicadores.\nNão há motivo para preocupação neste momento.",
+          "melhor": false,
+          "explicacao": "Não assustar virou licença para editar o conteúdo: minimizou os números e acrescentou uma avaliação (não há motivo para preocupação) que o relatório não faz. Isso já não é reescrita, é outro documento."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Em qual caso o padrão Reescreva mantendo é a ferramenta errada?",
+      "alternativas": [
+        {
+          "texto": "Atualizar o relatório mensal com os números novos do trimestre e uma conclusão revista.",
+          "correta": true,
+          "explicacao": "Aqui o conteúdo em si precisa mudar: números e conclusão novos. Amarrar os valores e a ordem do texto antigo travaria exatamente o que deve ser alterado."
+        },
+        {
+          "texto": "Transformar o FAQ aprovado pelo jurídico em posts curtos para a intranet.",
+          "correta": false,
+          "explicacao": "Material aprovado mudando de formato: caso ideal do padrão. As amarras garantem que a versão curta não contradiga o que o jurídico validou."
+        },
+        {
+          "texto": "Verter um comunicado oficial já publicado para o tom informal do canal da empresa.",
+          "correta": false,
+          "explicacao": "Mesmo conteúdo, outra roupa: mudar o tom mantendo fatos, datas e ordem é exatamente o que o padrão protege."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "id": "prompt-22-construir-do-zero",
+  "trilha": "prompt",
+  "titulo": "Construir do zero: o caso cru",
+  "nivel": 4,
+  "prereq": ["prompt-21-checklist-reverso"],
+  "xp": 40,
+  "conceito": "Capstone da trilha. Na vida real o pedido chega cru: \"a diretoria quer entender por que a margem caiu e o que fazer\". Ninguém dita escopo, formato ou critério: quem define é você, dentro do prompt.\n\nUm prompt construído do zero cobre seis frentes: **tarefa** ancorada na decisão, **contexto** (dados, período, o que é cada coisa), **papel e público**, **formato e tamanho**, **critério de sucesso** verificável e **tratamento do que falta**.\n\nA ordem importa: primeiro entenda que decisão a resposta vai apoiar, depois recorte os dados, só então molde a saída.\n\nRegra do que falta: mandar perguntar ou marcar hipótese, nunca deixar preencher em silêncio.",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**O caso cru.** Mensagem da sua chefe às 9h: \"a diretoria quer entender por que a margem caiu e o que fazer, me traz algo até quinta\". Você tem o fechamento dos últimos 6 meses em planilha (receita, custo e margem por linha de produto, valores fictícios). Mais nada foi definido. Qual estratégia de ataque com IA?",
+      "alternativas": [
+        {
+          "texto": "Colar a planilha e pedir uma análise completa e bem detalhada da margem, com recomendações, reforçando que não pode omitir nada importante.",
+          "melhor": false,
+          "feedback": "Parece diligência, mas \"completa e detalhada\" não substitui escopo: o modelo descreve a planilha inteira e recomenda generalidades (reduzir custos, revisar preços). A diretoria quer causa e ação; volume sem alvo devolve o trabalho de síntese para você."
+        },
+        {
+          "texto": "Antes de escrever, definir o que a diretoria vai decidir com a resposta; então montar um prompt único que fixa tarefa (decompor a variação da margem por linha e apontar causas com número), contexto (o que é cada coluna e o período), papel e público, formato de uma página e a regra para o que faltar: perguntar, não estimar em silêncio.",
+          "melhor": true,
+          "feedback": "É o trabalho de nível 4: transformar pedido cru em especificação. Você decide escopo, formato e critério antes de gastar a primeira rodada, e a regra para lacunas protege o material de números inventados diante da diretoria."
+        },
+        {
+          "texto": "Decompor ao máximo: um prompt por linha de produto da planilha, cada um analisando sua margem isoladamente, e depois juntar as respostas em um documento só.",
+          "melhor": false,
+          "feedback": "Decompor é uma boa ferramenta, mas aqui a fragmentação segue a estrutura do arquivo, não a pergunta. Queda de margem costuma ser história cruzada (mix entre linhas, custo comum ratear); analisar cada linha isolada perde exatamente isso, e a síntese volta para a sua mão."
+        }
+      ]
+    },
+    {
+      "tipo": "ordenacao",
+      "enunciado": "Você vai construir o prompt desse caso do zero. Coloque as etapas na ordem que evita retrabalho quando o pedido é ambíguo.",
+      "etapas": [
+        "Traduza o pedido cru em decisão: o que a diretoria vai decidir ou aprovar com essa resposta",
+        "Recorte contexto e escopo: que fatia dos dados responde a essa decisão, o que anexar e o que explicar sobre eles",
+        "Defina papel, público e formato: quem o modelo é, para quem escreve, em que estrutura e tamanho",
+        "Feche com critério de sucesso e tratamento de lacunas: o que a resposta precisa conter para valer e o que fazer com o que falta"
+      ],
+      "explicacao": "A decisão vem primeiro porque é ela que define o que é relevante: sem ela, qualquer recorte de dados é chute. O contexto vem antes de papel e formato porque o conteúdo manda na embalagem. Critério e lacunas fecham porque são o controle de qualidade: só dá para dizer o que a resposta precisa conter, e o que admitir não saber, depois que tarefa, dados e formato existem."
+    },
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "Exercício final de construção. Abaixo, o pedido cru exatamente como ele chega. Monte o prompt completo do zero na caixa de edição, cobrindo as seis frentes da trilha. Depois compare com a referência e se avalie pela checklist, item por item.",
+      "prompt_fraco": "A diretoria quer saber por que a margem caiu e o que fazer. Me ajuda? Segue a planilha do fechamento dos últimos 6 meses.",
+      "saida_fraca": "A queda de margem pode ter diversas causas, como aumento de custos de insumos, pressão competitiva sobre preços ou mudança no mix de produtos. Recomenda-se revisar a estrutura de custos, renegociar com fornecedores e avaliar reajustes de preço. Também é importante acompanhar indicadores de mercado. (Um texto de manual: não tocou em um único número da planilha e serviria para qualquer empresa do mundo.)",
+      "prompt_referencia": "Você é analista financeiro sênior preparando material para uma diretoria não técnica, que vai decidir na reunião de quinta onde agir para recuperar a margem.\n\nAnexei o fechamento mensal dos últimos 6 meses (valores fictícios): receita, custo e margem por linha de produto, uma aba por mês.\n\nTarefa:\n1. Decomponha a variação da margem entre o primeiro e o último mês: quanto veio de preço, quanto de custo e quanto de mix, por linha de produto.\n2. Aponte as 3 maiores causas da queda, cada uma sustentada por números da planilha (cite linha e mês).\n3. Recomende no máximo 3 ações, cada uma ligada a uma causa, com impacto marcado como estimativa.\n\nFormato: sumário executivo de 5 linhas, tabela de causas, tabela de ações. Uma página, sem jargão técnico.\n\nCritério: nenhuma causa sem número que a sustente; toda hipótese marcada como hipótese.\nSe faltar dado para alguma decomposição, não estime em silêncio: liste as perguntas que eu preciso responder antes da reunião.",
+      "saida_referencia": "Sumário executivo (valores fictícios): a margem caiu 4 pontos no semestre. Metade da queda vem do custo da linha B (alta de insumo a partir do mês 3), um quarto do mix (linha A, de margem alta, perdeu participação) e o restante de desconto médio maior na linha C.\n\nCausas: 1. Custo linha B, meses 3 a 6. 2. Mix desfavorável, linha A. 3. Descontos linha C.\nAções: 1. Renegociar insumo da linha B (impacto: estimativa). 2. Campanha de recuperação da linha A (estimativa). 3. Rever alçada de desconto da C (estimativa).\n\nPergunta antes da reunião: a planilha não separa desconto de preço de tabela na linha C; confirmar com comercial.",
+      "checklist": [
+        "Definiu a tarefa ancorada na decisão da diretoria (onde agir), e não como tema solto (\"analisar a margem\")?",
+        "Entregou o contexto dos dados: o que a planilha contém, período e como está organizada?",
+        "Definiu papel do modelo e público da resposta, com o nível técnico certo?",
+        "Especificou formato, estrutura e tamanho da saída?",
+        "Declarou critério de sucesso verificável (causa só com número que a sustente, hipótese marcada)?",
+        "Disse o que fazer com o que falta: perguntar antes da reunião, em vez de estimar em silêncio?"
+      ]
+    }
+  ]
+}

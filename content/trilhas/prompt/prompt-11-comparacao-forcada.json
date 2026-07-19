@@ -1,0 +1,101 @@
+{
+  "id": "prompt-11-comparacao-forcada",
+  "trilha": "prompt",
+  "titulo": "Comparação forçada",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "conceito": "**Padrão: Comparação forçada.** Duas opções, os mesmos critérios, tabela obrigatória: \"compare A e B nos critérios custo, prazo e risco, em tabela, e aponte onde cada um perde\".\n**Quando usar:** decisão real entre alternativas: fornecedores, ferramentas, propostas, caminhos de projeto.\n**Quando NÃO usar:** quando só existe uma opção viável. A comparação vira teatro e fabrica equilíbrio onde não há escolha.\n**Saída esperada:** tabela com critérios idênticos para os dois lados, a fraqueza explícita de cada um e em que cenário cada um ganharia.",
+  "exercicios": [
+    {
+      "tipo": "comparar_prompts",
+      "enunciado": "A empresa precisa escolher entre dois sistemas de ponto eletrônico, A e B, com as duas propostas em mãos. Qual prompt entrega a base de decisão mais sólida?",
+      "prompts": [
+        {
+          "rotulo": "Prompt A",
+          "texto": "Qual sistema de ponto é melhor, o A ou o B? Aqui estão as duas propostas.\n\n[propostas]",
+          "saida_esperada": "O sistema A parece ser a melhor escolha.\nEle tem mais funcionalidades e uma interface mais moderna.\nO sistema B também é bom, com preço atrativo,\nmas o A oferece um pacote mais completo no geral.\nRecomendo o sistema A.",
+          "melhor": false,
+          "explicacao": "\"Melhor\" sem critérios deixa o modelo escolher a régua: aqui ele pesou funcionalidades, mas a sua dor podia ser custo ou prazo. E \"no geral\" esconde exatamente onde o A perde."
+        },
+        {
+          "rotulo": "Prompt B",
+          "texto": "Liste os prós e contras do sistema A e do sistema B com base nas propostas.\n\n[propostas]",
+          "saida_esperada": "Sistema A: prós: interface moderna, app de celular, relatórios prontos. Contras: preço mais alto.\nSistema B: prós: preço menor, suporte em português. Contras: implantação mais lenta.\nAmbos atendem à legislação de registro de ponto.\nA escolha depende das prioridades da empresa.",
+          "melhor": false,
+          "explicacao": "Plausível, e é a armadilha: cada lista usa critérios diferentes (app de um lado, suporte do outro), então nada é comparável ponto a ponto. Prós e contras soltos terminam em \"depende\", que é onde você já estava."
+        },
+        {
+          "rotulo": "Prompt C",
+          "texto": "Compare o sistema A e o sistema B nos critérios custo total em 24 meses, prazo de implantação e risco de dependência do fornecedor, em tabela com uma linha por critério.\nDepois da tabela, aponte explicitamente onde cada um perde e diga em que cenário cada um seria a escolha certa.\n\n[propostas]",
+          "saida_esperada": "Critério | Sistema A | Sistema B\nCusto em 24 meses | R$ 58 mil | R$ 41 mil (valores fictícios, das propostas)\nPrazo de implantação | 3 semanas | 8 semanas\nRisco de dependência | exportação de dados aberta | dados presos ao fornecedor\nOnde o A perde: custo, cerca de 40% mais caro no período.\nOnde o B perde: prazo e saída difícil se a parceria azedar.\nCenários: A ganha se o prazo de dezembro for inegociável; B ganha com caixa apertado e prazo folgado.",
+          "melhor": true,
+          "explicacao": "Mesmos critérios para os dois lados, tabela que obriga o confronto célula a célula e a pergunta incômoda: onde cada um perde. A recomendação vira condicional ao cenário, não torcida por um lado."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Marcos, operações.** Tem duas cotações reais na mesa para a logística do próximo ano: renovar com a transportadora atual ou migrar para uma nova. Precisa levar uma recomendação ao comitê. Como pedir a análise?",
+      "alternativas": [
+        {
+          "texto": "Pedir uma análise detalhada de cada proposta, uma de cada vez, e juntar as conclusões no final.",
+          "melhor": false,
+          "feedback": "Analisada em separado, cada proposta é julgada com critérios que emergem dela mesma: uma análise destaca preço, a outra destaca cobertura. Na hora de juntar, Marcos compara laranjas com maçãs, e o comitê percebe."
+        },
+        {
+          "texto": "Pedir: compare as duas propostas nos critérios custo por entrega, prazo médio e risco de transição, em tabela, aponte onde cada uma perde e em que cenário cada uma ganha.",
+          "melhor": true,
+          "feedback": "Critérios fixados por quem decide, tabela que força o confronto e fraquezas explícitas: o comitê recebe uma base auditável e pode discordar de um critério em vez de desconfiar do conjunto."
+        },
+        {
+          "texto": "Pedir: monte o caso mais convincente possível a favor da migração, para eu testar se ele se sustenta.",
+          "melhor": false,
+          "feedback": "Advocacia tem seu uso (testar um caso), mas não substitui a comparação: o modelo vai vender a migração e enterrar o custo de transição. Para decidir entre duas opções reais, a régua precisa ser a mesma para as duas."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Luiza, compras.** O contrato do sistema de folha vence em 60 dias. Por política interna, só existe um fornecedor homologado e não há tempo de homologar outro. A diretoria pediu \"um comparativo com o mercado\" para o dossiê de renovação. O que Luiza pede à IA?",
+      "alternativas": [
+        {
+          "texto": "Comparar o fornecedor atual com dois concorrentes de mercado, em tabela, como manda o padrão.",
+          "melhor": false,
+          "feedback": "Comparação sem alternativa viável é teatro: a tabela fica bonita no dossiê, mas nenhum concorrente pode ser contratado em 60 dias. Pior, fabrica a impressão de que houve escolha quando não houve."
+        },
+        {
+          "texto": "Explicar a restrição à diretoria e pedir à IA uma análise da única opção real: aderência do contrato às necessidades, pontos a renegociar, riscos e referências de preço de mercado como régua, deixando claro que não são alternativas contratáveis agora.",
+          "melhor": true,
+          "feedback": "Quando só há uma opção, o trabalho útil é espremer essa opção: o que renegociar, onde está caro frente ao mercado, que cláusula proteger. Preço de mercado entra como régua, não como falsa alternativa, e a restrição vai documentada, não maquiada."
+        },
+        {
+          "texto": "Pedir a comparação, mas avisar a IA que o fornecedor atual deve vencer.",
+          "melhor": false,
+          "feedback": "O pior dos dois mundos: formato de comparação com resultado encomendado. Se o dossiê for auditado, uma comparação dirigida compromete mais do que a ausência dela."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Na comparação forçada, qual é a função da instrução \"aponte onde cada um perde\"?",
+      "alternativas": [
+        {
+          "texto": "Impedir a resposta em cima do muro: sem ela, o modelo tende a elogiar os dois lados e terminar num \"depende\" que devolve a decisão para você.",
+          "correta": true,
+          "explicacao": "Modelos puxam para o equilíbrio educado. Exigir a fraqueza de cada lado força o confronto que a decisão precisa; se um lado não perde em nada, a resposta terá que mostrar isso também."
+        },
+        {
+          "texto": "Garantir que os números da tabela estejam corretos, porque o modelo confere os dados ao criticar.",
+          "correta": false,
+          "explicacao": "Apontar fraquezas não confere número nenhum: o modelo pode criticar com base num valor errado. Dados da tabela se validam contra a fonte (as propostas), não pela instrução de crítica."
+        },
+        {
+          "texto": "Deixar a resposta mais curta, porque o modelo corta os elogios.",
+          "correta": false,
+          "explicacao": "O efeito não é tamanho, é conteúdo: a resposta pode até ficar mais longa. O que muda é sair do elogio simétrico para o confronto explícito entre as opções."
+        }
+      ]
+    }
+  ]
+}

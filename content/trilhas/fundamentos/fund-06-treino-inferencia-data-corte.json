@@ -1,0 +1,64 @@
+{
+  "id": "fund-06-treino-inferencia-data-corte",
+  "trilha": "fundamentos",
+  "titulo": "Treino, inferência e data de corte",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "conceito": "Treino é a fase cara e demorada em que o modelo ajusta seus pesos vendo enormes quantidades de texto. Inferência é toda vez que você conversa com o modelo depois disso: ele só usa os pesos já prontos, não aprende com a sua conversa.\n\nA data de corte é o limite dos dados usados no treino. Eventos depois disso o modelo não conhece, a menos que você informe no próprio prompt.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que conversar com o modelo não faz ele 'aprender' permanentemente com você?",
+      "alternativas": [
+        {
+          "texto": "Porque conversar é inferência, que usa os pesos já fixados no treino; os pesos não mudam durante a conversa.",
+          "correta": true,
+          "explicacao": "Inferência usa o modelo pronto. Só o treino ajusta pesos, e treino é um processo separado, muito mais custoso e feito antes."
+        },
+        {
+          "texto": "Porque o modelo se recusa a prestar atenção no que você escreve.",
+          "correta": false,
+          "explicacao": "O modelo presta atenção ao que você escreve dentro daquela conversa (isso é o contexto). O que não acontece é atualização permanente dos pesos."
+        },
+        {
+          "texto": "Porque conversas são apagadas antes de chegar ao modelo.",
+          "correta": false,
+          "explicacao": "A conversa chega ao modelo normalmente e influencia a resposta atual; o que não acontece é ela virar treino permanente."
+        }
+      ]
+    },
+    {
+      "tipo": "ordenacao",
+      "enunciado": "Ordene a relação entre treino, pesos e inferência.",
+      "etapas": [
+        "O modelo passa pela fase de treino, vendo grandes quantidades de texto",
+        "Os pesos do modelo ficam fixados ao final do treino",
+        "Toda conversa depois disso é inferência, usando os pesos fixos",
+        "A conversa não modifica os pesos nem vira treino automaticamente"
+      ],
+      "explicacao": "O treino acontece uma vez, fixa os pesos, e só depois começam as conversas (inferência), que usam esses pesos sem alterá-los."
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Henrique, área jurídica.** Pergunta ao modelo sobre uma notícia de ontem e recebe uma resposta genérica, sem o fato específico. Qual é a explicação mais provável?",
+      "alternativas": [
+        {
+          "texto": "A notícia é posterior à data de corte do treino do modelo, então ele não tem esse conhecimento, a menos que Henrique cole a notícia no prompt.",
+          "melhor": true,
+          "feedback": "Isso é esperado: o modelo só conhece o que existia até a data de corte dos dados de treino, não eventos posteriores, salvo se informados na conversa."
+        },
+        {
+          "texto": "O modelo está com defeito e precisa ser reiniciado.",
+          "melhor": false,
+          "feedback": "Não é defeito, é uma limitação estrutural: conhecimento limitado à data de corte do treino."
+        },
+        {
+          "texto": "Henrique precisa perguntar de um jeito mais educado para o modelo revelar a notícia.",
+          "melhor": false,
+          "feedback": "Educação no pedido não desbloqueia conhecimento que o modelo simplesmente não tem. Fornecer a notícia no prompt sim resolveria."
+        }
+      ]
+    }
+  ]
+}

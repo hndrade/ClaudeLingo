@@ -1,0 +1,75 @@
+{
+  "id": "mcp-01-problema-que-resolve",
+  "trilha": "mcp",
+  "titulo": "O problema que o MCP resolve",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "conceito": "Antes de um protocolo padrão, conectar um modelo a uma ferramenta externa (um banco de dados, uma API, um sistema de arquivos) exigia código de integração feito sob medida para cada combinação de modelo e ferramenta.\n\nMCP (Model Context Protocol) padroniza essa conexão: qualquer ferramenta que fala MCP pode ser usada por qualquer aplicação que também fale MCP, sem reescrever a integração para cada par.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Qual é o ganho principal de um protocolo padrão como o MCP, em vez de cada integração ser feita sob medida?",
+      "alternativas": [
+        {
+          "texto": "Uma ferramenta que implementa o protocolo pode ser usada por qualquer aplicação que também o implemente, sem reescrever a integração para cada combinação.",
+          "correta": true,
+          "explicacao": "Esse é o valor de um padrão: reduzir o trabalho de N integrações customizadas para uma implementação por lado, reutilizável entre combinações."
+        },
+        {
+          "texto": "O protocolo torna o modelo mais inteligente automaticamente.",
+          "correta": false,
+          "explicacao": "MCP é sobre conectividade e padronização de acesso a ferramentas, não sobre a capacidade de raciocínio do modelo em si."
+        },
+        {
+          "texto": "O protocolo elimina a necessidade de qualquer ferramenta externa.",
+          "correta": false,
+          "explicacao": "É o oposto: o protocolo existe justamente para facilitar a conexão com ferramentas externas, não para eliminá-las."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Lucas, área de dados.** Quer conectar um assistente de IA ao banco de dados da empresa, e no futuro também a um sistema de tickets. Sem um protocolo padrão, o que ele provavelmente enfrentaria?",
+      "alternativas": [
+        {
+          "texto": "Precisaria escrever uma integração customizada para cada combinação de assistente e ferramenta, e refazer o trabalho se trocar de assistente ou de ferramenta.",
+          "melhor": true,
+          "feedback": "Esse é o custo que um protocolo padrão evita: sem ele, cada nova combinação de ferramenta e aplicação exige trabalho de integração do zero."
+        },
+        {
+          "texto": "Nada mudaria, integrações sempre funcionam automaticamente entre qualquer sistema.",
+          "melhor": false,
+          "feedback": "Integrações não funcionam automaticamente sem um contrato comum; é exatamente esse contrato que um protocolo como o MCP fornece."
+        },
+        {
+          "texto": "O banco de dados pararia de funcionar.",
+          "melhor": false,
+          "feedback": "O banco de dados continuaria funcionando normalmente para seus outros usos; o desafio é especificamente sobre conectar o assistente de IA a ele."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a frase sobre o que o MCP padroniza.",
+      "texto": "O MCP padroniza a forma como um modelo se conecta a ___, para que a mesma implementação sirva a várias combinações.",
+      "opcoes": [
+        {
+          "texto": "ferramentas e fontes de dados externas",
+          "correta": true,
+          "explicacao": "É esse o escopo do protocolo: a conexão entre modelo/aplicação e ferramentas ou dados externos, de forma reutilizável."
+        },
+        {
+          "texto": "outros usuários humanos",
+          "correta": false,
+          "explicacao": "MCP não é sobre conectar pessoas entre si; é sobre conectar um modelo a ferramentas e dados."
+        },
+        {
+          "texto": "redes sociais",
+          "correta": false,
+          "explicacao": "Redes sociais podem ser uma das muitas integrações possíveis, mas não é isso que o protocolo padroniza em geral."
+        }
+      ]
+    }
+  ]
+}

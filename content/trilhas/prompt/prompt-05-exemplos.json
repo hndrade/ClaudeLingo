@@ -1,0 +1,107 @@
+{
+  "id": "prompt-05-exemplos",
+  "trilha": "prompt",
+  "titulo": "Exemplos valem mais que instruções",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "conceito": "Descrever o formato em parágrafos rende menos que **mostrar 1 ou 2 exemplos** prontos: o modelo imita padrão com mais fidelidade do que segue descrição.\n\nO exemplo positivo mostra o alvo. O **exemplo negativo**, rotulado como \"assim NÃO\", corta o vício que insiste em voltar mesmo depois da instrução: tom corporativo, jargão, bullet gigante.\n\nQuando usar: formato ou tom difícil de descrever, tarefa que vai se repetir. Quando não usar: tarefa única e trivial, onde o exemplo só ocupa espaço.",
+  "exercicios": [
+    {
+      "tipo": "comparar_prompts",
+      "enunciado": "Mesma tarefa: transformar uma nota técnica de atualização de sistema em um aviso curto para os usuários internos. Qual prompt acerta o tom de primeira?",
+      "prompts": [
+        {
+          "rotulo": "Prompt A",
+          "texto": "Transforme a nota técnica abaixo em um aviso para os usuários do sistema. O aviso deve ser curto, começar pelo impacto para o usuário, evitar jargão técnico, ter no máximo 3 linhas e informar o horário da mudança.\n\n[nota técnica]",
+          "saida_esperada": "Prezados, informamos que na próxima janela de manutenção será executada a atualização da versão 2.4 do módulo de faturamento.\nA atualização contempla melhorias de performance e correções.\nA mudança ocorre às 22h desta quinta-feira.\nContamos com a compreensão de todos.",
+          "melhor": false,
+          "explicacao": "As instruções são boas, mas descrevem o tom em vez de mostrá-lo. \"Evitar jargão\" é impreciso: o modelo mantém o registro corporativo (\"prezados\", \"contempla melhorias\") porque nenhum exemplo mostrou como é um aviso aprovado."
+        },
+        {
+          "rotulo": "Prompt B",
+          "texto": "Transforme a nota técnica abaixo em um aviso para os usuários, seguindo o padrão dos exemplos.\n\nAssim SIM:\n\"O relatório de vendas vai ficar fora do ar hoje, das 22h às 23h. Salve seu trabalho antes.\"\n\"A tela de login mudou: agora o acesso é pelo crachá. Nada a fazer, só usar o novo botão.\"\n\nAssim NÃO:\n\"Prezados, informamos que será executada a atualização da versão 2.4, contemplando melhorias.\"\n\n[nota técnica]",
+          "saida_esperada": "A busca de clientes vai ficar lenta nesta quinta, das 20h às 22h, durante uma manutenção.\nSe puder, deixe as consultas grandes para sexta de manhã.\nNada muda na tela: é só lentidão temporária.\nDúvidas: canal de suporte interno.",
+          "melhor": true,
+          "explicacao": "Dois exemplos positivos definem o alvo melhor que qualquer parágrafo de instruções, e o exemplo negativo mata o \"prezados, informamos\" na raiz: o modelo vê exatamente onde passa a linha entre aprovado e reprovado."
+        },
+        {
+          "rotulo": "Prompt C",
+          "texto": "Transforme a nota técnica abaixo em um aviso para os usuários. Não escreva como comunicado corporativo: nada de \"prezados\" nem jargão técnico.\n\n[nota técnica]",
+          "saida_esperada": "Aviso: atualização do sistema de faturamento nesta quinta.\nA versão 2.4 traz melhorias e correções de bugs no backend.\nHaverá indisponibilidade durante a janela de manutenção.\nMais informações com o time de TI.",
+          "melhor": false,
+          "explicacao": "Dizer só o que não fazer deixa o alvo indefinido: o modelo evita \"prezados\", mas troca um vício por outro (\"backend\", \"janela de manutenção\"). Exemplo negativo funciona ao lado do positivo, não sozinho."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Você pediu bullets curtos e neutros, mas o modelo insiste em fechar cada bullet com uma frase de vendedor. Qual ajuste tende a resolver de vez?",
+      "alternativas": [
+        {
+          "texto": "Reescrever a instrução com mais ênfase: SEM frases de vendedor, tom estritamente neutro e objetivo.",
+          "correta": false,
+          "explicacao": "Ênfase repete a mesma descrição que já falhou, só que em caixa alta. O modelo continua sem ver como é um bullet aprovado, então o vício volta no terceiro item."
+        },
+        {
+          "texto": "Adicionar um par de exemplos: um bullet no formato aprovado e, rotulado como \"assim NÃO\", um bullet fechando com frase de vendedor.",
+          "correta": true,
+          "explicacao": "O contraste entre o certo e o errado mostra exatamente onde está a linha. Padrão concreto supera descrição, e o negativo mira o vício específico que insiste em voltar."
+        },
+        {
+          "texto": "Trocar bullets por parágrafos, já que o formato de lista parece induzir o problema.",
+          "correta": false,
+          "explicacao": "O vício está no tom, não no leiaute. Em parágrafos, a frase de vendedor continua aparecendo, agora diluída num texto mais difícil de escanear."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Marina, marketing.** Precisa gerar 40 descrições de produto no padrão da loja: 2 frases, benefício antes da característica, sem exclamação. No arquivo dela há descrições antigas boas e ruins. Como montar o prompt?",
+      "alternativas": [
+        {
+          "texto": "Escrever um parágrafo detalhado descrevendo o estilo da marca: tom, estrutura, o que evitar, público-alvo.",
+          "melhor": false,
+          "feedback": "Descrição de tom é o tipo de instrução que o modelo mais erra: cada palavra (\"leve\", \"direto\") é ambígua. A cada lote, as descrições derivam para o genérico e Marina reescreve na mão."
+        },
+        {
+          "texto": "Colar 2 descrições aprovadas como modelo e 1 reprovada rotulada \"assim NÃO\", e pedir as 40 no mesmo padrão.",
+          "melhor": true,
+          "feedback": "Os exemplos reais carregam as regras implícitas que Marina nem saberia listar (ritmo, vocabulário, ordem benefício-característica), e o negativo bloqueia o vício já conhecido. Dois positivos bastam para fixar o padrão."
+        },
+        {
+          "texto": "Colar 15 descrições antigas de uma vez, sem rotular quais são boas, para o modelo captar o estilo geral.",
+          "melhor": false,
+          "feedback": "Sem rótulo, o modelo imita a média do lote, incluindo as ruins. Volume de exemplos não substitui seleção: 2 bons rotulados valem mais que 15 sem curadoria."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a regra prática desta lição.",
+      "texto": "Quando o modelo repete um erro mesmo depois da instrução, acrescente ao prompt ___.",
+      "opcoes": [
+        {
+          "texto": "um exemplo negativo rotulado, mostrando o erro ao lado de um exemplo certo",
+          "correta": true,
+          "explicacao": "O par certo/errado ensina pelo contraste: o modelo passa a reconhecer o vício em vez de depender da sua descrição dele."
+        },
+        {
+          "texto": "a mesma instrução repetida no início e no fim",
+          "correta": false,
+          "explicacao": "Repetir aumenta a ênfase, não a clareza. Se a descrição era ambígua uma vez, continua ambígua duas vezes."
+        },
+        {
+          "texto": "um aviso de que a tarefa é muito importante para a empresa",
+          "correta": false,
+          "explicacao": "Importância não define formato. O modelo responde com mais formalidade e mais texto, e o erro original permanece."
+        },
+        {
+          "texto": "adjetivos mais fortes descrevendo a qualidade esperada",
+          "correta": false,
+          "explicacao": "Adjetivo continua sem mostrar o padrão: \"impecável\" e \"profissional\" não dizem como é um item aprovado, só pedem torcida."
+        }
+      ]
+    }
+  ]
+}

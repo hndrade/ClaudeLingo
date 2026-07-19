@@ -1,0 +1,57 @@
+{
+  "id": "prompt-24-anatomia-md",
+  "trilha": "prompt",
+  "titulo": "Anatomia de um bom .md de instrução",
+  "nivel": 5,
+  "prereq": [],
+  "xp": 45,
+  "conceito": "Um .md de instrução tem 5 partes: contexto (quem é, para quem escreve), regras duras (o que sempre vale, sem exceção), exemplos (positivo e negativo), formato de saída (como a resposta deve chegar) e o que não fazer.\n\nA parte mais esquecida é 'o que não fazer': sem ela, o modelo volta ao vício antigo assim que o caso foge um pouco do exemplo.",
+  "exercicios": [
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "O .md abaixo é usado por um time inteiro, mas é fraco: só tem um parágrafo de intenção. Reescreva na caixa cobrindo as 5 partes, compare com a referência e se autoavalie.",
+      "prompt_fraco": "# Instrução de atendimento\n\nResponda os clientes de forma educada e profissional, resolvendo o problema da melhor forma possível.",
+      "saida_fraca": "Prezado cliente, agradecemos seu contato. Estamos analisando sua solicitação e retornaremos em breve com uma solução adequada. (Educado, mas vago: não resolve nada, não segue a política real, e cada atendente preenche o resto do jeito que quiser.)",
+      "prompt_referencia": "# Instrução de atendimento\n\n## Contexto\nVocê responde clientes da Nortex sobre pedidos de rastreio de frota. O leitor é o cliente, que quer solução, não desculpa.\n\n## Regras duras\n- Assuma o erro quando for nosso, sem enrolar.\n- Nunca prometa prazo ou compensação fora da política vigente.\n- Se faltar informação para resolver, pergunte antes de inventar solução.\n\n## Exemplos\nBom: 'O atraso foi falha nossa. Já coloquei seu pedido em prioridade e adicionei um cupom de 10%. Aviso assim que sair para entrega.'\nRuim: 'Fique tranquilo, vamos resolver tudo rapidinho, pode confiar!' (promete o que não controla)\n\n## Formato de saída\nResposta direta ao cliente, no máximo 5 linhas, sem saudação genérica de robô.\n\n## O que não fazer\nNão prometer prazo exato. Não usar linguagem de script ('sua satisfação é importante para nós'). Não encerrar o ticket sem confirmar que o cliente entendeu o próximo passo.",
+      "saida_referencia": "O atraso foi falha nossa, e você tem razão em reclamar. Já coloquei seu pedido em prioridade e adicionei um cupom de 10% na sua conta. Aviso assim que ele sair para entrega. Qualquer coisa, me chame por aqui.",
+      "checklist": [
+        "Escrevi o contexto (quem escreve, para quem)?",
+        "Listei regras duras, sem exceção?",
+        "Dei um exemplo bom e um ruim?",
+        "Defini o formato de saída?",
+        "Escrevi o que não fazer, explicitamente?",
+        "O .md ficaria igual se outra pessoa do time o usasse amanhã?"
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie a parte do .md com o problema que ela evita quando está ausente.",
+      "pares": [
+        { "conceito": "Regras duras", "definicao": "Evita que o modelo aplique a regra só quando lembrar" },
+        { "conceito": "Exemplo ruim (o que evitar)", "definicao": "Evita que o modelo repita o vício mais comum do time" },
+        { "conceito": "O que não fazer", "definicao": "Evita que o modelo volte ao comportamento antigo em caso fora do exemplo" }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que 'seja objetivo e profissional' não é uma regra dura de um .md?",
+      "alternativas": [
+        {
+          "texto": "Porque é uma frase muito curta para valer como regra.",
+          "correta": false,
+          "explicacao": "Tamanho não é o problema. Uma regra curta e específica ('nunca prometa prazo fora da política') funciona melhor que uma longa e vaga."
+        },
+        {
+          "texto": "Porque é adjetivo, não critério: cada execução do modelo vai interpretar 'objetivo' de um jeito diferente.",
+          "correta": true,
+          "explicacao": "Regra dura precisa ser verificável. 'Objetivo' não diz o que fazer num caso concreto; uma regra como 'máximo 5 linhas, sem saudação genérica' diz."
+        },
+        {
+          "texto": "Porque o modelo não entende a palavra 'profissional'.",
+          "correta": false,
+          "explicacao": "O modelo entende a palavra perfeitamente. O problema é que ela não define uma ação concreta e verificável."
+        }
+      ]
+    }
+  ]
+}

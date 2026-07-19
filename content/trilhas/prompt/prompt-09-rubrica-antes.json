@@ -1,0 +1,101 @@
+{
+  "id": "prompt-09-rubrica-antes",
+  "trilha": "prompt",
+  "titulo": "Rubrica antes da tarefa",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "conceito": "**Padrão: Rubrica antes da tarefa.** Peça primeiro o critério de avaliação: \"liste o que separa uma boa análise de uma ruim\". Só depois peça a execução contra esse critério.\n**Quando usar:** tarefa subjetiva em que \"bom\" é vago: avaliar textos, dar parecer, priorizar propostas.\n**Quando NÃO usar:** tarefa mecânica com formato já fechado. A rubrica só adiciona custo e latência.\n**Saída esperada:** primeiro a rubrica, com critérios verificáveis; depois a entrega avaliada critério a critério, com veredito por item.",
+  "exercicios": [
+    {
+      "tipo": "comparar_prompts",
+      "enunciado": "O time de marketing escreveu 6 versões de um post de LinkedIn sobre o novo produto e você quer que a IA ajude a escolher qual publicar. Qual prompt tende a produzir a recomendação mais confiável?",
+      "prompts": [
+        {
+          "rotulo": "Prompt A",
+          "texto": "Aqui estão 6 versões de um post de LinkedIn. Me diga qual é a melhor.\n\n[6 versões]",
+          "saida_esperada": "A versão 3 é a melhor.\nEla tem um tom mais envolvente e comunica bem o valor do produto.\nAs outras versões também são boas, mas a 3 se destaca pela clareza.\nRecomendo publicá-la.",
+          "melhor": false,
+          "explicacao": "Veredito sem critério: \"envolvente\" e \"clareza\" surgem depois da escolha, como justificativa. Você não tem como discordar nem auditar. Compare com o Prompt B, que fixa a régua antes de julgar."
+        },
+        {
+          "rotulo": "Prompt B",
+          "texto": "Antes de avaliar, liste 5 critérios que separam um post de LinkedIn corporativo forte de um fraco, cada um verificável em uma frase.\nDepois avalie as 6 versões abaixo contra esses critérios e recomende uma com base no placar.\n\n[6 versões]",
+          "saida_esperada": "Critérios: 1) gancho na primeira linha, 2) benefício concreto em vez de recurso, 3) uma única chamada para ação, 4) tamanho até 900 caracteres, 5) sem jargão interno.\nVersão 1: atende 1, 2, 5. Falha em 3 (duas chamadas) e 4.\nVersão 3: atende os 5 critérios.\nVersão 5: atende 2, 4, 5. Falha em 1 (abre com o nome do produto).\n(demais versões no mesmo formato)\nRecomendação: versão 3, a única que atende os 5 critérios.",
+          "melhor": true,
+          "explicacao": "A rubrica vem antes do julgamento: você pode corrigir os critérios antes de aceitar o veredito, e o placar mostra por que cada versão perde. É o padrão da lição aplicado inteiro."
+        },
+        {
+          "rotulo": "Prompt C",
+          "texto": "Avalie as 6 versões abaixo considerando qualidade do texto e potencial de engajamento e me diga qual publicar.\n\n[6 versões]",
+          "saida_esperada": "Considerando qualidade e engajamento, a versão 3 é a mais indicada.\nEla equilibra um bom texto com alto potencial de engajamento.\nA versão 1 também tem boa qualidade, mas tende a engajar menos.\nAs demais ficam abaixo nesses dois aspectos.\nSugiro publicar a versão 3.",
+          "melhor": false,
+          "explicacao": "Parece haver critérios, mas \"qualidade\" e \"engajamento\" são tão vagos quanto \"melhor\". O modelo continua julgando por dentro, sem régua auditável. Nomear critérios vagos não é o mesmo que pedir a rubrica primeiro."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Camila, RH.** Recebeu 12 respostas de candidatos para a pergunta de case da vaga de analista e precisa levar 3 finalistas para a gestora amanhã. Como usar a IA?",
+      "alternativas": [
+        {
+          "texto": "Colar as 12 respostas e pedir: escolha as 3 melhores respostas e justifique cada escolha.",
+          "melhor": false,
+          "feedback": "A IA escolhe com critérios internos que Camila não vê: a justificativa nasce depois da escolha. Se a gestora perguntar por que o candidato X ficou de fora, a defesa da lista fica frágil."
+        },
+        {
+          "texto": "Pedir primeiro: liste 5 critérios que separam uma resposta forte de uma fraca para esta vaga. Revisar a rubrica, ajustar o que não fizer sentido e só então pedir a avaliação das 12 respostas contra ela.",
+          "melhor": true,
+          "feedback": "Rubrica antes, com revisão humana no meio: Camila valida a régua, que é barata, antes de rodar a avaliação, que é cara. Chega na gestora com critérios defensáveis, não com um palpite da IA."
+        },
+        {
+          "texto": "Pedir nota de 0 a 10 para cada resposta e levar as 3 maiores notas.",
+          "melhor": false,
+          "feedback": "Nota sem critério é precisão de mentira: o 8,5 parece objetivo, mas ninguém sabe o que ele mede. Ordenar por um número opaco é o mesmo palpite da primeira opção, com verniz quantitativo."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Em qual destas tarefas pedir a rubrica antes só adiciona custo, sem melhorar a saída?",
+      "alternativas": [
+        {
+          "texto": "Avaliar 4 propostas de agências de publicidade para decidir qual contratar.",
+          "correta": false,
+          "explicacao": "\"Boa proposta\" é subjetivo: cada pessoa pesa preço, portfólio e prazo de um jeito. É exatamente o caso em que a rubrica antes paga o próprio custo."
+        },
+        {
+          "texto": "Extrair nome, CNPJ e data de vencimento de 20 contratos para uma planilha.",
+          "correta": true,
+          "explicacao": "Tarefa mecânica com formato fechado: o critério de acerto já está no pedido (campos certos, valores exatos). Rubrica aqui é etapa extra que não muda o resultado."
+        },
+        {
+          "texto": "Dar parecer sobre o texto do comunicado de reestruturação antes do envio à empresa.",
+          "correta": false,
+          "explicacao": "Parecer sobre texto sensível é julgamento subjetivo: tom, clareza, risco de leitura errada. Definir a régua antes evita um parecer de gosto pessoal."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Diego, financeiro.** Precisa converter 40 linhas de um extrato bancário em planilha com colunas data, descrição e valor. Um colega sugeriu: \"pede primeiro a rubrica do que é uma boa conversão, aprendi que melhora tudo\". O que Diego deve fazer?",
+      "alternativas": [
+        {
+          "texto": "Seguir a sugestão: pedir a rubrica de uma boa conversão e depois a conversão contra ela.",
+          "melhor": false,
+          "feedback": "O critério de uma conversão boa já é objetivo: campos certos, valores idênticos ao original. A rubrica devolveria obviedades (\"seja fiel aos dados\") e cobraria tempo por isso. Padrão certo, tarefa errada."
+        },
+        {
+          "texto": "Ir direto: pedir a conversão com o formato fechado no prompt (colunas nomeadas, valores copiados sem alteração, uma linha por lançamento).",
+          "melhor": true,
+          "feedback": "Tarefa mecânica pede formato fechado, não rubrica. A energia vai para onde rende: travar o formato e proibir alteração de valores. Rubrica antes é para quando \"bom\" é discutível, e aqui não é."
+        },
+        {
+          "texto": "Pedir a conversão e, depois, pedir que a IA crie uma rubrica para avaliar a própria conversão.",
+          "melhor": false,
+          "feedback": "Rubrica depois da execução vira autoelogio: o modelo tende a aprovar o que acabou de fazer. E segue sendo custo extra numa tarefa em que a conferência real é bater os valores com o extrato."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "id": "rag-03-busca-vetorial-hibrida",
+  "trilha": "rag",
+  "titulo": "Busca vetorial e busca híbrida",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "conceito": "Busca vetorial usa embeddings para achar chunks com significado parecido ao da pergunta, mesmo sem palavra igual. Ela é ótima para intenção, mas pode falhar em achar um termo exato, como um código de produto ou um nome próprio raro.\n\nBusca híbrida combina busca vetorial (significado) com busca por palavra-chave tipo BM25 (correspondência exata de termo), pegando o melhor dos dois: intenção E precisão de termo específico.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que busca vetorial sozinha pode falhar ao buscar por um código de produto específico, como 'SKU-48812'?",
+      "alternativas": [
+        {
+          "texto": "Porque embeddings capturam significado geral, e um código específico não carrega significado semântico comum o suficiente para garantir correspondência exata por proximidade.",
+          "correta": true,
+          "explicacao": "Códigos, IDs e termos raros são o ponto fraco da busca puramente semântica; eles precisam de correspondência exata, que busca por palavra-chave resolve melhor."
+        },
+        {
+          "texto": "Porque busca vetorial não processa números.",
+          "correta": false,
+          "explicacao": "Busca vetorial processa números normalmente; o problema não é processar, é que a proximidade semântica não garante achar o termo exato entre milhares de códigos parecidos."
+        },
+        {
+          "texto": "Porque busca vetorial só funciona em inglês.",
+          "correta": false,
+          "explicacao": "Busca vetorial funciona em múltiplos idiomas; a limitação aqui é sobre termos exatos, não sobre idioma."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Henrique, área jurídica.** Monta um sistema de busca sobre contratos que precisa achar tanto 'cláusulas sobre rescisão' (busca por intenção) quanto o número exato de um contrato específico, tipo 'CT-2024-0091'. Qual abordagem cobre os dois casos?",
+      "alternativas": [
+        {
+          "texto": "Busca híbrida: vetorial para captar a intenção sobre rescisão, e busca por palavra-chave para achar o número exato do contrato.",
+          "melhor": true,
+          "feedback": "É exatamente o caso de uso da busca híbrida: cobrir tanto a busca por significado quanto a busca por termo exato, que sozinhas não dão conta dos dois cenários igualmente bem."
+        },
+        {
+          "texto": "Só busca vetorial, porque ela já resolve os dois casos igualmente bem.",
+          "melhor": false,
+          "feedback": "Busca vetorial sozinha tende a ser fraca para achar um código exato entre muitos parecidos, exatamente o segundo caso citado."
+        },
+        {
+          "texto": "Só busca por palavra-chave, porque é mais simples de implementar.",
+          "melhor": false,
+          "feedback": "Busca só por palavra-chave perderia a capacidade de achar 'cláusulas sobre rescisão' quando o termo exato 'rescisão' não aparece, mas o conceito está presente de outra forma."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie o tipo de busca com o que ela resolve melhor.",
+      "pares": [
+        { "conceito": "Busca vetorial (embeddings)", "definicao": "Encontrar significado parecido, mesmo com palavras diferentes" },
+        { "conceito": "Busca por palavra-chave (BM25)", "definicao": "Encontrar termo exato, como código ou nome próprio raro" },
+        { "conceito": "Busca híbrida", "definicao": "Combinar as duas para cobrir intenção e termo exato ao mesmo tempo" }
+      ]
+    }
+  ]
+}

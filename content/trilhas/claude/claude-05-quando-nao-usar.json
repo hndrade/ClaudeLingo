@@ -1,0 +1,75 @@
+{
+  "id": "claude-05-quando-nao-usar",
+  "trilha": "claude",
+  "titulo": "Quando NÃO usar Claude",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "conceito": "Claude não é a ferramenta certa quando a tarefa exige garantia matemática (otimização de rota, cálculo financeiro exato), quando a decisão precisa de responsabilidade legal humana (parecer jurídico, laudo), ou quando o dado é sensível demais para sair do ambiente controlado sem aprovação.\n\nNesses casos, Claude pode apoiar (organizar, redigir rascunho, explicar), mas não deve decidir nem ser a fonte final.",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**Henrique, área jurídica.** Quer que o Claude decida sozinho, sem revisão de advogado, se um contrato pode ser assinado. É um bom uso da ferramenta?",
+      "alternativas": [
+        {
+          "texto": "Não: decisão de assinar um contrato é responsabilidade jurídica humana; Claude pode apoiar levantando pontos de atenção, não decidir sozinho.",
+          "melhor": true,
+          "feedback": "Esse é exatamente o tipo de caso onde a ferramenta apoia (organiza, aponta trechos) mas não substitui o julgamento e a responsabilidade de um advogado."
+        },
+        {
+          "texto": "Sim, desde que o prompt seja bem escrito o suficiente.",
+          "melhor": false,
+          "feedback": "Nenhum prompt resolve o problema de fundo: a responsabilidade legal da decisão precisa ser humana, independentemente da qualidade do prompt."
+        },
+        {
+          "texto": "Sim, porque modelos de linguagem nunca erram em questões jurídicas.",
+          "melhor": false,
+          "feedback": "Modelos podem alucinar cláusula ou lei inexistente, como visto nas lições sobre alucinação. Confiar cegamente é justamente o risco a evitar."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que otimizar uma rota de entrega com muitas restrições (janela de horário, capacidade de veículo) não é uma boa tarefa para simplesmente pedir ao chat?",
+      "alternativas": [
+        {
+          "texto": "Porque é um problema de otimização matemática com garantia; um chat gera uma sequência plausível, não uma solução otimizada e verificada.",
+          "correta": true,
+          "explicacao": "Esse tipo de problema pede uma ferramenta de otimização dedicada (um solver), que garante respeitar as restrições, ao contrário de uma resposta gerada por chat."
+        },
+        {
+          "texto": "Porque o chat não consegue processar texto com números.",
+          "correta": false,
+          "explicacao": "O chat processa números perfeitamente. O problema não é processar números, é a falta de garantia matemática de uma resposta gerada por chat."
+        },
+        {
+          "texto": "Porque rotas de entrega são um assunto proibido para o chat.",
+          "correta": false,
+          "explicacao": "Não é um assunto proibido; o chat pode até ajudar a preparar os dados. O problema é usá-lo para calcular a rota ótima em si."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a orientação sobre dado sensível e Claude.",
+      "texto": "Antes de colar um dado sensível numa conversa, verifique a política da sua empresa e ___, em vez de assumir que está tudo bem.",
+      "opcoes": [
+        {
+          "texto": "confirme se aquele tipo de dado pode sair do ambiente controlado",
+          "correta": true,
+          "explicacao": "Dado sensível (pessoal, financeiro, de saúde) exige checar a política antes, não depois. Assumir sem checar é o risco a evitar."
+        },
+        {
+          "texto": "cole de qualquer forma, já que depois dá para apagar a conversa",
+          "correta": false,
+          "explicacao": "Apagar a conversa depois não desfaz o risco de ter exposto um dado sensível sem autorização prévia."
+        },
+        {
+          "texto": "peça para o modelo esquecer o dado assim que possível",
+          "correta": false,
+          "explicacao": "Pedir para o modelo 'esquecer' não é um controle de segurança confiável. A prevenção precisa vir antes de colar o dado, não depois."
+        }
+      ]
+    }
+  ]
+}

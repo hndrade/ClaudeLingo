@@ -1,0 +1,75 @@
+{
+  "id": "prompt-21-checklist-reverso",
+  "trilha": "prompt",
+  "titulo": "Checklist reverso",
+  "nivel": 4,
+  "prereq": ["prompt-20-devils-advocate"],
+  "xp": 40,
+  "conceito": "**Checklist reverso**: antes de dar a resposta por pronta, peça ao modelo o que ficou faltando nela: \"liste o que esta análise NÃO cobre e o que você assumiu sem me perguntar\".\n\nUma resposta fluente parece completa porque você não enxerga o que não está lá. O modelo sabe apontar os próprios buracos, mas só quando recebe a ordem.\n\n**Quando usar**: entregável que vai apoiar uma decisão (relatório, parecer, proposta); é uma auditoria de completude que custa um prompt. **Quando não usar**: rascunho descartável ou brainstorm, onde lacuna não custa nada.\n\nSaída esperada: omissões relevantes, premissas assumidas em silêncio e o que fornecer para fechar cada lacuna.",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**Tiago, analista de RH.** Terminou com a IA um parecer sobre a nova política de home office que o comitê vota amanhã cedo. O texto está fluente, bem estruturado, parece completo. Restam 2 horas de trabalho hoje. Qual é o melhor uso delas?",
+      "alternativas": [
+        {
+          "texto": "Pedir ao modelo uma revisão final de gramática e tom, e uma versão mais persuasiva da conclusão, já que o comitê decide amanhã.",
+          "melhor": false,
+          "feedback": "Polir superfície quando o risco é de buraco: se o parecer não cobre, por exemplo, o custo trabalhista da mudança, nenhuma conclusão persuasiva salva Tiago da pergunta do comitê. Forma depois, completude primeiro."
+        },
+        {
+          "texto": "Pedir: \"não reescreva ainda. Liste o que este parecer não cobre e que o comitê pode perguntar, as premissas que você assumiu sem me perguntar e que dado fecharia cada lacuna, em ordem de impacto na votação.\" Depois decidir o que preencher nas 2 horas.",
+          "melhor": true,
+          "feedback": "Auditoria barata na hora certa: o entregável vai para decisão e ainda há tempo de fechar as lacunas graves. A ordem por impacto diz onde gastar as 2 horas, e o \"não reescreva\" mantém o controle com Tiago."
+        },
+        {
+          "texto": "Pedir ao modelo uma segunda versão do parecer do zero, com outra estrutura, e comparar as duas para ver qual está mais completa.",
+          "melhor": false,
+          "feedback": "Parece prudência, mas duas versões geradas da mesma conversa compartilham os mesmos pontos cegos. A comparação mede estilo e estrutura, não completude, e consome as 2 horas escolhendo texto em vez de fechando lacunas."
+        }
+      ]
+    },
+    {
+      "tipo": "comparar_prompts",
+      "enunciado": "A análise de viabilidade da abertura de uma filial (valores fictícios) está pronta na conversa e vai amanhã para o sócio decidir. Qual prompt de acompanhamento audita a completude de verdade?",
+      "prompts": [
+        {
+          "rotulo": "Prompt A",
+          "texto": "Essa análise está completa? Falta alguma coisa importante?",
+          "saida_esperada": "Sim, a análise está bastante completa. Ela cobre investimento inicial, projeção de receita e ponto de equilíbrio, que são os pilares de uma decisão de expansão.\nSe quiser enriquecer, você poderia opcionalmente adicionar um benchmark de concorrentes.\nNo geral, é uma base sólida para a decisão.",
+          "melhor": false,
+          "explicacao": "Pergunta de sim ou não convida o sim: o modelo valida o próprio trabalho, cita o que já existe como prova de completude e rebaixa a lacuna a algo opcional. É a armadilha que o checklist reverso evita."
+        },
+        {
+          "rotulo": "Prompt B",
+          "texto": "Refaça a análise incluindo tudo o que ficou de fora, para ela ficar 100% completa.",
+          "saida_esperada": "Análise de viabilidade (versão ampliada)\n1. Investimento inicial... 2. Projeção de receita... 3. Ponto de equilíbrio...\n4. Análise de concorrência... 5. Cenário macroeconômico... 6. Riscos regulatórios...\n7. Plano de contratação... 8. Estratégia de marketing local...\n(O texto dobra de tamanho, misturando o essencial com seções genéricas.)",
+          "melhor": false,
+          "explicacao": "A pegadinha do atalho: parece resolver a lacuna em um passo, mas o conserto é invisível. Você nunca vê a lista do que faltava, não julga o que importa para o sócio, e \"tudo\" incha a análise com seção genérica sem dado real."
+        },
+        {
+          "rotulo": "Prompt C",
+          "texto": "Não reescreva a análise. Ela vai apoiar a decisão do sócio de abrir ou não a filial. Liste em bullets:\n1. O que a análise NÃO cobre e por que isso importa para essa decisão.\n2. O que você assumiu sem me perguntar (premissas de número, prazo ou comportamento).\n3. Para cada item, que dado eu teria que fornecer para fechar a lacuna.\nOrdene pelo impacto na decisão. Se alguma categoria não tiver item relevante, diga isso explicitamente.",
+          "saida_esperada": "Não coberto:\n1. Custo de rescisão se a filial fechar em 2 anos: muda o risco da decisão. Dado: multas do contrato de aluguel.\n2. Canibalização da loja atual: parte da receita projetada pode ser transferida, não nova. Dado: CEP dos clientes atuais.\nAssumido sem perguntar:\n1. Ritmo de maturação de 12 meses, baseado em média de mercado, não no seu histórico. Dado: curva da última loja aberta.\nCategoria sem item relevante: nenhuma.",
+          "melhor": true,
+          "explicacao": "Ancora a auditoria na decisão do sócio, separa omissão de premissa, exige o dado que fecha cada lacuna e prioriza por impacto. O \"não reescreva\" preserva a análise e a cláusula de categoria vazia impede lacuna inventada para preencher cota."
+        }
+      ]
+    },
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "Exercício de construção. O pedido abaixo é o que alguém digita 10 minutos antes de enviar um entregável importante. Monte o prompt completo do zero na caixa de edição, aplicando o checklist reverso. Depois compare com a referência e se avalie pela checklist.",
+      "prompt_fraco": "Dá uma conferida nesse relatório de fechamento antes de eu mandar pro CFO, vê se tá ok.",
+      "saida_fraca": "O relatório está bem organizado e as seções seguem uma ordem lógica. Sugestões pontuais: padronizar as casas decimais nas tabelas, alinhar o título da seção 3 e revisar uma concordância no parágrafo final. Feitos esses ajustes, está pronto para envio. (Conferiu forma, não conteúdo: nenhuma palavra sobre o que o relatório deixa de responder ao CFO.)",
+      "prompt_referencia": "O relatório abaixo (valores fictícios) vai para o CFO amanhã e apoia a decisão de liberar ou congelar o orçamento extra do trimestre. Não elogie e não reescreva nada ainda.\n\nFaça o checklist reverso dele:\n1. O que o relatório NÃO cobre e que o CFO provavelmente vai perguntar antes de decidir.\n2. Cada premissa que ele assume sem declarar (números projetados, sazonalidade, câmbio).\n3. Dados usados que têm limite de confiabilidade, e qual limite.\n4. Para cada item acima: o que eu preciso adicionar ou responder para fechar a lacuna.\n\nOrdene tudo por risco para a decisão. Se alguma categoria não tiver item relevante, diga explicitamente.\n\n[relatório]",
+      "saida_referencia": "1. Não coberto: efeito do reajuste de fornecedores já assinado para o próximo trimestre; o CFO vai perguntar como ele afeta a projeção. Fechar: adicionar cenário com o reajuste.\n2. Premissa não declarada: a projeção de receita repete a sazonalidade do ano passado, sem ajuste pela perda do cliente Alfa (fictício). Fechar: declarar a premissa e mostrar o número sem o cliente.\n3. Confiabilidade: os custos de outubro ainda são parciais, faltam notas de frete. Fechar: marcar a linha como preliminar.\n4. Categoria sem item relevante: nenhuma.\nMaior risco para a decisão: o item 2.",
+      "checklist": [
+        "Disse qual decisão o entregável vai apoiar e de quem?",
+        "Pediu explicitamente o que NÃO está coberto, em vez de perguntar se está bom?",
+        "Pediu as premissas assumidas sem estarem declaradas?",
+        "Proibiu elogio e reescrita antes da auditoria?",
+        "Pediu, para cada lacuna, o que fornecer ou responder para fechá-la?",
+        "Mandou ordenar por risco ou impacto na decisão, com saída explícita para categoria vazia?"
+      ]
+    }
+  ]
+}

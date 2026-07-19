@@ -1,0 +1,107 @@
+{
+  "id": "prompt-08-criterio-sucesso",
+  "trilha": "prompt",
+  "titulo": "Critério de sucesso, não adjetivo",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "conceito": "\"Bom, completo, caprichado\" não é instrução: é torcida. Adjetivo não é verificável, então o modelo o traduz em volume e formalidade.\n\n**Critério de sucesso** é o teste que a resposta precisa passar: \"correto, com fonte citada em cada item e sem nada fora do período\". Dá para conferir item a item e dá para devolver: \"refaça, o item 3 está sem fonte\".\n\nAntes de enviar, pergunte-se: como eu saberia que esta resposta está certa? O que você responder a isso vai no prompt.",
+  "exercicios": [
+    {
+      "tipo": "comparar_prompts",
+      "enunciado": "Levantamento de despesas fora da política no trimestre, a partir de uma planilha (valores fictícios). Qual prompt produz uma resposta que dá para conferir?",
+      "prompts": [
+        {
+          "rotulo": "Prompt A",
+          "texto": "Analise a planilha de despesas abaixo e faça um levantamento completo e caprichado das irregularidades.\n\n[planilha]",
+          "saida_esperada": "A análise da planilha revela alguns pontos de atenção relevantes.\nHá despesas que merecem revisão quanto à documentação de suporte.\nAlgumas categorias apresentam valores acima do padrão usual.\nRecomenda-se reforçar os controles internos e o fluxo de aprovação.",
+          "melhor": false,
+          "explicacao": "\"Completo e caprichado\" vira prosa de auditoria genérica: nenhuma linha citada, nenhum item conferível. A resposta parece profissional e não serve para nada."
+        },
+        {
+          "rotulo": "Prompt B",
+          "texto": "Na planilha abaixo, liste toda despesa que violar pelo menos uma destas regras:\n1. Sem nota fiscal anexada.\n2. Acima de R$ 500 sem aprovação registrada.\n3. Data fora de 01/04 a 30/06.\nFormato: linha da planilha, regra violada, valor. Se nenhuma violar, escreva \"nenhuma encontrada\". Não inclua despesas que apenas pareçam altas.\n\n[planilha]",
+          "saida_esperada": "Linha 12: regra 1 (sem nota fiscal), R$ [valor].\nLinha 27: regra 2 (acima de R$ 500 sem aprovação), R$ [valor].\nLinha 31: regras 2 e 3 (sem aprovação e data 08/07), R$ [valor].\nDemais linhas: em conformidade com as 3 regras.",
+          "melhor": true,
+          "explicacao": "As 3 regras são o critério de sucesso: cada achado aponta linha, regra e valor, então dá para conferir na planilha em minutos e devolver o que estiver errado. O \"não inclua o que apenas parece alto\" ainda corta falso positivo."
+        },
+        {
+          "rotulo": "Prompt C",
+          "texto": "Analise a planilha de despesas abaixo com máximo rigor. Seja minucioso e não deixe passar absolutamente nada suspeito.\n\n[planilha]",
+          "saida_esperada": "Foram identificados diversos pontos potencialmente suspeitos:\nLinha 5: valor levemente acima da média da categoria.\nLinha 9: descrição curta, o que pode indicar falta de detalhamento.\nLinha 12: sem nota fiscal anexada.\n(segue apontando mais de 20 linhas, a maioria por critérios que o modelo mesmo inventou)",
+          "melhor": false,
+          "explicacao": "Rigor sem critério vira paranoia: o modelo inventa os próprios testes e mistura 1 achado real com 19 falsos positivos que você terá que triar na mão. \"Minucioso\" é adjetivo, não teste."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Qual instrução permite verificar objetivamente se a resposta serviu?",
+      "alternativas": [
+        {
+          "texto": "Resuma o relatório de forma clara, profissional e bem estruturada.",
+          "correta": false,
+          "explicacao": "Os três adjetivos dependem de opinião: não há como dizer que a resposta falhou. O modelo responde com formalidade e você fica sem teste de aceite."
+        },
+        {
+          "texto": "Resuma o relatório em até 5 bullets, cada um citando a página de origem do dado.",
+          "correta": true,
+          "explicacao": "Dá para contar os bullets e checar cada página citada: a resposta passa ou não passa. Critério verificável também permite devolver com precisão o que refazer."
+        },
+        {
+          "texto": "Faça o melhor resumo possível, como se fosse para a diretoria.",
+          "correta": false,
+          "explicacao": "\"Melhor possível\" e o público sugerem esmero, mas não definem nenhum teste. O modelo entrega polimento, não precisão, e você não sabe o que cobrar."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Diego, RH.** Vai usar IA para triar 80 currículos de analista de dados. Como pedir a triagem?",
+      "alternativas": [
+        {
+          "texto": "Selecione os melhores candidatos e justifique cada escolha.",
+          "melhor": false,
+          "feedback": "\"Melhor\" é adjetivo: o modelo cria critérios próprios e pode mudar de critério no meio da pilha. As justificativas viram prosa não comparável entre candidatos, e a triagem fica inauditável."
+        },
+        {
+          "texto": "Aprove quem atende aos 3 requisitos: SQL declarado no currículo, 3 anos ou mais na função, disponibilidade para híbrido. Liste os reprovados com o requisito que faltou.",
+          "melhor": true,
+          "feedback": "Critérios verificáveis contra o texto do currículo, aplicados igualmente aos 80. A lista de reprovados com o motivo permite auditar a triagem e recuperar casos de fronteira, coisa que adjetivo nenhum oferece."
+        },
+        {
+          "texto": "Dê uma nota de 0 a 10 para cada currículo e ordene do melhor para o pior.",
+          "melhor": false,
+          "feedback": "A nota parece objetiva, mas sem critério declarado é adjetivo disfarçado de número: dois currículos parecidos podem receber notas diferentes, e ninguém sabe o que um 7 significa. Número sem rubrica não é critério."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete para transformar o pedido em algo verificável.",
+      "texto": "Revise o contrato e aponte os problemas. A resposta só serve se ___.",
+      "opcoes": [
+        {
+          "texto": "cada problema citar a cláusula e a regra que ele viola",
+          "correta": true,
+          "explicacao": "Vira um teste: sem cláusula citada ou sem regra apontada, o item falhou e volta. É a diferença entre opinião e achado verificável."
+        },
+        {
+          "texto": "for completa e aprofundada",
+          "correta": false,
+          "explicacao": "Adjetivos: não há como medir \"completa\". O modelo responde com volume, e volume não é cobertura."
+        },
+        {
+          "texto": "demonstrar grande atenção aos detalhes",
+          "correta": false,
+          "explicacao": "\"Atenção aos detalhes\" descreve uma postura, não um resultado conferível. O modelo apenas adota tom meticuloso."
+        },
+        {
+          "texto": "tiver tom técnico e profissional",
+          "correta": false,
+          "explicacao": "Tom não valida conteúdo: um problema inventado em linguagem técnica continua inventado. O teste precisa mirar o que a resposta afirma, não como ela soa."
+        }
+      ]
+    }
+  ]
+}

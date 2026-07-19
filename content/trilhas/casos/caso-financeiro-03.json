@@ -1,0 +1,72 @@
+{
+  "id": "caso-financeiro-03",
+  "trilha": "casos",
+  "titulo": "Jorge e a análise de variação",
+  "nivel": 3,
+  "area": "financeiro",
+  "prereq": [],
+  "xp": 30,
+  "conceito": "**Jorge, analista financeiro na Solaris Indústria.** Agora precisa explicar, para a diretoria, por que o realizado do trimestre se afastou do orçado por centro de custo. Ele tem a planilha de orçado vs realizado e trinta minutos.\n\nO prompt que ele escreveu é fraco: pede análise sem dizer o recorte, o formato nem o que fazer quando não há dado de causa. O resultado é uma prosa que descreve a planilha inteira. Aqui a IA é ótima parceira: o conserto é dar escopo (maiores variações), formato (tabela), e a regra de honestidade (hipótese marcada como hipótese, sem inventar causa)."
+,
+  "exercicios": [
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "Este é o prompt real que Jorge mandou. Reescreva na caixa aplicando escopo, formato e tratamento de incerteza, depois compare com a referência e se autoavalie.",
+      "prompt_fraco": "Analisa esse orçado vs realizado do trimestre e me explica as variações.\n\n[planilha por centro de custo]",
+      "saida_fraca": "A análise do trimestre mostra que a empresa teve diversas variações entre o orçado e o realizado. Alguns centros de custo gastaram mais do que o previsto, enquanto outros gastaram menos. De modo geral, o desempenho ficou dentro do esperado, com pontos de atenção que merecem acompanhamento nos próximos meses. Recomenda-se monitorar de perto os gastos.",
+      "prompt_referencia": "Você é meu apoio para uma análise de variação orçamentária (orçado vs realizado) do trimestre, por centro de custo.\nTarefa: liste os 5 centros de custo com maior variação percentual, do maior para o menor.\nFormato: tabela com colunas orçado, realizado, variação em R$, variação em percentual e possível causa.\nRegras de honestidade: na coluna de causa, só escreva uma explicação se ela estiver nos dados que enviei; caso contrário escreva hipótese a confirmar e nunca apresente suposição como fato.\nSepare variações favoráveis (gastou menos) das desfavoráveis (gastou mais).\nNão recomende ações genéricas; foque em descrever a variação.\n\n[planilha por centro de custo]",
+      "saida_referencia": "Variações desfavoráveis (valores fictícios)\n| Centro de custo | Orçado | Realizado | Var. R$ | Var. % | Causa |\n| Logística | 120.000 | 156.000 | +36.000 | +30% | hipótese a confirmar |\n| Manutenção | 80.000 | 96.000 | +16.000 | +20% | frota parada (consta na nota da planilha) |\n\nVariações favoráveis\n| Centro de custo | Orçado | Realizado | Var. R$ | Var. % | Causa |\n| Marketing | 60.000 | 48.000 | -12.000 | -20% | campanha adiada (consta na planilha) |\n\nObservação: 3 causas ficaram como hipótese a confirmar por falta de dado.",
+      "checklist": [
+        "Defini o escopo (as maiores variações, não a planilha toda)?",
+        "Declarei o formato de saída (tabela com colunas nomeadas)?",
+        "Exigi variação em R$ e em percentual, não só um dos dois?",
+        "Dei uma regra para quando não há dado de causa (hipótese a confirmar)?",
+        "Proibi apresentar suposição como fato?",
+        "Separei variações favoráveis das desfavoráveis?"
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Qual acréscimo ao prompt de Jorge mais reduz o risco de a diretoria receber uma causa inventada?",
+      "alternativas": [
+        {
+          "texto": "Se a causa da variação não estiver nos dados enviados, escreva hipótese a confirmar em vez de deduzir um motivo.",
+          "correta": true,
+          "explicacao": "Ataca direto a alucinação mais cara aqui: o modelo preencher a coluna de causa com um motivo plausível e falso. A instrução dá uma saída honesta para o caso de falta de dado."
+        },
+        {
+          "texto": "Peça para o modelo usar um tom mais executivo e seguro nas conclusões.",
+          "correta": false,
+          "explicacao": "Tom seguro sobre dado incerto é exatamente o perigo: aumenta a confiança da diretoria numa causa que talvez seja invenção. O que falta é honestidade, não firmeza."
+        },
+        {
+          "texto": "Peça uma análise mais longa e detalhada, cobrindo todos os centros de custo.",
+          "correta": false,
+          "explicacao": "Mais volume não é mais verdade. Cobrir tudo dilui as variações que importam e multiplica as oportunidades de o modelo inventar causa para cada linha."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a regra que transforma o pedido de Jorge em algo priorizado e conferível.",
+      "texto": "Liste os ___ centros de custo com maior variação percentual, em tabela, separando favoráveis de desfavoráveis.",
+      "opcoes": [
+        {
+          "texto": "5",
+          "correta": true,
+          "explicacao": "Número explícito força o modelo a priorizar, que é o trabalho difícil, e dá a Jorge uma saída de tamanho previsível para levar à diretoria."
+        },
+        {
+          "texto": "principais",
+          "correta": false,
+          "explicacao": "Principais para quem? Sem número, o modelo decide se são 3 ou 15 e a priorização fica frouxa."
+        },
+        {
+          "texto": "todos os",
+          "correta": false,
+          "explicacao": "Devolve a planilha inteira reescrita em prosa: o oposto de uma análise de variação, que existe para separar o que se afastou do que ficou na linha."
+        }
+      ]
+    }
+  ]
+}

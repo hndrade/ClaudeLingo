@@ -1,0 +1,75 @@
+{
+  "id": "llm-01-janela-contexto",
+  "trilha": "llm",
+  "titulo": "Janela de contexto: o que o modelo consegue ver de uma vez",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "conceito": "A janela de contexto é o quanto de texto, medido em tokens, o modelo consegue considerar numa mesma conversa: o que você escreveu, os documentos colados e o que ele já respondeu.\n\nQuando a conversa passa desse limite, o começo começa a sair de vista, mesmo que ele pareça lembrar. Conversas muito longas ou muitos arquivos colados podem fazer o modelo perder uma instrução do início.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "O que compõe a janela de contexto numa conversa?",
+      "alternativas": [
+        {
+          "texto": "Tudo que está na conversa até aquele ponto: o que você escreveu, arquivos colados e o que o modelo já respondeu.",
+          "correta": true,
+          "explicacao": "A janela de contexto soma tudo isso, e o total precisa caber dentro do limite de tokens do modelo."
+        },
+        {
+          "texto": "Só a última pergunta que você fez.",
+          "correta": false,
+          "explicacao": "A janela de contexto acumula toda a conversa até ali, não só a última mensagem."
+        },
+        {
+          "texto": "Apenas o tempo de resposta do modelo.",
+          "correta": false,
+          "explicacao": "Tempo de resposta é outra métrica (latência), sem relação direta com o que compõe a janela de contexto."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Paula, área de atendimento.** Numa conversa muito longa com o modelo, ele parece 'esquecer' uma instrução que Paula deu lá no começo. Qual é a explicação mais provável?",
+      "alternativas": [
+        {
+          "texto": "A conversa provavelmente ultrapassou a janela de contexto útil, e a instrução do início saiu de vista.",
+          "melhor": true,
+          "feedback": "Esse é o comportamento esperado quando a conversa cresce muito: partes do início podem sair da janela de contexto efetiva."
+        },
+        {
+          "texto": "O modelo está de mau humor hoje.",
+          "melhor": false,
+          "feedback": "Modelos não têm humor. O comportamento tem explicação técnica: limite de contexto, não estado emocional."
+        },
+        {
+          "texto": "Paula deveria repetir a pergunta em letras maiúsculas para ele prestar mais atenção.",
+          "melhor": false,
+          "feedback": "Maiúsculas não resolvem limite de contexto. A solução real é reforçar a instrução novamente ou começar uma conversa nova mais enxuta."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a frase sobre o que fazer quando uma instrução importante precisa sobreviver numa conversa longa.",
+      "texto": "Numa conversa muito longa, é mais seguro ___ a instrução importante do que confiar que o modelo ainda vê o início.",
+      "opcoes": [
+        {
+          "texto": "repetir",
+          "correta": true,
+          "explicacao": "Repetir a instrução relevante perto do pedido atual garante que ela esteja dentro da parte da conversa que o modelo está considerando."
+        },
+        {
+          "texto": "gritar",
+          "correta": false,
+          "explicacao": "Tom não resolve limite de contexto; o problema é estrutural, não de ênfase."
+        },
+        {
+          "texto": "esconder",
+          "correta": false,
+          "explicacao": "Esconder a instrução tornaria ainda mais difícil ela ser seguida."
+        }
+      ]
+    }
+  ]
+}

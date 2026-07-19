@@ -1,0 +1,71 @@
+{
+  "id": "caso-atendimento-04",
+  "trilha": "casos",
+  "titulo": "Paula: escalonar caso sensível é decisão humana",
+  "nivel": 4,
+  "area": "atendimento",
+  "prereq": [],
+  "xp": 40,
+  "nao_usar_ia": true,
+  "conceito": "A IA pode triar e sugerir rota para tickets comuns. Mas um caso sensível (ameaça de processo, risco à saúde, dado vazado, cliente em crise) não pode ser resolvido nem encerrado por resposta automática.\n\nNesses casos, o papel da IA é sinalizar e escalar para uma pessoa, nunca responder sozinha. O erro é deixar o automático tratar o que exige julgamento e responsabilidade humana.",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**Paula, área de atendimento.** Entra um ticket: o cliente diz que o produto causou um problema de saúde e menciona advogado. O fluxo automático de respostas está ligado. O que deve acontecer?",
+      "alternativas": [
+        {
+          "texto": "O fluxo automático responde com o script padrão de reclamação e encerra o ticket.",
+          "melhor": false,
+          "feedback": "Menção a saúde e a advogado é caso sensível, com risco jurídico e humano. Uma resposta automática pode agravar, gerar prova contra a empresa e tratar como rotina o que exige cuidado e responsabilidade."
+        },
+        {
+          "texto": "A IA detecta os sinais de sensibilidade, não responde ao cliente e escala imediatamente para um humano e o jurídico.",
+          "melhor": true,
+          "feedback": "Uso correto: a IA triа e sinaliza, mas a resposta e a condução ficam com quem pode assumir a responsabilidade. Caso sensível não se encerra no automático."
+        },
+        {
+          "texto": "A IA responde pedindo mais detalhes para resolver sozinha e ganhar tempo.",
+          "melhor": false,
+          "feedback": "Puxar conversa automática num caso com risco jurídico e de saúde é arriscado: cada mensagem automática pode virar prova e passar a impressão de descaso. O certo é escalar, não continuar sozinha."
+        }
+      ]
+    },
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "Pedido cru que deixaria o automático tratar tudo. Monte na caixa o prompt que usa a IA para triar e escalar sem responder o sensível, compare com a referência e se autoavalie.",
+      "prompt_fraco": "Responde automaticamente todos os tickets da fila.",
+      "saida_fraca": "Todos os 40 tickets foram respondidos automaticamente com a solução mais adequada a cada caso, incluindo o do cliente que mencionou problema de saúde e ação judicial. (Tratar o caso sensível como os outros é o erro grave.)",
+      "prompt_referencia": "Triе a fila de tickets, mas NÃO responda sozinha os casos sensíveis.\nMarque como 'escalar_humano' e não gere resposta ao cliente quando houver: menção a saúde, segurança, ameaça de processo, dado pessoal vazado, ou cliente em situação de crise.\nPara os tickets comuns, sugira uma resposta dentro da política, que eu reviso antes de enviar.\nNo fim, liste separadamente os tickets escalados e por quê.\n\n[fila de tickets]",
+      "saida_referencia": "Comuns (resposta sugerida para revisão): tickets 1, 2, 4, 5...\n\nEscalar para humano (sem resposta automática):\n- Ticket 3: menciona problema de saúde e advogado. Risco jurídico e de saúde.\n- Ticket 8: relata dado pessoal exposto. Possível incidente de privacidade.\n\nNenhuma resposta foi enviada aos tickets escalados.",
+      "checklist": [
+        "Listei os sinais que tornam um ticket sensível?",
+        "Proibi a IA de responder sozinha os sensíveis?",
+        "Mandei escalar para humano esses casos?",
+        "Deixei a resposta dos comuns para minha revisão?",
+        "Pedi a lista dos escalados com o motivo?",
+        "Mantive a decisão sensível com uma pessoa responsável?"
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que um caso sensível não deve ser encerrado por resposta automática, mesmo que a IA escreva bem?",
+      "alternativas": [
+        {
+          "texto": "Porque a IA escreve devagar demais para casos urgentes.",
+          "correta": false,
+          "explicacao": "Velocidade não é o ponto. Mesmo instantânea, a resposta automática não pode assumir a responsabilidade que o caso exige."
+        },
+        {
+          "texto": "Porque envolve risco jurídico, de saúde ou de privacidade que exige julgamento e alguém que responda pela decisão.",
+          "correta": true,
+          "explicacao": "Exato. Escrever bem não é o mesmo que poder decidir. Esses casos precisam de uma pessoa que avalie o contexto e assuma a responsabilidade legal e humana."
+        },
+        {
+          "texto": "Porque a IA se recusa a responder casos sensíveis.",
+          "correta": false,
+          "explicacao": "Ela não se recusa sozinha, e por isso o fluxo precisa ser desenhado para escalar. Deixar por conta do automático é o risco que se quer evitar."
+        }
+      ]
+    }
+  ]
+}

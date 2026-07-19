@@ -1,0 +1,62 @@
+{
+  "id": "fund-01-machine-learning",
+  "trilha": "fundamentos",
+  "titulo": "Machine learning: aprender com dados em vez de programar regras",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "conceito": "Um programa tradicional segue regras escritas por uma pessoa: se isso, faça aquilo. Machine learning inverte a lógica: você mostra exemplos (dados) e o sistema encontra o padrão sozinho, sem que ninguém escreva a regra explícita.\n\nUm modelo de linguagem é isso em escala gigante: aprendeu padrões de bilhões de textos. Ele não decorou respostas prontas, generalizou um padrão.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Qual frase melhor descreve o que muda de um programa tradicional para um sistema de machine learning?",
+      "alternativas": [
+        {
+          "texto": "No programa tradicional, um humano escreve as regras; no machine learning, o sistema encontra o padrão a partir de exemplos.",
+          "correta": true,
+          "explicacao": "Essa é a diferença central: de regra escrita à mão para padrão aprendido a partir de dados."
+        },
+        {
+          "texto": "Machine learning é só um programa tradicional rodando em um computador mais rápido.",
+          "correta": false,
+          "explicacao": "Velocidade de hardware não é a diferença. A diferença é de onde vem a regra: de uma pessoa ou dos dados."
+        },
+        {
+          "texto": "Machine learning é a mesma coisa que programação tradicional, só com outro nome.",
+          "correta": false,
+          "explicacao": "São abordagens diferentes: uma parte de regras explícitas, a outra de padrões extraídos de exemplos."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Rafael, área de marketing.** Um colega diz: 'o chatbot só decorou um monte de respostas prontas e escolhe uma quando você pergunta algo parecido'. Como Rafael corrige isso?",
+      "alternativas": [
+        {
+          "texto": "Concorda: é realmente uma tabela gigante de respostas fixas.",
+          "melhor": false,
+          "feedback": "Isso descreveria um sistema de regras fixas, não um modelo treinado. Um modelo generaliza padrões, não escolhe entre respostas prontas."
+        },
+        {
+          "texto": "Explica que o modelo aprendeu padrões de linguagem a partir de exemplos, então consegue responder a perguntas que nunca viu exatamente daquela forma.",
+          "melhor": true,
+          "feedback": "É a explicação correta: o aprendizado generaliza o padrão, permitindo lidar com perguntas novas, não só repetir o que já viu."
+        },
+        {
+          "texto": "Diz que ninguém sabe como o chatbot funciona por dentro.",
+          "melhor": false,
+          "feedback": "Existe imprecisão real sobre certos detalhes internos, mas o princípio geral (aprender padrão a partir de dados) é conhecido e explicável."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie o termo com sua definição.",
+      "pares": [
+        { "conceito": "Dado de treino", "definicao": "Os exemplos que o sistema usa para aprender o padrão" },
+        { "conceito": "Modelo", "definicao": "O resultado do aprendizado, capaz de generalizar para casos novos" },
+        { "conceito": "Regra escrita à mão", "definicao": "Como funciona um programa tradicional, sem aprendizado" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "id": "fund-02-redes-neurais",
+  "trilha": "fundamentos",
+  "titulo": "Redes neurais em linguagem humana",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "conceito": "Uma rede neural é uma cadeia de camadas que transforma números em outros números, ajustando pesos internos até a saída bater com o exemplo certo durante o treino. Não há neurônio biológico ali: é multiplicação, soma e uma função que decide quanto daquele sinal passa adiante.\n\nPense nela como um funil com muitos ajustes internos, calibrados por repetição até acertar.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "O que são os 'pesos' de uma rede neural?",
+      "alternativas": [
+        {
+          "texto": "Números internos que a rede ajusta durante o treino até a saída ficar próxima do exemplo certo.",
+          "correta": true,
+          "explicacao": "Os pesos são exatamente isso: os parâmetros ajustáveis que o treino calibra."
+        },
+        {
+          "texto": "O tamanho em megabytes do arquivo do modelo.",
+          "correta": false,
+          "explicacao": "Tamanho de arquivo é consequência de ter muitos pesos, não é a definição de peso."
+        },
+        {
+          "texto": "A quantidade de perguntas que o modelo já respondeu.",
+          "correta": false,
+          "explicacao": "Pesos são fixados no treino, antes de qualquer conversa acontecer. Conversas não mudam os pesos."
+        }
+      ]
+    },
+    {
+      "tipo": "ordenacao",
+      "enunciado": "Ordene o que acontece durante uma rodada de treino de uma rede neural.",
+      "etapas": [
+        "O dado de entrada passa pelas camadas da rede",
+        "A saída da rede é comparada com a resposta certa esperada",
+        "O erro entre a saída e a resposta certa é calculado",
+        "Os pesos são ajustados um pouco para reduzir esse erro"
+      ],
+      "explicacao": "Primeiro o dado percorre a rede e gera uma saída; só então dá para comparar com o certo, calcular o erro e ajustar os pesos. Sem saída não há o que comparar, e sem comparação não há o que ajustar."
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a frase sobre o que uma rede neural NÃO é.",
+      "texto": "Uma rede neural artificial ___ um cérebro biológico; é uma estrutura matemática de camadas e pesos.",
+      "opcoes": [
+        {
+          "texto": "não replica literalmente",
+          "correta": true,
+          "explicacao": "O nome é inspirado em neurônios biológicos, mas a rede é matemática: multiplicação, soma e funções de ativação, não células vivas."
+        },
+        {
+          "texto": "é uma cópia exata de",
+          "correta": false,
+          "explicacao": "Isso superestima a semelhança. É uma inspiração de nome, não uma réplica funcional de neurônios biológicos."
+        },
+        {
+          "texto": "funciona exatamente como",
+          "correta": false,
+          "explicacao": "O funcionamento é matemático (pesos, camadas, ativação), bem diferente da química e eletricidade de um neurônio real."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "id": "caso-atendimento-03",
+  "trilha": "casos",
+  "titulo": "Paula: consertar a classificação de tickets",
+  "nivel": 3,
+  "area": "atendimento",
+  "prereq": [],
+  "xp": 30,
+  "conceito": "Classificar ticket serve para rotear e priorizar. Se as categorias são vagas ou se sobrepõem, a classificação não ajuda ninguém.\n\nO prompt fraco pede 'classifica esses tickets' sem dar as categorias. O forte fixa a lista fechada de categorias, o critério de prioridade e o que fazer com o que não encaixa, para a saída ser acionável.",
+  "exercicios": [
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "**Paula, área de atendimento.** Quer classificar a fila de tickets para rotear ao time certo. O prompt abaixo inventa categorias a cada rodada. Reescreva na caixa, compare com a referência e se autoavalie.",
+      "prompt_fraco": "Classifica esses tickets por tipo:\n\n[lista de tickets]",
+      "saida_fraca": "Ticket 1: problema técnico. Ticket 2: dúvida. Ticket 3: reclamação geral. Ticket 4: outro assunto. (Categorias inventadas na hora, vagas e sobrepostas; 'dúvida' e 'outro' não roteiam para ninguém.)",
+      "prompt_referencia": "Classifique cada ticket abaixo em UMA das categorias desta lista fechada: [cobranca, entrega, defeito_produto, acesso_conta, cancelamento].\nPara cada ticket: categoria, prioridade (alta se o cliente está sem usar o serviço, senão normal) e uma justificativa de uma linha.\nSe um ticket não encaixar em nenhuma categoria, marque como 'revisar_humano' em vez de forçar.\nNão crie categorias novas.\n\n[lista de tickets]",
+      "saida_referencia": "Ticket 1: cobranca | alta | cobrado em duplicidade, cliente pede estorno.\nTicket 2: entrega | normal | pergunta status do envio.\nTicket 3: acesso_conta | alta | não consegue logar, está sem usar o serviço.\nTicket 4: revisar_humano | normal | mistura elogio e uma dúvida fora das categorias.",
+      "checklist": [
+        "Dei uma lista fechada de categorias?",
+        "Proibi criar categorias novas?",
+        "Defini o critério de prioridade?",
+        "Pedi justificativa por ticket?",
+        "Instruí a marcar 'revisar_humano' quando não encaixa?",
+        "Deixei a saída pronta para rotear ao time certo?"
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que dar uma lista fechada de categorias é melhor que deixar a IA nomear os tipos?",
+      "alternativas": [
+        {
+          "texto": "Porque a IA escreve nomes de categoria mais bonitos.",
+          "correta": false,
+          "explicacao": "Estética não importa aqui. O que importa é a saída ser consistente e roteável, o que só a lista fechada garante."
+        },
+        {
+          "texto": "Porque garante categorias consistentes que batem com os times e a fila, rodada após rodada.",
+          "correta": true,
+          "explicacao": "Exato. Sem lista fechada, cada rodada inventa nomes diferentes e a classificação não roteia. A lista fixa liga o ticket ao time responsável."
+        },
+        {
+          "texto": "Porque a IA não consegue ler tickets longos.",
+          "correta": false,
+          "explicacao": "Ela lê tickets longos sem dificuldade. O problema não é leitura, é a inconsistência de categorias inventadas a cada vez."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie cada decisão de design da classificação com o problema que ela evita.",
+      "pares": [
+        { "conceito": "Lista fechada de categorias", "definicao": "Evita nomes diferentes a cada rodada" },
+        { "conceito": "Critério de prioridade explícito", "definicao": "Evita tudo virar urgente ou nada virar" },
+        { "conceito": "Opção revisar_humano", "definicao": "Evita forçar o que não encaixa numa categoria errada" }
+      ]
+    }
+  ]
+}

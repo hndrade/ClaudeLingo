@@ -1,0 +1,74 @@
+{
+  "id": "prompt-15-iteracao",
+  "trilha": "prompt",
+  "titulo": "Iterar sem recomeçar",
+  "nivel": 3,
+  "prereq": [],
+  "xp": 30,
+  "conceito": "A primeira saída veio 80% boa e 20% errada. Reescrever o prompt do zero joga fora os 80%: a nova versão conserta uma coisa e quebra outra, e você recomeça a avaliação inteira.\n\nItere apontando O QUE preservar e O QUE mudar: \"mantenha a estrutura e os números; refaça só o tom da seção 2, menos alarmista\". Preservação explícita primeiro, mudança cirúrgica depois, com direção clara (menos X, mais Y).",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**Diego, marketing.** Pediu à IA um texto de lançamento. Veio bom: estrutura certa, argumentos certos, mas o segundo parágrafo exagera e promete demais. O que fazer?",
+      "alternativas": [
+        {
+          "texto": "Reescrever o prompt original, agora bem mais detalhado, e gerar tudo de novo.",
+          "melhor": false,
+          "feedback": "Loteria: a nova versão pode consertar o parágrafo 2 e piorar os três que estavam bons. Diego perde o que já tinha aprovado e recomeça a avaliação do zero."
+        },
+        {
+          "texto": "Responder na mesma conversa: mantenha tudo como está; reescreva apenas o segundo parágrafo, sem promessas absolutas, tom confiante mas verificável.",
+          "melhor": true,
+          "feedback": "Preserva o que já passou no crivo e concentra a mudança onde dói, com direção clara (sem promessas absolutas). O modelo sabe o que não pode tocar."
+        },
+        {
+          "texto": "Copiar o texto para um documento e consertar o parágrafo na mão, sem falar com o modelo.",
+          "melhor": false,
+          "feedback": "Resolve hoje, mas só desta vez: em texto longo ou tarefa que se repete, editar na mão vira o gargalo. Ensinar o ajuste ao modelo faz a próxima versão já vir certa."
+        }
+      ]
+    },
+    {
+      "tipo": "comparar_prompts",
+      "enunciado": "O modelo entregou o rascunho do informe de resultados: boa estrutura, números certos, mas a seção de riscos saiu alarmista. Qual follow-up funciona?",
+      "prompts": [
+        {
+          "rotulo": "Prompt A",
+          "texto": "Ficou ruim, refaz.",
+          "saida_esperada": "(O modelo reescreve o informe inteiro: nova estrutura, seções reorganizadas, números resumidos de outro jeito. A seção de riscos mudou, mas o que estava bom também mudou.)",
+          "melhor": false,
+          "explicacao": "Sem saber o que preservar, o modelo trata tudo como descartável. Os 80% bons vão embora junto com os 20% ruins."
+        },
+        {
+          "rotulo": "Prompt B",
+          "texto": "Deixa a seção de riscos melhor, mais profissional.",
+          "saida_esperada": "(A seção de riscos volta mais polida na forma, mas continua alarmista no conteúdo: \"melhor\" e \"profissional\" não dizem a direção da mudança. E as outras seções sofrem retoques que ninguém pediu.)",
+          "melhor": false,
+          "explicacao": "Mudança sem direção nem fronteira: adjetivo não é instrução. O modelo poliu a superfície e não tocou no problema real, o tom."
+        },
+        {
+          "rotulo": "Prompt C",
+          "texto": "Mantenha a estrutura, os títulos e todos os números exatamente como estão. Refaça apenas a seção 2 (Riscos): tom factual, sem adjetivos alarmistas, cada risco em uma linha com probabilidade e impacto. Não altere as demais seções.",
+          "saida_esperada": "Seção 2, Riscos (revisada):\n- Atraso do fornecedor principal: provável, impacto alto no prazo de entrega\n- Variação cambial: possível, impacto médio no custo\n- Rotatividade no time do projeto: pouco provável, impacto médio\n\n(Demais seções idênticas ao rascunho anterior.)",
+          "melhor": true,
+          "explicacao": "Preservação explícita, alvo delimitado e direção concreta (factual, probabilidade e impacto). A iteração muda só o que precisava mudar."
+        }
+      ]
+    },
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "O rascunho da IA veio quase bom, e o follow-up abaixo vai destruir a parte boa. Conserte a iteração: diga o que preservar e o que mudar, depois compare com a referência.",
+      "prompt_fraco": "Não ficou bom. Reescreve esse relatório de status, agora caprichando mais.",
+      "saida_fraca": "(O modelo gera um relatório novo: outra ordem de seções, sumário diferente, e o quadro de pendências que estava perfeito virou parágrafo corrido. O problema original, o tom vago dos próximos passos, continua lá. Duas versões depois, ninguém sabe mais qual versão tinha o quê.)",
+      "prompt_referencia": "O relatório está quase pronto. Mantenha exatamente como estão: a ordem das seções, o quadro de pendências e todos os prazos e números.\nMude apenas a seção Próximos Passos: troque as frases vagas (\"acompanhar o tema\", \"alinhar com o time\") por ações com verbo, responsável e data.\nNão altere mais nada.",
+      "saida_referencia": "Próximos Passos (revisado):\n- Enviar a minuta do contrato ao jurídico: Paula, até 24/07\n- Confirmar a janela de manutenção com o fornecedor: Rafael, até 28/07\n- Apresentar o plano de contingência na reunião mensal: Diego, em 01/08\n\n(Restante do relatório preservado, idêntico à versão anterior.)",
+      "checklist": [
+        "Listou explicitamente o que preservar (estrutura, números, trechos já aprovados)?",
+        "Delimitou a mudança a um trecho ou aspecto específico?",
+        "Deu a direção da mudança (menos X, mais Y), em vez de só \"melhora\"?",
+        "Proibiu alterações fora do alvo (\"não altere mais nada\")?",
+        "Iterou na mesma conversa, aproveitando o contexto, em vez de recomeçar do zero?"
+      ]
+    }
+  ]
+}

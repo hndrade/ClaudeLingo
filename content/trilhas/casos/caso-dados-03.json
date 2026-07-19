@@ -1,0 +1,58 @@
+{
+  "id": "caso-dados-03",
+  "trilha": "casos",
+  "titulo": "Lucas: entender uma consulta herdada",
+  "nivel": 3,
+  "area": "dados",
+  "prereq": [],
+  "xp": 30,
+  "conceito": "Herdar uma query longa e sem comentário é comum. A IA ajuda a decifrar, mas 'me explica essa query' devolve uma parafrase vaga.\n\nO prompt forte pede a explicação em partes (o que cada junção e filtro faz), o que a query assume, e onde ela pode estar errada ou desatualizada, para você poder confiar ou corrigir.",
+  "exercicios": [
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "**Lucas, área de dados.** Recebeu uma query de 60 linhas que ninguém documentou e alimenta um painel importante. O prompt abaixo devolve uma parafrase inútil. Reescreva na caixa, compare com a referência e se autoavalie.",
+      "prompt_fraco": "Me explica o que essa query faz:\n\n[query de 60 linhas]",
+      "saida_fraca": "Essa query seleciona dados de vendas, faz algumas junções com outras tabelas, aplica filtros e agrupamentos, e retorna um resultado consolidado usado para análise de desempenho comercial.",
+      "prompt_referencia": "Explique a query abaixo em partes, para eu decidir se posso confiar nela.\n1. O que cada junção (JOIN) conecta e por quê.\n2. O que cada filtro (WHERE) inclui e exclui, com atenção a datas e status.\n3. Que premissas a query assume (ex: exclui cancelados? considera imposto?).\n4. Pontos de risco: filtro que pode estar desatualizado, junção que duplica linha, ou coluna de nome ambíguo.\nNão reescreva a query, só explique. Se algo estiver ambíguo, diga 'não dá para saber sem os dados'.\n\n[query de 60 linhas]",
+      "saida_referencia": "1. JOINs: vendas com clientes (traz região) e com produtos (traz categoria).\n2. Filtros: só status 'faturada'; exclui devoluções; período dos últimos 12 meses pela data_venda.\n3. Premissas: ignora vendas canceladas; usa valor_liquido, ou seja, já sem imposto.\n4. Riscos: o filtro de 12 meses é fixo por data corrente, pode não bater com o fechamento contábil; o JOIN com produtos pode duplicar linha se um item tiver duas categorias. Verificar.",
+      "checklist": [
+        "Pedi explicação em partes (JOINs, filtros)?",
+        "Pedi as premissas que a query assume?",
+        "Pedi os pontos de risco (filtro velho, junção que duplica)?",
+        "Mandei não reescrever, só explicar?",
+        "Instruí a marcar o que não dá para saber sem os dados?",
+        "Foquei em decidir se posso confiar na query?"
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie cada parte da query com o que você precisa entender dela.",
+      "pares": [
+        { "conceito": "JOIN", "definicao": "O que ele conecta e se pode duplicar linhas" },
+        { "conceito": "WHERE", "definicao": "O que entra e o que fica de fora do resultado" },
+        { "conceito": "Premissa implícita", "definicao": "A regra de negócio que a query assume sem dizer" }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que pedir os 'pontos de risco' da query é mais útil que pedir só o que ela faz?",
+      "alternativas": [
+        {
+          "texto": "Porque deixa a resposta mais curta.",
+          "correta": false,
+          "explicacao": "Não é sobre tamanho. Pedir risco muda a natureza da resposta: de descrição para avaliação de confiança."
+        },
+        {
+          "texto": "Porque revela onde a query pode estar errada ou desatualizada, que é o que decide se você pode confiar nela.",
+          "correta": true,
+          "explicacao": "Exato. Saber o que a query faz não diz se está certa. Os riscos (filtro velho, junção que duplica) são o que você precisa checar antes de confiar no painel."
+        },
+        {
+          "texto": "Porque a IA só explica queries curtas.",
+          "correta": false,
+          "explicacao": "A IA explica queries longas sem problema. O ponto é pedir a análise de risco, não apenas a parafrase do que a query faz."
+        }
+      ]
+    }
+  ]
+}

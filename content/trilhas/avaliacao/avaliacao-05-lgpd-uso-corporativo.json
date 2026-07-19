@@ -1,0 +1,75 @@
+{
+  "id": "avaliacao-05-lgpd-uso-corporativo",
+  "trilha": "avaliacao",
+  "titulo": "LGPD em uso corporativo de IA",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "conceito": "A LGPD exige uma base legal para tratar dado pessoal, e minimização: usar só o dado necessário para a finalidade, não tudo que estiver disponível. Colar uma planilha inteira de clientes numa ferramenta de IA, quando só um campo importa, tende a violar minimização.\n\nEsta lição é educativa, não é aconselhamento jurídico. Em caso concreto de dúvida sobre conformidade, consulte o time jurídico ou de privacidade da empresa.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "O que significa o princípio de minimização de dados, aplicado ao uso de IA?",
+      "alternativas": [
+        {
+          "texto": "Usar só o dado pessoal necessário para a finalidade específica da tarefa, não todo dado disponível só porque está à mão.",
+          "correta": true,
+          "explicacao": "Minimização é limitar o uso ao necessário; colar mais dado do que a tarefa exige aumenta risco sem necessidade real."
+        },
+        {
+          "texto": "Usar a menor quantidade de tokens possível em cada prompt.",
+          "correta": false,
+          "explicacao": "Minimização de dados é sobre dado pessoal e finalidade, não sobre economia de tokens, que é uma questão de custo, não de privacidade."
+        },
+        {
+          "texto": "Nunca usar IA para processar qualquer dado, mesmo anonimizado.",
+          "correta": false,
+          "explicacao": "Minimização não proíbe todo uso; ela pede que se use só o necessário, o que ainda permite uso responsável de dado, inclusive anonimizado."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Carla, área de RH.** Precisa analisar o tempo médio de resposta a candidatos, e para isso cola a planilha inteira de candidaturas, incluindo nome, CPF e endereço de cada um, numa ferramenta de IA. O que ela deveria ter feito, pensando em minimização?",
+      "alternativas": [
+        {
+          "texto": "Remover ou não incluir CPF, endereço e outros campos que não são necessários para calcular tempo médio de resposta, mantendo só data de candidatura e data de resposta.",
+          "melhor": true,
+          "feedback": "Para calcular tempo médio de resposta, dados como CPF e endereço são desnecessários; minimizar reduz a exposição sem prejudicar a análise pretendida."
+        },
+        {
+          "texto": "Colar tudo, porque quanto mais dado, melhor a análise.",
+          "melhor": false,
+          "feedback": "Mais dado não significa análise melhor quando o excesso é irrelevante para a pergunta; e o excesso aumenta o risco de exposição desnecessária."
+        },
+        {
+          "texto": "Não fazer a análise de forma alguma, já que qualquer uso de dado é arriscado.",
+          "melhor": false,
+          "feedback": "Análise responsável é possível com minimização; evitar todo uso de dado não é a orientação da LGPD, que permite tratamento com base legal e finalidade adequada."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a frase sobre o papel desta lição.",
+      "texto": "Este conteúdo é educativo, não é ___; em caso de dúvida concreta sobre conformidade, consulte o time jurídico ou de privacidade.",
+      "opcoes": [
+        {
+          "texto": "aconselhamento jurídico",
+          "correta": true,
+          "explicacao": "É importante deixar claro que uma lição introdutória não substitui orientação jurídica formal para um caso real."
+        },
+        {
+          "texto": "um resumo técnico de IA",
+          "correta": false,
+          "explicacao": "O ponto da ressalva é sobre natureza jurídica do conteúdo, não sobre ser ou não um resumo técnico."
+        },
+        {
+          "texto": "um manual de uso do chat",
+          "correta": false,
+          "explicacao": "A ressalva não é sobre manual de uso de ferramenta, é sobre a lição não substituir orientação jurídica formal."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "id": "agentes-01-loop-e-tool-use",
+  "trilha": "agentes",
+  "titulo": "O loop de agente e tool use",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "conceito": "Um agente não responde de uma vez só: ele repete um ciclo. Decide o próximo passo, chama uma tool se precisar (buscar dado, executar ação), observa o resultado, e decide o passo seguinte com base nisso.\n\nEsse ciclo se repete até o agente concluir a tarefa ou decidir que não consegue prosseguir. Tool use é a capacidade de, dentro desse ciclo, chamar ferramentas externas em vez de só gerar texto.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "O que diferencia um agente de uma resposta única de chat?",
+      "alternativas": [
+        {
+          "texto": "O agente repete um ciclo de decidir, agir (às vezes chamando uma tool) e observar o resultado, várias vezes, até concluir a tarefa.",
+          "correta": true,
+          "explicacao": "Esse ciclo repetido é a característica central de um agente, diferente de uma resposta única gerada de uma vez."
+        },
+        {
+          "texto": "O agente sempre responde mais rápido que um chat comum.",
+          "correta": false,
+          "explicacao": "Velocidade não é a diferença central; um agente pode até demorar mais, porque executa vários passos em sequência."
+        },
+        {
+          "texto": "O agente nunca comete erro, ao contrário de um chat comum.",
+          "correta": false,
+          "explicacao": "Agentes também podem errar; o loop de decidir e agir não garante acerto, apenas estrutura o processo de execução em etapas."
+        }
+      ]
+    },
+    {
+      "tipo": "ordenacao",
+      "enunciado": "Ordene um ciclo típico do loop de um agente.",
+      "etapas": [
+        "O agente decide qual é o próximo passo necessário",
+        "O agente chama uma tool, se for preciso, para executar esse passo",
+        "O agente observa o resultado da tool",
+        "O agente decide o passo seguinte com base nesse resultado"
+      ],
+      "explicacao": "O ciclo se repete: cada decisão depende do resultado observado no passo anterior, até a tarefa estar concluída."
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Sônia, área de operações.** Pede a um agente para 'organizar os pedidos atrasados e notificar o time responsável'. O agente primeiro busca os pedidos, depois filtra os atrasados, depois identifica o time de cada um, depois envia a notificação. O que isso demonstra?",
+      "alternativas": [
+        {
+          "texto": "O agente está executando o loop várias vezes, cada chamada de tool alimentando a decisão do próximo passo, até completar a tarefa em etapas.",
+          "melhor": true,
+          "feedback": "Esse encadeamento de busca, filtro, identificação e notificação é exatamente o loop de agente em ação, repetido até a tarefa terminar."
+        },
+        {
+          "texto": "O agente gerou toda a resposta de uma vez, sem nenhuma etapa intermediária.",
+          "melhor": false,
+          "feedback": "O cenário descreve várias etapas encadeadas, o oposto de uma resposta única gerada de uma vez."
+        },
+        {
+          "texto": "O agente está com defeito porque demorou várias etapas para terminar.",
+          "melhor": false,
+          "feedback": "Várias etapas não é defeito; é o comportamento esperado de um agente executando uma tarefa que naturalmente exige múltiplos passos."
+        }
+      ]
+    }
+  ]
+}

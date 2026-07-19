@@ -1,0 +1,80 @@
+{
+  "id": "claude-02-projects-artifacts",
+  "trilha": "claude",
+  "titulo": "Projects e Artifacts",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "verificado_em": "2026-07-19",
+  "fontes": [
+    "https://www.anthropic.com/news/projects",
+    "https://support.claude.com/en/articles/9487310-what-are-artifacts-and-how-do-i-use-them"
+  ],
+  "conceito": "Um Project reúne documentos, instruções customizadas e o histórico de várias conversas relacionadas num só lugar, com um contexto próprio que vale para toda conversa dentro dele.\n\nUm Artifact é uma janela separada da conversa que mostra um conteúdo gerado (código, documento, diagrama) para você ver e editar sem ele se perder no meio do texto do chat.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Qual é a diferença central entre um Project e um Artifact?",
+      "alternativas": [
+        {
+          "texto": "Project organiza documentos, instruções e conversas relacionadas num contexto persistente; Artifact é uma janela para ver e editar um conteúdo gerado numa conversa específica.",
+          "correta": true,
+          "explicacao": "São mecanismos diferentes: um organiza o contexto de trabalho ao longo do tempo, o outro exibe um resultado gerado de forma isolada e editável."
+        },
+        {
+          "texto": "Project e Artifact são exatamente a mesma coisa com nomes diferentes.",
+          "correta": false,
+          "explicacao": "Cumprem papéis diferentes: um é sobre organização de contexto e conversas, o outro sobre exibição e edição de um conteúdo gerado."
+        },
+        {
+          "texto": "Artifact serve para guardar documentos e Project serve para mostrar código gerado.",
+          "correta": false,
+          "explicacao": "É o contrário: Project guarda documentos e contexto; Artifact é quem exibe o conteúdo gerado, como código."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Carla, área de RH.** Quer manter as políticas internas e as instruções de tom sempre disponíveis, para qualquer pergunta futura do time sobre RH, sem precisar colar tudo de novo a cada conversa. Qual recurso resolve isso?",
+      "alternativas": [
+        {
+          "texto": "Um Project, configurado com os documentos e instruções de RH, disponível para qualquer conversa relacionada.",
+          "melhor": true,
+          "feedback": "É exatamente o caso de uso do Project: contexto persistente e reutilizável entre várias conversas relacionadas ao mesmo tema."
+        },
+        {
+          "texto": "Um Artifact, que ela cria e recria em cada nova pergunta.",
+          "melhor": false,
+          "feedback": "Artifact é uma janela de exibição de um conteúdo gerado numa conversa, não um mecanismo pensado para persistir contexto entre conversas diferentes."
+        },
+        {
+          "texto": "Colar as políticas inteiras em cada nova conversa, todos os dias.",
+          "melhor": false,
+          "feedback": "Funciona, mas repete o trabalho e o custo de token toda vez. O Project existe exatamente para evitar essa repetição."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a frase sobre o papel do Artifact.",
+      "texto": "O Artifact aparece numa janela separada da conversa para você ver e editar um conteúdo gerado, sem ele se ___ no meio do texto do chat.",
+      "opcoes": [
+        {
+          "texto": "perder",
+          "correta": true,
+          "explicacao": "Esse é o propósito do Artifact: manter um conteúdo importante visível e editável, separado do fluxo de texto da conversa."
+        },
+        {
+          "texto": "vender",
+          "correta": false,
+          "explicacao": "Não tem relação com o propósito do recurso, que é sobre visibilidade e edição, não comércio."
+        },
+        {
+          "texto": "treinar",
+          "correta": false,
+          "explicacao": "Artifact não é um mecanismo de treino do modelo; é uma forma de exibir e editar um conteúdo gerado numa conversa."
+        }
+      ]
+    }
+  ]
+}

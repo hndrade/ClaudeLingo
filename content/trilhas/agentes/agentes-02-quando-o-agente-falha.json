@@ -1,0 +1,62 @@
+{
+  "id": "agentes-02-quando-o-agente-falha",
+  "trilha": "agentes",
+  "titulo": "Quando o agente falha",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "conceito": "Um agente pode entrar num loop repetitivo, tentando a mesma ação sem progresso. Pode interpretar mal o resultado de uma tool e seguir por um caminho errado com confiança. Ou pode ir se afastando aos poucos do objetivo original, um passo plausível de cada vez, até estar longe do que foi pedido.\n\nEsses modos de falha são difíceis de perceber olhando só o passo atual; costumam aparecer quando se olha a sequência inteira.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que um agente pode se afastar do objetivo original mesmo sem nenhum passo isoladamente absurdo?",
+      "alternativas": [
+        {
+          "texto": "Porque cada passo pode parecer razoável isoladamente, mas o acúmulo de pequenos desvios leva a um resultado final distante do que foi pedido.",
+          "correta": true,
+          "explicacao": "Esse é o padrão de deriva: nenhum passo individual soa absurdo, mas a soma deles se afasta do objetivo original."
+        },
+        {
+          "texto": "Porque o agente sempre para de funcionar assim que erra um passo.",
+          "correta": false,
+          "explicacao": "O agente frequentemente continua executando, o que é justamente o problema: erros pequenos não interrompem o processo automaticamente."
+        },
+        {
+          "texto": "Porque isso nunca acontece com agentes bem construídos.",
+          "correta": false,
+          "explicacao": "Deriva de objetivo é um risco estrutural do loop de agente, não uma falha exclusiva de má construção; mesmo agentes bem feitos precisam de checagem."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Paula, área de atendimento.** Pediu a um agente para 'resolver os tickets pendentes de hoje' e, ao revisar depois, percebe que ele passou a tarde tentando repetidamente a mesma ação num ticket que não respondia, sem avançar para os outros. Que tipo de falha é essa?",
+      "alternativas": [
+        {
+          "texto": "Um loop repetitivo sem progresso: o agente ficou preso tentando a mesma ação sem conseguir avançar, e sem perceber que deveria mudar de estratégia ou parar.",
+          "melhor": true,
+          "feedback": "Esse é um dos modos de falha clássicos de agente: repetir a mesma ação sem sucesso, consumindo tempo e recurso sem progresso real."
+        },
+        {
+          "texto": "Um funcionamento perfeito, já que o agente estava sempre agindo.",
+          "melhor": false,
+          "feedback": "Estar sempre agindo não é o mesmo que progredir; um loop sem sucesso repetido é uma falha, mesmo que o agente pareça ocupado."
+        },
+        {
+          "texto": "Um bug de rede que não tem relação com o comportamento do agente.",
+          "melhor": false,
+          "feedback": "O padrão descrito (repetir a mesma ação sem sucesso) é um modo de falha característico do loop de agente, não necessariamente um problema de rede."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie o modo de falha com sua característica.",
+      "pares": [
+        { "conceito": "Loop repetitivo", "definicao": "Tenta a mesma ação sem progresso, sem perceber que precisa mudar" },
+        { "conceito": "Má interpretação de resultado", "definicao": "Segue um caminho errado com confiança, por ler mal o que uma tool devolveu" },
+        { "conceito": "Deriva de objetivo", "definicao": "Cada passo parece razoável, mas o acúmulo se afasta do pedido original" }
+      ]
+    }
+  ]
+}

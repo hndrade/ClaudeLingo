@@ -1,0 +1,71 @@
+{
+  "id": "prompt-18-extracao-estruturada",
+  "trilha": "prompt",
+  "titulo": "Extração estruturada",
+  "nivel": 3,
+  "prereq": [],
+  "xp": 30,
+  "conceito": "**Padrão: Extração estruturada.** Fixe o schema da saída, campo a campo, e o valor para o que faltar: \"extraia: contratante, valor, prazo, multa; campo ausente = NAO_ENCONTRADO; não deduza\".\n\n**Quando usar:** extrair os mesmos dados de muitos documentos (contratos, notas fiscais, currículos), para conferir e tabular em volume.\n**Quando não usar:** análise interpretativa, em que o schema engessa a resposta que precisava de nuance.\n**Saída esperada:** sempre os mesmos campos, na mesma ordem, com NAO_ENCONTRADO no lugar de palpite.",
+  "exercicios": [
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "A equipe de compras precisa tabular 40 contratos em uma planilha (contrato e valores fictícios). Conserte o prompt aplicando o padrão Extração estruturada, depois compare com a referência e se autoavalie.",
+      "prompt_fraco": "Pega as informações importantes desse contrato pra mim:\n\n[contrato]",
+      "saida_fraca": "Este contrato de fornecimento estabelece uma parceria entre as partes, com condições comerciais interessantes. O valor acordado gira em torno de R$ 84 mil anuais e o prazo é de aproximadamente um ano. Não localizei cláusula de multa, mas provavelmente segue o padrão de 10% do valor do contrato.\n\n(Texto corrido impossível de tabular: importante ficou a critério do modelo, o valor foi arredondado e a multa foi deduzida em vez de marcada como ausente.)",
+      "prompt_referencia": "Extraia do contrato abaixo exatamente estes campos, nesta ordem:\ncontratante:\ncontratada:\nvalor_total:\nprazo_vigencia:\nmulta_rescisao:\nRegras: um campo por linha, no formato campo: valor. Campo ausente no texto = NAO_ENCONTRADO. Não deduza nem complete com o que seria comum em contratos. Copie valores e datas exatamente como estão escritos.\n\n[contrato]",
+      "saida_referencia": "contratante: Distribuidora Alfa Ltda\ncontratada: Transportes Beta S.A.\nvalor_total: R$ 84.000,00\nprazo_vigencia: 12 meses a partir de 01/03\nmulta_rescisao: NAO_ENCONTRADO",
+      "checklist": [
+        "Definiu o schema campo a campo, com nomes e ordem fixos?",
+        "Definiu o valor exato para campo ausente (NAO_ENCONTRADO)?",
+        "Proibiu deduzir e completar com o que seria comum?",
+        "Definiu o formato de cada linha para a saída ser tabulável?",
+        "Mandou copiar valores como estão escritos, sem arredondar ou interpretar?"
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a regra que impede o modelo de inventar dados na extração em volume.",
+      "texto": "Extraia de cada nota fiscal: fornecedor, CNPJ, valor total e data de emissão. Uma nota por linha, campos separados por ponto e vírgula. ___",
+      "opcoes": [
+        {
+          "texto": "Campo ausente = NAO_ENCONTRADO; não deduza nem complete.",
+          "correta": true,
+          "explicacao": "Valor sentinela explícito mais proibição de deduzir: o que faltar fica visível na planilha em vez de virar palpite disfarçado de dado."
+        },
+        {
+          "texto": "Se algum campo estiver faltando, use o bom senso.",
+          "correta": false,
+          "explicacao": "Bom senso é exatamente a dedução que contamina a base: um CNPJ inventado parece tão real quanto um copiado, e você não tem como distinguir depois."
+        },
+        {
+          "texto": "Preencha apenas os campos que encontrar.",
+          "correta": false,
+          "explicacao": "Sem sentinela, a linha sai com menos campos e as colunas desalinham: você não sabe se o dado faltou no documento ou se o modelo pulou."
+        },
+        {
+          "texto": "Ignore as notas que estiverem incompletas.",
+          "correta": false,
+          "explicacao": "Descarta documento válido em silêncio: em volume, você quer a nota na base com os buracos marcados, não sumindo sem aviso."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie cada peça do padrão Extração estruturada com o problema que ela resolve.",
+      "pares": [
+        {
+          "conceito": "Schema fixo, campo a campo",
+          "definicao": "Toda saída sai igual e tabulável, mesmo em 40 documentos"
+        },
+        {
+          "conceito": "NAO_ENCONTRADO explícito",
+          "definicao": "Ausência vira dado visível, não palpite preenchido"
+        },
+        {
+          "conceito": "Proibição de deduzir",
+          "definicao": "Separa o que está escrito do que parece provável"
+        }
+      ]
+    }
+  ]
+}

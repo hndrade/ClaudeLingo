@@ -1,0 +1,77 @@
+{
+  "id": "comparativo-05-latencia-privacidade-onpremise",
+  "trilha": "comparativo",
+  "titulo": "Eixo latência e privacidade/on-premise",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "verificado_em": "2026-07-19",
+  "fontes": ["https://www.llama.com/models/llama-4/", "https://github.com/ollama/ollama"],
+  "conceito": "Latência entre fornecedores não é diretamente comparável por um número único: cada um mede e reporta de forma diferente, e depende do modelo escolhido dentro da família (o mais rápido de cada fornecedor tende a ser o mais barato também).\n\nPrivacidade e on-premise é onde modelo aberto rodando localmente se destaca: com um modelo aberto (como a família Llama) rodando via uma ferramenta local (como Ollama), o dado nunca sai da sua máquina ou rede, ao contrário de uma chamada de API para um fornecedor externo.",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**Henrique, área jurídica.** Precisa processar documentos com dado sensível de cliente, e a política da empresa proíbe que esse dado saia da rede interna. Qual caminho atende essa exigência?",
+      "alternativas": [
+        {
+          "texto": "Um modelo aberto rodando localmente, via uma ferramenta como Ollama, dentro da rede interna, sem enviar o dado para uma API externa.",
+          "melhor": true,
+          "feedback": "É exatamente o cenário onde rodar local resolve o requisito: o dado processado nunca sai do ambiente controlado."
+        },
+        {
+          "texto": "Qualquer API de fornecedor externo, desde que o modelo seja o mais capaz disponível.",
+          "melhor": false,
+          "feedback": "Capacidade do modelo não resolve o requisito de política interna; se o dado não pode sair da rede, uma API externa não atende, independentemente da capacidade."
+        },
+        {
+          "texto": "Não existe solução possível para esse requisito.",
+          "melhor": false,
+          "feedback": "Existe solução: rodar um modelo aberto localmente é justamente a resposta para esse tipo de exigência de dado não sair do ambiente controlado."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que comparar 'latência' entre dois fornecedores diferentes com um número único é enganoso?",
+      "alternativas": [
+        {
+          "texto": "Porque cada fornecedor mede e reporta latência de forma diferente, e a latência real também varia pelo modelo escolhido dentro da família de cada um.",
+          "correta": true,
+          "explicacao": "Sem uma metodologia de medição comum, comparar um número isolado entre fornecedores diferentes não é uma comparação justa ou confiável."
+        },
+        {
+          "texto": "Porque latência não existe em nenhum modelo de IA.",
+          "correta": false,
+          "explicacao": "Latência existe e é uma característica real de qualquer modelo; o problema é comparar números sem metodologia comum entre fornecedores."
+        },
+        {
+          "texto": "Porque todos os modelos de todos os fornecedores têm exatamente a mesma latência.",
+          "correta": false,
+          "explicacao": "A latência varia bastante entre modelos, inclusive dentro da mesma família de um fornecedor; a questão é a comparação direta entre fornecedores diferentes ser enganosa."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a frase sobre a vantagem central de rodar um modelo localmente.",
+      "texto": "Rodar um modelo aberto localmente garante que o dado processado ___ do ambiente controlado, ao contrário de uma chamada a uma API externa.",
+      "opcoes": [
+        {
+          "texto": "não saia",
+          "correta": true,
+          "explicacao": "Essa é a garantia central do processamento local: o dado permanece dentro do ambiente que você controla, sem trafegar para um serviço externo."
+        },
+        {
+          "texto": "seja duplicado",
+          "correta": false,
+          "explicacao": "Duplicação não é o ponto central; o que importa aqui é o dado não sair do ambiente controlado, não quantas cópias existem."
+        },
+        {
+          "texto": "seja apagado automaticamente",
+          "correta": false,
+          "explicacao": "Apagamento automático é uma questão separada de retenção de dado, não a vantagem central de rodar localmente, que é sobre onde o processamento acontece."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "id": "caso-dados-04",
+  "trilha": "casos",
+  "titulo": "Lucas: documentar uma métrica do zero",
+  "nivel": 4,
+  "area": "dados",
+  "prereq": [],
+  "xp": 40,
+  "conceito": "Uma métrica sem definição precisa vira briga: cada área calcula de um jeito. Documentar é fixar a fórmula, a fonte, o recorte, o que entra e o que fica de fora.\n\nO caso chega cru: 'documenta a métrica de churn'. Churn de quê, medido como, em qual janela, contando quem? Sem isso, a doc não resolve a ambiguidade que existe justamente para resolver.",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**Lucas, área de dados.** Duas áreas brigam porque cada uma calcula churn diferente. Pedem a ele para documentar a métrica. Qual estratégia produz uma definição que encerra a discussão?",
+      "alternativas": [
+        {
+          "texto": "Pedir à IA 'escreve a definição de churn' e publicar o que vier.",
+          "melhor": false,
+          "feedback": "A IA devolve a definição genérica de livro, que é justamente a ambiguidade que causou a briga. Não fixa a fórmula, a fonte nem o recorte da empresa."
+        },
+        {
+          "texto": "Dar à IA a regra que o negócio decidiu (o que conta como cliente perdido, a janela, a fonte) e pedir a documentação estruturada com fórmula, exemplo e casos de borda.",
+          "melhor": true,
+          "feedback": "A decisão de negócio é humana; a IA formaliza. A doc fixa fórmula, fonte, janela e casos de borda, então as duas áreas passam a calcular igual. A ambiguidade morre."
+        },
+        {
+          "texto": "Deixar a IA escolher a definição mais comum de mercado para padronizar.",
+          "melhor": false,
+          "feedback": "A definição de mercado pode não corresponder ao contrato e ao ciclo da sua empresa. Métrica é decisão de negócio, não média do setor; a IA documenta a sua, não impõe a dela."
+        }
+      ]
+    },
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "Pedido cru de uma linha. Monte na caixa o prompt que produz a documentação da métrica sem deixar a IA inventar a regra, compare com a referência e se autoavalie.",
+      "prompt_fraco": "Documenta a métrica de churn pra gente.",
+      "saida_fraca": "Churn é a taxa de clientes que deixam de usar o produto em um período. Calcula-se dividindo os clientes perdidos pelo total de clientes. É importante para medir retenção. (Definição de livro: não diz o que conta como perdido aqui, nem a janela, nem a fonte.)",
+      "prompt_referencia": "Documente a métrica de churn com base NA REGRA que vou te dar, sem trocar por definição de mercado.\nRegra do negócio: cliente perdido = assinatura cancelada e não reativada em 30 dias; janela = mensal; fonte = tabela assinaturas(status, data_cancelamento).\nEstruture a doc: nome, o que mede, fórmula exata, fonte dos dados, janela, o que entra e o que fica de fora, e 2 casos de borda resolvidos (ex: cliente que cancela e volta em 20 dias).\nSe faltar alguma regra para fechar a definição, liste as perguntas em vez de assumir.",
+      "saida_referencia": "Churn mensal\nMede: proporção de clientes que cancelaram e não voltaram no mês.\nFórmula: cancelados sem reativação em 30 dias / clientes ativos no início do mês.\nFonte: assinaturas(status, data_cancelamento).\nEntra: cancelamento definitivo. Fica de fora: pausa e downgrade.\nBordas: cancelou e voltou em 20 dias = não é churn; cancelou dia 30 = conta no mês do cancelamento.\nPerguntas em aberto: conta cliente em teste gratuito?",
+      "checklist": [
+        "Ancorei a doc na regra do negócio, não na definição de mercado?",
+        "Pedi fórmula exata e fonte dos dados?",
+        "Defini a janela e o recorte?",
+        "Pedi o que entra e o que fica de fora?",
+        "Pedi casos de borda resolvidos?",
+        "Mandei listar perguntas em vez de assumir o que falta?"
+      ]
+    },
+    {
+      "tipo": "ordenacao",
+      "enunciado": "Ordene a documentação da métrica do que mais fixa a definição para o complemento.",
+      "etapas": [
+        "Fórmula exata e o que conta como evento",
+        "Fonte dos dados e janela de medição",
+        "O que entra e o que fica de fora",
+        "Casos de borda resolvidos"
+      ],
+      "explicacao": "Sem a fórmula e o que conta como evento, o resto não tem sobre o que se apoiar. Fonte e janela vêm em seguida, depois os recortes, e os casos de borda fecham as brechas que sobraram."
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "id": "mcp-03-tools-resources-prompts",
+  "trilha": "mcp",
+  "titulo": "Tools, resources e prompts: as três primitivas",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "conceito": "Um server MCP pode oferecer três tipos de capacidade. Tools são ações que o modelo pode executar (enviar um e-mail, criar uma tarefa). Resources são dados que podem ser lidos (um arquivo, o conteúdo de uma página). Prompts são modelos de instrução prontos que o usuário pode invocar.\n\nUm server mínimo costuma expor pelo menos uma tool, com um nome, uma descrição do que faz e o formato dos parâmetros que espera.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Qual é a diferença entre uma tool e um resource num server MCP?",
+      "alternativas": [
+        {
+          "texto": "Tool é uma ação que o modelo pode executar; resource é um dado que pode ser lido, sem executar uma ação.",
+          "correta": true,
+          "explicacao": "Essa é a distinção central: tool age no mundo (cria, envia, modifica), resource apenas disponibiliza informação para leitura."
+        },
+        {
+          "texto": "Tool e resource são exatamente a mesma coisa, só com nomes diferentes.",
+          "correta": false,
+          "explicacao": "São primitivas diferentes: uma executa ação, a outra disponibiliza dado para leitura."
+        },
+        {
+          "texto": "Resource só existe em servers muito antigos, hoje só se usa tool.",
+          "correta": false,
+          "explicacao": "As duas primitivas coexistem e servem a propósitos diferentes; resource não é uma primitiva obsoleta."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a definição mínima de uma tool exposta por um server MCP.",
+      "texto": "Uma tool precisa de um nome, uma descrição do que faz e o formato dos ___ que espera receber.",
+      "opcoes": [
+        {
+          "texto": "parâmetros",
+          "correta": true,
+          "explicacao": "Sem o formato dos parâmetros esperados, o modelo não sabe como chamar a tool corretamente com os dados certos."
+        },
+        {
+          "texto": "usuários",
+          "correta": false,
+          "explicacao": "A definição de uma tool não inclui uma lista de usuários; ela descreve a ação e os dados que precisa para executá-la."
+        },
+        {
+          "texto": "servidores",
+          "correta": false,
+          "explicacao": "A tool já pertence a um server específico; o que falta definir nela são os parâmetros de entrada, não outros servidores."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Carla, área de RH.** Quer que um assistente consiga tanto ler as políticas internas (documento) quanto criar automaticamente um ticket de solicitação de férias (ação). Como isso se mapeia nas primitivas do MCP?",
+      "alternativas": [
+        {
+          "texto": "Ler as políticas é um resource; criar o ticket é uma tool.",
+          "melhor": true,
+          "feedback": "Exatamente essa é a distinção: acesso a dado para leitura é resource, execução de uma ação que muda algo no mundo é tool."
+        },
+        {
+          "texto": "As duas coisas são tools, porque tudo que o assistente faz é uma tool.",
+          "melhor": false,
+          "feedback": "Nem toda capacidade é uma ação; ler um documento sem alterar nada se encaixa melhor como resource, reservando tool para ações que executam algo."
+        },
+        {
+          "texto": "As duas coisas são resources, porque envolvem dados.",
+          "melhor": false,
+          "feedback": "Criar um ticket é uma ação que muda o estado de um sistema, não apenas ler um dado; isso caracteriza uma tool, não um resource."
+        }
+      ]
+    }
+  ]
+}

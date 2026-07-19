@@ -1,0 +1,70 @@
+{
+  "id": "comparativo-01-panorama-cinco-caminhos",
+  "trilha": "comparativo",
+  "titulo": "Cinco caminhos, nenhum vencedor único",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "verificado_em": "2026-07-19",
+  "fontes": [
+    "https://platform.claude.com/docs/en/about-claude/models/overview",
+    "https://developers.openai.com/api/docs/pricing",
+    "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+    "https://www.llama.com/models/llama-4/",
+    "https://github.com/ollama/ollama"
+  ],
+  "conceito": "Existem hoje pelo menos cinco caminhos: Claude (Anthropic), GPT (OpenAI), Gemini (Google), Llama e outros modelos abertos, e um modelo rodando localmente (por exemplo via Ollama). Nenhum vence em todos os eixos ao mesmo tempo.\n\nEsta trilha não decreta um vencedor. Ela ensina a decidir por eixo: código, raciocínio, escrita longa, multimodal, contexto, custo, latência, privacidade e ecossistema. O caminho certo depende de qual eixo pesa mais no seu caso.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Qual é a premissa central desta trilha sobre comparar modelos de IA?",
+      "alternativas": [
+        {
+          "texto": "Não existe um modelo melhor em tudo; a escolha certa depende de qual eixo (custo, código, privacidade, etc.) importa mais para o caso específico.",
+          "correta": true,
+          "explicacao": "É essa a premissa: decisão por eixo e por caso de uso, não um ranking fixo de melhor para pior."
+        },
+        {
+          "texto": "O modelo mais caro é sempre o melhor para qualquer tarefa.",
+          "correta": false,
+          "explicacao": "Preço mais alto não garante ser a escolha certa para toda tarefa; depende do eixo que importa no caso."
+        },
+        {
+          "texto": "Só existe um fornecedor de IA relevante no mercado hoje.",
+          "correta": false,
+          "explicacao": "Existem vários fornecedores relevantes, com tradeoffs diferentes entre si, como esta trilha detalha."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie o caminho com sua característica mais citada nesta introdução.",
+      "pares": [
+        { "conceito": "Modelo aberto (Llama e outros)", "definicao": "Pesos disponíveis para rodar e adaptar sob os termos da licença" },
+        { "conceito": "Modelo local (via Ollama, por exemplo)", "definicao": "Roda na própria máquina, sem enviar dado para fora" },
+        { "conceito": "Modelos de API fechada (Claude, GPT, Gemini)", "definicao": "Acessados via API do fornecedor, com família de modelos por tradeoff de capacidade e custo" }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Lucas, área de dados.** Antes de escolher um modelo para um novo projeto, pergunta 'qual é o melhor de todos?'. Qual é a resposta mais honesta?",
+      "alternativas": [
+        {
+          "texto": "Depende: é preciso saber qual eixo importa mais para o projeto (custo, privacidade, janela de contexto, capacidade de código) antes de escolher.",
+          "melhor": true,
+          "feedback": "Essa é a resposta honesta: a pergunta certa não é 'qual é o melhor', é 'o melhor para qual critério, neste caso'."
+        },
+        {
+          "texto": "Sempre o modelo mais novo lançado, não importa o motivo.",
+          "melhor": false,
+          "feedback": "Novidade não é sinônimo de adequação ao caso; um modelo mais antigo pode ser mais barato e suficiente para a tarefa."
+        },
+        {
+          "texto": "Sempre o modelo com a maior janela de contexto disponível.",
+          "melhor": false,
+          "feedback": "Janela de contexto é só um dos eixos; para muitas tarefas ela nem é o fator decisivo."
+        }
+      ]
+    }
+  ]
+}

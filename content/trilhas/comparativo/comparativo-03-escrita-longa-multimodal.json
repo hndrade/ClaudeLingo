@@ -1,0 +1,67 @@
+{
+  "id": "comparativo-03-escrita-longa-multimodal",
+  "trilha": "comparativo",
+  "titulo": "Eixo escrita longa e multimodal",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "verificado_em": "2026-07-19",
+  "fontes": [
+    "https://platform.claude.com/docs/en/about-claude/models/overview",
+    "https://ai.google.dev/gemini-api/docs/gemini-3"
+  ],
+  "conceito": "Escrita longa (produzir um documento extenso e coerente numa só resposta) e multimodal (entender imagem, além de texto) são eixos onde os modelos atuais dos grandes fornecedores costumam ser competitivos entre si, com diferenças de limite de saída e formato suportado.\n\nO limite de tokens de saída de um modelo importa tanto quanto a janela de contexto de entrada: um documento muito longo pode esbarrar nesse teto antes de terminar.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que o limite de tokens de saída é relevante para uma tarefa de escrita longa, além da janela de contexto de entrada?",
+      "alternativas": [
+        {
+          "texto": "Porque mesmo com uma entrada pequena, a resposta gerada (um relatório extenso, por exemplo) pode esbarrar no teto de tokens que o modelo consegue produzir numa única resposta.",
+          "correta": true,
+          "explicacao": "Entrada e saída têm limites separados; um documento muito longo pode ser cortado no limite de saída, mesmo que a entrada tenha sido curta."
+        },
+        {
+          "texto": "Porque não existe limite de tokens de saída em nenhum modelo atual.",
+          "correta": false,
+          "explicacao": "Limite de saída existe e varia por modelo; ignorá-lo pode fazer um documento longo sair cortado no meio."
+        },
+        {
+          "texto": "Porque o limite de saída é sempre igual ao limite de entrada em todos os modelos.",
+          "correta": false,
+          "explicacao": "Entrada e saída costumam ter limites diferentes e medidos separadamente, não são necessariamente iguais."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Henrique, área jurídica.** Precisa que a IA leia um contrato digitalizado como imagem (não como texto pesquisável) e extraia cláusulas dele. Qual capacidade do modelo é essencial aqui?",
+      "alternativas": [
+        {
+          "texto": "Capacidade multimodal (entender imagem, não só texto), já que o documento está digitalizado como imagem, não como texto extraível.",
+          "melhor": true,
+          "feedback": "Sem suporte a imagem, o modelo simplesmente não teria como processar um documento digitalizado sem primeiro passar por outro processo de extração de texto."
+        },
+        {
+          "texto": "Janela de contexto grande, isso resolve qualquer formato de arquivo.",
+          "melhor": false,
+          "feedback": "Janela de contexto grande ajuda com documentos longos, mas não resolve o problema de o conteúdo estar em formato de imagem, não de texto."
+        },
+        {
+          "texto": "Não importa, qualquer modelo processa qualquer formato de arquivo igualmente bem.",
+          "melhor": false,
+          "feedback": "Formato de entrada importa: um documento em imagem exige capacidade multimodal, que nem todo modelo ou configuração oferece da mesma forma."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie o eixo com a pergunta que ele responde na hora de escolher um modelo.",
+      "pares": [
+        { "conceito": "Escrita longa", "definicao": "O modelo consegue gerar um documento extenso e coerente numa única resposta?" },
+        { "conceito": "Multimodal", "definicao": "O modelo entende imagem além de texto?" },
+        { "conceito": "Limite de tokens de saída", "definicao": "Até onde a resposta gerada pode crescer antes de ser cortada?" }
+      ]
+    }
+  ]
+}

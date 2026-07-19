@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "vitest run"
+    "test": "vitest run",
+    "check-stale": "node scripts/check-stale.mjs"
   },
   "dependencies": {
     "next": "^15.3.0",

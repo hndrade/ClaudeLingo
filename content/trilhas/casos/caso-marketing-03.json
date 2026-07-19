@@ -1,0 +1,71 @@
+{
+  "id": "caso-marketing-03",
+  "trilha": "casos",
+  "titulo": "Rafael: consertar o pedido de variação de copy",
+  "nivel": 3,
+  "area": "marketing",
+  "prereq": [],
+  "xp": 30,
+  "conceito": "Pedir variações de copy sem amarra gera dez frases que dizem a mesma coisa. Boa variação muda o ângulo, não só as palavras.\n\nO prompt forte fixa o que preservar (oferta, tom, tamanho) e o que variar (o gancho: dor, ganho, prova, urgência), para você poder testar ângulos, não sinônimos.",
+  "exercicios": [
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "**Rafael, área de marketing.** Quer variações de um anúncio para testar. O prompt abaixo devolve dez frases quase iguais. Reescreva na caixa, compare com a referência e se autoavalie.",
+      "prompt_fraco": "Me dá 10 variações desse anúncio:\n\n'Rastreio de frota em tempo real. Peça uma demonstração.'",
+      "saida_fraca": "1. Rastreamento de frota em tempo real, solicite uma demo.\n2. Acompanhe sua frota em tempo real, peça uma demonstração.\n3. Frota rastreada em tempo real, agende uma demo.\n(Dez maneiras de dizer a mesma frase, todas com o mesmo gancho.)",
+      "prompt_referencia": "Escreva 4 variações do anúncio abaixo para teste A/B.\nPreserve: a oferta (rastreio de frota em tempo real), a chamada para ação (pedir demonstração), o tom direto e o limite de 2 linhas.\nVarie o gancho, um por variação: (1) dor do atraso, (2) ganho de economia, (3) prova concreta, (4) urgência realista.\nNada de superlativo vazio. Marque estimativas como estimativa.\n\n'Rastreio de frota em tempo real. Peça uma demonstração.'",
+      "saida_referencia": "1. Dor: Cada atraso vira multa e cliente perdido. Rastreie sua frota em tempo real. Peça uma demonstração.\n2. Ganho: Evitar um atraso por semana já paga o sistema (estimativa). Rastreio em tempo real. Peça uma demonstração.\n3. Prova: Transportadoras enxergam cada veículo ao vivo com nosso rastreio. Peça uma demonstração.\n4. Urgência: Enquanto você não vê a frota, o problema já aconteceu. Rastreio em tempo real. Peça uma demonstração.",
+      "checklist": [
+        "Disse o que preservar (oferta, chamada, tom, tamanho)?",
+        "Disse o que variar (o gancho, um por peça)?",
+        "Nomeei os ângulos em vez de pedir variações genéricas?",
+        "Proibi superlativo vazio?",
+        "Mandei marcar estimativa como estimativa?",
+        "Limitei a quantidade a algo testável?"
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "O que torna uma variação de copy útil para um teste A/B?",
+      "alternativas": [
+        {
+          "texto": "Ela usa sinônimos diferentes para dizer a mesma coisa.",
+          "correta": false,
+          "explicacao": "Trocar palavra por sinônimo testa nada: o gancho é o mesmo, então o resultado do teste não ensina qual ângulo funciona."
+        },
+        {
+          "texto": "Ela ataca por um ângulo diferente (dor, ganho, prova, urgência), mantendo a oferta fixa.",
+          "correta": true,
+          "explicacao": "Variar o ângulo com a oferta fixa é o que faz o teste responder qual mensagem convence, que é o objetivo de testar."
+        },
+        {
+          "texto": "Ela é sempre mais longa que o original.",
+          "correta": false,
+          "explicacao": "Tamanho não é ângulo. Uma variação mais longa dizendo o mesmo continua testando nada."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete o pedido para que as variações sirvam a um teste de verdade.",
+      "texto": "Gere 4 variações mantendo a oferta e ___.",
+      "opcoes": [
+        {
+          "texto": "variando só o gancho: dor, ganho, prova e urgência",
+          "correta": true,
+          "explicacao": "Fixa o que não pode mudar e nomeia o que deve mudar. O teste passa a comparar ângulos, não redações do mesmo texto."
+        },
+        {
+          "texto": "trocando as palavras por sinônimos",
+          "correta": false,
+          "explicacao": "Sinônimo não muda o ângulo. O teste não distingue nada e você perde a rodada."
+        },
+        {
+          "texto": "deixando cada uma bem mais criativa que a anterior",
+          "correta": false,
+          "explicacao": "Criatividade crescente não é uma variável de teste. Sem ângulo definido, não dá para saber o que fez a peça funcionar."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "id": "agentes-06-avaliacao-de-agente",
+  "trilha": "agentes",
+  "titulo": "Avaliação de agente",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "conceito": "Avaliar um agente não é só olhar se a resposta final parece boa. Métricas úteis incluem: taxa de conclusão da tarefa sem intervenção humana, custo médio por tarefa concluída, e quantas vezes um humano precisou corrigir o rumo no meio do caminho.\n\nUm agente que sempre conclui a tarefa mas custa caro e precisa de correção humana frequente não é necessariamente melhor que um mais lento, mas mais barato e confiável.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que só olhar se a resposta final 'parece boa' é insuficiente para avaliar um agente?",
+      "alternativas": [
+        {
+          "texto": "Porque não revela o custo real, quantas iterações foram gastas, nem quantas vezes um humano precisou corrigir o rumo, informações essenciais para decidir se vale usar o agente em produção.",
+          "correta": true,
+          "explicacao": "A qualidade percebida do resultado final esconde o processo: custo, tempo, iterações e intervenção humana são parte necessária da avaliação."
+        },
+        {
+          "texto": "Porque a resposta final nunca importa na avaliação de um agente.",
+          "correta": false,
+          "explicacao": "A resposta final importa, sim; o problema é que ela sozinha não conta a história completa do processo e do custo envolvidos."
+        },
+        {
+          "texto": "Porque agentes nunca produzem uma resposta final avaliável.",
+          "correta": false,
+          "explicacao": "Agentes produzem resultado final avaliável normalmente; o ponto é que esse resultado sozinho não é suficiente para uma avaliação completa."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Henrique, área jurídica.** Compara dois agentes para triagem de documentos: o Agente A conclui sozinho 60% das tarefas, com custo baixo; o Agente B conclui 95%, mas custa 5 vezes mais e exige revisão humana frequente mesmo nas que 'conclui'. Qual leitura é mais cuidadosa?",
+      "alternativas": [
+        {
+          "texto": "Comparar as duas métricas junto com o custo e a frequência de correção humana, porque a taxa de conclusão sozinha não conta a história completa.",
+          "melhor": true,
+          "feedback": "Taxa de conclusão alta com custo alto e correção humana frequente pode não compensar frente a uma taxa menor, mas barata e mais previsível; a decisão depende do conjunto de métricas."
+        },
+        {
+          "texto": "Escolher sempre o Agente B, porque tem taxa de conclusão maior.",
+          "melhor": false,
+          "feedback": "Taxa de conclusão isolada ignora custo e necessidade de correção humana, que podem tornar o Agente B pior na prática, dependendo do orçamento e do risco aceitável."
+        },
+        {
+          "texto": "Escolher sempre o Agente A, porque é mais barato, sem considerar mais nada.",
+          "melhor": false,
+          "feedback": "Custo baixo isolado também não é suficiente; uma taxa de conclusão de 60% pode ser baixa demais dependendo da tarefa, então o conjunto de métricas precisa ser considerado."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie a métrica de avaliação de agente com o que ela revela.",
+      "pares": [
+        { "conceito": "Taxa de conclusão sem intervenção", "definicao": "Quantas tarefas o agente termina sozinho, sem ajuda humana" },
+        { "conceito": "Custo médio por tarefa", "definicao": "Quanto cada execução consome em tokens e iterações" },
+        { "conceito": "Frequência de correção humana", "definicao": "Quantas vezes uma pessoa precisou intervir no meio do processo" }
+      ]
+    }
+  ]
+}

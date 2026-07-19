@@ -1,0 +1,64 @@
+{
+  "id": "claude-01-familia-modelos",
+  "trilha": "claude",
+  "titulo": "Família de modelos: capacidade, custo e velocidade",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "verificado_em": "2026-07-19",
+  "fontes": ["https://platform.claude.com/docs/en/about-claude/models/overview"],
+  "conceito": "A Anthropic mantém uma família de modelos com tradeoffs diferentes. Claude Fable 5 é o mais capaz, indicado quando só o melhor resultado resolve. Claude Opus 4.8 é o recomendado para codificação agente complexa e trabalho corporativo. Claude Sonnet 5 busca o equilíbrio entre velocidade e inteligência. Claude Haiku 4.5 é o mais rápido e o mais barato.\n\nEscolher o modelo certo é escolher o ponto certo nessa troca entre capacidade, custo e velocidade, não sempre o mais forte.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Uma tarefa de classificar milhares de tickets simples por dia, onde volume e custo importam mais que raciocínio profundo, pede qual tipo de modelo?",
+      "alternativas": [
+        {
+          "texto": "Um modelo rápido e barato, otimizado para tarefas de alto volume e baixa complexidade.",
+          "correta": true,
+          "explicacao": "Para tarefas simples em grande volume, o modelo mais rápido e barato da família tende a ser a escolha mais eficiente."
+        },
+        {
+          "texto": "Sempre o modelo mais capaz disponível, independentemente da tarefa.",
+          "correta": false,
+          "explicacao": "Usar sempre o modelo mais capaz para tarefas simples desperdiça custo e velocidade sem ganho real de qualidade perceptível."
+        },
+        {
+          "texto": "Não importa, todos os modelos da família custam e demoram o mesmo.",
+          "correta": false,
+          "explicacao": "Os modelos da família diferem em preço e velocidade, exatamente o ponto que orienta a escolha para cada tipo de tarefa."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie o modelo com o critério que mais pesa na sua indicação principal.",
+      "pares": [
+        { "conceito": "Modelo mais capaz da família", "definicao": "Quando só o melhor resultado possível resolve o problema" },
+        { "conceito": "Modelo recomendado para codificação agente complexa", "definicao": "Trabalho corporativo e tarefas de engenharia mais exigentes" },
+        { "conceito": "Modelo mais rápido e barato", "definicao": "Alto volume, tarefa simples, custo é o gargalo" }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Lucas, área de dados.** Precisa classificar 10 mil tickets simples por dia, com orçamento apertado. Precisão importa, mas não exige raciocínio complexo por ticket. Qual caminho faz mais sentido?",
+      "alternativas": [
+        {
+          "texto": "Usar sempre o modelo mais capaz e caro da família, para garantir o máximo de precisão em cada ticket.",
+          "melhor": false,
+          "feedback": "Para uma tarefa simples em alto volume, o modelo mais caro custa muito mais sem ganho perceptível de qualidade nesse tipo de classificação."
+        },
+        {
+          "texto": "Usar o modelo mais rápido e barato da família, adequado a tarefas de alto volume e baixa complexidade.",
+          "melhor": true,
+          "feedback": "Esse é o perfil de tarefa (volume alto, complexidade baixa, custo como gargalo) para o qual o modelo mais rápido e barato é indicado."
+        },
+        {
+          "texto": "Não usar nenhum modelo e classificar manualmente os 10 mil tickets.",
+          "melhor": false,
+          "feedback": "Classificação simples em alto volume é exatamente o tipo de tarefa onde um modelo rápido e barato agrega valor real, sem exigir revisão total manual."
+        }
+      ]
+    }
+  ]
+}

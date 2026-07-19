@@ -1,0 +1,64 @@
+{
+  "id": "avaliacao-01-como-montar-um-eval",
+  "trilha": "avaliacao",
+  "titulo": "Como montar um eval",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "conceito": "Um eval é um conjunto de casos de teste reais, cada um com uma entrada e um critério claro de acerto, usado para medir se um prompt ou sistema funciona antes de colocá-lo em produção.\n\nSem eval, você só sabe se algo 'parece bom' num exemplo que você mesmo escolheu, o que tende a ser o caso mais fácil. Um eval bom inclui casos difíceis e casos de borda, não só o caminho feliz.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que testar um prompt só com o exemplo mais fácil que você lembrou não é suficiente antes de colocar em produção?",
+      "alternativas": [
+        {
+          "texto": "Porque o exemplo fácil tende a esconder falhas que só aparecem em casos difíceis, de borda ou incomuns, que vão acontecer de verdade em produção.",
+          "correta": true,
+          "explicacao": "Um eval bom cobre a variedade real de casos, não só o mais confortável de testar; é isso que revela onde o sistema realmente falha."
+        },
+        {
+          "texto": "Porque não existe diferença entre testar um caso fácil e um caso difícil.",
+          "correta": false,
+          "explicacao": "Existe diferença real: um caso difícil frequentemente revela falhas que o caso fácil nunca mostraria."
+        },
+        {
+          "texto": "Porque um exemplo fácil sempre falha de propósito.",
+          "correta": false,
+          "explicacao": "O problema não é o exemplo fácil falhar; é ele não revelar os problemas que só aparecem em casos mais difíceis."
+        }
+      ]
+    },
+    {
+      "tipo": "ordenacao",
+      "enunciado": "Ordene os passos para montar um eval simples.",
+      "etapas": [
+        "Reunir casos de teste reais, incluindo casos difíceis e de borda",
+        "Definir, para cada caso, um critério claro do que conta como acerto",
+        "Rodar o prompt ou sistema contra todos os casos",
+        "Registrar a taxa de acerto e investigar os casos que falharam"
+      ],
+      "explicacao": "Sem casos reais e critério claro definidos antes, não há como avaliar de forma consistente; e só depois de rodar tudo é possível investigar as falhas encontradas."
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Lucas, área de dados.** Testou um prompt de extração de dado em 3 exemplos que ele mesmo escreveu, todos limpos e bem formatados, e aprovou o prompt para produção. Qual é o risco dessa abordagem?",
+      "alternativas": [
+        {
+          "texto": "Os exemplos escolhidos por ele podem não representar a variedade real dos documentos que chegam em produção, incluindo casos mal formatados ou incomuns que o prompt nunca foi testado contra.",
+          "melhor": true,
+          "feedback": "Testar só com exemplos convenientes, escolhidos pelo próprio autor do prompt, tende a superestimar a qualidade real do sistema."
+        },
+        {
+          "texto": "Nenhum risco, três exemplos bem escolhidos sempre bastam para qualquer sistema.",
+          "melhor": false,
+          "feedback": "Três exemplos escolhidos pelo próprio autor, todos fáceis, dificilmente representam a variedade de casos reais que aparecem em produção."
+        },
+        {
+          "texto": "O risco é só de o sistema ficar lento, não de errar.",
+          "melhor": false,
+          "feedback": "O risco principal aqui é de qualidade e acerto, não de velocidade; um eval fraco não detecta erros que vão aparecer em produção."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "id": "prompt-10-explique-como-se",
+  "trilha": "prompt",
+  "titulo": "Explique como se",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "conceito": "**Padrão: Explique como se.** Calibre a profundidade pelo público: \"explique como se eu fosse o gerente comercial que nunca viu SQL\". O público nomeado vira a régua do vocabulário.\n**Quando usar:** traduzir um tema técnico para outra audiência: diretoria, cliente, área vizinha.\n**Quando NÃO usar:** quando você precisa do rigor técnico completo. A simplificação corta nuance, e às vezes a nuance é o ponto.\n**Saída esperada:** explicação no vocabulário do público, com analogia do mundo dele e foco no que ele decide com aquilo.",
+  "exercicios": [
+    {
+      "tipo": "comparar_prompts",
+      "enunciado": "A diretoria comercial quer entender por que o time de dados diz que \"o modelo de previsão de demanda degradou\". Qual prompt produz a explicação mais útil para essa audiência?",
+      "prompts": [
+        {
+          "rotulo": "Prompt A",
+          "texto": "Explique o que significa um modelo de previsão de demanda degradar.",
+          "saida_esperada": "A degradação de um modelo ocorre quando sua performance preditiva diminui ao longo do tempo.\nIsso costuma acontecer por data drift, quando a distribuição dos dados de entrada muda,\nou por concept drift, quando a relação entre as variáveis e o alvo se altera.\nMétricas como MAPE e RMSE pioram, indicando a necessidade de retreino.",
+          "melhor": false,
+          "explicacao": "Correto e inútil para a mesa: drift, MAPE e RMSE são vocabulário de quem já sabe. Sem público declarado, o modelo explica para um colega de dados, não para a diretoria."
+        },
+        {
+          "rotulo": "Prompt B",
+          "texto": "Explique por que um modelo de previsão de demanda degrada, como se eu fosse o diretor comercial que nunca estudou estatística.\nUse uma analogia do mundo de vendas, diga o efeito prático no pedido de compra e feche com a decisão que está na mesa. Máximo de 8 linhas.",
+          "saida_esperada": "Pense no vendedor que batia meta usando o feeling de 2023: os clientes mudaram e o feeling ficou velho.\nO modelo é esse vendedor: aprendeu com o passado, e o padrão de compra de hoje já não é aquele.\nEfeito prático: a previsão erra mais, e o pedido de compra sai com sobra em uns itens e falta em outros.\nDecisão na mesa: pausar o pedido automático e aprovar o retreino, cerca de duas semanas.\nSem isso, o erro de previsão tende a crescer mês a mês.",
+          "melhor": true,
+          "explicacao": "Público nomeado, analogia do mundo dele, efeito prático e a decisão que importa. Compare com o A: mesmo conteúdo de fundo, mas aqui a profundidade foi calibrada para quem vai decidir, não para quem vai retreinar."
+        },
+        {
+          "rotulo": "Prompt C",
+          "texto": "Explique de forma simples e sem termos técnicos por que um modelo de previsão de demanda degrada.",
+          "saida_esperada": "Um modelo de previsão é como uma receita que aprendeu com o passado.\nCom o tempo, o mundo muda e a receita fica desatualizada.\nPor isso as previsões começam a errar mais do que antes.\nÉ preciso atualizar o modelo com dados novos para ele voltar a acertar.",
+          "melhor": false,
+          "explicacao": "Plausível e quase lá: é simples, mas simples para quem? Sem o público, falta o que a diretoria faria com isso: efeito no pedido de compra e decisão a tomar. \"De forma simples\" nivela por baixo; público nomeado calibra."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Renata, TI.** O jurídico pediu para entender o incidente de segurança da semana passada antes de responder ao cliente. Renata tem o relatório técnico de 6 páginas. O que pedir à IA?",
+      "alternativas": [
+        {
+          "texto": "Resuma o relatório em 10 linhas.",
+          "melhor": false,
+          "feedback": "Resumo encurta, mas não traduz: as 10 linhas continuarão falando de token de sessão e endpoint. O jurídico precisa de outra língua, não de menos texto."
+        },
+        {
+          "texto": "Explique o incidente como se o leitor fosse o advogado da empresa, que nunca trabalhou com TI: o que aconteceu, quais dados foram expostos, por quanto tempo e o que já foi corrigido. Sem jargão; termo técnico só se explicado em uma frase.",
+          "melhor": true,
+          "feedback": "Público nomeado e as perguntas que esse público precisa responder ao cliente. É o padrão da lição: a audiência define o vocabulário e o recorte, não só o tamanho."
+        },
+        {
+          "texto": "Reescreva o relatório completo em linguagem acessível, mantendo todos os detalhes técnicos.",
+          "melhor": false,
+          "feedback": "Manter todos os detalhes e ser acessível brigam entre si: o resultado são 6 páginas parafraseadas. Traduzir para outro público exige cortar o que ele não usa, e este pedido proíbe cortar."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Fábio, engenharia.** A auditoria pediu a descrição exata do controle de acesso ao banco de dados de produção, que será anexada ao relatório de conformidade. Um colega sugere: \"pede pra IA explicar como se o auditor fosse leigo, fica mais amigável\". O que fazer?",
+      "alternativas": [
+        {
+          "texto": "Seguir a sugestão: explicar como se o auditor nunca tivesse visto um banco de dados.",
+          "melhor": false,
+          "feedback": "Documento de conformidade vive de precisão: \"só pessoas autorizadas entram\" é amigável e inútil para auditoria. A simplificação corta exatamente a nuance (perfis, logs, revisão de acessos) que o auditor precisa verificar."
+        },
+        {
+          "texto": "Pedir uma versão com analogias do dia a dia para cada mecanismo técnico.",
+          "melhor": false,
+          "feedback": "Analogia serve para ensinar, não para atestar. Num anexo de auditoria, a analogia vira imprecisão contestável. O instrumento é bom, o contexto é errado."
+        },
+        {
+          "texto": "Manter o rigor: pedir a descrição técnica precisa do controle, estruturada nos itens que a auditoria verifica, e deixar a simplificação para quando for apresentar a executivos.",
+          "melhor": true,
+          "feedback": "Aqui o leitor precisa do detalhe completo: é o caso de NÃO usar o padrão. \"Explique como se\" traduz entre públicos; auditoria de conformidade exige o texto na língua original, com rigor técnico."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete o prompt para que a explicação chegue calibrada para quem vai decidir.",
+      "texto": "Explique o resultado do teste A/B do novo checkout ___. Foque no que muda para a meta de conversão do trimestre e termine com uma recomendação.",
+      "opcoes": [
+        {
+          "texto": "como se eu fosse a gerente de e-commerce, que decide o rollout mas nunca estudou estatística",
+          "correta": true,
+          "explicacao": "Público nomeado com papel e limite de repertório: o modelo sabe o que traduzir (significância, intervalo de confiança) e o que manter (impacto na conversão, decisão de rollout)."
+        },
+        {
+          "texto": "de forma simples e resumida",
+          "correta": false,
+          "explicacao": "Simples para quem? Sem o público, o modelo escolhe o nível sozinho e costuma nivelar por baixo, cortando o que a gerente precisaria para decidir o rollout."
+        },
+        {
+          "texto": "com todos os detalhes estatísticos do experimento",
+          "correta": false,
+          "explicacao": "É o oposto do padrão: rigor completo para quem não fala essa língua. A gerente recebe p-valor e intervalo de confiança e continua sem saber se aprova o rollout."
+        },
+        {
+          "texto": "como se eu fosse uma criança de 5 anos",
+          "correta": false,
+          "explicacao": "Infantiliza a decisão: corta tanto que o dado de negócio some. \"Como se\" calibra para um público real de trabalho, não para o público mais leigo possível."
+        }
+      ]
+    }
+  ]
+}

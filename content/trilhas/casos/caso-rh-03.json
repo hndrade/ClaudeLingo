@@ -1,0 +1,70 @@
+{
+  "id": "caso-rh-03",
+  "trilha": "casos",
+  "titulo": "Carla e a devolutiva ao liderado",
+  "nivel": 3,
+  "area": "rh",
+  "prereq": [],
+  "xp": 30,
+  "conceito": "**Carla, RH da Nortex.** Agora precisa ajudar um gestor a dar feedback a um liderado que anda entregando atrasado. Ela pediu para a IA: escreve um feedback pra ele melhorar.\n\nO que voltou foi genérico, sem fato, com tom que soa a bronca. Feedback vago não muda comportamento: precisa de situação concreta, do efeito daquilo e do próximo passo combinado.\n\nO padrão que salva a devolutiva é dar à IA o contexto real (o que aconteceu, com que impacto) e a estrutura desejada, em vez de pedir um texto motivacional no ar.",
+  "exercicios": [
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "O prompt que Carla usou é fraco. Reescreva na caixa aplicando contexto, estrutura e tom, depois compare com a referência e se autoavalie.",
+      "prompt_fraco": "Escreve um feedback pra um funcionário que está indo mal, pra ele melhorar.",
+      "saida_fraca": "Olá! Gostaríamos de conversar sobre o seu desempenho recente. Notamos que há pontos a evoluir e acreditamos no seu potencial. Esperamos ver mais dedicação e comprometimento daqui para frente. Conte conosco! (Sem um fato sequer: o liderado lê, não sabe o que fez de errado nem o que mudar, e ainda se sente vigiado.)",
+      "prompt_referencia": "Ajude a estruturar um feedback presencial de um gestor para um liderado.\nSituação concreta: nas últimas 3 sprints, 4 entregas saíram em média 2 dias após o prazo combinado, sem aviso antecipado.\nImpacto: o time seguinte ficou parado esperando, e uma entrega ao cliente atrasou.\nObjetivo: alinhar prazos realistas e o aviso antecipado quando algo travar, sem desmotivar.\nEstruture em 3 partes: 1) o fato observado, sem adjetivo de personalidade; 2) o impacto no time e no cliente; 3) o combinado dali para frente, com espaço para o liderado responder.\nTom: direto e respeitoso, foco no comportamento, não na pessoa. Máximo de 12 linhas.",
+      "saida_referencia": "Fato: nas últimas 3 sprints, 4 entregas saíram cerca de 2 dias depois do prazo que combinamos, e sem um aviso antes.\n\nImpacto: quando isso acontece, quem depende da sua parte fica parado, e em um dos casos o cliente recebeu com atraso.\n\nCombinado: quero entender o que está pesando no caminho. A partir de agora, se você perceber que um prazo vai estourar, me avise assim que notar, para a gente remanejar juntos. Que apoio faria diferença pra isso funcionar?",
+      "checklist": [
+        "Dei o fato concreto (o que, quando, quanto), sem rótulo de personalidade?",
+        "Descrevi o impacto real no time e no cliente?",
+        "Defini o objetivo da conversa (o que mudar daqui pra frente)?",
+        "Pedi uma estrutura clara com espaço para o liderado responder?",
+        "Defini tom e limite de tamanho para não virar sermão?"
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Qual ingrediente falta no prompt fraco de Carla e mais muda a qualidade do feedback?",
+      "alternativas": [
+        {
+          "texto": "A situação concreta: o que aconteceu, quando e com que impacto.",
+          "correta": true,
+          "explicacao": "Sem fato, a IA só produz elogio ou bronca genérica. O feedback que muda comportamento parte de um evento observável e do seu efeito."
+        },
+        {
+          "texto": "Um pedido para o texto ficar mais longo e emocionante.",
+          "correta": false,
+          "explicacao": "Volume e emoção não corrigem a falta de fato. Um feedback longo e vago é pior: cansa e continua sem dizer o que fazer."
+        },
+        {
+          "texto": "A ordem de listar todos os erros do funcionário desde a contratação.",
+          "correta": false,
+          "explicacao": "Despejar histórico vira ataque à pessoa e some com o foco. Feedback útil trata de um comportamento específico e do próximo passo, não de um dossiê."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a instrução para que a devolutiva foque no comportamento, e não em julgar quem a pessoa é.",
+      "texto": "Descreva ___, sem usar adjetivos de personalidade como desorganizado ou relaxado.",
+      "opcoes": [
+        {
+          "texto": "o fato observado e o impacto que ele causou",
+          "correta": true,
+          "explicacao": "Fato mais impacto é acionável: a pessoa entende o que mudar. Rótulo de personalidade só gera defesa."
+        },
+        {
+          "texto": "como você se sente decepcionado com ele",
+          "correta": false,
+          "explicacao": "Centrar na decepção transfere o foco para o julgamento pessoal, e não para o comportamento que dá para ajustar."
+        },
+        {
+          "texto": "tudo o que os colegas andam comentando sobre ele",
+          "correta": false,
+          "explicacao": "Feedback por boato não tem fato verificável nem dono, e mina a confiança. Fale do que foi observado diretamente."
+        }
+      ]
+    }
+  ]
+}

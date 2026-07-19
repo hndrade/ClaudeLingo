@@ -1,0 +1,75 @@
+{
+  "id": "agentes-04-human-in-the-loop",
+  "trilha": "agentes",
+  "titulo": "Human in the loop: onde exigir aprovação",
+  "nivel": 2,
+  "prereq": [],
+  "xp": 25,
+  "conceito": "Human in the loop é desenhar pontos de checagem onde uma pessoa precisa aprovar antes do agente continuar, especialmente antes de ações difíceis de reverter (enviar um e-mail, deletar um registro, gastar dinheiro).\n\nA escolha de onde colocar essas checagens é uma questão de risco: ações reversíveis e de baixo impacto podem rodar livres; ações irreversíveis ou de alto impacto merecem um humano no meio do caminho antes de acontecerem.",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**Beatriz, área comercial.** Configura um agente para atualizar o CRM automaticamente e, separadamente, para enviar propostas de desconto acima de 20% direto ao cliente. Onde faz mais sentido exigir aprovação humana?",
+      "alternativas": [
+        {
+          "texto": "Antes de enviar a proposta de desconto ao cliente, porque é uma ação de impacto financeiro e difícil de desfazer depois de enviada.",
+          "melhor": true,
+          "feedback": "Ações de alto impacto e difíceis de reverter, como uma proposta de desconto enviada ao cliente, são candidatas naturais a checagem humana antes de executar."
+        },
+        {
+          "texto": "Antes de atualizar o CRM, porque é a ação mais arriscada das duas.",
+          "melhor": false,
+          "feedback": "Atualizar um registro interno costuma ser reversível e de baixo impacto comparado a enviar uma proposta de desconto direto ao cliente."
+        },
+        {
+          "texto": "Em nenhuma das duas, agentes não deveriam ter checagem humana nunca.",
+          "melhor": false,
+          "feedback": "Eliminar toda checagem humana ignora o risco real de ações irreversíveis ou de alto impacto, como uma proposta de desconto enviada sem revisão."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Qual critério ajuda a decidir onde colocar um ponto de aprovação humana no fluxo de um agente?",
+      "alternativas": [
+        {
+          "texto": "O quão reversível e de alto impacto é a ação: ações irreversíveis ou de impacto alto merecem checagem antes de executar.",
+          "correta": true,
+          "explicacao": "Reversibilidade e impacto são os dois fatores centrais para decidir onde vale a pena colocar um humano no meio do processo."
+        },
+        {
+          "texto": "Colocar aprovação humana em toda e qualquer ação, sem distinção.",
+          "correta": false,
+          "explicacao": "Isso tornaria o agente inútil na prática, exigindo aprovação até para ações triviais e reversíveis; o critério precisa ser proporcional ao risco."
+        },
+        {
+          "texto": "Colocar aprovação humana só nas ações mais rápidas de executar.",
+          "correta": false,
+          "explicacao": "Velocidade de execução não é o critério relevante; o que importa é reversibilidade e impacto da ação, não sua rapidez."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a regra de onde priorizar checagem humana num fluxo de agente.",
+      "texto": "Ações difíceis de ___ e de alto impacto merecem um ponto de aprovação humana antes de o agente executar.",
+      "opcoes": [
+        {
+          "texto": "reverter",
+          "correta": true,
+          "explicacao": "Reversibilidade é o critério chave: quanto mais difícil desfazer uma ação, mais importante é ter checagem humana antes dela acontecer."
+        },
+        {
+          "texto": "explicar",
+          "correta": false,
+          "explicacao": "Facilidade de explicação não é o critério relevante para decidir onde colocar checagem humana; o que importa é o risco da ação em si."
+        },
+        {
+          "texto": "digitar",
+          "correta": false,
+          "explicacao": "Complexidade de digitação não tem relação com a decisão de onde exigir aprovação humana no fluxo de um agente."
+        }
+      ]
+    }
+  ]
+}

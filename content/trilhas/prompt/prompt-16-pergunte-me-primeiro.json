@@ -1,0 +1,68 @@
+{
+  "id": "prompt-16-pergunte-me-primeiro",
+  "trilha": "prompt",
+  "titulo": "Pergunte-me primeiro",
+  "nivel": 3,
+  "prereq": [],
+  "xp": 30,
+  "conceito": "**Padrão: Pergunte-me primeiro.** Proíba a suposição e exija perguntas antes da entrega: \"não entregue nada antes de me fazer as perguntas que faltam; assuma zero\".\n\n**Quando usar:** briefing incompleto e tarefa cara de refazer (proposta, parecer, análise longa).\n**Quando não usar:** tarefa trivial, onde responder às perguntas custa mais que corrigir o erro.\n**Saída esperada:** só uma lista de perguntas, numerada e priorizada, nenhuma entrega; o trabalho vem depois das suas respostas.",
+  "exercicios": [
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "Um analista pede uma proposta comercial com briefing de uma linha. Reescreva o prompt aplicando o padrão Pergunte-me primeiro, depois compare com a referência e se autoavalie.",
+      "prompt_fraco": "Monta uma proposta comercial pra Transportadora Horizonte, é um cliente novo. Capricha que é importante.",
+      "saida_fraca": "Proposta Comercial: Transportadora Horizonte\n\n1. Apresentação: somos referência em soluções logísticas...\n2. Escopo: oferecemos serviços completos e personalizados conforme a necessidade do cliente.\n3. Investimento: R$ [a definir]\n4. Vigência: 12 meses.\n\n(O modelo inventou um escopo genérico, deixou o preço em aberto e assumiu sozinho a vigência. Se qualquer suposição estiver errada, a proposta inteira volta para refazer.)",
+      "prompt_referencia": "Preciso de uma proposta comercial para a Transportadora Horizonte, cliente novo e importante.\nAntes de escrever qualquer coisa, me faça as perguntas que faltam. Assuma zero: não deduza escopo, preço, prazo, concorrência nem formato.\nNão entregue nenhum trecho da proposta antes das minhas respostas.\nListe no máximo 8 perguntas, numeradas e agrupadas por tema, começando pelas que mais mudam a proposta.",
+      "saida_referencia": "Antes de redigir, preciso que você responda:\n\nEscopo\n1. Quais serviços entram nesta proposta e quais ficam de fora?\n2. Há volume ou frequência estimada de operação?\n\nComercial\n3. Existe faixa de preço ou orçamento sinalizado pelo cliente?\n4. Há concorrente na disputa? Qual diferencial devo destacar?\n\nEntrega\n5. Qual o prazo de início esperado e a vigência pretendida?\n6. A proposta sai como PDF formal ou e-mail direto?\n\nCom as respostas, escrevo a proposta completa.",
+      "checklist": [
+        "Proibiu explicitamente qualquer entrega antes das respostas?",
+        "Mandou assumir zero em vez de deixar o modelo completar as lacunas?",
+        "Definiu formato para as perguntas (numeradas, agrupadas, priorizadas)?",
+        "Limitou a quantidade de perguntas para não virar interrogatório?",
+        "Deixou claro que a entrega vem depois das respostas?"
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Rafael, jurídico.** O diretor pediu por mensagem um parecer sobre a rescisão do contrato com um fornecedor. Não anexou o contrato nem disse qual cláusula preocupa. Refazer um parecer custa um dia de trabalho. O que Rafael coloca no prompt?",
+      "alternativas": [
+        {
+          "texto": "Pedir o parecer assim mesmo: analise os riscos de rescindir um contrato de fornecimento típico, cobrindo as hipóteses mais comuns.",
+          "melhor": false,
+          "feedback": "Sem o contrato, o parecer sai genérico e o diretor vai perguntar: mas e a nossa multa? Rafael refaz tudo no dia seguinte, exatamente o custo que ele queria evitar."
+        },
+        {
+          "texto": "Aplicar Pergunte-me primeiro: descrever o pedido, mandar o modelo listar as informações que faltam (contrato, cláusula crítica, motivo da rescisão, prazo) e proibir qualquer parecer antes das respostas.",
+          "melhor": true,
+          "feedback": "Briefing incompleto e retrabalho caro: o caso exato do padrão. Bônus: a lista de perguntas vira a mensagem que Rafael manda de volta ao diretor."
+        },
+        {
+          "texto": "Decompor a tarefa: pedir primeiro um resumo das regras gerais de rescisão contratual e montar o parecer por conta própria depois.",
+          "melhor": false,
+          "feedback": "Decompor é útil, mas não ataca o problema real: a informação que falta está com o diretor, não com o modelo. Resumo de regra geral não substitui o contrato específico."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Em qual situação o padrão Pergunte-me primeiro custa mais do que ajuda?",
+      "alternativas": [
+        {
+          "texto": "Revisar a ortografia de um aviso interno de 5 linhas.",
+          "correta": true,
+          "explicacao": "Tarefa trivial e barata de refazer: qualquer rodada de perguntas custa mais que simplesmente corrigir a saída se vier algo estranho. Peça direto."
+        },
+        {
+          "texto": "Redigir a proposta de um projeto de 6 meses a partir de um briefing de duas linhas.",
+          "correta": false,
+          "explicacao": "Caso clássico para o padrão: briefing raso e retrabalho caríssimo. Aqui as perguntas são o melhor investimento do prompt."
+        },
+        {
+          "texto": "Preparar uma apresentação para a diretoria sem saber o tempo de fala nem o foco pedido.",
+          "correta": false,
+          "explicacao": "Informação essencial em falta e entrega de alta visibilidade: perguntar antes evita refazer os slides na véspera."
+        }
+      ]
+    }
+  ]
+}

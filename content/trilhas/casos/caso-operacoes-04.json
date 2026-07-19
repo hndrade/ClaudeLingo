@@ -1,0 +1,71 @@
+{
+  "id": "caso-operacoes-04",
+  "trilha": "casos",
+  "titulo": "Sônia: planejamento de rota é trabalho de solver, não de chat",
+  "nivel": 4,
+  "area": "operacoes",
+  "prereq": [],
+  "xp": 40,
+  "nao_usar_ia": true,
+  "conceito": "Otimizar rota com muitas paradas, janelas de entrega e capacidade é um problema matemático. Um roteirizador (solver) resolve com garantia; um chat estima e erra sem avisar.\n\nO LLM ajuda a preparar o problema (organizar endereços, checar restrições, explicar o resultado do solver para a equipe). Ele não é o otimizador. Pedir a rota ótima ao chat é usar a ferramenta errada.",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**Sônia, área de operações.** Tem 30 entregas amanhã, com janelas de horário e limite de peso por veículo. Ela precisa da melhor rota. Qual caminho faz sentido?",
+      "alternativas": [
+        {
+          "texto": "Colar as 30 paradas no chat e pedir a rota ótima que minimiza a distância.",
+          "melhor": false,
+          "feedback": "Roteirização com janelas e capacidade é otimização combinatória. O chat devolve uma sequência plausível e não ótima, sem garantir que respeita os horários e o peso. Erro caro que aparece só no dia."
+        },
+        {
+          "texto": "Usar um roteirizador que resolve o problema com as restrições, e usar a IA para organizar os endereços de entrada e explicar a rota para os motoristas.",
+          "melhor": true,
+          "feedback": "Ferramenta certa para cada parte: o solver otimiza com garantia sobre janelas e peso, a IA prepara o dado e traduz o resultado para a equipe. A IA apoia, não substitui o otimizador."
+        },
+        {
+          "texto": "Pedir ao chat a rota e conferir só se parece razoável no mapa.",
+          "melhor": false,
+          "feedback": "Parecer razoável não é respeitar 30 janelas e o limite de peso. A conferência a olho não pega a violação de restrição, e a suposta otimização não tem base."
+        }
+      ]
+    },
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "Pedido cru que joga o problema errado no chat. Monte na caixa o prompt que usa a IA no papel certo (apoio ao solver), compare com a referência e se autoavalie.",
+      "prompt_fraco": "Me dá a rota mais curta pra essas 30 entregas.",
+      "saida_fraca": "Aqui está uma rota otimizada para as 30 entregas, começando pela mais próxima e seguindo em sequência lógica até a mais distante, minimizando o percurso total. (Uma sequência inventada, sem checar janela nem peso, apresentada como otimizada.)",
+      "prompt_referencia": "Não calcule a rota ótima; isso é do roteirizador. Ajude a preparar o problema para ele.\nDas 30 entregas abaixo, organize uma tabela com: endereço, janela de horário, peso e observações.\nAponte conflitos que o roteirizador precisa saber: entregas com janela impossível de cumprir juntas, ou peso que estoura a capacidade de um veículo.\nMarque como 'faltando' qualquer endereço ou janela incompleta.\nNão invente coordenada nem estime distância.\n\n[lista de 30 entregas]",
+      "saida_referencia": "Endereço | Janela | Peso | Observação\n(30 linhas organizadas a partir do que foi colado)\n\nConflitos para o roteirizador:\n- Entregas 4 e 19 têm janela 8h-9h em bairros opostos: provavelmente exigem veículos diferentes.\n- Soma de peso da região sul passa de 2 t: revisar capacidade.\nFaltando: janela da entrega 12, CEP da entrega 27.",
+      "checklist": [
+        "Deixei claro que a IA não calcula a rota ótima?",
+        "Coloquei a IA para organizar o dado de entrada do solver?",
+        "Pedi para apontar conflitos de janela e de peso?",
+        "Mandei marcar dado faltante em vez de completar?",
+        "Proibi inventar coordenada e estimar distância?",
+        "Reservei a otimização para a ferramenta certa?"
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que um roteirizador é melhor que o chat para otimizar a rota, mesmo o chat parecendo mais prático?",
+      "alternativas": [
+        {
+          "texto": "Porque o roteirizador é sempre mais barato que usar IA.",
+          "correta": false,
+          "explicacao": "Custo não é o argumento. O ponto é a garantia: o solver respeita as restrições e otimiza de fato, o chat não."
+        },
+        {
+          "texto": "Porque o roteirizador resolve o problema respeitando janelas e capacidade com garantia, e o chat só produz um palpite plausível.",
+          "correta": true,
+          "explicacao": "Exato. Roteirização é otimização com restrições; o solver dá uma solução válida e otimizada, o chat dá uma sequência que parece boa e pode violar tudo."
+        },
+        {
+          "texto": "Porque o chat não consegue ler endereços.",
+          "correta": false,
+          "explicacao": "O chat lê endereços muito bem, e é isso que o torna útil para preparar o dado. O que ele não faz é a otimização combinatória com garantia."
+        }
+      ]
+    }
+  ]
+}

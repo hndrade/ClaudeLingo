@@ -1,0 +1,77 @@
+{
+  "id": "prompt-02-contexto",
+  "trilha": "prompt",
+  "titulo": "Contexto: o que o modelo não sabe",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "conceito": "O modelo não conhece sua empresa, seu chefe, nem o que você já tentou e descartou. Sem contexto, ele preenche as lacunas com o genérico mais provável.\n\nAntes de pedir, responda no próprio prompt: **quem é você**, **para quem é a saída** e **o que já foi tentado ou decidido**.\n\nContexto não é enfeite: é a diferença entre uma resposta de manual e uma resposta para o seu caso.",
+  "exercicios": [
+    {
+      "tipo": "comparar_prompts",
+      "enunciado": "Três pessoas pedem ideias para reduzir custos. Compare os prompts e o que cada um devolve: qual saída é aproveitável de verdade?",
+      "prompts": [
+        {
+          "rotulo": "Prompt A",
+          "texto": "Me dá ideias para reduzir custos na minha empresa.",
+          "saida_esperada": "Claro! Algumas ideias para reduzir custos:\n1. Renegocie contratos com fornecedores\n2. Reduza gastos com energia e papel\n3. Corte viagens e eventos não essenciais\n4. Avalie reduzir o quadro de funcionários\n5. Digitalize processos manuais",
+          "melhor": false,
+          "explicacao": "Lista de manual que serve para qualquer empresa do mundo. O modelo não sabe seu setor, seu tamanho, nem que talvez você já tenha feito metade disso. Note a sugestão de demissões: ele não sabe que isso pode estar vetado."
+        },
+        {
+          "rotulo": "Prompt B",
+          "texto": "Contexto: sou gerente de operações de uma transportadora com frota própria de caminhões. Já renegociamos combustível e reduzimos horas extras. A diretoria descartou demissões.\n\nListe 5 ideias de redução de custos que ainda não tentamos, focadas em manutenção e rotas. Uma linha por ideia.",
+          "saida_esperada": "1. Manutenção preventiva por quilometragem em vez de corretiva, reduzindo paradas não planejadas\n2. Roteirização com software para cortar quilômetros vazios entre entregas\n3. Rodízio e recapagem programada de pneus, um dos maiores custos por km da frota\n4. Telemetria para reduzir condução agressiva, que eleva consumo e desgaste\n5. Consolidação de cargas parciais em rotas de baixa ocupação",
+          "melhor": true,
+          "explicacao": "Quem pede (gerente de operações), qual negócio (transportadora com frota própria) e o que já foi tentado ou vetado. O modelo para de repetir o óbvio e trabalha no espaço que sobrou: manutenção e rotas."
+        },
+        {
+          "rotulo": "Prompt C",
+          "texto": "Pense como um consultor de negócios top de linha e me dê ideias criativas e fora da caixa para reduzir custos.",
+          "saida_esperada": "Como consultor, sugiro pensar além do óbvio:\n1. Adote um modelo de trabalho híbrido para reduzir escritório\n2. Terceirize atividades que não são o core do negócio\n3. Implemente orçamento base zero\n4. Crie um programa de ideias de economia com os funcionários\n5. Revise o portfólio e descontinue produtos de baixa margem",
+          "melhor": false,
+          "explicacao": "O papel de consultor muda o tom, mas não resolve o problema: sem saber quem você é e o que já foi tentado, as ideias continuam genéricas, só que com verniz de consultoria. Papel não substitui contexto."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Você escreve: \"Monte um plano para melhorar o clima da minha equipe.\" O que o modelo sabe sobre a sua equipe nesse momento?",
+      "alternativas": [
+        {
+          "texto": "Nada: ele vai supor uma equipe genérica e devolver ações de manual.",
+          "correta": true,
+          "explicacao": "Exato. Tamanho da equipe, área, o que causou o clima ruim, o que já foi feito: nada disso está no prompt, então o modelo preenche tudo com o caso mais provável, que raramente é o seu."
+        },
+        {
+          "texto": "Ele consulta os sistemas internos da empresa para entender a situação da equipe.",
+          "correta": false,
+          "explicacao": "O modelo não tem acesso aos seus sistemas, e-mails ou pesquisas de clima. Ele só vê o que você colar ou escrever no prompt."
+        },
+        {
+          "texto": "Ele lembra do que você contou sobre a equipe em conversas de semanas atrás.",
+          "correta": false,
+          "explicacao": "Cada conversa nova começa do zero por padrão. Se o contexto importa, repita no prompt: é mais seguro do que apostar que o modelo lembra."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie cada tipo de contexto com o problema que ele evita na resposta.",
+      "pares": [
+        {
+          "conceito": "Quem é você (cargo, empresa, situação)",
+          "definicao": "Evita resposta de manual que serve para qualquer um"
+        },
+        {
+          "conceito": "Para quem é a saída",
+          "definicao": "Evita tom e nível de detalhe errados para o leitor real"
+        },
+        {
+          "conceito": "O que já foi tentado ou descartado",
+          "definicao": "Evita sugestões repetidas ou já vetadas pelo chefe"
+        }
+      ]
+    }
+  ]
+}

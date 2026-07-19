@@ -1,0 +1,75 @@
+{
+  "id": "llm-04-custo-por-token",
+  "trilha": "llm",
+  "titulo": "Custo por token: entrada e saída não custam igual",
+  "nivel": 1,
+  "prereq": [],
+  "xp": 20,
+  "conceito": "O uso do modelo costuma ser cobrado por token, e o preço de entrada (o que você manda) costuma ser mais barato que o de saída (o que o modelo gera). Colar um documento grande custa mesmo que a resposta seja curta.\n\nOs valores exatos variam por modelo e mudam com o tempo; qualquer preço citado aqui é ilustrativo (fictício), não um valor real de mercado.",
+  "exercicios": [
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que pedir 'resuma em 3 bullets' costuma ser mais barato que pedir 'explique tudo em detalhes'?",
+      "alternativas": [
+        {
+          "texto": "Porque o token de saída costuma custar mais que o de entrada, e uma resposta curta gera menos tokens de saída.",
+          "correta": true,
+          "explicacao": "Como saída costuma ser mais cara por token, e uma resposta curta usa menos tokens de saída, o custo total tende a ser menor."
+        },
+        {
+          "texto": "Porque pedidos educados são mais baratos que pedidos diretos.",
+          "correta": false,
+          "explicacao": "Educação no pedido não influencia custo. O que influencia é a quantidade de tokens gerados na saída."
+        },
+        {
+          "texto": "Porque bullets usam uma tecnologia diferente de texto corrido.",
+          "correta": false,
+          "explicacao": "Bullet e texto corrido usam a mesma tecnologia de geração; o que muda é a quantidade de tokens produzidos."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "**Sônia, área de operações.** Precisa consultar o mesmo manual de procedimento várias vezes ao longo do dia. Colar o manual inteiro toda vez é a opção mais econômica?",
+      "alternativas": [
+        {
+          "texto": "Não necessariamente: colar o documento inteiro em cada consulta cobra tokens de entrada repetidamente, mesmo que a pergunta seja curta.",
+          "melhor": true,
+          "feedback": "Repetir o documento inteiro a cada pergunta soma custo de entrada toda vez. Manter o documento num contexto persistente (como um Project) evita repetir o custo."
+        },
+        {
+          "texto": "Sim, colar o documento inteiro toda vez nunca tem custo, só a resposta final custa.",
+          "melhor": false,
+          "feedback": "Tokens de entrada também custam, mesmo sendo mais baratos por token que os de saída. Repetir um documento grande tem custo, sim."
+        },
+        {
+          "texto": "O custo depende só do horário do dia em que a pergunta é feita.",
+          "melhor": false,
+          "feedback": "Horário não é um fator relevante para custo por token nesse contexto. O que importa é a quantidade de tokens de entrada e saída em cada chamada."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a frase sobre a estrutura típica de custo por token.",
+      "texto": "Em geral, o preço por token de ___ é mais alto que o preço por token de entrada.",
+      "opcoes": [
+        {
+          "texto": "saída",
+          "correta": true,
+          "explicacao": "É um padrão comum entre provedores: gerar texto (saída) costuma custar mais por token do que processar o texto de entrada."
+        },
+        {
+          "texto": "silêncio",
+          "correta": false,
+          "explicacao": "Não existe cobrança por 'silêncio'; a cobrança é sobre tokens efetivamente processados ou gerados."
+        },
+        {
+          "texto": "espera",
+          "correta": false,
+          "explicacao": "Tempo de espera é medido como latência, uma métrica diferente, não diretamente ligada ao preço por token."
+        }
+      ]
+    }
+  ]
+}

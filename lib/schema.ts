@@ -89,6 +89,8 @@ export const licaoSchema = z
     verificado_em: z.string().date().optional(),
     fontes: z.array(z.string().url()).optional(),
     conceito: z.string(),
+    // Marca uma lição cujo case conclui que o certo é não usar IA, ou usar de forma limitada.
+    nao_usar_ia: z.boolean().optional(),
     exercicios: z.array(exercicioSchema).min(1),
   })
   .refine((l) => !l.verificado_em || (l.fontes && l.fontes.length > 0), {

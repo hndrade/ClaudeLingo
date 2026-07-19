@@ -1,0 +1,76 @@
+{
+  "id": "caso-juridico-03",
+  "trilha": "casos",
+  "titulo": "Henrique: extrair cláusula num schema fixo",
+  "nivel": 3,
+  "area": "juridico",
+  "prereq": [],
+  "xp": 30,
+  "conceito": "Quando você extrai o mesmo dado de vários contratos, a saída precisa ser sempre igual: mesmos campos, mesma ordem, mesmo formato.\n\nDeclare um **schema fixo** (os campos e o tipo de cada um), mande usar **\"não consta\"** quando o contrato não trouxer o dado, exija a **cláusula de origem** e proíba **inferir**.\n\nSem schema, cada contrato volta num formato diferente e você não consegue empilhar tudo numa planilha.",
+  "exercicios": [
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "**Henrique** está montando uma planilha com prazo, multa e reajuste de 40 contratos de fornecedor. Ele extrai um a um com o prompt abaixo e cada resposta volta num formato diferente, às vezes com um valor que o contrato não tem. Reescreva o prompt, depois compare com a referência.",
+      "prompt_fraco": "Me diz o prazo, a multa e o reajuste desse contrato:\n\n[contrato]",
+      "saida_fraca": "Esse contrato tem prazo de 12 meses e prevê multa em caso de rescisão. O reajuste segue o índice de inflação, provavelmente o IPCA como é comum nesse tipo de contrato. Qualquer dúvida é só avisar!\n\n(No contrato seguinte ele responde em bullets; em outro, esquece a multa; e aqui inventou o IPCA, que não está escrito.)",
+      "prompt_referencia": "Extraia os dados do contrato abaixo e devolva SOMENTE neste formato JSON, nesta ordem de campos:\n{\n  \"prazo_meses\": número,\n  \"clausula_prazo\": texto (ex.: \"Cl. 4\"),\n  \"multa_rescisao_percent\": número,\n  \"clausula_multa\": texto,\n  \"indice_reajuste\": texto,\n  \"clausula_reajuste\": texto\n}\nRegras:\n1. Se um dado não estiver escrito no contrato, use \"não consta\" no valor e na cláusula.\n2. Copie apenas o que está no texto. Não infira nem complete com o que é comum no mercado.\n3. Sem comentários fora do JSON.\n\n[contrato]",
+      "saida_referencia": "{\n  \"prazo_meses\": 12,\n  \"clausula_prazo\": \"Cl. 4\",\n  \"multa_rescisao_percent\": 30,\n  \"clausula_multa\": \"Cl. 8.1\",\n  \"indice_reajuste\": \"não consta\",\n  \"clausula_reajuste\": \"não consta\"\n}",
+      "checklist": [
+        "Declarei o schema com os campos e o tipo de cada um?",
+        "Fixei a ordem dos campos para todos os contratos saírem iguais?",
+        "Defini o valor para dado ausente (não consta) em vez de deixar o modelo omitir?",
+        "Proibi inferir ou completar com o que é comum no mercado?",
+        "Exigi a cláusula de origem de cada dado?",
+        "Restringi a saída a só o JSON, sem texto em volta?"
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que \"use não consta quando o dado não estiver no contrato\" é mais seguro do que deixar o modelo em silêncio sobre o campo?",
+      "alternativas": [
+        {
+          "texto": "Porque o silêncio some com o campo e, ao empilhar 40 contratos, você não distingue o que faltou do que ninguém extraiu; o não consta marca a ausência de forma auditável.",
+          "correta": true,
+          "explicacao": "Numa planilha, célula vazia é ambígua: erro de extração ou dado inexistente? O não consta responde isso e mantém o schema íntegro em todas as linhas."
+        },
+        {
+          "texto": "Porque obriga o modelo a estimar o valor mais provável para o campo vazio.",
+          "correta": false,
+          "explicacao": "É o oposto do que se quer. Estimar é inferir, e num dado contratual isso vira número inventado dentro da planilha."
+        },
+        {
+          "texto": "Porque deixa o JSON mais curto e rápido de processar.",
+          "correta": false,
+          "explicacao": "Tamanho não é o ponto. O que importa é a linha continuar completa e comparável entre contratos, não ficar menor."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete a regra que impede o modelo de contaminar a extração com conhecimento genérico.",
+      "texto": "Copie apenas o que está no texto do contrato. ___ com o que é comum nesse tipo de contrato.",
+      "opcoes": [
+        {
+          "texto": "Não infira nem complete",
+          "correta": true,
+          "explicacao": "Fecha a porta para o modelo preencher lacunas com o padrão de mercado. O dado extraído passa a refletir só aquele contrato."
+        },
+        {
+          "texto": "Complete quando fizer sentido",
+          "correta": false,
+          "explicacao": "Fizer sentido para quem? Abre espaço para o modelo escrever IPCA porque quase todo contrato usa, mesmo que este não diga."
+        },
+        {
+          "texto": "Ajuste levemente",
+          "correta": false,
+          "explicacao": "Ajustar um dado contratual é alterá-lo. Na extração, qualquer edição do que está escrito é erro, não melhoria."
+        },
+        {
+          "texto": "Resuma e generalize",
+          "correta": false,
+          "explicacao": "Generalizar apaga a especificidade da cláusula, que é justamente o que a planilha precisa guardar por contrato."
+        }
+      ]
+    }
+  ]
+}

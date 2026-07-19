@@ -1,0 +1,60 @@
+{
+  "id": "caso-comercial-03",
+  "trilha": "casos",
+  "titulo": "Beatriz: resumo de pipeline que o gerente lê em 1 minuto",
+  "nivel": 3,
+  "area": "comercial",
+  "prereq": [],
+  "xp": 30,
+  "conceito": "Um resumo de pipeline serve para decidir, não para narrar. O gerente quer saber onde o dinheiro está travado e o que fazer nesta semana.\n\nO prompt fraco pede um resumo e recebe uma lista morna de negócios. O prompt forte define o recorte (só o trimestre aberto), o formato (por estágio, com valor e próximo passo) e o que destacar (o que está parado há mais tempo).",
+  "exercicios": [
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "**Beatriz, área comercial.** Toda sexta ela manda ao gerente um resumo do pipeline. Hoje usa o prompt abaixo e recebe um texto que o gerente não lê. Reescreva na caixa, compare com a referência e se autoavalie.",
+      "prompt_fraco": "Resume como está meu pipeline:\n\n[exportação do CRM]",
+      "saida_fraca": "Seu pipeline tem vários negócios em andamento em diferentes estágios. Há oportunidades promissoras e alguns negócios que precisam de atenção. No geral o momento é positivo, com bom volume na base. Vale acompanhar os principais para garantir o fechamento no prazo.",
+      "prompt_referencia": "Resuma o pipeline abaixo para meu gerente, só os negócios do trimestre aberto.\nAgrupe por estágio (qualificação, proposta, negociação, fechamento).\nPara cada negócio: cliente, valor, dias parado no estágio atual e próximo passo definido.\nDestaque no topo os 3 negócios de maior valor parados há mais de 15 dias.\nSe algum negócio estiver sem próximo passo, marque como 'sem próximo passo'.\nMáximo de 12 linhas.\n\n[exportação do CRM]",
+      "saida_referencia": "Travados (valor alto, mais de 15 dias parados):\n- LogBR, R$ 120 mil (fictício), 22 dias em negociação, sem próximo passo\n- TechCorp, R$ 90 mil (fictício), 18 dias em proposta, aguardando revisão de escopo\n\nProposta: VarejoX R$ 40 mil, 6 dias, enviar caso de uso ate quarta.\nNegociação: LogBR (acima).\nFechamento: Alfa R$ 25 mil, assinar contrato esta semana.",
+      "checklist": [
+        "Delimitei o recorte (só o trimestre aberto)?",
+        "Defini quem lê e para quê (gerente, decidir)?",
+        "Pedi agrupamento por estágio?",
+        "Pedi valor e próximo passo de cada negócio?",
+        "Mandei destacar o que está parado e caro?",
+        "Instruí o que fazer quando falta o próximo passo?"
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Qual dessas informações mais ajuda o gerente a agir sobre o pipeline?",
+      "alternativas": [
+        {
+          "texto": "O número total de negócios abertos, sem detalhe.",
+          "correta": false,
+          "explicacao": "Um total agregado não diz onde agir. Vinte negócios podem estar todos saudáveis ou todos travados, e o gerente continua sem saber onde entrar."
+        },
+        {
+          "texto": "Quais negócios de valor alto estão parados há mais tempo e sem próximo passo.",
+          "correta": true,
+          "explicacao": "Isso aponta exatamente onde há dinheiro travado e falta de ação. É a informação que transforma um resumo em decisão."
+        },
+        {
+          "texto": "Um texto motivacional dizendo que o trimestre vai fechar bem.",
+          "correta": false,
+          "explicacao": "Otimismo não é dado. O gerente precisa de fatos acionáveis, não de ânimo."
+        }
+      ]
+    },
+    {
+      "tipo": "ordenacao",
+      "enunciado": "Ordene o resumo de pipeline do que mais exige ação para o que menos exige.",
+      "etapas": [
+        "Negócios de valor alto parados e sem próximo passo",
+        "Negócios em negociação com próximo passo já marcado",
+        "Negócios em proposta recém-enviada",
+        "Negócios em qualificação inicial"
+      ],
+      "explicacao": "O gerente lê de cima para baixo e para quando acabou o tempo. O que está travado e caro tem que vir primeiro; o que é novo e ainda anda sozinho pode esperar."
+    }
+  ]
+}

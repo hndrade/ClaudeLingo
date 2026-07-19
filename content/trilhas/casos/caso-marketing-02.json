@@ -1,0 +1,69 @@
+{
+  "id": "caso-marketing-02",
+  "trilha": "casos",
+  "titulo": "Rafael: transformar um pedido vago em briefing",
+  "nivel": 2,
+  "area": "marketing",
+  "prereq": [],
+  "xp": 25,
+  "conceito": "Um briefing ruim gera dez rodadas de ajuste. Ele precisa dizer objetivo, público, canal, tom, o que não fazer e como medir sucesso.\n\nO pedido 'cria uns posts pra campanha' deixa tudo em aberto e o modelo preenche com genérico. Um briefing declarado fecha as decisões antes de a peça nascer.",
+  "exercicios": [
+    {
+      "tipo": "comparar_prompts",
+      "enunciado": "**Rafael, área de marketing. Analista na Nortex.** Precisa de posts para o lançamento de um serviço de rastreio de frota. Qual prompt gera peça utilizável na primeira rodada?",
+      "prompts": [
+        {
+          "rotulo": "Prompt A",
+          "texto": "Cria uns posts pra campanha do nosso lançamento.",
+          "saida_esperada": "Post 1: Novidade chegando! Fique ligado.\nPost 2: Transforme o seu negócio com inovação.\nPost 3: A espera acabou, conheça nossa solução.\n(Genérico, serve para qualquer produto, sem público nem canal.)",
+          "melhor": false,
+          "explicacao": "Sem público, canal, tom ou objetivo, o modelo devolve frases de encher. Servem para qualquer coisa, logo não servem para nada."
+        },
+        {
+          "rotulo": "Prompt B",
+          "texto": "Escreva 3 posts para LinkedIn sobre o lançamento do nosso rastreio de frota.\nPúblico: gestor de logística de transportadora média.\nObjetivo: gerar pedidos de demonstração.\nTom: direto, sem hype, com um dado concreto por post.\nEvite: superlativos vazios (revolucionário, incrível) e emoji.\nCada post: máximo 4 linhas e uma chamada para ação clara.",
+          "saida_esperada": "Post 1: Atraso na entrega custa multa e cliente. Nosso rastreio avisa o desvio antes de virar problema. Peça uma demonstração.\nPost 2: Você sabe onde cada veículo está agora? Se a resposta demora, sua operação está no escuro. Veja como mudar isso.\nPost 3: Reduzir uma janela de atraso por semana já paga o rastreio. Agende 15 minutos com a gente.",
+          "melhor": true,
+          "explicacao": "Público, objetivo, tom, restrição e formato definidos. A peça já sai no alvo e com chamada para ação, pronta para pequenos ajustes em vez de recomeço."
+        },
+        {
+          "rotulo": "Prompt C",
+          "texto": "Escreva posts bem criativos e impactantes sobre o lançamento, caprichando bastante no texto.",
+          "saida_esperada": "Post 1: Prepare-se para uma revolução sem precedentes na sua logística!\nPost 2: A inovação que vai transformar tudo o que você conhece sobre frotas!\nPost 3: O futuro chegou, e ele é surpreendente!\n(Criativo e impactante sem alvo produz hype vazio.)",
+          "melhor": false,
+          "explicacao": "Criativo e impactante são adjetivos, não briefing. O modelo responde com exclamação e superlativo, exatamente o que afasta um gestor de logística."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Pareie cada parte do briefing com a decisão que ela fecha.",
+      "pares": [
+        { "conceito": "Público", "definicao": "Com quem a peça fala e o que essa pessoa já sabe" },
+        { "conceito": "Objetivo", "definicao": "O que a peça precisa fazer a pessoa fazer" },
+        { "conceito": "Evite", "definicao": "O vício que a peça não pode ter, dito de antemão" }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "O designer devolve a Rafael uma arte linda mas fora do alvo. O que no briefing teria evitado isso?",
+      "alternativas": [
+        {
+          "texto": "Ter pedido a peça com mais urgência.",
+          "melhor": false,
+          "feedback": "Pressa não corrige rumo. A arte saiu bonita e errada porque o alvo não estava escrito, não porque faltou correria."
+        },
+        {
+          "texto": "Ter declarado público, objetivo e o que evitar antes de a peça começar.",
+          "melhor": true,
+          "feedback": "As decisões de rumo cabem no briefing, não na revisão. Com público e objetivo escritos, o designer acerta o alvo na primeira, e a beleza passa a somar em vez de mascarar o erro."
+        },
+        {
+          "texto": "Ter deixado o designer livre para criar sem amarras.",
+          "melhor": false,
+          "feedback": "Liberdade sem alvo é o que produziu a peça fora do alvo. Restrição clara não mata a criatividade, ela a direciona para o problema certo."
+        }
+      ]
+    }
+  ]
+}

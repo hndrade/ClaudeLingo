@@ -15,3 +15,11 @@ Pensamentos de execução. Curto, bruto, cronológico. Não é documentação.
 - Escada verificada no mapa: 4 disponiveis N1 → 7 N2 → 8 N3 → 3 N4. Sem furo.
 - Fase 4 fechada. Próxima: Fase 5, cases por área (8 áreas, personagens recorrentes, 1 case "não use IA" por área).
 - Pendência conhecida: favicon; alguns agentes puseram prereq encadeado nas lições N4 (campo hoje não é usado pelo motor, escada usa nivel; inofensivo).
+
+## 2026-07-19 (Fase 5)
+- 8 áreas x 3 níveis = 24 cases. Personagens: Jorge, Beatriz, Carla, Henrique, Rafael, Sônia, Lucas, Paula.
+- Onda 1 (4 agentes) e onda 2 nem lançou: limite de sessão da CONTA travou os subagentes (reset 2:10 UTC). Escrevi 15 dos 24 eu mesmo (orquestrador segue vivo mesmo com subagentes bloqueados).
+- Lição de processo: subagente e orquestrador dividem a mesma quota. Em pico de uso, escrever direto é mais confiável que insistir em spawnar.
+- nao_usar_ia: 1 por área, verificado por teste. Regra de honestidade da spec cumprida.
+- Achado: teste de travessão pegou comentário SQL "--"; troquei por /* */ (SQL valido, nao viola a regra de texto). 223 testes verdes.
+- Git: hook reclama de assinatura GPG (nao tenho chave aqui); email do committer ja e noreply@anthropic.com. Nao da pra assinar neste ambiente.

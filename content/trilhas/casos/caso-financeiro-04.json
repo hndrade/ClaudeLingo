@@ -1,0 +1,68 @@
+{
+  "id": "caso-financeiro-04",
+  "trilha": "casos",
+  "titulo": "Jorge e a previsão de caixa",
+  "nivel": 4,
+  "area": "financeiro",
+  "prereq": [],
+  "xp": 40,
+  "conceito": "**Jorge, analista financeiro na Solaris Indústria.** A diretoria pediu uma previsão de caixa das próximas 13 semanas para decidir se antecipa recebíveis. Jorge tem contas a receber, contas a pagar, saldo inicial e o histórico de atrasos dos clientes. E tem uma linha de prompt na cabeça.\n\nCaso cru: nada de escopo, formato ou premissas. Construir do zero significa transformar a linha vaga num prompt completo, contra uma rubrica: horizonte e granularidade, premissas explícitas (atraso médio, sazonalidade), saída em tabela por semana com saldo projetado, e a honestidade de marcar o que é estimativa e sinalizar semanas de caixa negativo em vez de suavizar."
+,
+  "exercicios": [
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "Jorge só tem esta linha. Construa o prompt inteiro contra a rubrica do checklist, depois compare com a referência.",
+      "prompt_fraco": "Faz uma previsão de caixa pra mim.",
+      "saida_fraca": "Claro! Com base em uma estimativa geral, sua previsão de caixa para os próximos meses aparenta ser positiva, com boa capacidade de honrar os compromissos. Recomendo manter uma reserva de segurança e revisar os gastos periodicamente para garantir a saúde financeira do caixa.",
+      "prompt_referencia": "Monte uma previsão de fluxo de caixa das próximas 13 semanas para apoiar uma decisão sobre antecipar recebíveis.\nDados que envio: saldo inicial, contas a receber (valor, cliente, vencimento), contas a pagar (valor, vencimento) e o atraso médio histórico por cliente.\nPremissas explícitas: aplique o atraso médio de cada cliente ao vencimento previsto e liste em uma linha as premissas que usou. Se algum dado faltar, escreva premissa assumida e não invente número.\nFormato: tabela por semana com saldo inicial, entradas, saídas, saldo final projetado. Sinalize com atenção qualquer semana de saldo final negativo.\nHonestidade: marque valores projetados como estimativa e não apresente a previsão como valor garantido.\nAo final, aponte as 2 semanas de maior aperto de caixa.\n\n[saldo inicial, contas a receber, contas a pagar, histórico de atraso]",
+      "saida_referencia": "Premissas: atraso médio aplicado por cliente; recebíveis sem histórico assumidos no vencimento (premissa assumida).\n\nPrevisão 13 semanas (estimativa, valores fictícios)\n| Semana | Saldo inicial | Entradas | Saídas | Saldo final |\n| S1 | 50.000 | 30.000 | 42.000 | 38.000 |\n| S2 | 38.000 | 12.000 | 40.000 | 10.000 |\n| S3 | 10.000 | 8.000 | 25.000 | atenção: -7.000 |\n\nMaior aperto: S3 e S7 (saldo projetado negativo).\nObservação: números são estimativa, dependem do atraso real dos clientes.",
+      "checklist": [
+        "Defini horizonte e granularidade (13 semanas, semana a semana)?",
+        "Listei os dados de entrada que a previsão precisa consumir?",
+        "Tornei as premissas explícitas (atraso médio, dado faltante)?",
+        "Declarei o formato (tabela por semana com saldo final projetado)?",
+        "Exigi sinalizar semanas de caixa negativo em vez de suavizar?",
+        "Marquei os valores como estimativa, sem apresentar como garantido?"
+      ]
+    },
+    {
+      "tipo": "comparar_prompts",
+      "enunciado": "Duas construções para o mesmo pedido de Jorge. Qual dá à diretoria uma base para decidir, e não uma falsa certeza?",
+      "prompts": [
+        {
+          "rotulo": "Prompt A",
+          "texto": "Projeta o caixa das próximas 13 semanas e me diz se vamos ficar no positivo.",
+          "saida_esperada": "Boa notícia: pela projeção, o caixa deve se manter positivo ao longo das 13 semanas. Não há motivo para preocupação no horizonte analisado, e a antecipação de recebíveis provavelmente não será necessária.",
+          "melhor": false,
+          "explicacao": "Pergunta de sim ou não sobre um dado incerto convida o modelo a dar um veredito tranquilizador. Some as premissas, some a tabela, some o alerta de semana negativa: some tudo que sustentaria a decisão."
+        },
+        {
+          "rotulo": "Prompt B",
+          "texto": "Monte a previsão de caixa de 13 semanas em tabela (saldo inicial, entradas, saídas, saldo final por semana), aplicando o atraso médio por cliente. Liste as premissas em uma linha, marque os valores como estimativa, sinalize semanas de saldo negativo e aponte as 2 de maior aperto. Se faltar dado, escreva premissa assumida.\n\n[dados]",
+          "saida_esperada": "Premissas: atraso médio por cliente aplicado; 2 recebíveis sem histórico assumidos no vencimento.\n| Semana | Saldo inicial | Entradas | Saídas | Saldo final |\n| S1 | 50.000 | 30.000 | 42.000 | 38.000 |\n| S3 | 10.000 | 8.000 | 25.000 | atenção: -7.000 |\nMaior aperto: S3 e S7. Valores são estimativa.",
+          "melhor": true,
+          "explicacao": "Horizonte, formato, premissas explícitas e honestidade sobre a incerteza. A diretoria vê onde o caixa aperta e sob quais suposições, que é o que embasa a decisão de antecipar ou não recebíveis."
+        },
+        {
+          "rotulo": "Prompt C",
+          "texto": "Com base no histórico, prevê o caixa e já recomenda se devemos antecipar recebíveis e quanto.",
+          "saida_esperada": "Recomendo antecipar R$ 120.000 em recebíveis nas próximas duas semanas para garantir folga de caixa. Essa medida deixará o fluxo confortável em todo o trimestre e evita qualquer risco de saldo negativo.",
+          "melhor": false,
+          "explicacao": "Pula da previsão direto para uma recomendação financeira com valor exato, sem mostrar a tabela nem as premissas. A decisão de antecipar recebíveis tem custo e é da diretoria; o prompt deveria entregar a base, não um veredito com número inventado."
+        }
+      ]
+    },
+    {
+      "tipo": "ordenacao",
+      "enunciado": "Coloque na ordem as etapas para Jorge construir a previsão de caixa com apoio da IA, do jeito que sustenta a decisão.",
+      "etapas": [
+        "Defina o objetivo e o horizonte: 13 semanas para decidir sobre antecipar recebíveis",
+        "Reúna e liste os dados de entrada: recebíveis, pagáveis, saldo inicial, atraso histórico",
+        "Torne as premissas explícitas e mande marcar como estimativa o que for projetado",
+        "Peça a saída em tabela por semana com saldo final e alerta de semana negativa",
+        "Confira as premissas e os números base antes de levar à diretoria"
+      ],
+      "explicacao": "Objetivo e horizonte primeiro, porque definem o resto. Dados e premissas antes do formato, senão a tabela projeta sobre o vazio. E a conferência humana fecha: a IA monta a estrutura, mas o número que embasa uma decisão de caixa passa pelo olho de quem responde por ele."
+    }
+  ]
+}

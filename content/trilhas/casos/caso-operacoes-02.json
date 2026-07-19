@@ -1,0 +1,71 @@
+{
+  "id": "caso-operacoes-02",
+  "trilha": "casos",
+  "titulo": "Sônia: escrever um procedimento que qualquer um segue",
+  "nivel": 2,
+  "area": "operacoes",
+  "prereq": [],
+  "xp": 25,
+  "conceito": "Um procedimento operacional serve para alguém executar sem adivinhar. Precisa de passos na ordem, quem faz cada um, o que checar e o que fazer quando dá errado.\n\nPedir 'escreve o procedimento' gera um texto vago. O prompt forte dá o processo real, o público (quem vai executar) e exige passo numerado com ponto de verificação.",
+  "exercicios": [
+    {
+      "tipo": "comparar_prompts",
+      "enunciado": "**Sônia, área de operações. Coordenadora em um centro de distribuição.** Precisa documentar o recebimento de mercadoria para treinar novatos. Qual prompt gera um procedimento que o novato consegue seguir?",
+      "prompts": [
+        {
+          "rotulo": "Prompt A",
+          "texto": "Escreve o procedimento de recebimento de mercadoria.",
+          "saida_esperada": "O recebimento de mercadoria deve ser feito com atenção e organização, conferindo os itens e registrando as informações no sistema, garantindo qualidade e evitando erros no processo.",
+          "melhor": false,
+          "explicacao": "Um parágrafo de intenções, não um procedimento. O novato lê e continua sem saber o que fazer primeiro nem o que conferir."
+        },
+        {
+          "rotulo": "Prompt B",
+          "texto": "Escreva o procedimento de recebimento de mercadoria para um operador no primeiro dia.\nUse os passos reais que vou listar, em ordem numerada.\nPara cada passo: quem faz, a ação, e o ponto de verificação (o que confere antes de seguir).\nInclua o que fazer quando a nota não bate com a carga.\n\nPassos: conferir nota contra pedido, contar volumes, checar avarias, dar entrada no sistema, endereçar no estoque.",
+          "saida_esperada": "1. Conferente: confere a nota fiscal contra o pedido. Verificação: número do pedido e itens batem. Se não bater, retém a carga e chama a Sônia.\n2. Conferente: conta os volumes. Verificação: quantidade da nota igual à contada.\n3. Conferente: checa avarias. Verificação: registra foto se houver.\n4. Operador de sistema: dá entrada. Verificação: itens lançados igualam a nota.\n5. Operador: endereça no estoque. Verificação: endereço registrado no sistema.",
+          "melhor": true,
+          "explicacao": "Passo numerado, responsável, ação e verificação, mais o caminho do erro. O novato executa sem adivinhar e sabe quando parar e chamar ajuda."
+        },
+        {
+          "rotulo": "Prompt C",
+          "texto": "Escreve um procedimento bem completo e detalhado de recebimento, cobrindo tudo.",
+          "saida_esperada": "1. Preparação do ambiente de recebimento. 2. Verificação de equipamentos. 3. Análise documental completa. 4. Conferência quantitativa e qualitativa detalhada. 5. Processamento sistêmico... (segue longo, genérico, sem quem faz nem ponto de verificação).",
+          "melhor": false,
+          "explicacao": "Completo e detalhado sem o processo real vira uma lista inchada e abstrata. Muitos passos genéricos e nenhum executável pelo novato de verdade."
+        }
+      ]
+    },
+    {
+      "tipo": "ordenacao",
+      "enunciado": "Ordene o recebimento de mercadoria como ele deve acontecer no chão.",
+      "etapas": [
+        "Conferir a nota fiscal contra o pedido",
+        "Contar os volumes recebidos",
+        "Dar entrada dos itens no sistema",
+        "Endereçar a mercadoria no estoque"
+      ],
+      "explicacao": "Confere-se antes de contar, conta-se antes de dar entrada, e só se endereça o que já entrou no sistema. Inverter a ordem cria estoque fantasma e erro de inventário."
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "O que separa um procedimento executável de um texto bonito sobre o processo?",
+      "alternativas": [
+        {
+          "texto": "O procedimento usa palavras mais técnicas.",
+          "correta": false,
+          "explicacao": "Vocabulário técnico não faz ninguém executar. Um texto cheio de termos ainda pode não dizer quem faz o quê."
+        },
+        {
+          "texto": "O procedimento traz passo numerado, responsável e o que verificar antes de seguir.",
+          "correta": true,
+          "explicacao": "É isso que permite alguém executar sem adivinhar e saber quando algo está errado. Ação, dono e verificação são a espinha do procedimento."
+        },
+        {
+          "texto": "O procedimento é mais longo e cobre mais assuntos.",
+          "correta": false,
+          "explicacao": "Comprimento não é clareza. Um texto longo e genérico é mais difícil de seguir que cinco passos verificáveis."
+        }
+      ]
+    }
+  ]
+}

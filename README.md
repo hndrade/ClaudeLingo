@@ -45,6 +45,18 @@ Pedidos do dono do projeto, implementados fora da ordem original das fases:
 
 Verificação: percurso completo via Playwright em 375x667, modos claro e escuro: onboarding, mapa, lição inteira, popup, repescagem, persistência em disco conferida no JSON.
 
+### Fase 5: Cases por área (concluída)
+
+Feito:
+
+- Trilha "Cases por área" com 24 lições: 8 áreas (financeiro, comercial, RH, jurídico, marketing, operações, dados, atendimento), cada uma com um personagem recorrente (Jorge, Beatriz, Carla, Henrique, Rafael, Sônia, Lucas, Paula) nos níveis 2, 3 e 4, o mesmo problema ficando mais cru a cada nível.
+- Regra de honestidade cumprida: cada área tem exatamente um case cuja resposta certa é não usar IA ou usar de forma limitada, marcado com o campo nao_usar_ia no JSON e verificado por teste. Exemplos: conciliação sem rastreabilidade (Jorge), triagem de currículo (Carla), parecer de risco jurídico (Henrique), roteirização que é trabalho de solver (Sônia), rodar SQL gerado às cegas (Lucas), escalonar caso sensível (Paula).
+- Schema ganhou o campo opcional nao_usar_ia; o teste de conteúdo passou a exigir cobertura de níveis 2 a 4 e ao menos um case nao_usar_ia por área. Suíte total: 223 testes verdes.
+
+Verificação da fase: testes cobrindo cobertura por área e a marca nao_usar_ia, mais checagem visual do mapa (trilha nova visível) e de um case renderizando em 375px.
+
+Nota de processo: a escrita foi tentada com subagentes em duas ondas; o limite de sessão da conta interrompeu a maioria no meio, então parte das 24 lições foi escrita direto pelo orquestrador. Registrado em NOTAS.md.
+
 ### Fase 4: Trilha 4 completa + login por perfis (concluída)
 
 Feito:

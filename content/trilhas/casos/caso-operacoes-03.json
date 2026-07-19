@@ -1,0 +1,71 @@
+{
+  "id": "caso-operacoes-03",
+  "trilha": "casos",
+  "titulo": "Sônia: consertar a análise de causa raiz",
+  "nivel": 3,
+  "area": "operacoes",
+  "prereq": [],
+  "xp": 30,
+  "conceito": "Análise de causa raiz não é listar o que aconteceu, é chegar ao porquê que, se resolvido, impede a repetição. Parar no primeiro motivo aparente conserta o sintoma.\n\nO prompt fraco pede 'a causa' e recebe o sintoma. O forte dá os fatos, pede a cadeia de porquês e separa causa raiz de causa aparente, com a ação que cada uma pede.",
+  "exercicios": [
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "**Sônia, área de operações.** Um lote saiu com endereço errado e voltou. Ela quer entender a causa para não repetir. O prompt abaixo para no sintoma. Reescreva na caixa, compare com a referência e se autoavalie.",
+      "prompt_fraco": "Qual foi a causa desse erro de expedição?\n\n[relato do ocorrido]",
+      "saida_fraca": "A causa do erro foi que o operador digitou o endereço errado no sistema durante a expedição, o que gerou o envio incorreto e a devolução da mercadoria.",
+      "prompt_referencia": "Analise a causa raiz do erro de expedição abaixo.\nUse os fatos do relato, não invente.\nMonte a cadeia de porquês: parta do sintoma e pergunte 'por que' até chegar à causa que, corrigida, impede a repetição.\nSepare causa aparente (o que se vê) de causa raiz (o que permitiu acontecer).\nPara a causa raiz, proponha uma ação de processo, não uma bronca no operador.\n\n[relato do ocorrido]",
+      "saida_referencia": "Sintoma: lote enviado ao endereço errado.\nPor que: o operador digitou o endereço manualmente.\nPor que manual: o sistema permite digitar endereço livre em vez de puxar do pedido.\nCausa aparente: erro de digitação do operador.\nCausa raiz: o sistema não valida o endereço contra o pedido.\nAção: bloquear endereço livre e forçar seleção do endereço do pedido.",
+      "checklist": [
+        "Pedi a cadeia de porquês, não só a causa?",
+        "Separei causa aparente de causa raiz?",
+        "Ancorei nos fatos do relato, sem invenção?",
+        "Pedi ação de processo, não culpa individual?",
+        "Cheguei a uma causa que, corrigida, impede repetir?",
+        "Mantive o foco no que se pode mudar?"
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "A análise apontou 'operador desatento' como causa. Por que Sônia não deve parar aí?",
+      "alternativas": [
+        {
+          "texto": "Porque o operador vai ficar chateado com a acusação.",
+          "melhor": false,
+          "feedback": "O problema não é diplomacia, é eficácia. Mesmo que ninguém se chateie, culpar a pessoa não impede o próximo operador de errar igual."
+        },
+        {
+          "texto": "Porque culpar a pessoa não muda o processo que permitiu o erro, então ele se repete com o próximo.",
+          "melhor": true,
+          "feedback": "Exato. 'Desatento' é sintoma. A causa raiz é o sistema aceitar endereço livre. Corrigir o processo protege contra o erro; corrigir a pessoa não."
+        },
+        {
+          "texto": "Porque a IA nunca acerta a causa de um erro operacional.",
+          "melhor": false,
+          "feedback": "A IA ajuda a montar a cadeia de porquês quando você exige isso. O erro aqui foi parar no primeiro motivo, não usar a ferramenta."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete o pedido para a análise chegar onde se conserta o processo.",
+      "texto": "Monte a cadeia de porquês até a causa raiz e proponha ___.",
+      "opcoes": [
+        {
+          "texto": "uma mudança no processo que impeça o erro de repetir",
+          "correta": true,
+          "explicacao": "Leva a análise ao ponto acionável: mudar o processo. É o que diferencia investigar de apenas registrar o ocorrido."
+        },
+        {
+          "texto": "quem deve ser advertido pelo erro",
+          "correta": false,
+          "explicacao": "Advertência mira a pessoa, não a causa. O erro volta com o próximo que usar o mesmo processo falho."
+        },
+        {
+          "texto": "um resumo do que aconteceu para o arquivo",
+          "correta": false,
+          "explicacao": "Resumir o ocorrido é registro, não análise. Sem ação de processo, o aprendizado não impede a repetição."
+        }
+      ]
+    }
+  ]
+}

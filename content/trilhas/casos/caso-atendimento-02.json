@@ -1,0 +1,82 @@
+{
+  "id": "caso-atendimento-02",
+  "trilha": "casos",
+  "titulo": "Paula: resposta padrão que não soa robótica",
+  "nivel": 2,
+  "area": "atendimento",
+  "prereq": [],
+  "xp": 25,
+  "conceito": "Uma resposta padrão boa resolve o problema e soa humana. A ruim ou é fria e genérica, ou promete o que a empresa não cumpre.\n\nPedir 'escreve uma resposta pro cliente' sem contexto gera texto de robô. O prompt forte dá a situação, a política real (o que pode e o que não pode) e o tom, e proíbe prometer o que não está na regra.",
+  "exercicios": [
+    {
+      "tipo": "comparar_prompts",
+      "enunciado": "**Paula, área de atendimento. Analista de suporte.** Um cliente reclama de atraso na entrega. Qual prompt gera uma resposta que resolve sem prometer o impossível?",
+      "prompts": [
+        {
+          "rotulo": "Prompt A",
+          "texto": "Escreve uma resposta pro cliente que reclamou do atraso.",
+          "saida_esperada": "Prezado cliente, lamentamos o ocorrido e pedimos desculpas pelo transtorno. Sua satisfação é muito importante para nós e faremos o possível para resolver. Agradecemos a compreensão.",
+          "melhor": false,
+          "explicacao": "Fria, genérica e vazia: não diz o que houve, nem o próximo passo, nem prazo. O cliente irritado com atraso fica mais irritado com a resposta de robô."
+        },
+        {
+          "rotulo": "Prompt B",
+          "texto": "Escreva a resposta ao cliente que reclamou do atraso na entrega.\nSituação: pedido saiu com 3 dias de atraso por falha logística nossa.\nPolítica: podemos oferecer reenvio prioritário e cupom de 10%; não podemos garantir data exata de chegada.\nTom: humano, direto, assume o erro sem enrolar.\nNão prometa prazo que não está na política nem invente compensação.",
+          "saida_esperada": "Oi, [nome]. O atraso foi falha nossa na logística, e você tem razão em reclamar. Já coloquei seu pedido em reenvio prioritário e adicionei um cupom de 10% na sua conta. Não vou cravar uma data para não te prometer o que não controlo, mas te aviso assim que ele sair para entrega. Qualquer coisa, respondo por aqui.",
+          "melhor": true,
+          "explicacao": "Assume o erro, dá o próximo passo concreto dentro da política e é honesta sobre o que não pode garantir. Resolve e soa gente, não script."
+        },
+        {
+          "rotulo": "Prompt C",
+          "texto": "Escreve uma resposta bem calorosa prometendo que vai chegar rápido e resolver tudo.",
+          "saida_esperada": "Oi! Fique tranquilo, vamos resolver tudo rapidinho e seu pedido chega já já, pode confiar! Estamos cuidando de tudo com o maior carinho para você ficar 100% satisfeito!",
+          "melhor": false,
+          "explicacao": "Calorosa e irresponsável: promete 'já já' e '100%' que a empresa não controla. Quando não chegar rápido, a promessa vira segunda reclamação, pior que a primeira."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "A resposta gerada promete algo que a política não cobre. Qual é o risco de Paula enviar assim mesmo?",
+      "alternativas": [
+        {
+          "texto": "Nenhum, o cliente fica feliz na hora.",
+          "melhor": false,
+          "feedback": "A felicidade dura até a promessa não se cumprir. Aí vem a segunda reclamação, agora com um 'vocês prometeram' que a empresa não pode honrar."
+        },
+        {
+          "texto": "A promessa fora da política vira uma nova frustração e um problema maior quando não for cumprida.",
+          "melhor": true,
+          "feedback": "Exato. Prometer o que não se controla troca uma reclamação pequena por uma quebra de confiança. A resposta tem que caber no que a empresa realmente faz."
+        },
+        {
+          "texto": "A IA nunca deveria escrever resposta de atendimento.",
+          "melhor": false,
+          "feedback": "A IA escreve ótimas respostas quando você dá a política e o tom. O erro não foi usar IA, foi não amarrar o que pode e o que não pode ser prometido."
+        }
+      ]
+    },
+    {
+      "tipo": "preencher_lacuna",
+      "enunciado": "Complete o prompt no ponto que protege o atendimento de virar promessa quebrada.",
+      "texto": "Escreva a resposta com tom humano, oferecendo só o que está na política e ___.",
+      "opcoes": [
+        {
+          "texto": "sem prometer prazo ou compensação que não estão na regra",
+          "correta": true,
+          "explicacao": "Fecha a porta para a promessa impossível. A resposta resolve dentro do que a empresa cumpre, e a confiança se mantém."
+        },
+        {
+          "texto": "prometendo o que for preciso para acalmar o cliente",
+          "correta": false,
+          "explicacao": "Acalmar com promessa que não se cumpre só adia e agrava. A segunda frustração é sempre pior que a primeira."
+        },
+        {
+          "texto": "no maior tamanho possível para parecer atencioso",
+          "correta": false,
+          "explicacao": "Texto longo não é atenção, é enrolação. O cliente com problema quer o próximo passo claro, não um parágrafo de cortesia."
+        }
+      ]
+    }
+  ]
+}

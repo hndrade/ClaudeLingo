@@ -1,0 +1,82 @@
+{
+  "id": "caso-rh-02",
+  "trilha": "casos",
+  "titulo": "Carla e a triagem de currículos",
+  "nivel": 2,
+  "area": "rh",
+  "prereq": [],
+  "xp": 25,
+  "nao_usar_ia": true,
+  "conceito": "**Carla, RH da Nortex.** Abriu uma vaga de analista e recebeu 80 currículos. A tentação é colar todos no chat e pedir: escolhe os 5 melhores pra mim.\n\nDecidir quem passa é decisão sobre pessoas. O modelo carrega viés dos dados em que foi treinado, não explica por que reprovou ninguém e mexe com dado pessoal sob a LGPD.\n\nO uso certo é mais humilde: a IA organiza informação objetiva e verificável, Carla decide, e nenhum candidato é descartado no automático.",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**Carla tem 80 currículos e pouco tempo.** Qual jeito de usar IA a protege de um erro que custa caro?",
+      "alternativas": [
+        {
+          "texto": "Colar os 80 currículos e pedir: ranqueie do melhor para o pior e me diga quem eu devo chamar.",
+          "melhor": false,
+          "feedback": "Isso terceiriza a decisão sobre pessoas para o modelo. Ele ordena por padrões que não controla, pode penalizar quem tem lacuna no currículo por licença ou desemprego, e Carla não consegue justificar o corte se for questionada."
+        },
+        {
+          "texto": "Pedir para a IA extrair, em tabela, só dados objetivos de cada currículo (anos na função, ferramentas citadas, formação exigida sim ou não), sem nota nem ranking, e decidir ela mesma quem avança.",
+          "melhor": true,
+          "feedback": "A IA faz o trabalho chato de tabular 80 documentos e deixa a informação comparável. A decisão, com o julgamento e o contexto que só Carla tem, continua sendo dela. Nada é descartado sozinho."
+        },
+        {
+          "texto": "Pedir para a IA eliminar automaticamente quem não tem diploma e seguir só com o resto.",
+          "melhor": false,
+          "feedback": "Corte automático sobre pessoas é justamente o que a LGPD pede cuidado e o que gera injustiça: um ótimo candidato com formação equivalente some da tela sem ninguém olhar. Filtrar é papel de um critério revisado por humano, não de descarte cego."
+        }
+      ]
+    },
+    {
+      "tipo": "comparar_prompts",
+      "enunciado": "Carla vai usar a IA para preparar a triagem dos 80 currículos. Qual prompt entrega algo útil sem tomar a decisão no lugar dela?",
+      "prompts": [
+        {
+          "rotulo": "Prompt A",
+          "texto": "Aqui estão 80 currículos. Escolha os 5 melhores candidatos para a vaga de analista e explique por que os outros são piores.",
+          "saida_esperada": "Os 5 melhores candidatos são: 1. Fernanda M. (perfil mais forte), 2. Rodrigo T., 3. Aline P., 4. Bruno S., 5. Camila R. Os demais foram considerados menos competitivos por terem menos experiência ou formação menos alinhada.",
+          "melhor": false,
+          "explicacao": "O modelo decidiu quem entra e quem sai, sem critério verificável e sem mostrar de onde tirou melhor. Carla não pode auditar nem justificar esse corte, e assume um viés que não controla."
+        },
+        {
+          "rotulo": "Prompt B",
+          "texto": "Extraia de cada currículo abaixo, em tabela, apenas: nome, anos de experiência na função de analista, ferramentas citadas (Excel, SQL, Power BI), formação concluída na área exigida (sim ou nao). Não atribua nota, não ranqueie e não recomende ninguém. Se um dado não aparecer no currículo, escreva \"não informado\".\n\n[80 currículos]",
+          "saida_esperada": "| Nome | Anos na função | Ferramentas | Formação na área |\n| Fernanda M. | 4 | Excel, SQL | sim |\n| Rodrigo T. | 2 | Excel, Power BI | não informado |\n| Aline P. | 6 | Excel, SQL, Power BI | sim |\n(segue para os 80, só com fatos do currículo)",
+          "melhor": true,
+          "explicacao": "A IA faz o trabalho mecânico de ler 80 documentos e deixa tudo comparável em fatos, marcando o que não sabe em vez de inventar. Quem decide quem avança continua sendo Carla, com critério que ela pode explicar."
+        },
+        {
+          "rotulo": "Prompt C",
+          "texto": "Analise esses 80 currículos e me dê uma nota de 0 a 10 para cada candidato, considerando o fit cultural e o potencial de crescimento.",
+          "saida_esperada": "Fernanda M.: 9,0 (ótimo fit cultural e alto potencial). Rodrigo T.: 6,5 (fit mediano). Aline P.: 8,5. Bruno S.: 7,0 (potencial de crescimento incerto). (segue com uma nota para cada um)",
+          "melhor": false,
+          "explicacao": "Fit cultural e potencial não estão no currículo: o modelo inventa. Uma nota numérica dá aparência de objetividade a um palpite, e é exatamente esse tipo de julgamento sobre pessoas que precisa de humano, não de número mágico."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que, na triagem, o certo é a IA organizar e a Carla decidir, e não o contrário?",
+      "alternativas": [
+        {
+          "texto": "Porque a decisão é sobre pessoas: envolve viés que o modelo não controla, precisa de justificativa auditável e mexe com dado pessoal sob a LGPD.",
+          "correta": true,
+          "explicacao": "Exato. Tabular fatos objetivos é onde a IA ajuda de verdade. Decidir quem avança exige responsabilidade humana, rastreabilidade e cuidado legal que o chat não oferece."
+        },
+        {
+          "texto": "Porque o modelo é lento para ler muitos currículos e erra a contagem de páginas.",
+          "correta": false,
+          "explicacao": "Velocidade não é o ponto: a IA até lê rápido. O problema é delegar a ela um julgamento sobre pessoas, não a capacidade de processar texto."
+        },
+        {
+          "texto": "Porque a IA nunca consegue extrair dados de um currículo de forma confiável.",
+          "correta": false,
+          "explicacao": "Exagero na direção oposta. Extrair dados objetivos e marcar o que falta é justamente o bom uso aqui. O limite é a decisão final, não a extração."
+        }
+      ]
+    }
+  ]
+}

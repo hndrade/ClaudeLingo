@@ -1,0 +1,82 @@
+{
+  "id": "caso-financeiro-02",
+  "trilha": "casos",
+  "titulo": "Jorge e a conciliação bancária",
+  "nivel": 2,
+  "area": "financeiro",
+  "prereq": [],
+  "xp": 25,
+  "nao_usar_ia": true,
+  "conceito": "**Jorge, analista financeiro na Solaris Indústria.** Fecha o mês conciliando o extrato bancário com o razão contábil. Hoje ele cola tudo no chat e pede concilia isso pra mim. Recebe texto corrido, sem rastro de qual lançamento casou com qual, e não confia.\n\nConciliação é um número que a auditoria vai conferir. Aqui a IA ajuda a **preparar e estruturar** os dados e a **apontar candidatos a divergência**, mas o batimento final precisa de trilha auditável e conferência humana. O melhor prompt é o que devolve algo verificável, não uma prosa que afirma estar tudo certo.",
+  "exercicios": [
+    {
+      "tipo": "comparar_prompts",
+      "enunciado": "Jorge tem o extrato e o razão do mês em duas listas. Qual prompt devolve algo que ele consegue auditar, em vez de acreditar no escuro?",
+      "prompts": [
+        {
+          "rotulo": "Prompt A",
+          "texto": "Concilia isso pra mim:\n\n[extrato]\n[razão]",
+          "saida_esperada": "Analisei os dois documentos e a conciliação está praticamente correta. A maioria dos lançamentos bate entre extrato e razão, com pequenas diferenças que parecem ser de data. No geral, o mês está conciliado.",
+          "melhor": false,
+          "explicacao": "Prosa tranquilizadora e nada verificável. Não diz qual linha casou com qual, nem lista o que sobrou. Jorge não consegue provar isso para a auditoria, então o trabalho continua todo por fazer."
+        },
+        {
+          "rotulo": "Prompt B",
+          "texto": "Você vai me ajudar a PREPARAR uma conciliação, não a fechá-la.\nEntradas: extrato (data, valor, histórico) e razão (data, valor, conta, doc).\nDevolva uma tabela de candidatos a batimento com as colunas: valor, data extrato, data razão, diferença em dias, e status sugerido (casado, divergente, sem par).\nRegras: só marque casado quando valor for idêntico e a diferença de datas for de até 2 dias. Nunca invente um par para forçar fechamento. Liste à parte, em SEM PAR, tudo que ficou sozinho nos dois lados.\nNão conclua que o mês está conciliado: isso eu confiro na mão.\n\n[extrato]\n[razão]",
+          "saida_esperada": "CANDIDATOS A BATIMENTO (valores fictícios)\n| Valor | Data extrato | Data razão | Dif. dias | Status |\n| 1.240,00 | 03/06 | 03/06 | 0 | casado |\n| 890,50 | 11/06 | 12/06 | 1 | casado |\n| 2.000,00 | 18/06 | 22/06 | 4 | divergente |\n\nSEM PAR\n- Extrato: 350,00 em 27/06 (sem correspondente no razão)\n- Razão: 1.115,00 em 09/06 (doc NF-4471, sem correspondente no extrato)\n\nObservação: 3 itens exigem sua conferência antes do fechamento.",
+          "melhor": true,
+          "explicacao": "Escopo claro (preparar, não fechar), schema de saída em colunas, regra explícita de batimento e tratamento honesto do que não casou (SEM PAR em vez de esconder). Jorge recebe uma trilha que dá para conferir linha a linha e defender na auditoria."
+        },
+        {
+          "rotulo": "Prompt C",
+          "texto": "Concilia o extrato com o razão e me diz o saldo final conciliado já pronto pra eu lançar no sistema.\n\n[extrato]\n[razão]",
+          "saida_esperada": "Conciliação concluída. Saldo final conciliado: R$ 48.317,90. Todos os lançamentos foram batidos e o valor já pode ser lançado no sistema como saldo oficial do mês.",
+          "melhor": false,
+          "explicacao": "Pior que o A: pede um número oficial pronto para lançar. O modelo entrega um saldo de aparência precisa sem trilha de como chegou nele, e uma divergência escondida vira erro contábil assinado por Jorge. Número oficial não se terceiriza para o chat."
+        }
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "Depois de rodar o Prompt B, a IA lista 3 itens SEM PAR e 1 divergente de 4 dias. O que Jorge faz para fechar o mês do jeito certo?",
+      "alternativas": [
+        {
+          "texto": "Confere na mão cada item SEM PAR e o divergente, decide caso a caso (lançamento em trânsito, tarifa não contabilizada, erro de digitação) e só então dá o mês por conciliado.",
+          "melhor": true,
+          "feedback": "A IA fez o trabalho braçal de parear e separar o que sobrou. A decisão sobre cada exceção, que é onde mora o risco, fica com quem responde pela conta. É exatamente o uso limitado que a tarefa pede: máquina prepara, humano audita."
+        },
+        {
+          "texto": "Pede para a IA decidir o que fazer com cada item sem par e aplicar os ajustes sozinha, para ganhar tempo.",
+          "melhor": false,
+          "feedback": "Cada item sem par pode ser trânsito legítimo, tarifa esquecida ou fraude. Delegar a decisão apaga a rastreabilidade e coloca no fechamento ajustes que ninguém validou. O gargalo aqui é justamente o julgamento humano, não a velocidade."
+        },
+        {
+          "texto": "Como sobraram poucos itens, ignora os SEM PAR e fecha com o que já bateu.",
+          "melhor": false,
+          "feedback": "Item sem par é o coração da conciliação: é ali que aparece o dinheiro que sumiu ou entrou errado. Ignorar é fechar um número que a primeira conferência da auditoria derruba."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que, para a conciliação final, a resposta certa é NÃO jogar tudo no chat e confiar na saída?",
+      "alternativas": [
+        {
+          "texto": "Porque o resultado alimenta a contabilidade e a auditoria, e exige trilha auditável e conferência humana; a IA entra para preparar e estruturar, não para assinar o número.",
+          "correta": true,
+          "explicacao": "É um número oficial com responsável e revisão externa. O valor da IA está em organizar candidatos e isolar exceções; o fechamento em si precisa ser conferível e assumido por uma pessoa."
+        },
+        {
+          "texto": "Porque modelos de IA não conseguem comparar valores numéricos entre duas listas.",
+          "correta": false,
+          "explicacao": "Conseguem, sim, e é útil para gerar candidatos a batimento. O problema não é capacidade de comparar, é a falta de rastreabilidade e de conferência quando o número vira oficial."
+        },
+        {
+          "texto": "Porque conciliação é sempre proibida por lei de ser tocada por software.",
+          "correta": false,
+          "explicacao": "Não existe tal proibição; conciliação é rotineiramente feita com software, inclusive determinístico. A questão é manter trilha auditável e decisão humana sobre as exceções, não banir a ferramenta."
+        }
+      ]
+    }
+  ]
+}

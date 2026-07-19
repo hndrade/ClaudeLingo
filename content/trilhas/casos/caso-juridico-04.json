@@ -1,0 +1,71 @@
+{
+  "id": "caso-juridico-04",
+  "trilha": "casos",
+  "titulo": "Henrique: checagem de risco que não substitui o advogado",
+  "nivel": 4,
+  "area": "juridico",
+  "prereq": [],
+  "xp": 40,
+  "nao_usar_ia": true,
+  "conceito": "Apontar riscos de um contrato e decidir assinar são coisas diferentes. A IA pode fazer a primeira; a segunda é do advogado.\n\nUm parecer que vira decisão de assinar não pode sair de um modelo sem revisão: ele alucina cláusula, inventa jurisprudência e não responde por nada. O uso correto é limitado: a IA levanta candidatos a risco e aponta o trecho, o advogado valida e decide.",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**Henrique, área jurídica.** O time comercial quer assinar um contrato hoje e pede a ele um parecer de risco rápido. Ele pensa em colar o contrato na IA e mandar o resultado como parecer. Qual caminho é o correto?",
+      "alternativas": [
+        {
+          "texto": "Colar o contrato, pedir o parecer de risco e encaminhar a resposta da IA como parecer para o comercial assinar.",
+          "melhor": false,
+          "feedback": "Um parecer que autoriza assinatura é responsabilidade do advogado. A IA pode inventar cláusula ou citar lei que não existe, e ninguém responde por isso. Encaminhar direto é terceirizar risco jurídico para uma máquina."
+        },
+        {
+          "texto": "Usar a IA para levantar candidatos a risco e apontar os trechos, e então revisar cada ponto no contrato antes de emitir o parecer dele.",
+          "melhor": true,
+          "feedback": "Uso limitado e correto. A IA acelera a varredura e não deixa passar um trecho, mas Henrique confere cada risco no texto real e assina o parecer com o nome dele. A decisão continua humana e auditável."
+        },
+        {
+          "texto": "Recusar qualquer uso de IA e ler as 40 páginas na pressa, sozinho, em 20 minutos.",
+          "melhor": false,
+          "feedback": "O oposto do exagero também erra. Sob pressa, a IA ajuda a não pular um trecho. O ponto não é banir a ferramenta, é não deixar ela decidir. Levantar com IA e validar com advogado é melhor que correr o olho sozinho."
+        }
+      ]
+    },
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "Pedido cru que Henrique faria. Monte na caixa o prompt que usa a IA como apoio à checagem sem transformá-la em parecer, compare com a referência e se autoavalie.",
+      "prompt_fraco": "Esse contrato é seguro pra assinar?\n\n[contrato]",
+      "saida_fraca": "Sim, o contrato parece equilibrado e seguro para assinatura, sem cláusulas abusivas relevantes. (Uma sentença de autoridade que Henrique não pode confiar: pode ter passado batido uma cláusula de multa, e o 'sim' vira responsabilidade dele.)",
+      "prompt_referencia": "Você é apoio de revisão, não emite parecer.\nLeia o contrato abaixo e liste os trechos que merecem atenção jurídica, sem concluir se devo assinar.\nPara cada ponto: cite o trecho literal, o número da cláusula e por que pode ser risco (multa, rescisão, foro, responsabilidade, prazo).\nSe não tiver certeza sobre um ponto, marque como 'a confirmar' em vez de afirmar.\nNão invente cláusula que não esteja no texto nem cite legislação.\nAo final, escreva: 'Revisão humana obrigatória antes de qualquer decisão.'\n\n[contrato]",
+      "saida_referencia": "Pontos de atenção (a validar por advogado):\n- Cláusula 7.2: multa de 30% sobre o total em caso de rescisão antecipada. Trecho: '...multa correspondente a 30%...'. Risco alto de custo.\n- Cláusula 9: foro na comarca do fornecedor. Risco de custo processual.\n- Cláusula 4.1: prazo de pagamento de 15 dias, curto para nosso fluxo. A confirmar.\n\nRevisão humana obrigatória antes de qualquer decisão.",
+      "checklist": [
+        "Deixei claro que a IA não emite parecer nem decide?",
+        "Pedi o trecho literal e o número da cláusula de cada risco?",
+        "Mandei marcar incerteza como 'a confirmar'?",
+        "Proibi inventar cláusula e citar lei?",
+        "Exigi o aviso de revisão humana obrigatória?",
+        "Mantive a decisão de assinar fora do escopo da IA?"
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que pedir à IA a conclusão 'pode assinar' é mais perigoso do que pedir a lista de trechos de risco?",
+      "alternativas": [
+        {
+          "texto": "Porque a conclusão demora mais para ser gerada.",
+          "correta": false,
+          "explicacao": "Tempo não é o risco. O problema é o que a conclusão carrega: uma decisão jurídica com aparência de autoridade e nenhum responsável."
+        },
+        {
+          "texto": "Porque a conclusão esconde o que foi verificado e transfere para o modelo uma decisão que é do advogado, com risco de cláusula ou lei inventada.",
+          "correta": true,
+          "explicacao": "Exato. A lista de trechos é conferível item a item; o 'pode assinar' é uma caixa-preta que Henrique assinaria sem saber o que a máquina deixou passar."
+        },
+        {
+          "texto": "Porque a IA sempre recusa concluir sobre contratos.",
+          "correta": false,
+          "explicacao": "Ela não recusa, e esse é justamente o perigo: responde com confiança mesmo quando errou. Por isso a decisão precisa ficar com o humano."
+        }
+      ]
+    }
+  ]
+}

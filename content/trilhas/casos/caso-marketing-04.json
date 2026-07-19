@@ -1,0 +1,71 @@
+{
+  "id": "caso-marketing-04",
+  "trilha": "casos",
+  "titulo": "Rafael: análise de concorrente sem inventar o concorrente",
+  "nivel": 4,
+  "area": "marketing",
+  "prereq": [],
+  "xp": 40,
+  "nao_usar_ia": true,
+  "conceito": "A IA não sabe o preço nem a funcionalidade atual de um concorrente. Se você perguntar, ela responde mesmo assim, com dados plausíveis e falsos.\n\nUso correto e limitado: você traz os fatos coletados da fonte primária (site, tabela, release), e a IA estrutura, compara e aponta lacunas. Ela organiza a análise; ela não é a fonte.",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**Rafael, área de marketing.** Precisa de uma análise do concorrente Trackfy para uma reunião. Ele tem pouco tempo. Qual caminho não coloca dado inventado no slide?",
+      "alternativas": [
+        {
+          "texto": "Perguntar à IA os preços, os planos e os recursos do Trackfy e montar o comparativo com o que ela responder.",
+          "melhor": false,
+          "feedback": "A IA não tem o preço atual do Trackfy e vai inventar um plausível. Rafael apresentaria número falso para a diretoria e perderia credibilidade na primeira conferência."
+        },
+        {
+          "texto": "Coletar os dados do site e do material do Trackfy, colar no prompt e pedir para a IA estruturar o comparativo e apontar o que ficou sem informação.",
+          "melhor": true,
+          "feedback": "A fonte é primária e verificável; a IA só organiza e compara. O que faltar aparece como lacuna a buscar, não como número inventado. A análise fica defensável."
+        },
+        {
+          "texto": "Pedir à IA uma análise SWOT completa do Trackfy do conhecimento dela.",
+          "melhor": false,
+          "feedback": "Uma SWOT tirada da memória do modelo mistura fato antigo, suposição e invenção sem marcar qual é qual. Parece completa e é areia movediça para uma decisão."
+        }
+      ]
+    },
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "Pedido cru e perigoso. Monte na caixa o prompt que usa a IA para estruturar a análise sem virar fonte, compare com a referência e se autoavalie.",
+      "prompt_fraco": "Faz uma análise completa do nosso concorrente Trackfy.",
+      "saida_fraca": "O Trackfy cobra cerca de R$ 89 por veículo ao mês, tem app iOS e Android, integra com os principais ERPs e atende mais de 500 clientes. Pontos fortes: preço competitivo e boa reputação. (Todos esses números podem ser pura invenção do modelo.)",
+      "prompt_referencia": "Vou colar dados que eu mesmo coletei do site e do material do Trackfy. Use SÓ esses dados.\nMonte um comparativo em tabela entre Trackfy e nós, nos critérios: preço por veículo, plataformas, integrações citadas, tempo de implantação.\nOnde eu não tiver fornecido o dado, escreva 'a buscar na fonte', nunca preencha por conta própria.\nNão acrescente informação que não esteja no que colei e não estime preço.\n\n[dados coletados do Trackfy] [nossos dados]",
+      "saida_referencia": "Critério | Trackfy | Nós\nPreço por veículo | a buscar na fonte | R$ 79 (fictício)\nPlataformas | iOS, Android (do site deles) | iOS, Android, Web\nIntegrações citadas | ERP X (do material) | ERP X, Y, Z\nTempo de implantação | a buscar na fonte | 5 dias\n\nLacunas a preencher antes da reunião: preço e prazo do Trackfy.",
+      "checklist": [
+        "Restringi a IA a usar só os dados que eu coletei?",
+        "Proibi estimar preço e inventar informação?",
+        "Mandei marcar dado ausente como 'a buscar na fonte'?",
+        "Defini os critérios do comparativo?",
+        "Pedi formato de tabela para a reunião?",
+        "Deixei claro que a fonte é primária, não o modelo?"
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "Por que confiar na IA como fonte sobre um concorrente é pior do que uma busca manual mais lenta?",
+      "alternativas": [
+        {
+          "texto": "Porque a busca manual é sempre mais rápida.",
+          "correta": false,
+          "explicacao": "Nem sempre é mais rápida. A questão não é velocidade, é a confiabilidade do número que vai para o slide."
+        },
+        {
+          "texto": "Porque a IA gera um número plausível e falso com a mesma confiança de um verdadeiro, e você leva o erro para a decisão.",
+          "correta": true,
+          "explicacao": "Exato. O perigo é a confiança: o preço inventado parece tão real quanto o verdadeiro, e ninguém desconfia até o cliente ou o chefe conferir."
+        },
+        {
+          "texto": "Porque a IA se recusa a falar de concorrentes.",
+          "correta": false,
+          "explicacao": "Ela não se recusa, e é isso que engana. Responde com autoridade mesmo sem ter o dado atual, por isso não pode ser a fonte."
+        }
+      ]
+    }
+  ]
+}

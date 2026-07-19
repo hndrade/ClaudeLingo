@@ -1,0 +1,97 @@
+{
+  "id": "caso-juridico-02",
+  "trilha": "casos",
+  "titulo": "Henrique: ler contrato sem reler tudo",
+  "nivel": 2,
+  "area": "juridico",
+  "prereq": [],
+  "xp": 25,
+  "conceito": "Ler contrato com IA não é pedir um resumo: o resumo repete as cláusulas na ordem e esconde o que importa.\n\nPeça **pontos de atenção por categoria** (prazo, reajuste, multa, rescisão, foro), cada um com **o número da cláusula**. Mande o modelo **sinalizar o que falta** e **nunca afirmar o que não está escrito**.\n\nAssim você revisa direcionado, em vez de reler o contrato inteiro para achar as três linhas perigosas.",
+  "exercicios": [
+    {
+      "tipo": "cenario",
+      "enunciado": "**Henrique, departamento jurídico da Nortec Logística.** Toda semana chegam contratos de fornecedor para ele ler antes da assinatura. Hoje ele cola o PDF no chat e pede \"resume esse contrato\". Recebe um resumo que repete as cláusulas na ordem, sem dizer o que é perigoso, então relê tudo mesmo assim. Qual mudança resolve a dor dele?",
+      "alternativas": [
+        {
+          "texto": "Pedir o mesmo resumo, mas mandando o modelo escrever de forma mais completa e detalhada.",
+          "melhor": false,
+          "feedback": "Mais volume piora o problema: Henrique quer menos texto e mais direção. Completo e detalhado devolve uma segunda versão do contrato, não os pontos de risco."
+        },
+        {
+          "texto": "Pedir os pontos de atenção por categoria (prazo, reajuste, multa, rescisão, foro), cada um com o número da cláusula, e sinalizar as categorias que o contrato não trata.",
+          "melhor": true,
+          "feedback": "Troca o resumo linear por uma triagem por risco. As categorias dão o que procurar, o número da cláusula dá rastreabilidade, e a marcação de ausência aponta o que o contrato deixou de proteger."
+        },
+        {
+          "texto": "Pedir para o modelo dizer se o contrato é bom e se pode assinar.",
+          "melhor": false,
+          "feedback": "Isso terceiriza a decisão. O modelo responde com uma opinião sem base auditável, e a assinatura é responsabilidade do advogado, não do resumo."
+        }
+      ]
+    },
+    {
+      "tipo": "comparar_prompts",
+      "enunciado": "Henrique recebeu um contrato de prestação de serviços de 14 páginas. Quer os pontos de atenção antes de aprovar. Qual prompt entrega isso?",
+      "prompts": [
+        {
+          "rotulo": "Prompt A",
+          "texto": "Resume esse contrato:\n\n[contrato]",
+          "saida_esperada": "O contrato regula a prestação de serviços de transporte entre as partes. Define o objeto, o prazo de vigência, as condições de pagamento e as obrigações de cada parte. Traz ainda cláusulas de confidencialidade, rescisão e foro para dirimir conflitos.",
+          "melhor": false,
+          "explicacao": "Repete a estrutura do contrato em ordem. Não diz o que é desfavorável nem onde está: Henrique lê e continua tendo que abrir o documento para achar o risco."
+        },
+        {
+          "rotulo": "Prompt B",
+          "texto": "Você é advogado revisando este contrato antes da assinatura da Nortec (contratante).\nListe os pontos de atenção agrupados por categoria: prazo e renovação, reajuste, multa e penalidade, rescisão, responsabilidade, foro.\nEm cada ponto cite o número da cláusula e transcreva o trecho relevante.\nSe uma categoria não aparecer no contrato, escreva \"não consta\" e trate isso como um ponto de atenção.\nNão afirme nada que não esteja escrito no texto.\n\n[contrato]",
+          "saida_esperada": "Prazo e renovação (Cl. 4): 12 meses com renovação automática, salvo aviso com 90 dias. Atenção: prazo de aviso longo.\nReajuste (Cl. 5.2): IPCA anual. Ok.\nMulta (Cl. 8.1): 30% do valor total do contrato por rescisão antecipada. Atenção: percentual alto.\nRescisão (Cl. 9): imotivada só pela contratada. Atenção: assimetria contra a Nortec.\nResponsabilidade: não consta cláusula de limitação. Atenção: exposição ilimitada.\nForo (Cl. 12): comarca do fornecedor.",
+          "melhor": true,
+          "explicacao": "Escopo (categorias de risco), rastreabilidade (número da cláusula e trecho), tratamento explícito de ausência (não consta vira alerta) e proibição de inventar. Henrique revisa os quatro pontos marcados em vez de reler 14 páginas."
+        },
+        {
+          "rotulo": "Prompt C",
+          "texto": "Lista tudo que for importante nesse contrato:\n\n[contrato]",
+          "saida_esperada": "1. Identificação das partes. 2. Objeto do contrato. 3. Prazo. 4. Valor e forma de pagamento. 5. Reajuste. 6. Obrigações da contratada. 7. Obrigações da contratante. 8. Confidencialidade. 9. Multa. 10. Rescisão. 11. Foro. 12. Disposições gerais. (lista todos os itens sem apontar quais são desfavoráveis)",
+          "melhor": false,
+          "explicacao": "Importante sem critério vira índice do contrato. Tudo entra na lista com o mesmo peso, e o que é perigoso fica escondido no meio do que é padrão."
+        },
+        {
+          "rotulo": "Prompt D",
+          "texto": "Esse contrato é seguro pra gente assinar? Me dá sua opinião:\n\n[contrato]",
+          "saida_esperada": "No geral o contrato parece equilibrado e adequado para a operação. As cláusulas seguem o padrão de mercado e não identifiquei impedimentos relevantes para a assinatura. Recomendo prosseguir.",
+          "melhor": false,
+          "explicacao": "Pede veredito, e o modelo entrega confiança sem lastro. Some a assimetria da rescisão e a multa de 30% num parece equilibrado. Opinião não é revisão: esconde o risco em vez de expor."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "No Prompt B, por que a instrução \"se uma categoria não aparecer, escreva não consta e trate como ponto de atenção\" é decisiva?",
+      "alternativas": [
+        {
+          "texto": "Porque uma proteção ausente (por exemplo, limite de responsabilidade) costuma ser mais perigosa que uma cláusula ruim escrita, e sem essa instrução o modelo simplesmente omite o que não existe.",
+          "correta": true,
+          "explicacao": "O risco jurídico mora tanto no que está escrito quanto no que ficou de fora. Forçar o não consta transforma o silêncio do contrato em alerta visível."
+        },
+        {
+          "texto": "Porque obriga o modelo a preencher a categoria com uma cláusula equivalente de outro contrato.",
+          "correta": false,
+          "explicacao": "Isso seria inventar cláusula que não existe no documento. A instrução manda sinalizar a falta, nunca importar texto de fora."
+        },
+        {
+          "texto": "Porque deixa o resumo mais longo, cobrindo todas as categorias possíveis.",
+          "correta": false,
+          "explicacao": "O ganho não é tamanho, é cobertura de risco. Marcar a ausência aponta uma vulnerabilidade real, não engorda o texto por engordar."
+        }
+      ]
+    },
+    {
+      "tipo": "associacao",
+      "enunciado": "Ligue cada ingrediente do prompt de leitura de contrato ao risco que ele evita.",
+      "pares": [
+        { "conceito": "Agrupar por categoria de risco", "definicao": "Evita o resumo linear que repete as cláusulas na ordem sem priorizar" },
+        { "conceito": "Citar número da cláusula e o trecho", "definicao": "Evita ter que reabrir o contrato para checar onde está cada ponto" },
+        { "conceito": "Marcar categoria ausente como não consta", "definicao": "Evita que uma proteção que faltou passe despercebida por não estar escrita" }
+      ]
+    }
+  ]
+}

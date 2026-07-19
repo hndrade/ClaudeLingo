@@ -1,0 +1,70 @@
+{
+  "id": "caso-rh-04",
+  "trilha": "casos",
+  "titulo": "Carla e a descrição de vaga do zero",
+  "nivel": 4,
+  "area": "rh",
+  "prereq": [],
+  "xp": 40,
+  "conceito": "**Carla, RH da Nortex.** Precisa publicar a descrição de uma vaga de analista de dados júnior. O gestor mandou uma linha no chat: cria a descrição da vaga de analista.\n\nCaso cru: sem contexto, a IA devolve um texto genérico, cheio de exigência inflada e requisito que exclui gente boa sem motivo. Construir bem é dar as restrições reais antes de pedir.\n\nMonte o prompt do zero contra a rubrica do checklist: quem é a empresa e a senioridade, o que a pessoa vai fazer, o que é requisito de verdade contra desejável, tom inclusivo e formato.",
+  "exercicios": [
+    {
+      "tipo": "consertar_prompt",
+      "enunciado": "Você tem só o pedido cru do gestor. Construa o prompt do zero na caixa, usando o checklist como rubrica, depois compare com a referência.",
+      "prompt_fraco": "Cria a descrição da vaga de analista.",
+      "saida_fraca": "Vaga: Analista. Buscamos profissional dinâmico, proativo e com excelente comunicação para atuar em ambiente desafiador. Requisitos: ensino superior completo, experiência comprovada, inglês fluente, domínio do pacote Office, disponibilidade total. Diferencial: pós-graduação. (Genérico, com exigências infladas e nenhuma tarefa real da vaga: afasta bom candidato e não diz o que a pessoa vai fazer.)",
+      "prompt_referencia": "Escreva uma descrição de vaga a partir dos dados abaixo. Não invente requisito que não está aqui.\nEmpresa: Nortex, software de logística, time de dados com 6 pessoas.\nCargo: Analista de Dados Júnior, primeira ou segunda experiência na área.\nO que a pessoa vai fazer: montar relatórios em SQL e Power BI, limpar bases e apoiar as áreas com dados.\nRequisitos reais: SQL intermediário e Excel; disposição para aprender.\nDesejáveis (não obrigatórios): Power BI e Python.\nNão exigir: inglês fluente nem diploma de área específica.\nTom inclusivo: linguagem neutra, sem exigência inflada, com uma frase convidando quem preenche parte dos requisitos a se candidatar.\nFormato: título, 1 parágrafo sobre a vaga, bloco O que você vai fazer, bloco Requisitos, bloco Diferenciais. Máximo de 20 linhas.",
+      "saida_referencia": "Analista de Dados Júnior (Nortex)\n\nNa Nortex, software de logística, nosso time de dados de 6 pessoas ajuda todas as áreas a decidir com números. Buscamos alguém no início da carreira em dados para crescer com a gente.\n\nO que você vai fazer:\n- Montar relatórios em SQL e Power BI\n- Limpar e organizar bases\n- Apoiar as áreas com respostas baseadas em dados\n\nRequisitos:\n- SQL intermediário e Excel\n- Vontade de aprender\n\nDiferenciais (não obrigatórios):\n- Power BI e Python\n\nSe você preenche parte dos requisitos e tem vontade de aprender, candidate-se mesmo assim.",
+      "checklist": [
+        "Dei o contexto da empresa e a senioridade real da vaga?",
+        "Descrevi o que a pessoa vai fazer no dia a dia, com tarefas concretas?",
+        "Separei requisito de verdade de desejável, e disse o que NÃO exigir?",
+        "Pedi tom inclusivo e linguagem neutra, sem exigência inflada?",
+        "Convidei quem preenche parte dos requisitos a se candidatar?",
+        "Defini o formato e um limite de tamanho?"
+      ]
+    },
+    {
+      "tipo": "cenario",
+      "enunciado": "Ao construir o prompt da vaga, Carla precisa decidir como tratar os requisitos. Qual escolha atrai o candidato certo sem excluir gente boa?",
+      "alternativas": [
+        {
+          "texto": "Listar tudo que seria bom ter como requisito obrigatório, para filtrar mais.",
+          "melhor": false,
+          "feedback": "Requisito inflado não filtra melhor: espanta quem tem 80 por cento do perfil e se autoexclui. Você recebe menos candidatura e não necessariamente as melhores."
+        },
+        {
+          "texto": "Separar o que é mesmo obrigatório (SQL e Excel) de desejável (Power BI, Python), e dizer no prompt para não exigir inglês nem diploma específico.",
+          "melhor": true,
+          "feedback": "Deixa claro o piso real da vaga e sinaliza o que é bônus. Isso amplia o funil de bons candidatos e ainda evita barreira que exclui sem relação com a função."
+        },
+        {
+          "texto": "Deixar os requisitos em aberto e pedir para a IA decidir o que costuma cair em vaga de analista.",
+          "melhor": false,
+          "feedback": "Aí a IA preenche com o clichê do mercado (inglês fluente, pós, disponibilidade total) que você não pediu e não precisa. Construir do zero é justamente dar as restrições reais antes, não terceirizar o critério."
+        }
+      ]
+    },
+    {
+      "tipo": "multipla_escolha",
+      "enunciado": "No pedido cru cria a descrição da vaga de analista, qual falta é a que mais compromete o resultado?",
+      "alternativas": [
+        {
+          "texto": "Não dizer o que a pessoa vai fazer nem quais são os requisitos reais da vaga.",
+          "correta": true,
+          "explicacao": "Sem as tarefas e o piso real, a IA só tem o clichê de mercado para preencher, e é daí que vem a exigência inflada e a descrição que não descreve nada."
+        },
+        {
+          "texto": "Não pedir para o texto usar palavras mais bonitas e impactantes.",
+          "correta": false,
+          "explicacao": "Palavra bonita é o que o prompt fraco já produz de sobra. O que falta é substância: contexto e requisitos reais, não enfeite."
+        },
+        {
+          "texto": "Não informar o logotipo e as cores da empresa.",
+          "correta": false,
+          "explicacao": "Identidade visual não é o problema de uma descrição de vaga em texto. A falha está no conteúdo: o que a vaga é e o que ela exige de fato."
+        }
+      ]
+    }
+  ]
+}

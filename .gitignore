@@ -5,3 +5,6 @@ next-env.d.ts
 *.tsbuildinfo
 data/
 .env.local
+firebase-debug.log
+firestore-debug.log
+.firebase/

@@ -10,6 +10,22 @@ cp .env.local.example .env.local   # preencha com as chaves do seu projeto Fireb
 npm run dev
 ```
 
+### Testar login e Firestore sem projeto Firebase real (emulador local)
+
+Para testar o fluxo de login e persistência sem criar um projeto Firebase de verdade, use o [Firebase Local Emulator Suite](https://firebase.google.com/docs/emulator-suite):
+
+```bash
+npx firebase-tools emulators:start --project demo-claudelingo --only auth,firestore
+```
+
+Em `.env.local`, além das variáveis de exemplo (podem ser qualquer valor fictício com esse método), adicione:
+
+```
+NEXT_PUBLIC_USE_FIREBASE_EMULATOR=true
+```
+
+Com o emulador e `npm run dev` rodando, `/login` conecta no Auth e Firestore locais (`lib/firebase.ts` só ativa isso quando a variável acima existe; nunca em produção). O provedor Google abre `apis.google.com` de verdade mesmo com o emulador, então **o link mágico por e-mail é o fluxo indicado para testar offline**: peça o link em `/login`, pegue o "e-mail" simulado na REST API do próprio emulador (`GET http://127.0.0.1:9099/emulator/v1/projects/demo-claudelingo/oobCodes`) e abra o `oobLink` retornado no navegador.
+
 ## Publicar no GitHub Pages (checklist)
 
 O código já está pronto (export estático, workflow de deploy, regras do Firestore). Faltam só passos que só você pode fazer, porque exigem sua conta:
@@ -22,7 +38,7 @@ O código já está pronto (export estático, workflow de deploy, regras do Fire
 6. **Ativar o GitHub Pages**: no repositório, Settings → Pages → Source: escolha "GitHub Actions" (não "Deploy from a branch").
 7. **Disparar o deploy**: dê push na branch `main` (ou rode o workflow "Deploy to GitHub Pages" manualmente em Actions). O site sobe em `https://<seu-usuario>.github.io/ClaudeLingo/`.
 
-Sem os passos 1 a 5, o build até passa (as chaves do Firebase não são validadas em build time), mas o login falha em produção. Isso não foi testado ponta a ponta com um projeto Firebase real nesta sessão, porque criar contas e projetos em serviços externos exige acesso que esta sessão não tem: o export estático, o fluxo de auth e as regras de segurança foram verificados no código e num build local, não contra um Firebase de verdade.
+Sem os passos 1 a 5, o build até passa (as chaves do Firebase não são validadas em build time), mas o login falha em produção. O fluxo completo (login por link mágico, leitura/escrita no Firestore, persistência entre sessões) foi testado ponta a ponta contra o [Firebase Local Emulator Suite](#testar-login-e-firestore-sem-projeto-firebase-real-emulador-local) nesta sessão — não contra um projeto Firebase real, porque criar contas em serviços externos exige acesso que esta sessão não tem. O login com Google não foi possível de testar aqui (o popup carrega `apis.google.com` de verdade mesmo com o emulador, e a rede deste ambiente não permite esse tráfego), então recomendo validar esse provedor especificamente assim que o Firebase estiver configurado, antes de considerar a spec 100% fechada.
 
 ## Estrutura
 
@@ -71,7 +87,17 @@ Pedido pós-plano original: publicar o app e sincronizar progresso entre aparelh
 
 Verificação: 487 testes continuam verdes (nenhum dependia das rotas removidas), typecheck limpo, `npm run build` gera `out/` com as ~100 páginas de lição pré-renderizadas (via `generateStaticParams`), confirmado com `GITHUB_ACTIONS=true` que o `basePath` é aplicado em todo asset e nos links de download da biblioteca.
 
-Limitação honesta: não testei o fluxo de login e sincronização contra um projeto Firebase real, porque criar contas e projetos em serviços externos exige acesso que esta sessão não tem. O checklist de passos manuais (README, seção "Publicar no GitHub Pages") cobre exatamente isso; recomendo testar o login de ponta a ponta assim que o Firebase estiver configurado, antes de considerar a sincronização entre aparelhos validada.
+Limitação honesta: não testei o fluxo de login e sincronização contra um projeto Firebase real, porque criar contas e projetos em serviços externos exige acesso que esta sessão não tem. O checklist de passos manuais (README, seção "Publicar no GitHub Pages") cobre exatamente isso.
+
+### Teste ponta a ponta com Firebase Local Emulator Suite (concluído)
+
+Pedido: "abre uma janela de teste simulado" (uma prova real de que login + sincronização funcionam, não só leitura de código). Sem projeto Firebase real disponível nesta sessão, usei o [Firebase Local Emulator Suite](https://firebase.google.com/docs/emulator-suite) (Auth na porta 9099, Firestore na 8080, projeto fictício `demo-claudelingo`) e Playwright para dirigir um Chromium de verdade contra o app rodando localmente.
+
+- `lib/firebase.ts` ganhou um guarda condicional (`NEXT_PUBLIC_USE_FIREBASE_EMULATOR=true`): conecta `connectAuthEmulator`/`connectFirestoreEmulator` só quando essa env var existe e só no navegador. Nunca ativa em produção (a variável não é setada no workflow de deploy). `firebase.json` (novo, na raiz) configura as portas dos emuladores.
+- Tentei primeiro o login com Google (`signInWithPopup`): não deu pra validar neste ambiente porque o popup carrega `https://apis.google.com/js/api.js` de verdade mesmo com o Auth emulado, e a rede sandboxed desta sessão não permite esse tráfego externo de forma limpa (erros de proxy/certificado no Chromium). Troquei a estratégia de teste para o **link mágico por e-mail**, que é 100% nativo do Firebase e não depende de nenhum host externo: peguei o link "enviado" direto da REST API do emulador (`/emulator/v1/projects/demo-claudelingo/oobCodes`) em vez de uma caixa de entrada de verdade, e o Playwright navegou pra esse link como se o usuário tivesse clicado nele no e-mail.
+- Fluxo confirmado de ponta a ponta, com capturas de tela em cada etapa: `/login` carrega → `enviarLinkMagico()` chama o Auth emulado de verdade → o link mágico completa o login (`signInWithEmailLink`) → onboarding roda e salva o compromisso no Firestore emulado → o mapa lê o progresso do Firestore (`carregarProgresso`) → uma lição completa grava de volta (`salvarProgresso`, +20 XP, badge "Primeiro passo" desbloqueado) → voltar ao mapa relê o XP do Firestore → um **reload completo da página** (nova navegação do zero, não estado em memória) mantém os mesmos 20 XP → uma **segunda sessão de navegador** independente, logando de novo só com o e-mail, mostra o mesmo progresso (simula um segundo aparelho).
+- Achados e correções feitos no script de teste (não no app): o clique num "link" de lição usando busca por texto pegava a descrição da trilha (que cita "Machine learning" em texto solto) antes do link de verdade — trocado para busca por `role=link`. A checagem de fim de fluxo usando `text=XP` era ambígua (a tela de "Lição concluída" também mostra "+20 XP") e causava corridas de navegação — trocada por um seletor exclusivo do mapa ("Suas conquistas"). Um clique genérico de "responde qualquer exercício" acabou clicando "Refazer lição" na tela final por engano, reiniciando a lição — corrigido parando o loop assim que a tela de conclusão aparece.
+- Limitação que continua real: isso valida a integração Firebase Auth + Firestore do código, não um projeto Firebase de produção nem o provedor Google. O checklist de "Publicar no GitHub Pages" continua sendo o caminho para isso.
 
 ### Rodada de ajustes pós Fase 1 (concluída)
 
